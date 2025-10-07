@@ -1,0 +1,26 @@
+# Ignore everything by default
+*
+
+# But allow the tranzmit website files
+!app/
+!components/
+!lib/
+!hooks/
+!styles/
+!public/
+!*.json
+!*.mjs
+!*.md
+!.gitignore
+!env.example
+!SYSTEM_ARCHITECTURE.md
+
+# Ignore specific directories and files
+Downloads/
+node_modules/
+*.log
+.DS_Store
+.next/
+out/
+logo.png
+LIQUID DEATH REPORT/
