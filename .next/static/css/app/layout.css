@@ -501,9 +501,6 @@ font-weight: 100 900;
   .my-4 {
     margin-block: calc(var(--spacing) * 4);
   }
-  .my-12 {
-    margin-block: calc(var(--spacing) * 12);
-  }
   .-mt-4 {
     margin-top: calc(var(--spacing) * -4);
   }
@@ -1737,11 +1734,6 @@ font-weight: 100 900;
   }
   .via-blue-50 {
     --tw-gradient-via: var(--color-blue-50);
-    --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
-    --tw-gradient-stops: var(--tw-gradient-via-stops);
-  }
-  .via-border {
-    --tw-gradient-via: var(--border);
     --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
     --tw-gradient-stops: var(--tw-gradient-via-stops);
   }

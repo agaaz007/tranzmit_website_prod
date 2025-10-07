@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   description:
     "Tranzmit finds the right participants, conducts interviews, analyzes responses, and delivers actionable insights — with results in hours, not weeks.",
   generator: "v0.app",
+  icons: {
+    icon: "/tranzmit-logo.png",
+    shortcut: "/tranzmit-logo.png",
+    apple: "/tranzmit-logo.png",
+  },
 }
 
 export default function RootLayout({
