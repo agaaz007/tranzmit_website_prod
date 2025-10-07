@@ -190,14 +190,6 @@ export default function SampleReportPage() {
               
               <div className="mb-8">
                 <h3 className="text-3xl font-bold text-foreground mb-6 drop-shadow-sm">What We Learned</h3>
-                <div className="bg-white/60 p-6 rounded-xl border border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    The most critical finding from this study is the <strong className="text-foreground font-semibold">complete lack of purchase conviction</strong> for both Liquid Death and Spindrift. 
-                    Specifically, both brands registered <strong className="text-foreground font-semibold">0.0% Top 2 Box Purchase Intent</strong> (meaning no consumers indicated they would "definitely" or "probably" purchase) 
-                    and, notably, <strong className="text-foreground font-semibold">0.0% Bottom 2 Box Rejection</strong> (meaning no consumers indicated they would "definitely not" or "probably not" purchase). 
-                This suggests a widespread consumer ambivalence, with virtually all participants falling into the "might or might not purchase" category for both concepts.
-              </p>
-                </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-8 mb-8">
