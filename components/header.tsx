@@ -46,6 +46,9 @@ export function Header() {
               <a href="/sample-report">Sample Report</a>
             </Button>
             <Button size="default" className="text-sm sm:text-base font-medium px-3 sm:px-8 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white" asChild>
+              <a href="/access-report">Access Report</a>
+            </Button>
+            <Button size="default" className="text-sm sm:text-base font-medium px-3 sm:px-8 py-2 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white" asChild>
               <a href="/book-demo">Request Demo</a>
             </Button>
           </div>
