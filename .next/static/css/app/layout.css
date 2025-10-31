@@ -791,6 +791,9 @@ font-weight: 100 900;
   .min-h-\[62px\] {
     min-height: 62px;
   }
+  .min-h-\[300px\] {
+    min-height: 300px;
+  }
   .min-h-screen {
     min-height: 100vh;
   }
@@ -2197,6 +2200,9 @@ font-weight: 100 900;
   }
   .text-green-400 {
     color: var(--color-green-400);
+  }
+  .text-green-600 {
+    color: var(--color-green-600);
   }
   .text-muted-foreground {
     color: var(--muted-foreground);
