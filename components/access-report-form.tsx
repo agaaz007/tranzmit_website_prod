@@ -27,20 +27,40 @@ export function AccessReportForm() {
     setIsSubmitting(true)
 
     try {
-      // TODO: Implement actual authentication logic
-      // For now, simulate API call
+      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500))
       
-      // Example validation - replace with actual API call
-      if (formData.reportId && formData.password) {
-        toast.success("Access granted! Redirecting to your report...")
-        // TODO: Replace with actual report route
-        setTimeout(() => {
-          router.push('/sample-report')
-        }, 1000)
-      } else {
-        toast.error("Please enter both Report ID and Password")
+      // Report ID to route mapping
+      const reportRoutes: Record<string, { path: string; password: string }> = {
+        'SAMPLE-001': { path: '/sample-report', password: 'demo123' },
+        'INNERWEAR-001': { path: '/innerwear-report', password: 'innerwear123' },
+        'RPT-LIQUID-DEATH': { path: '/sample-report', password: 'liquideath' },
+        'RPT-INNERWEAR': { path: '/innerwear-report', password: 'innerwear' }
       }
+      
+      const reportIdUpper = formData.reportId.toUpperCase()
+      const reportConfig = reportRoutes[reportIdUpper]
+      
+      if (!formData.reportId || !formData.password) {
+        toast.error("Please enter both Report ID and Password")
+        return
+      }
+      
+      if (!reportConfig) {
+        toast.error("Invalid Report ID. Please check and try again.")
+        return
+      }
+      
+      if (formData.password !== reportConfig.password) {
+        toast.error("Incorrect password. Please try again.")
+        return
+      }
+      
+      toast.success("Access granted! Redirecting to your report...")
+      setTimeout(() => {
+        router.push(reportConfig.path)
+      }, 1000)
+      
     } catch (error) {
       console.error('Login error:', error)
       toast.error('Invalid credentials. Please try again.')
@@ -199,6 +219,25 @@ export function AccessReportForm() {
                       </>
                     )}
                   </Button>
+
+                  {/* Available Reports (Demo) */}
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-100">
+                    <h4 className="text-sm font-semibold text-foreground mb-3">Demo Reports Available:</h4>
+                    <div className="space-y-2 text-xs text-muted-foreground">
+                      <div className="flex justify-between items-center">
+                        <span className="font-mono bg-white px-2 py-1 rounded">SAMPLE-001</span>
+                        <span className="text-xs">Password: demo123</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-mono bg-white px-2 py-1 rounded">INNERWEAR-001</span>
+                        <span className="text-xs">Password: innerwear123</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-mono bg-white px-2 py-1 rounded">RPT-INNERWEAR</span>
+                        <span className="text-xs">Password: innerwear</span>
+                      </div>
+                    </div>
+                  </div>
 
                   {/* Help text */}
                   <div className="text-center pt-4">
