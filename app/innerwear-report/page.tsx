@@ -191,7 +191,7 @@ export default function InnerwearReportPage() {
                           <span className="w-1.5 h-8 bg-white rounded-full"></span>
                           EXECUTIVE SUMMARY
                         </h2>
-                        <p className="mt-1.5 text-sm text-blue-100 font-medium">Innerwear Category Brand Health Study 2024</p>
+                        <p className="mt-1.5 text-sm text-blue-100 font-medium">Innerwear Category Brand Health Study 2025</p>
                       </div>
                       <div className="flex items-center gap-6 text-sm bg-white/10 backdrop-blur-sm rounded-md px-4 py-2 border border-white/20">
                         <div className="flex items-center gap-2">
@@ -199,7 +199,7 @@ export default function InnerwearReportPage() {
                           <span className="text-white font-semibold">n=14</span>
                         </div>
                         <div className="text-blue-200">|</div>
-                        <span className="text-white font-medium">Q4 2024</span>
+                        <span className="text-white font-medium">NOV 2025</span>
                       </div>
                     </div>
                     {/* Subtle pattern overlay */}
@@ -322,12 +322,12 @@ export default function InnerwearReportPage() {
                     {/* Sample Overview */}
                     <div>
                       <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-5">Sample Composition</h3>
-                      <div className="grid md:grid-cols-3 gap-4 mb-6">
-                        <div className="bg-gray-50 rounded-md p-5 border-l-4 border-gray-600">
+                      <div className="grid md:grid-cols-2 gap-4 mb-6">
+                        {/* <div className="bg-gray-50 rounded-md p-5 border-l-4 border-gray-600">
                           <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider">Total Sample</p>
                           <p className="text-3xl font-bold text-gray-900 mt-1">N=14</p>
                           <p className="text-sm text-gray-700 mt-2">Respondents</p>
-                        </div>
+                        </div> */}
                         <div className="bg-blue-50 rounded-md p-5 border-l-4 border-blue-600">
                           <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider">Male</p>
                           <p className="text-3xl font-bold text-gray-900 mt-1">79%</p>
