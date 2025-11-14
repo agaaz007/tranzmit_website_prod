@@ -9,6 +9,14 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 
+// Report routes mapping Report IDs to their paths and passwords
+const reportRoutes: Record<string, { path: string; password: string }> = {
+  'SAMPLE-001': { path: '/sample-report', password: 'demo123' },
+  'INNERWEAR-001': { path: '/innerwear-report', password: 'innerwear123' },
+  'RPT-LIQUID-DEATH': { path: '/sample-report', password: 'liquideath' },
+  'RPT-INNERWEAR': { path: '/innerwear-report', password: 'innerwear' }
+}
+
 export function AccessReportForm() {
   const router = useRouter()
   const [formData, setFormData] = useState({
@@ -27,24 +35,33 @@ export function AccessReportForm() {
     setIsSubmitting(true)
 
     try {
-      // TODO: Implement actual authentication logic
-      // For now, simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 800))
       
-      // Example validation - replace with actual API call
-      if (formData.reportId && formData.password) {
-        toast.success("Access granted! Redirecting to your report...")
-        // TODO: Replace with actual report route
-        setTimeout(() => {
-          router.push('/sample-report')
-        }, 1000)
-      } else {
-        toast.error("Please enter both Report ID and Password")
+      // Validate Report ID exists
+      const reportRoute = reportRoutes[formData.reportId.toUpperCase().trim()]
+      
+      if (!reportRoute) {
+        toast.error("Invalid Report ID. Please check and try again.")
+        setIsSubmitting(false)
+        return
       }
+      
+      // Validate password
+      if (formData.password !== reportRoute.password) {
+        toast.error("Incorrect password. Please try again.")
+        setIsSubmitting(false)
+        return
+      }
+      
+      // Success - redirect to report
+      toast.success("Access granted! Redirecting to your report...")
+      setTimeout(() => {
+        router.push(reportRoute.path)
+      }, 1000)
     } catch (error) {
       console.error('Login error:', error)
-      toast.error('Invalid credentials. Please try again.')
-    } finally {
+      toast.error('An error occurred. Please try again.')
       setIsSubmitting(false)
     }
   }
@@ -213,6 +230,30 @@ export function AccessReportForm() {
                     </p>
                   </div>
                 </form>
+
+                {/* Demo Reports Available */}
+                {/* <div className="mt-8 pt-6 border-t border-gray-200">
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-100">
+                    <h4 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <FileText className="h-4 w-4" />
+                      Demo Reports Available:
+                    </h4>
+                    <div className="space-y-2 text-xs">
+                      <div className="flex justify-between items-center bg-white/60 rounded px-3 py-2">
+                        <span className="font-mono font-semibold text-gray-900">SAMPLE-001</span>
+                        <span className="text-gray-600">Password: <span className="font-semibold">demo123</span></span>
+                      </div>
+                      <div className="flex justify-between items-center bg-white/60 rounded px-3 py-2">
+                        <span className="font-mono font-semibold text-gray-900">INNERWEAR-001</span>
+                        <span className="text-gray-600">Password: <span className="font-semibold">innerwear123</span></span>
+                      </div>
+                      <div className="flex justify-between items-center bg-white/60 rounded px-3 py-2">
+                        <span className="font-mono font-semibold text-gray-900">RPT-INNERWEAR</span>
+                        <span className="text-gray-600">Password: <span className="font-semibold">innerwear</span></span>
+                      </div> */}
+                    {/* </div> */}
+                  {/* </div> */}
+                {/* </div> */}
               </CardContent>
             </Card>
           </div>
