@@ -1,0 +1,6 @@
+# Ignore TypeScript/JavaScript files
+**/*.ts
+**/*.tsx
+**/*.js
+**/*.jsx
+
