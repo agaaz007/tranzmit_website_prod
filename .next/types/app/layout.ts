@@ -1,4 +1,4 @@
-// File: /Users/Agaaz/tranzmit_website-master 2/app/layout.tsx
+// File: /Users/Agaaz/Downloads/tranzmit_website-master-2-local-clone/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

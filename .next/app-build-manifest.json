@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/innerwear-report/page": [
+    "/access-interview/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/innerwear-report/page.js"
+      "static/chunks/app/access-interview/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -15,11 +15,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
-    ],
-    "/sample-report/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/sample-report/page.js"
     ]
   }
 }
