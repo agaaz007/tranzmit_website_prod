@@ -19,46 +19,45 @@ function getElevenLabsClient() {
   return new ElevenLabsClient({ apiKey })
 }
 
-const SYSTEM_PROMPT = `You are Anita, a voice agent for the brand FreeCulture.
-<critical_rules>
-1. **PURE SPEECH ONLY:** Your output is sent directly to a Text-to-Speech engine.
-   - DO NOT say "Step 1" or "Question 2".
-   - DO NOT say "User said yes" or "Moving on".
-   - DO NOT include any text inside brackets [] or parentheses () in the spoken part.
-   - START your response *immediately* with the first word to be spoken.
-2. **HINDI ENFORCEMENT:** 
-   - If the user selects Hindi in the second question, you must output ALL future text in **Devanagari Script** (e.g., "जी बिलकुल, अगला सवाल...").
-   - Do NOT use Romanized Hindi (Hinglish).
-3. **PRONUNCIATION GUARD:**
-   - Write "FreeCulture" normally.
-   - Write "XYXX" as "X-Y-X-X".
-   - Write "Zivame" as "Zee-Vaa-May".
-   - Write "Clovia" as "Clo-Vee-Aaa".
-   - Write "DAMENSCH" as "Daa-Mensch".
-   - Write "Enamor" as "En-Am-Or".
-</critical_rules>
-<conversation_flow>
-You must move strictly down this list. Find the last question asked in the history, and ask the **IMMEDIATE NEXT** one.
-1. **(If this is the start):** "Hi, I’m Anita speaking from FreeCulture. We are offering a **free pair of socks** for a quick four-minute feedback call. Is now a good time?"
-2. **(Language):** "Great. What language would you prefer? English or Hindi?"
-3. **(Age):** "Just for our records, could you tell me your age?"
-4. **(3 Words):** "When you think of FreeCulture, what are the first 3 words that come to mind?"
-5. **(Standout):** "Looking back, what part of your experience with us really stood out? The website, packaging, or fit?"
-6. **(Gender Context):** "Quick context question: Do you usually shop for Men’s innerwear or Women’s innerwear?"
-7. **(Ranking - If Men's):** "Okay, quick ranking game! Please rank these brands from #1 to #4: Jockey, X-Y-X-X, Lux-Cozy, FreeCulture, Daa-Mensch."
-   **(Ranking - If Women's):** "Okay, quick ranking game! Please rank these brands from #1 to #4: Jockey Women, En-Am-Or, FreeCulture, Zee-Vaa-May, Clo-Vee-Aaa."
-8. **(Drawer Check):** "Apart from us, which other innerwear brands are in your drawer right now? Your top 2 or 3?"
-9. **(Quality):** "Since you’ve used FreeCulture for a while, are you happy with the quality after washing?"
-   *(If Yes/No -> Ask how many months or what specifically failed)*
-10. **(General Issues):** "Is there any frustration or issue you still face with innerwear brands generally?"
-11. **(Pricing):** "What are your honest thoughts on FreeCulture’s pricing?"
-12. **(Concept):** "If we launched a 'Shape-Wear' line that makes you look fitter under clothes, would you buy it immediately, or be skeptical?"
-13. **(Buyer ID):** "Do you buy your innerwear yourself, or does a partner or parent usually pick it up?"
-14. **(Fabric):** "Last technical question—what fabric do you prefer? Cotton, Modal, or something else?"
-15. **(Closing):** "Done! This was super helpful. We’ll send your **free socks coupon** via WhatsApp right now. Is this the best number to send it to?"
-   *(Confirm -> "Thanks! Have a wonderful day.")*
-</conversation_flow>
+const SYSTEM_PROMPT = `
+Only respond in ENGLISH. Do not respond in any other language.
+You are an empathetic and professional interviewer for "Tranzmit", an innerwear brand.
+Your goal is to conduct a user research interview.
+You should generally cover the following topics, but adapt the order and phrasing based on the user's responses.
+Do not ask all questions at once. Ask one question at a time.
+Keep your questions concise and conversational.
 
+You must output your response in JSON format with the following structure:
+{
+  "text": "The question text",
+  "type": "text" | "mcq" | "number" | "ordering",
+  "options": ["Option 1", "Option 2"] // Only for mcq or ordering
+}
+
+Use "text" for open-ended questions where the user should speak.
+Use "mcq" for questions with specific choices (e.g., Gender, specific age ranges if needed, or simple Yes/No).
+Use "number" for specific numeric values (e.g., exact age, price).
+Use "ordering" when asking to rank items (e.g., Competitor Ranking).
+
+Key Topics to Cover:
+1. Introduction & Warm-up (already done if this is later)
+2. "Three Words" associated with FreeCulture (text)
+3. Standout Experience with the brand (text)
+4. Gender & Shopping Habits (can be mcq for gender)
+5. Competitor Ranking (use "ordering" type with options like ["Jockey", "XYXX", "Van Heusen", "FreeCulture", "Other"])
+6. Brands currently in their drawer (text or mcq)
+7. Durability/Quality of FreeCulture products (text)
+8. Issues/Frustrations with innerwear (text)
+9. Pricing Perception (text or number)
+10. Concept Test (Fitter Line) (text)
+11. Purchaser Identity (Who buys?) (text)
+12. Fabric Preference (text or mcq)
+
+If the user answers briefly, ask a follow-up.
+If the user answers in Hindi, reply in Hindi (or the language they prefer).
+Maintain a friendly, research-focused tone.
+
+When survey is completed, return a message saying "Survey completed".
 `
 
 export async function POST(req: NextRequest) {
@@ -74,25 +73,104 @@ export async function POST(req: NextRequest) {
 
     // 1. Get Transcript (from Audio or Text)
     if (textAnswer) {
-        transcript = textAnswer
+      transcript = textAnswer
     } else if (audioFile) {
-        // Transcribe Audio using ElevenLabs Scribe
-        const arrayBuffer = await audioFile.arrayBuffer()
-        const audioBuffer = Buffer.from(arrayBuffer)
-        
-        try {
-            const elevenlabs = getElevenLabsClient()
-            const transcription = await elevenlabs.speechToText.convert({
-                file: new Blob([audioBuffer]),
-                model_id: "scribe_v1",
-            })
-            transcript = transcription.text
-        } catch (scribeError) {
-            console.error("ElevenLabs Scribe Error:", scribeError)
-            return NextResponse.json({ error: "Transcription failed" }, { status: 500 })
+      // Transcribe Audio using ElevenLabs Scribe v2
+      console.log("Audio file received:", {
+        name: audioFile.name,
+        size: audioFile.size,
+        type: audioFile.type
+      })
+
+      const arrayBuffer = await audioFile.arrayBuffer()
+
+      if (arrayBuffer.byteLength === 0) {
+        console.error("Empty audio buffer received")
+        return NextResponse.json({
+          error: "Empty audio recording",
+          details: "No audio data was captured. Please try speaking again."
+        }, { status: 400 })
+      }
+
+      console.log("Audio buffer size:", arrayBuffer.byteLength)
+
+      // --- DEBUG: Save file locally ---
+      try {
+        const fs = await import("fs/promises")
+        const path = await import("path")
+        const debugDir = path.join(process.cwd(), "debug_audio")
+        await fs.mkdir(debugDir, { recursive: true })
+        const timestamp = new Date().toISOString().replace(/[:.]/g, "-")
+        const filename = `audio-${timestamp}.webm`
+        const filepath = path.join(debugDir, filename)
+        await fs.writeFile(filepath, Buffer.from(arrayBuffer))
+        console.log("Saved debug audio to:", filepath)
+      } catch (err) {
+        console.error("Failed to save debug audio:", err)
+      }
+      // --------------------------------
+
+      try {
+        const elevenlabs = getElevenLabsClient()
+        console.log("ElevenLabs client created, starting transcription with Scribe v2...")
+
+        // Create a File object for ElevenLabs Scribe v2
+        // Scribe v2 accepts various formats including webm
+        const audioFile2 = new File(
+          [arrayBuffer],
+          "audio.webm",
+          { type: "audio/webm" }
+        )
+
+        console.log("Sending to ElevenLabs Scribe v2:", {
+          fileName: audioFile2.name,
+          fileSize: audioFile2.size,
+          fileType: audioFile2.type,
+          language: language === 'hi' ? 'hi' : 'en'
+        })
+
+        const transcription = await elevenlabs.speechToText.convert({
+          file: audioFile2,
+          model_id: "scribe_v2"
+        })
+
+        transcript = transcription.text || ""
+        console.log("Transcription result:", {
+          length: transcript.length,
+          text: transcript.substring(0, 100),
+          fullResult: transcription
+        })
+
+        if (!transcript || transcript.trim().length === 0) {
+          console.warn("Transcription returned empty text - ElevenLabs Scribe v2 may not support this format")
+          return NextResponse.json({
+            error: "No speech detected",
+            details: "Could not transcribe the audio. This might be a format compatibility issue. Please try speaking more clearly or check your microphone.",
+            transcript: ""
+          }, { status: 400 })
         }
+      } catch (scribeError: any) {
+        console.error("ElevenLabs Scribe v2 Error:", {
+          message: scribeError?.message,
+          status: scribeError?.status,
+          body: scribeError?.body,
+          error: scribeError
+        })
+
+        const errorMessage = scribeError?.message || "Unknown transcription error"
+        const statusCode = scribeError?.status || 500
+
+        return NextResponse.json({
+          error: "Transcription failed",
+          details: `${errorMessage}. Note: ElevenLabs Scribe v2 may not support the video/webm format directly.`,
+          transcript: ""
+        }, { status: statusCode })
+      }
     } else {
-         return NextResponse.json({ error: "No input provided" }, { status: 400 })
+      return NextResponse.json({
+        error: "No input provided",
+        details: "Either audio recording or text answer is required"
+      }, { status: 400 })
     }
 
     // 2. Append user's answer to history
@@ -103,12 +181,12 @@ export async function POST(req: NextRequest) {
 
     // 3. Generate Next Question using OpenAI
     const messages: any[] = [
-        { role: "system", content: SYSTEM_PROMPT },
-        ...newHistory
+      { role: "system", content: SYSTEM_PROMPT },
+      ...newHistory
     ]
-    
+
     if (name) {
-        messages.splice(1, 0, { role: "system", content: `The user's name is ${name}. Please address them by name occasionally.` })
+      messages.splice(1, 0, { role: "system", content: `The user's name is ${name}. Please address them by name occasionally.` })
     }
 
     const openai = getOpenAIClient()
@@ -122,19 +200,19 @@ export async function POST(req: NextRequest) {
 
     const content = completion.choices[0].message.content
     if (!content) {
-        throw new Error("No content from OpenAI")
+      throw new Error("No content from OpenAI")
     }
 
     let nextQuestionData;
     try {
-        nextQuestionData = JSON.parse(content)
+      nextQuestionData = JSON.parse(content)
     } catch (e) {
-        console.error("Failed to parse JSON from OpenAI", content)
-        // Fallback
-        nextQuestionData = {
-            text: content,
-            type: "text"
-        }
+      console.error("Failed to parse JSON from OpenAI", content)
+      // Fallback
+      nextQuestionData = {
+        text: content,
+        type: "text"
+      }
     }
 
     // 4. Return result
