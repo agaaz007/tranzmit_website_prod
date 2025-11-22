@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Progress } from "@/components/ui/progress"
-import { Loader2, MicVocal, Check, GripVertical, ArrowRight, User } from "lucide-react"
+import { Loader2, MicVocal, Check, GripVertical, ArrowRight, User, AlertTriangle } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 import { cn } from "@/lib/utils"
 import { Reorder } from "framer-motion"
@@ -159,7 +159,7 @@ function AudioVisualizer({ stream }: { stream: MediaStream | null }) {
 // --- Main Page ---
 
 export default function AccessInterviewPage() {
-  const [step, setStep] = useState<"start" | "setup" | "interview" | "completed">("start")
+  const [step, setStep] = useState<"start" | "setup" | "rules" | "interview" | "completed">("start")
   const [setupData, setSetupData] = useState({ name: "", language: "en", consent: "" })
 
   // Dynamic Interview State
@@ -179,6 +179,7 @@ export default function AccessInterviewPage() {
   const [isRecording, setIsRecording] = useState(false)
   const [hasStartedAnswering, setHasStartedAnswering] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
+  const [attentionWarning, setAttentionWarning] = useState<string | null>(null)
 
   // Use Refs for synchronous access to data in event handlers/callbacks
   const chunksRef = useRef<Blob[]>([])
@@ -215,6 +216,7 @@ export default function AccessInterviewPage() {
 
   // Initialize ordering state when options change
   useEffect(() => {
+    setAttentionWarning(null)
     if (questionType === 'ordering' && questionOptions.length > 0) {
       setTextAnswer(questionOptions)
       setHasStartedAnswering(true) // Non-voice questions can submit immediately
@@ -452,13 +454,18 @@ export default function AccessInterviewPage() {
       return
     }
     if (setupData.consent === 'no') {
-        setStep("completed") 
+        setStep("completed")
         return
     }
-    
+
+    setStep("rules")
+  }
+
+  const handleRulesComplete = () => {
     // Start the full session recording
     startSessionRecording()
-    
+
+    setAttentionWarning(null)
     setStep("interview")
     setHasStartedAnswering(false) // Reset for new question
   }
@@ -527,16 +534,21 @@ export default function AccessInterviewPage() {
     // Validation checks...
     if (questionType === 'text' && !hasStartedAnswering) {
       toast({ title: "Required", description: lang === 'hi' ? "कृपया पहले उत्तर देना शुरू करें" : "Please start answering first." })
+      setAttentionWarning("Please start speaking before moving to the next question.")
       return
     }
     if (questionType === 'mcq' && !textAnswer) {
       toast({ title: "Required", description: "Please select an option." })
+      setAttentionWarning("Please select an option to continue.")
       return
     }
     if (questionType === 'number' && !textAnswer) {
       toast({ title: "Required", description: "Please enter a number." })
+      setAttentionWarning("Please provide a numeric answer to continue.")
       return
     }
+
+    setAttentionWarning(null)
 
     setIsProcessing(true)
 
@@ -558,6 +570,7 @@ export default function AccessInterviewPage() {
             description: `Audio too short (${audioBlob?.size || 0} bytes). Please speak clearly.`,
             variant: "destructive"
           })
+          setAttentionWarning("We couldn’t hear that clearly. Please speak for at least 2 seconds and try again.")
           setIsProcessing(false)
           setHasStartedAnswering(false) // Reset to allow retry
           return
@@ -868,9 +881,108 @@ export default function AccessInterviewPage() {
           </div>
         )}
 
+        {step === "rules" && (
+          <div className="flex-1 flex items-center justify-center py-8">
+            <div className="w-full max-w-3xl space-y-8 md:space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="text-center space-y-3 md:space-y-4 mb-8 md:mb-12">
+                <div className="h-14 w-14 md:h-16 md:w-16 bg-blue-600 rounded-2xl mx-auto flex items-center justify-center text-white mb-4 md:mb-6 shadow-lg shadow-blue-200">
+                  <MicVocal className="h-7 w-7 md:h-8 md:w-8" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Interview Guidelines</h2>
+                <p className="text-lg md:text-xl text-slate-500">Please read these important rules before we begin.</p>
+              </div>
+
+              <div className="space-y-6 md:space-y-8 px-4 md:px-8">
+                <div className="bg-slate-50 dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700">
+                  <h3 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-4">🎤 How to Respond</h3>
+                  <ul className="space-y-3 text-base md:text-lg text-slate-700 dark:text-slate-300">
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-600 mt-1">•</span>
+                      <span>Speak clearly and naturally - no need to shout or speak slowly</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-600 mt-1">•</span>
+                      <span>Wait for the "Start Answering" button to begin recording</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-600 mt-1">•</span>
+                      <span>Click "Next Question" when you've finished speaking</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-600 mt-1">•</span>
+                      <span>For multiple choice questions, select your preferred option</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-600 mt-1">•</span>
+                      <span>The microphone is only active when the red recording indicator is visible</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-900/20 rounded-2xl p-6 md:p-8 border border-blue-200 dark:border-blue-800">
+                  <h3 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-4">📹 Camera & Privacy</h3>
+                  <ul className="space-y-3 text-base md:text-lg text-slate-700 dark:text-slate-300">
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-600 mt-1">•</span>
+                      <span>Your camera captures facial expressions to help us understand your reactions</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-600 mt-1">•</span>
+                      <span>Keep your face visible within the camera frame (see the guide overlay)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-600 mt-1">•</span>
+                      <span>All data is securely stored and used only for research purposes</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-600 mt-1">•</span>
+                      <span>You can stop the interview at any time</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-green-50 dark:bg-green-900/20 rounded-2xl p-6 md:p-8 border border-green-200 dark:border-green-800">
+                  <h3 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-4">✨ What to Expect</h3>
+                  <ul className="space-y-3 text-base md:text-lg text-slate-700 dark:text-slate-300">
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 mt-1">•</span>
+                      <span>Questions will be asked one at a time</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 mt-1">•</span>
+                      <span>The interview will take approximately 10-15 minutes</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 mt-1">•</span>
+                      <span>Your responses help us improve our products and services</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 mt-1">•</span>
+                      <span>Thank you for your valuable feedback!</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex justify-center pt-8">
+                <Button onClick={handleRulesComplete} size="lg" className="rounded-full px-8 md:px-12 py-6 md:py-8 text-lg md:text-xl font-semibold bg-blue-600 hover:bg-blue-700 shadow-xl shadow-blue-200/50 hover:shadow-blue-200/70 transition-all active:scale-95">
+                  I Understand, Start Interview <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {step === "interview" && (
           <div className="flex-1 flex flex-col items-center justify-center py-4 md:py-8">
             <div className="w-full max-w-3xl space-y-8 md:space-y-12 animate-in fade-in duration-700">
+
+              {attentionWarning && (
+                <div className="flex items-center gap-3 px-4 py-3 rounded-2xl border border-red-200 bg-red-50 text-red-700 shadow-sm">
+                  <AlertTriangle className="h-5 w-5 flex-shrink-0" />
+                  <p className="text-sm md:text-base font-medium">{attentionWarning}</p>
+                </div>
+              )}
 
               <div className="text-center space-y-4 md:space-y-6 px-2">
                 <h2 className="text-2xl md:text-5xl font-bold leading-tight text-slate-900 tracking-tight">

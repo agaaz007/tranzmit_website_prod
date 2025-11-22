@@ -1,13 +1,6 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/interview/complete/route": "app/api/interview/complete/route.js",
-  "/api/interview/process/route": "app/api/interview/process/route.js",
   "/access-interview/page": "app/access-interview/page.js",
+  "/api/interview/complete/route": "app/api/interview/complete/route.js",
   "/page": "app/page.js",
-  "/api/submit-demo/route": "app/api/submit-demo/route.js",
-  "/innerwear-report/page": "app/innerwear-report/page.js",
-  "/sample-report/page": "app/sample-report/page.js",
-  "/access-report/page": "app/access-report/page.js",
-  "/try-agent/page": "app/try-agent/page.js",
-  "/book-demo/page": "app/book-demo/page.js"
+  "/api/interview/process/route": "app/api/interview/process/route.js"
 }
