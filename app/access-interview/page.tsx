@@ -479,6 +479,112 @@ export default function AccessInterviewPage() {
     }
   }
 
+  const handleNext = async () => {
+    if (isProcessing) return
+    setIsProcessing(true)
+
+    try {
+      const formData = new FormData()
+      formData.append("history", JSON.stringify(history))
+      formData.append("language", setupData.language)
+      formData.append("name", setupData.name)
+
+      if (questionType === "text") {
+        if (isRecording) {
+          const audioBlob = await stopRecording()
+          if (audioBlob) {
+            formData.append("audio", audioBlob, "recording.webm")
+          } else {
+            console.warn("No audio blob captured")
+            toast({ title: "Error", description: "Could not capture audio.", variant: "destructive" })
+            setIsProcessing(false)
+            return
+          }
+        } else {
+           // If not recording, maybe they already stopped? Or never started?
+           // For now, assume they must be recording or have recorded.
+           // But if `hasStartedAnswering` is true and `isRecording` is false, maybe they stopped manually?
+           // My logic above handles `isRecording`. 
+           // If they stopped manually, `handleNext` wouldn't have the blob unless I stored it.
+           // `stopRecording` stores it in `recordedChunks`, but `handleNext` needs the *current* answer.
+           // Actually `stopRecording` returns the blob.
+           // If I stop manually, I lose the return value if I don't store it.
+           // But the UI doesn't have a "Stop" button separate from "Next" usually in this flow?
+           // Let's check the UI.
+           // The UI shows "Next Question".
+           // So "Next Question" IS the stop button for voice.
+           // So `isRecording` should be true.
+           toast({ title: "Response Required", description: "Please record your answer." })
+           setIsProcessing(false)
+           return
+        }
+      } else {
+        let answerVal = ""
+        if (questionType === 'mcq') answerVal = textAnswer as string
+        else if (questionType === 'number') answerVal = textAnswer as string
+        else if (questionType === 'ordering') answerVal = (textAnswer as string[]).join(", ")
+
+        if (!answerVal) {
+          toast({ title: "Response Required", description: "Please answer the question." })
+          setIsProcessing(false)
+          return
+        }
+        formData.append("textAnswer", answerVal)
+      }
+
+      const res = await fetch("/api/interview/process", {
+        method: "POST",
+        body: formData
+      })
+
+      const data = await res.json()
+
+      if (data.error) {
+        toast({ title: "Please try again", description: data.error === "NO_ANSWER" ? "We didn't hear anything." : "We didn't understand that." })
+        // Don't advance
+        setIsProcessing(false)
+        return
+      }
+
+      if (data.completed || data.nextQuestion === "Survey completed") {
+        finishInterview()
+        return
+      }
+
+      if (data.updatedHistory) setHistory(data.updatedHistory)
+      
+      if (data.nextQuestion) setCurrentQuestion(data.nextQuestion)
+      if (data.questionType) setQuestionType(data.questionType)
+      if (data.options) setQuestionOptions(data.options)
+      
+      setTextAnswer("")
+      setHasStartedAnswering(false)
+
+    } catch (error) {
+      console.error("handleNext error:", error)
+      toast({ title: "Error", description: "Failed to process response. Please try again.", variant: "destructive" })
+    } finally {
+      setIsProcessing(false)
+    }
+  }
+
+  const downloadRecording = () => {
+    if (sessionChunksRef.current.length === 0) {
+      toast({ description: "No recording available." })
+      return
+    }
+    const blob = new Blob(sessionChunksRef.current, { type: "video/webm" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    document.body.appendChild(a)
+    a.style.display = "none"
+    a.href = url
+    a.download = `interview-session-${setupData.name.replace(/\s+/g, "-").toLowerCase() || "user"}.webm`
+    a.click()
+    window.URL.revokeObjectURL(url)
+    document.body.removeChild(a)
+  }
+
   const finishInterview = async () => {
     setIsUploading(true)
     try {
@@ -931,6 +1037,7 @@ export default function AccessInterviewPage() {
                 </div>
               </div>
             </div>
+          </div>
         )}
 
             {step === "completed" && (
@@ -956,5 +1063,5 @@ export default function AccessInterviewPage() {
             )}
           </div>
     </div>
-      )
+  )
 }

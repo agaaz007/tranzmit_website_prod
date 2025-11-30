@@ -42,9 +42,9 @@ export function Header() {
 
           {/* Right side with buttons */}
           <div className="flex items-center gap-3 flex-none">
-            <Button variant="outline" size="default" className="text-sm sm:text-base font-medium px-3 sm:px-6 py-2 sm:py-3 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" asChild>
+            {/* <Button variant="outline" size="default" className="text-sm sm:text-base font-medium px-3 sm:px-6 py-2 sm:py-3 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" asChild>
               <a href="/access-interview">Interview</a>
-            </Button>
+            </Button> */}
             <Button variant="outline" size="default" className="text-sm sm:text-base font-medium px-3 sm:px-6 py-2 sm:py-3 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" asChild>
               <a href="/sample-report">Sample Report</a>
             </Button>
