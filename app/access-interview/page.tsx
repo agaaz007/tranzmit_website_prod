@@ -180,15 +180,16 @@ export default function AccessInterviewPage() {
   const [hasStartedAnswering, setHasStartedAnswering] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
   const [attentionWarning, setAttentionWarning] = useState<string | null>(null)
+  const [isCriticalWarning, setIsCriticalWarning] = useState(false)
 
   // Use Refs for synchronous access to data in event handlers/callbacks
   const chunksRef = useRef<Blob[]>([])
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
-  
+
   // Full Session Recording
   const sessionChunksRef = useRef<Blob[]>([])
   const sessionRecorderRef = useRef<MediaRecorder | null>(null)
-  
+
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const lang = (setupData.language as "en" | "hi") || "en"
@@ -245,13 +246,13 @@ export default function AccessInterviewPage() {
     setStep("setup")
     try {
       // Request video with ideal resolution for face visibility
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { 
-          width: { ideal: 640 }, 
-          height: { ideal: 480 }, 
-          facingMode: "user" 
-        }, 
-        audio: true 
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          width: { ideal: 640 },
+          height: { ideal: 480 },
+          facingMode: "user"
+        },
+        audio: true
       })
       setMediaStream(stream)
     } catch (error) {
@@ -382,24 +383,24 @@ export default function AccessInterviewPage() {
 
   const startSessionRecording = () => {
     if (!mediaStream) return
-    
+
     console.log("🎥 Starting FULL SESSION recording...")
     sessionChunksRef.current = []
-    
+
     try {
       // Record video + audio for the full session
-      const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus') 
-        ? 'video/webm;codecs=vp9,opus' 
+      const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')
+        ? 'video/webm;codecs=vp9,opus'
         : 'video/webm'
-        
+
       const recorder = new MediaRecorder(mediaStream, { mimeType })
-      
+
       recorder.ondataavailable = (e) => {
         if (e.data && e.data.size > 0) {
           sessionChunksRef.current.push(e.data)
         }
       }
-      
+
       recorder.start(1000) // 1 second chunks
       sessionRecorderRef.current = recorder
       console.log("✅ Session recording started with", mimeType)
@@ -407,31 +408,31 @@ export default function AccessInterviewPage() {
       console.error("❌ Failed to start session recording:", err)
       // Try fallback
       try {
-         const recorder = new MediaRecorder(mediaStream)
-         recorder.ondataavailable = (e) => {
-            if (e.data.size > 0) sessionChunksRef.current.push(e.data)
-         }
-         recorder.start(1000)
-         sessionRecorderRef.current = recorder
-         console.log("⚠️ Session recording started (fallback)")
+        const recorder = new MediaRecorder(mediaStream)
+        recorder.ondataavailable = (e) => {
+          if (e.data.size > 0) sessionChunksRef.current.push(e.data)
+        }
+        recorder.start(1000)
+        sessionRecorderRef.current = recorder
+        console.log("⚠️ Session recording started (fallback)")
       } catch (e) {
-         console.error("Critical: Could not record session", e)
+        console.error("Critical: Could not record session", e)
       }
     }
   }
 
   const stopSessionRecording = async (): Promise<Blob | null> => {
     if (!sessionRecorderRef.current) return null
-    
+
     console.log("⏹️ Stopping session recording...")
     return new Promise((resolve) => {
       const recorder = sessionRecorderRef.current!
-      
+
       if (recorder.state === "inactive") {
-         const blob = new Blob(sessionChunksRef.current, { type: "video/webm" })
-         console.log("Session recording already stopped. Size:", blob.size)
-         resolve(blob)
-         return
+        const blob = new Blob(sessionChunksRef.current, { type: "video/webm" })
+        console.log("Session recording already stopped. Size:", blob.size)
+        resolve(blob)
+        return
       }
 
       recorder.onstop = () => {
@@ -439,7 +440,7 @@ export default function AccessInterviewPage() {
         console.log("✅ Session recording stopped. Final Size:", blob.size)
         resolve(blob)
       }
-      
+
       recorder.stop()
     })
   }
@@ -454,8 +455,8 @@ export default function AccessInterviewPage() {
       return
     }
     if (setupData.consent === 'no') {
-        setStep("completed")
-        return
+      setStep("completed")
+      return
     }
 
     setStep("rules")
@@ -491,7 +492,7 @@ export default function AccessInterviewPage() {
       }
       formData.append("history", JSON.stringify(history))
       formData.append("userInfo", JSON.stringify(setupData))
-      
+
       console.log("Starting interview completion upload...")
       toast({
         title: "Uploading Session...",
@@ -517,191 +518,15 @@ export default function AccessInterviewPage() {
       })
     } catch (error) {
       console.error("Finish Interview Error:", error)
-      toast({ 
-        title: "Upload Failed", 
-        description: "Could not save the session to the cloud. It is available locally.", 
-        variant: "destructive" 
+      toast({
+        title: "Upload Failed",
+        description: "Could not save the session to the cloud. It is available locally.",
+        variant: "destructive"
       })
     } finally {
       setIsUploading(false)
       setStep("completed")
     }
-  }
-
-  const handleNext = async () => {
-    if (isProcessing) return
-
-    // Validation checks...
-    if (questionType === 'text' && !hasStartedAnswering) {
-      toast({ title: "Required", description: lang === 'hi' ? "कृपया पहले उत्तर देना शुरू करें" : "Please start answering first." })
-      setAttentionWarning("Please start speaking before moving to the next question.")
-      return
-    }
-    if (questionType === 'mcq' && !textAnswer) {
-      toast({ title: "Required", description: "Please select an option." })
-      setAttentionWarning("Please select an option to continue.")
-      return
-    }
-    if (questionType === 'number' && !textAnswer) {
-      toast({ title: "Required", description: "Please enter a number." })
-      setAttentionWarning("Please provide a numeric answer to continue.")
-      return
-    }
-
-    setAttentionWarning(null)
-
-    setIsProcessing(true)
-
-    const formData = new FormData()
-    formData.append("history", JSON.stringify(history))
-    formData.append("language", lang)
-    formData.append("name", setupData.name)
-
-    if (questionType === "text") {
-      // --- VOICE LOGIC UPDATE START ---
-      try {
-        // Wait for the blob directly from the stop function
-        const audioBlob = await stopRecording()
-
-        if (!audioBlob || audioBlob.size < 500) { // Minimum 500 bytes
-          console.error("Audio blob rejected. Size:", audioBlob?.size, "Threshold: 500")
-          toast({
-            title: "Recording Error",
-            description: `Audio too short (${audioBlob?.size || 0} bytes). Please speak clearly.`,
-            variant: "destructive"
-          })
-          setAttentionWarning("We couldn’t hear that clearly. Please speak for at least 2 seconds and try again.")
-          setIsProcessing(false)
-          setHasStartedAnswering(false) // Reset to allow retry
-          return
-        }
-
-        formData.append("audio", audioBlob, "response.webm")
-      } catch (err) {
-        console.error("Error handling recording stop:", err)
-        setIsProcessing(false)
-        return
-      }
-      // --- VOICE LOGIC UPDATE END ---
-    } else {
-      // Text/Other inputs
-      let finalAnswer = textAnswer
-      if (Array.isArray(textAnswer)) finalAnswer = textAnswer.join(", ")
-      formData.append("textAnswer", finalAnswer as string)
-    }
-
-    try {
-      const apiRequestTimestamp = new Date().toISOString()
-      console.log("=".repeat(60))
-      console.log("🚀 SENDING API REQUEST")
-      console.log("Timestamp:", apiRequestTimestamp)
-      console.log("Endpoint:", "/api/interview/process")
-      console.log("Method:", "POST")
-      if (questionType === "text") {
-        console.log("Payload: Audio file + form data")
-      } else {
-        console.log("Payload: Text answer:", textAnswer)
-      }
-      console.log("=".repeat(60))
-
-      const res = await fetch("/api/interview/process", {
-        method: "POST",
-        body: formData
-      })
-
-      const apiResponseTimestamp = new Date().toISOString()
-      console.log("=".repeat(60))
-      console.log("📥 API RESPONSE RECEIVED")
-      console.log("Timestamp:", apiResponseTimestamp)
-      console.log("Status:", res.status, res.statusText)
-      console.log("=".repeat(60))
-
-      const data = await res.json()
-      console.log("Response Data:", data)
-
-      // Check for errors in the response
-      if (!res.ok || data.error) {
-        const errorMessage = data.error || "Failed to process"
-        const errorDetails = data.details || ""
-        const transcript = data.transcript || ""
-
-        toast({
-          title: "Processing Error",
-          description: transcript
-            ? `Transcription: "${transcript}". Error: ${errorMessage}${errorDetails ? ` - ${errorDetails}` : ""}`
-            : `${errorMessage}${errorDetails ? `: ${errorDetails}` : ""}`,
-          variant: "destructive",
-          duration: 8000
-        })
-
-        console.error("API Error:", { errorMessage, errorDetails, transcript, fullResponse: data })
-
-        // Reset so user can try again
-        if (questionType === "text") {
-          setHasStartedAnswering(false)
-        }
-        return
-      }
-
-      // Update State
-      setHistory(data.updatedHistory)
-      
-      // Check for completion:
-      // 1. Question limit reached
-      // 2. AI says "Survey completed"
-      const isSurveyCompleted = 
-          data.updatedHistory.length >= totalQuestions * 2 ||
-          data.nextQuestion?.toLowerCase().includes("survey completed")
-
-      if (isSurveyCompleted) {
-         console.log("🏁 Interview completed via LLM signal or limit. Finishing...")
-         await finishInterview()
-         return
-      }
-
-      setCurrentQuestion(data.nextQuestion)
-      setQuestionType(data.questionType || "text")
-      setQuestionOptions(data.options || [])
-
-      // Reset answers and answering state
-      setTextAnswer("")
-      setHasStartedAnswering(false) // Reset for next question
-
-      // Stop any ongoing recording
-      if (isRecording) {
-        await stopRecording()
-      }
-
-    } catch (error) {
-      console.error("Network/Parse Error:", error)
-      toast({
-        title: "Network Error",
-        description: `Could not connect to the server. ${error instanceof Error ? error.message : "Please check your connection and try again."}`,
-        variant: "destructive",
-        duration: 8000
-      })
-
-      // Reset so user can try again
-      if (questionType === "text") {
-        setHasStartedAnswering(false)
-      }
-    } finally {
-      console.log("Finally block: setting isProcessing to false")
-      setIsProcessing(false)
-    }
-  }
-
-  const downloadRecording = () => {
-    if (recordedChunks.length === 0) return
-    const blob = new Blob(recordedChunks, { type: "video/webm" })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    document.body.appendChild(a)
-    a.style.display = "none"
-    a.href = url
-    a.download = "interview-session.webm"
-    a.click()
-    window.URL.revokeObjectURL(url)
   }
 
   return (
@@ -713,21 +538,21 @@ export default function AccessInterviewPage() {
       {/* Video Feed - PiP Bottom Right */}
       {mediaStream && (
         <div className="fixed bottom-4 right-4 md:bottom-10 md:right-10 w-56 md:w-[480px] aspect-[3/4] md:aspect-video rounded-2xl overflow-hidden border-[6px] border-white shadow-2xl z-50 bg-black animate-in slide-in-from-bottom-4 opacity-100 transition-all hover:scale-105 duration-300 group">
-          <video 
-            ref={videoRef} 
-            autoPlay 
-            playsInline 
-            muted 
-            className="w-full h-full object-cover transform scale-x-[-1]" 
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            muted
+            className="w-full h-full object-cover transform scale-x-[-1]"
           />
-          
+
           {/* Face Guide Overlay */}
           <div className="absolute inset-0 pointer-events-none border-4 border-white/20 rounded-xl m-1">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-32 md:w-48 md:h-64 border-4 border-dashed border-white/40 rounded-[50%] opacity-60" />
             <div className="absolute bottom-4 left-0 right-0 text-center">
-                <p className="text-[10px] md:text-base text-white/90 font-semibold px-3 py-1 bg-black/40 backdrop-blur-md rounded-full mx-auto w-max shadow-sm">
-                  Keep face in frame
-                </p>
+              <p className="text-[10px] md:text-base text-white/90 font-semibold px-3 py-1 bg-black/40 backdrop-blur-md rounded-full mx-auto w-max shadow-sm">
+                Keep face in frame
+              </p>
             </div>
           </div>
 
@@ -974,163 +799,162 @@ export default function AccessInterviewPage() {
         )}
 
         {step === "interview" && (
-          <div className="flex-1 flex flex-col items-center justify-center py-4 md:py-8">
-            <div className="w-full max-w-3xl space-y-8 md:space-y-12 animate-in fade-in duration-700">
-
-              {attentionWarning && (
-                <div className="flex items-center gap-3 px-4 py-3 rounded-2xl border border-red-200 bg-red-50 text-red-700 shadow-sm">
-                  <AlertTriangle className="h-5 w-5 flex-shrink-0" />
-                  <p className="text-sm md:text-base font-medium">{attentionWarning}</p>
-                </div>
+          <div
+            className={cn(
+              "flex-1 flex flex-col items-center justify-center py-4 md:py-8 transition-colors duration-300",
+              isCriticalWarning ? "bg-red-50/80" : ""
+            )}
+          >
+            <div className="relative w-full max-w-3xl">
+              {isCriticalWarning && (
+                <div className="absolute inset-0 rounded-3xl border border-red-200 bg-red-100/70 animate-pulse pointer-events-none" />
               )}
+              <div className="relative w-full max-w-3xl space-y-8 md:space-y-12 animate-in fade-in duration-700">
 
-              <div className="text-center space-y-4 md:space-y-6 px-2">
-                <h2 className="text-2xl md:text-5xl font-bold leading-tight text-slate-900 tracking-tight">
-                  {currentQuestion.replace("{name}", setupData.name)}
-                </h2>
-              </div>
-
-              <div className="flex justify-center min-h-[250px] md:min-h-[300px] items-center">
-                {/* Voice Input Mode */}
-                {questionType === 'text' && (
-                  <>
-                    <VoiceInputDisplay
-                      isRecording={isRecording}
-                      hasStarted={hasStartedAnswering}
-                      lang={lang}
-                    />
-                    {/* Visualizer for debugging confidence */}
-                    <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-4 opacity-50 hover:opacity-100 transition-opacity">
-                      <AudioVisualizer stream={mediaStream} />
-                    </div>
-                  </>
-                )}
-
-                {/* MCQ Mode */}
-                {questionType === 'mcq' && (
-                  <div className="grid gap-3 w-full max-w-md mx-auto animate-in slide-in-from-bottom-8 duration-500 px-2">
-                    {questionOptions.map((opt, idx) => {
-                      const isSelected = textAnswer === opt;
-                      return (
-                        <button
-                          key={idx}
-                          onClick={() => setTextAnswer(opt)}
-                          className={cn(
-                            "w-full p-4 md:p-5 text-base md:text-lg font-medium transition-all duration-200 rounded-xl border-2 text-center shadow-sm touch-manipulation",
-                            isSelected
-                              ? "border-blue-600 bg-blue-600 text-white shadow-blue-200 shadow-lg scale-[1.02]"
-                              : "border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 active:scale-95"
-                          )}
-                        >
-                          {opt}
-                        </button>
-                      )
-                    })}
+                {attentionWarning && (
+                  <div
+                    className={cn(
+                      "flex items-center gap-3 px-4 py-3 rounded-2xl border text-sm md:text-base font-medium shadow-sm",
+                      isCriticalWarning
+                        ? "border-red-300 bg-red-100 text-red-800"
+                        : "border-amber-200 bg-amber-50 text-amber-700"
+                    )}
+                  >
+                    <AlertTriangle className="h-5 w-5 flex-shrink-0" />
+                    <p>{attentionWarning}</p>
                   </div>
                 )}
 
-                {/* Number Mode */}
-                {questionType === 'number' && (
-                  <div className="animate-in zoom-in duration-500">
-                    <Input
-                      type="number"
-                      className="text-5xl md:text-6xl p-8 md:p-12 h-auto w-48 md:w-64 text-center border-2 border-slate-200 rounded-2xl focus:border-blue-600 focus:ring-0 font-bold text-slate-800 placeholder:text-slate-200"
-                      placeholder="0"
-                      autoFocus
-                      value={textAnswer as string}
-                      onChange={(e) => setTextAnswer(e.target.value)}
-                    />
-                  </div>
-                )}
+                <div className="text-center space-y-4 md:space-y-6 px-2">
+                  <h2 className="text-2xl md:text-5xl font-bold leading-tight text-slate-900 tracking-tight">
+                    {currentQuestion.replace("{name}", setupData.name)}
+                  </h2>
+                </div>
 
-                {/* Ordering Mode */}
-                {questionType === 'ordering' && Array.isArray(textAnswer) && (
-                  <Reorder.Group axis="y" values={textAnswer} onReorder={setTextAnswer} className="space-y-2 md:space-y-3 w-full max-w-md animate-in slide-in-from-bottom-8 duration-500 px-2">
-                    {textAnswer.map((item) => (
-                      <Reorder.Item key={item} value={item} className="group bg-white border-2 border-slate-200 active:border-blue-400 p-3 md:p-4 rounded-xl shadow-sm cursor-grab active:cursor-grabbing flex items-center gap-4 select-none transition-colors touch-manipulation">
-                        <div className="text-slate-300 group-hover:text-blue-400 transition-colors">
-                          <GripVertical className="h-5 w-5 md:h-6 md:w-6" />
-                        </div>
-                        <span className="text-base md:text-lg font-medium text-slate-700">{item}</span>
-                      </Reorder.Item>
-                    ))}
-                  </Reorder.Group>
-                )}
-              </div>
-
-              <div className="flex justify-center pt-4 md:pt-8 pb-8">
-                {/* Show Start Answering button for voice questions when not started - HIDDEN for auto-record */
-                      /* questionType === 'text' && !hasStartedAnswering ? (
-                          <Button 
-                              onClick={(e) => {
-                                  console.log("Start Answering clicked!")
-                                  e.preventDefault()
-                                  e.stopPropagation()
-                                  handleStartAnswering()
-                              }} 
-                              size="lg" 
-                              className="rounded-full px-8 md:px-12 py-6 md:py-8 text-lg md:text-xl font-semibold shadow-xl transition-all duration-300 active:scale-95 bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 hover:shadow-2xl"
-                          >
-                             <div className="flex items-center gap-3">
-                              <MicVocal className="h-5 w-5 md:h-6 md:w-6" />
-                              <span>{lang === 'hi' ? "उत्तर देना शुरू करें" : "Start Answering"}</span>
-                             </div>
-                          </Button>
-                      ) : */ (
-                    <Button
-                      onClick={(e) => {
-                        console.log("Next Question clicked!", { isProcessing, questionType, isRecording })
-                        e.preventDefault()
-                        e.stopPropagation()
-                        handleNext()
-                      }}
-                      disabled={isProcessing}
-                      size="lg"
-                      className={cn(
-                        "rounded-full px-8 md:px-12 py-6 md:py-8 text-lg md:text-xl font-semibold shadow-xl transition-all duration-300 active:scale-95",
-                        isProcessing ? "bg-slate-100 text-slate-400 shadow-none" : "bg-slate-900 text-white hover:bg-slate-800 hover:scale-105 hover:shadow-2xl"
-                      )}
-                    >
-                      {isProcessing ? (
-                        <div className="flex items-center gap-3">
-                          <Loader2 className="h-5 w-5 md:h-6 md:w-6 animate-spin" />
-                          <span>Processing</span>
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-3">
-                          <span>{lang === 'hi' ? "अगला प्रश्न" : "Next Question"}</span>
-                          <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
-                        </div>
-                      )}
-                    </Button>
+                <div className="flex justify-center min-h-[250px] md:min-h-[300px] items-center">
+                  {/* Voice Input Mode */}
+                  {questionType === 'text' && (
+                    <>
+                      <VoiceInputDisplay
+                        isRecording={isRecording}
+                        hasStarted={hasStartedAnswering}
+                        lang={lang}
+                      />
+                      {/* Visualizer for debugging confidence */}
+                      <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-4 opacity-50 hover:opacity-100 transition-opacity">
+                        <AudioVisualizer stream={mediaStream} />
+                      </div>
+                    </>
                   )}
+
+                  {/* MCQ Mode */}
+                  {questionType === 'mcq' && (
+                    <div className="grid gap-3 w-full max-w-md mx-auto animate-in slide-in-from-bottom-8 duration-500 px-2">
+                      {questionOptions.map((opt, idx) => {
+                        const isSelected = textAnswer === opt;
+                        return (
+                          <button
+                            key={idx}
+                            onClick={() => setTextAnswer(opt)}
+                            className={cn(
+                              "w-full p-4 md:p-5 text-base md:text-lg font-medium transition-all duration-200 rounded-xl border-2 text-center shadow-sm touch-manipulation",
+                              isSelected
+                                ? "border-blue-600 bg-blue-600 text-white shadow-blue-200 shadow-lg scale-[1.02]"
+                                : "border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 active:scale-95"
+                            )}
+                          >
+                            {opt}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )}
+
+                  {/* Number Mode */}
+                  {questionType === 'number' && (
+                    <div className="animate-in zoom-in duration-500">
+                      <Input
+                        type="number"
+                        className="text-5xl md:text-6xl p-8 md:p-12 h-auto w-48 md:w-64 text-center border-2 border-slate-200 rounded-2xl focus:border-blue-600 focus:ring-0 font-bold text-slate-800 placeholder:text-slate-200"
+                        placeholder="0"
+                        autoFocus
+                        value={textAnswer as string}
+                        onChange={(e) => setTextAnswer(e.target.value)}
+                      />
+                    </div>
+                  )}
+
+                  {/* Ordering Mode */}
+                  {questionType === 'ordering' && Array.isArray(textAnswer) && (
+                    <Reorder.Group axis="y" values={textAnswer} onReorder={setTextAnswer} className="space-y-2 md:space-y-3 w-full max-w-md animate-in slide-in-from-bottom-8 duration-500 px-2">
+                      {textAnswer.map((item) => (
+                        <Reorder.Item key={item} value={item} className="group bg-white border-2 border-slate-200 active:border-blue-400 p-3 md:p-4 rounded-xl shadow-sm cursor-grab active:cursor-grabbing flex items-center gap-4 select-none transition-colors touch-manipulation">
+                          <div className="text-slate-300 group-hover:text-blue-400 transition-colors">
+                            <GripVertical className="h-5 w-5 md:h-6 md:w-6" />
+                          </div>
+                          <span className="text-base md:text-lg font-medium text-slate-700">{item}</span>
+                        </Reorder.Item>
+                      ))}
+                    </Reorder.Group>
+                  )}
+                </div>
+
+                <div className="flex justify-center pt-4 md:pt-8 pb-8">
+                  {/* Show Start Answering button for voice questions when not started - HIDDEN for auto-record */}
+                  <Button
+                    onClick={(e) => {
+                      console.log("Next Question clicked!", { isProcessing, questionType, isRecording })
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleNext()
+                    }}
+                    disabled={isProcessing}
+                    size="lg"
+                    className={cn(
+                      "rounded-full px-8 md:px-12 py-6 md:py-8 text-lg md:text-xl font-semibold shadow-xl transition-all duration-300 active:scale-95",
+                      isProcessing ? "bg-slate-100 text-slate-400 shadow-none" : "bg-slate-900 text-white hover:bg-slate-800 hover:scale-105 hover:shadow-2xl"
+                    )}
+                  >
+                    {isProcessing ? (
+                      <div className="flex items-center gap-3">
+                        <Loader2 className="h-5 w-5 md:h-6 md:w-6 animate-spin" />
+                        <span>Processing</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-3">
+                        <span>{lang === 'hi' ? "अगला प्रश्न" : "Next Question"}</span>
+                        <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+                      </div>
+                    )}
+                  </Button>
+
+                </div>
               </div>
             </div>
-          </div>
         )}
 
-        {step === "completed" && (
-          <div className="flex-1 flex items-center justify-center py-8">
-            <div className="max-w-md text-center space-y-6 md:space-y-8 animate-in zoom-in duration-500 px-4">
-              <div className="h-20 w-20 md:h-24 md:w-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8">
-                <Check className="h-8 w-8 md:h-10 md:w-10" />
+            {step === "completed" && (
+              <div className="flex-1 flex items-center justify-center py-8">
+                <div className="max-w-md text-center space-y-6 md:space-y-8 animate-in zoom-in duration-500 px-4">
+                  <div className="h-20 w-20 md:h-24 md:w-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8">
+                    <Check className="h-8 w-8 md:h-10 md:w-10" />
+                  </div>
+                  <div className="space-y-3 md:space-y-4">
+                    <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Thank you, {setupData.name}!</h2>
+                    <p className="text-base md:text-lg text-slate-500">Your feedback helps us build better products. The session has been recorded.</p>
+                  </div>
+                  <div className="space-y-3 pt-6">
+                    <Button onClick={downloadRecording} variant="outline" size="lg" className="w-full py-6 rounded-xl border-2 hover:bg-slate-50 text-slate-700">
+                      Download Recording
+                    </Button>
+                    <Button asChild variant="ghost" size="lg" className="w-full py-6 text-slate-500 hover:text-slate-900">
+                      <a href="/">Back to Home</a>
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <div className="space-y-3 md:space-y-4">
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Thank you, {setupData.name}!</h2>
-                <p className="text-base md:text-lg text-slate-500">Your feedback helps us build better products. The session has been recorded.</p>
-              </div>
-              <div className="space-y-3 pt-6">
-                <Button onClick={downloadRecording} variant="outline" size="lg" className="w-full py-6 rounded-xl border-2 hover:bg-slate-50 text-slate-700">
-                  Download Recording
-                </Button>
-                <Button asChild variant="ghost" size="lg" className="w-full py-6 text-slate-500 hover:text-slate-900">
-                  <a href="/">Back to Home</a>
-                </Button>
-              </div>
-            </div>
+            )}
           </div>
-        )}
-      </div>
     </div>
-  )
+      )
 }

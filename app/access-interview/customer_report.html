@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeCulture: Strategic Insights Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --bg: #ecf0f1;
+            --card: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 { margin: 0; font-size: 2.2rem; }
+        .header p { margin: 10px 0 0; opacity: 0.8; font-size: 1.1rem; }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-5px); }
+
+        .card h3 {
+            border-bottom: 2px solid var(--bg);
+            padding-bottom: 15px;
+            margin-top: 0;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .insight-badge {
+            font-size: 0.8em;
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: white;
+            background: var(--primary);
+        }
+        .badge-crit { background: var(--accent); }
+        .badge-opp { background: var(--success); }
+
+        /* Timeline Visualization */
+        .timeline-container { position: relative; padding: 20px 0; }
+        .timeline-line {
+            position: absolute; left: 20px; top: 0; bottom: 0; width: 4px; background: #ddd;
+        }
+        .timeline-event {
+            position: relative; margin-bottom: 25px; padding-left: 50px;
+        }
+        .timeline-dot {
+            position: absolute; left: 12px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--primary); border: 4px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .timeline-content {
+            background: #f9f9f9; padding: 15px; border-radius: 8px; border-left: 5px solid var(--primary);
+        }
+        .t-success .timeline-dot { background: var(--success); }
+        .t-success .timeline-content { border-left-color: var(--success); background: #f0f9f4; }
+        .t-crit .timeline-dot { background: var(--accent); }
+        .t-crit .timeline-content { border-left-color: var(--accent); background: #fff5f5; }
+
+        .alert-box {
+            background: #fdedec;
+            border-left: 5px solid var(--accent);
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; font-size: 0.9em; }
+        th { color: var(--primary); background: #f8f9fa; }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>FreeCulture Intelligence Dashboard</h1>
+        <p>Strategic Roadmap Derived from 17 Deep-Dive Customer Transcripts</p>
+    </div>
+
+    <div class="grid-container">
+        
+        <!-- 1. The Churn Cliff Timeline -->
+        <div class="card">
+            <h3>📉 The "Retention Crisis" Timeline <span class="insight-badge badge-crit">ACTION REQUIRED</span></h3>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-event t-success">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <strong>Day 1: The "Unboxing" Delight</strong>
+                        <p>Customers delighted. "Softest fabric," "Better than Jockey," "Great Colors." (High NPS)</p>
+                    </div>
+                </div>
+
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <strong>Week 3: The "Sizing Doubt" (R14)</strong>
+                        <p>Users notice inconsistency. "Same size pack, one is tight, one is loose."</p>
+                    </div>
+                </div>
+
+                <div class="timeline-event t-crit">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <strong>Month 1.5: Elastic Failure (R9, R12)</strong>
+                        <p>Waistband loses memory. "Last se dhila ho jata hai" (Gets loose).</p>
+                    </div>
+                </div>
+
+                <div class="timeline-event t-crit">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <strong>Month 3: Structural Failure (R2)</strong>
+                        <p>Fabric Tearing. "Vests are fine, but Underwear tears after washes."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Competitive Radar -->
+        <div class="card">
+            <h3>⚔️ Competitive Positioning <span class="insight-badge">STRATEGY</span></h3>
+            <canvas id="radarChart"></canvas>
+            <div class="alert-box" style="background: #e8f8f5; border-color: #27ae60;">
+                <strong>The "Smart" Win:</strong> You are beating DaMensch on "Price Value" (R11: "Same material, half price") but losing to Jockey on "Durability."
+            </div>
+        </div>
+
+        <!-- 3. New Product Opportunities -->
+        <div class="card">
+            <h3>💰 The "Active Gap" (Lost Revenue) <span class="insight-badge badge-opp">OPPORTUNITY</span></h3>
+            <canvas id="oppChart"></canvas>
+            <p style="margin-top:15px; font-size:0.9em; color:#666;">
+                <strong>Insight:</strong> High-value customers (R8, R9) leave FC to buy Jockey Sport because you lack <strong>Tactel Nylon</strong>.
+            </p>
+        </div>
+
+        <!-- 4. Buyer Personas -->
+        <div class="card">
+            <h3>👥 The "Gatekeeper" Economy <span class="insight-badge">MARKETING</span></h3>
+            <canvas id="personaChart"></canvas>
+            <p style="margin-top:15px; font-size:0.9em; color:#666;">
+                <strong>Strategy:</strong> ~30% of sales are driven by Moms/Wives (R6, R15). Marketing must address "Durability" to convince the person paying the bill.
+            </p>
+        </div>
+
+        <!-- 5. Executive Action Plan -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <h3>🚀 Executive Action Plan</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Problem Area</th>
+                        <th>Evidence (Transcript ID)</th>
+                        <th>Strategic Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Elastic Fatigue</strong></td>
+                        <td>R9, R12: "Loose after washing"</td>
+                        <td style="color: var(--accent); font-weight:bold;">Switch to High-Modulus Nylon Elastic.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Product Tearing</strong></td>
+                        <td>R2: "Briefs tear, Vests don't"</td>
+                        <td>Increase GSM on Brief/Trunk production line.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Active Churn</strong></td>
+                        <td>R8: "Need Tactel Nylon for Gym"</td>
+                        <td style="color: var(--success); font-weight:bold;">Launch FreeCulture PRO (Nylon Blend).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sizing Drift</strong></td>
+                        <td>R14: "Same pack, different fits"</td>
+                        <td>Enforce 0.5cm cutting tolerance in factory.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. Radar Chart
+        const ctxRadar = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['Price Value', 'Fabric Softness', 'Durability', 'Brand Fame', 'Active/Gym Use'],
+                datasets: [{
+                    label: 'FreeCulture',
+                    data: [9.5, 9.5, 4.0, 5.0, 3.0],
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.2)',
+                    pointBackgroundColor: '#e74c3c'
+                }, {
+                    label: 'Jockey (Benchmark)',
+                    data: [6.0, 5.0, 9.0, 10.0, 9.0],
+                    borderColor: '#34495e',
+                    backgroundColor: 'rgba(52, 73, 94, 0.2)',
+                    pointBackgroundColor: '#34495e'
+                }]
+            },
+            options: {
+                scales: { r: { beginAtZero: true, max: 10 } },
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // 2. Opportunity Bar Chart
+        const ctxOpp = document.getElementById('oppChart').getContext('2d');
+        new Chart(ctxOpp, {
+            type: 'bar',
+            data: {
+                labels: ['"Active" Nylon Line', '"Invisible" Shapewear', 'Senior Bundles', 'Teen Packs'],
+                datasets: [{
+                    label: 'Demand Intensity (1-10)',
+                    data: [9, 7, 6, 5],
+                    backgroundColor: ['#3498db', '#9b59b6', '#2ecc71', '#f1c40f']
+                }]
+            },
+            options: {
+                scales: { y: { beginAtZero: true, max: 10 } },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // 3. Persona Pie Chart
+        const ctxPersona = document.getElementById('personaChart').getContext('2d');
+        new Chart(ctxPersona, {
+            type: 'doughnut',
+            data: {
+                labels: ['Male Self-Buyer', 'Gatekeeper (Mom/Wife/Partner)', 'Active Pro (Flight Risk)'],
+                datasets: [{
+                    data: [60, 30, 10],
+                    backgroundColor: ['#2c3e50', '#e67e22', '#e74c3c']
+                }]
+            },
+            options: {
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    </script>
+
+</body>
+</html>

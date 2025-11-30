@@ -1,6 +1,5 @@
 {
-  "/access-interview/page": "app/access-interview/page.js",
-  "/api/interview/complete/route": "app/api/interview/complete/route.js",
   "/page": "app/page.js",
-  "/api/interview/process/route": "app/api/interview/process/route.js"
+  "/innerwear-customer-report/page": "app/innerwear-customer-report/page.js",
+  "/innerwear-report/page": "app/innerwear-report/page.js"
 }

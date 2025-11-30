@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeCulture: Phase 2 Strategic Dashboard</title>
+    <!-- Importing Chart.js and Annotation Plugin for Advanced Plots -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+    <style>
+        :root {
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --text-main: #e94560;
+            --text-sub: #a2a8d3;
+            --accent-blue: #0f3460;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--white);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px;
+            border-bottom: 2px solid var(--text-main);
+            margin-bottom: 40px;
+        }
+        .header h1 { margin: 0; font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; }
+        .header p { margin: 10px 0 0; color: var(--text-sub); font-size: 1.1rem; }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--text-main); }
+
+        .full-width { grid-column: 1 / -1; }
+
+        h3 { 
+            margin-top: 0; 
+            color: var(--text-main); 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            padding-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            background: rgba(233, 69, 96, 0.2);
+            color: var(--text-main);
+            font-size: 0.7rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--text-main);
+        }
+
+        .insight-box {
+            background: rgba(15, 52, 96, 0.5);
+            border-left: 4px solid var(--text-main);
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-sub);
+        }
+        .insight-box strong { color: var(--white); }
+
+        @media (max-width: 768px) { .dashboard-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>FreeCulture Intelligence Dashboard</h1>
+        <p>Phase 2: Behavioral Economics, Lifecycle & Competitor Co-Habitation</p>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <!-- 1. The Survival Curve (Lifecycle) -->
+        <div class="card full-width">
+            <h3>📉 The Product "Survival Curve" <span class="badge">RETENTION CRITICAL</span></h3>
+            <div style="height: 350px;">
+                <canvas id="survivalChart"></canvas>
+            </div>
+            <div class="insight-box">
+                <strong>The "60-Day Cliff":</strong> Customer satisfaction is elite (9.8/10) during the unboxing phase. However, it crashes between <strong>Day 45 and Day 60</strong>. This correlates exactly with the "Loose Elastic" (R9, R12) and "Tearing" (R2) feedback. Your product currently has a 2-month lifespan for active users.
+            </div>
+        </div>
+
+        <!-- 2. The Cotton Paradox (Say vs Do) -->
+        <div class="card">
+            <h3>🧵 The "Cotton Paradox" (Say vs Do) <span class="badge">PSYCHOLOGY</span></h3>
+            <div style="height: 300px;">
+                <canvas id="paradoxChart"></canvas>
+            </div>
+            <div class="insight-box">
+                <strong>Cognitive Dissonance:</strong> 76% of users <em>say</em> they prefer Cotton (Blue Bar) out of habit. However, 85% of their praise is for "Softness/Smoothness" (Red Bar)—attributes of Bamboo. 
+                <br><em>Action: Market your fabric as "The Evolution of Cotton."</em>
+            </div>
+        </div>
+
+        <!-- 3. Share of Drawer (Co-Habitation) -->
+        <div class="card">
+            <h3>🩳 "Share of Drawer" Co-Habitation <span class="badge">COMPETITION</span></h3>
+            <div style="height: 300px;">
+                <canvas id="drawerChart"></canvas>
+            </div>
+            <div class="insight-box">
+                <strong>The "Roommate" Effect:</strong> FreeCulture is almost never exclusive. You "co-habit" with Jockey. Jockey owns the "Rough/Gym" slot. You own the "Sleep/Comfort" slot. To win, you must launch an Active/Nylon line to capture the Jockey share.
+            </div>
+        </div>
+
+        <!-- 4. Shapewear Resistance Matrix -->
+        <div class="card">
+            <h3>🛡️ Shapewear: The Trust Barrier <span class="badge">NEW LAUNCH</span></h3>
+            <div style="height: 250px;">
+                <canvas id="shapewearChart"></canvas>
+            </div>
+            <div class="insight-box">
+                <strong>The Fear Factor:</strong> While intent is high (Green), the "Skeptics" (Yellow) specifically fear <strong>Visible Lines</strong> and <strong>Suffocation</strong>.
+                <br><em>Action: Rename product to "Invisible Fit Vests."</em>
+            </div>
+        </div>
+
+        <!-- 5. Demographic Matrix -->
+        <div class="card">
+            <h3>🎯 Demographic Priorities Matrix <span class="badge">TARGETING</span></h3>
+            <div style="height: 250px;">
+                <canvas id="demoChart"></canvas>
+            </div>
+            <div class="insight-box">
+                <strong>The "Active Gap":</strong> You are winning Gen Z (Style) and Boomers (Comfort), but losing the high-spending Millennials (25-40) because you lack a <strong>Nylon/Active</strong> product for their gym lifestyle.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Global Chart Defaults
+        Chart.defaults.font.family = "'Segoe UI', sans-serif";
+        Chart.defaults.color = '#a2a8d3';
+        Chart.defaults.borderColor = 'rgba(255,255,255,0.1)';
+
+        // 1. Survival Curve Chart (Line with Annotation)
+        const ctxSurvival = document.getElementById('survivalChart').getContext('2d');
+        new Chart(ctxSurvival, {
+            type: 'line',
+            data: {
+                labels: ['Unboxing', 'Week 2', 'Month 1', 'Month 2', 'Month 3', 'Month 6'],
+                datasets: [{
+                    label: 'Product Integrity / Satisfaction Score',
+                    data: [9.8, 9.5, 8.8, 5.5, 4.0, 3.0], // Crash at Month 2
+                    borderColor: '#e94560',
+                    backgroundColor: 'rgba(233, 69, 96, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#e94560',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { min: 0, max: 10, title: {display: true, text: 'Satisfaction Score (1-10)'} } },
+                plugins: {
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                xMin: 3, xMax: 3, // Month 2
+                                borderColor: '#ffffff', borderWidth: 2, borderDash: [6, 6],
+                                label: { content: '⚠️ ELASTIC FAILURE POINT', enabled: true, position: 'top', backgroundColor: 'rgba(233,69,96,0.8)' }
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            afterBody: function() { return "Key Issue: Waistband Loosening & Fabric Tearing"; }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 2. Cotton Paradox (Grouped Bar)
+        const ctxParadox = document.getElementById('paradoxChart').getContext('2d');
+        new Chart(ctxParadox, {
+            type: 'bar',
+            data: {
+                labels: ['Cotton', 'Bamboo/Modal', 'Synthetic/Nylon'],
+                datasets: [
+                    { label: 'What Users SAY they want', data: [76, 12, 12], backgroundColor: '#0f3460' },
+                    { label: 'What Users PRAISE (Softness)', data: [15, 80, 5], backgroundColor: '#e94560' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: 'Stated Preference vs. Actual Experience' } }
+            }
+        });
+
+        // 3. Drawer Share (Doughnut)
+        const ctxDrawer = document.getElementById('drawerChart').getContext('2d');
+        new Chart(ctxDrawer, {
+            type: 'doughnut',
+            data: {
+                labels: ['Also Own Jockey', 'Also Own DaMensch', 'Also Own XYXX', 'Exclusive to FreeCulture'],
+                datasets: [{
+                    data: [85, 35, 25, 15],
+                    backgroundColor: ['#16213e', '#e94560', '#533483', '#0f3460'],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: { legend: { position: 'right' } }
+            }
+        });
+
+        // 4. Shapewear Resistance (Horizontal Bar)
+        const ctxShape = document.getElementById('shapewearChart').getContext('2d');
+        new Chart(ctxShape, {
+            type: 'bar',
+            indexAxis: 'y',
+            data: {
+                labels: ['Sentiment'],
+                datasets: [
+                    { label: 'Immediate Buy', data: [58], backgroundColor: '#27ae60' },
+                    { label: 'Skeptical (Fear of Lines)', data: [28], backgroundColor: '#f1c40f' },
+                    { label: 'Reject', data: [14], backgroundColor: '#e94560' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { x: { stacked: true, max: 100 }, y: { stacked: true } }
+            }
+        });
+
+        // 5. Demographic Matrix (Bubble)
+        const ctxDemo = document.getElementById('demoChart').getContext('2d');
+        new Chart(ctxDemo, {
+            type: 'bubble',
+            data: {
+                datasets: [
+                    { label: 'Gen Z (Style)', data: [{x: 20, y: 80, r: 15}], backgroundColor: '#27ae60' },
+                    { label: 'Millennials (Churn Risk)', data: [{x: 32, y: 30, r: 25}], backgroundColor: '#e94560' }, // Low satisfaction
+                    { label: 'Boomers (Comfort)', data: [{x: 58, y: 90, r: 20}], backgroundColor: '#0f3460' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { title: {display: true, text: 'Age Group'}, min: 15, max: 70 },
+                    y: { title: {display: true, text: 'Satisfaction %'}, min: 0, max: 100 }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `${ctx.dataset.label}: Age ${ctx.raw.x}, Satisfaction ${ctx.raw.y}%`
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
