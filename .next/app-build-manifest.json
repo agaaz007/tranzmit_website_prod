@@ -16,10 +16,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/innerwear-report/page.js"
     ],
-    "/innerwear-customer-report/page": [
+    "/growth-report-freecultr/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/innerwear-customer-report/page.js"
+      "static/chunks/app/growth-report-freecultr/page.js"
     ]
   }
 }
