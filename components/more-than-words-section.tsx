@@ -6,6 +6,9 @@ export function MoreThanWordsSection() {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-6 gap-8 lg:gap-16 items-center">
           <div className="lg:col-span-2">
+            <div className="inline-flex items-center justify-center px-4 py-1.5 border border-gray-300 rounded-full text-sm font-medium text-gray-700 mb-6">
+              INSIGHTS
+            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">More than just words</h2>
             <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed">
               Audio interviews reveal tone, uncovering deeper user sentiment.

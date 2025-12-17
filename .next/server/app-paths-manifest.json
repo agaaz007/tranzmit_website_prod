@@ -1,4 +1,6 @@
 {
   "/page": "app/page.js",
-  "/growth-report-freecultr/page": "app/growth-report-freecultr/page.js"
+  "/access-report/page": "app/access-report/page.js",
+  "/sample-report/page": "app/sample-report/page.js",
+  "/innerwear-report/page": "app/innerwear-report/page.js"
 }

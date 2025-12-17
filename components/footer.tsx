@@ -1,40 +1,18 @@
 export function Footer() {
   return (
-    <footer className="bg-gray-100 py-20">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center text-center space-y-8">
-          {/* Main tagline */}
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Get valuable customer intelligence with Tranzmit
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Transform your customer research with AI-powered interviews that deliver deeper insights faster than ever before.
-            </p>
-          </div>
-          
-          {/* CTA Button */}
-          <div className="pt-4">
-            <a
-              href="/book-demo"
-              className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors duration-200"
-            >
-              Request Demo
-            </a>
-          </div>
-          
-          {/* Simple bottom section */}
-          <div className="pt-8 border-t border-gray-300 w-full">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-2xl text-blue-600">TRANZMIT</span>
-              </div>
-              <div className="text-gray-500 text-sm">
-                © 2025 Tranzmit. All rights reserved.
-              </div>
-            </div>
-          </div>
+    <footer className="relative w-full bg-gradient-to-b from-white via-cyan-100 to-cyan-300 overflow-hidden pt-8 sm:pt-10 md:pt-12 flex flex-col justify-between">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mb-10 sm:mb-14 md:mb-20">
+        <div className="pl-0 sm:pl-4">
+           <p className="text-xs sm:text-sm md:text-base font-medium text-gray-700">
+            Contact Us: <a href="mailto:support@tranzmit.ai" className="hover:text-blue-700 transition-colors break-all sm:break-normal">contact@trazmit.com</a>
+          </p>
         </div>
+      </div>
+      
+      <div className="w-full flex justify-center items-end pb-0 -mb-1 sm:-mb-2 md:-mb-4 lg:-mb-6">
+        <h1 className="text-[12vw] sm:text-[14vw] md:text-[16vw] lg:text-[18vw] leading-[0.75] font-black text-white/50 tracking-tighter select-none text-center whitespace-nowrap w-full">
+          TRANZMIT
+        </h1>
       </div>
     </footer>
   )
