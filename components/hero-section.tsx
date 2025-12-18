@@ -13,7 +13,7 @@ export function HeroSection() {
     <section className="relative overflow-hidden bg-background py-8 sm:py-12 md:py-16 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl text-center">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight text-balance leading-[1.1] max-w-6xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-tight text-balance leading-[1.1] max-w-6xl mx-auto">
             <span className="bg-gradient-to-r from-[#7FB3E7] to-[#050849] bg-clip-text text-transparent">Your Autonomous</span>
             <br />
             <span className="bg-gradient-to-r from-[#2F82AC] to-[#050849] bg-clip-text text-transparent">Customer Research </span>

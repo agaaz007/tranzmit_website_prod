@@ -26,7 +26,7 @@ export function UseCasesSection() {
             <div className="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 border border-gray-300 rounded-full text-xs sm:text-sm font-medium text-gray-700 mb-4 sm:mb-6">
               USE CASES ARE INFINITE
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold italic tracking-tight text-foreground mb-3 sm:mb-4">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold italic tracking-tight text-foreground mb-3 sm:mb-4 leading-tight">
               See Tranzmit in action
             </h2>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-2xl mx-auto px-2 sm:px-0">
