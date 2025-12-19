@@ -8,7 +8,7 @@ export function StatisticsSection() {
           </div>
         </div>
         <div className="w-full h-px bg-gray-300 mb-8 sm:mb-12 md:mb-16"></div>
-        <div className="flex flex-col sm:flex-row justify-between items-stretch gap-6 sm:gap-4 md:gap-6 lg:gap-8">
+        <div className="grid grid-cols-3 sm:flex sm:flex-row justify-between items-stretch gap-3 sm:gap-4 md:gap-6 lg:gap-8">
           <div className="flex-1 text-center sm:text-left">
             <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">3x</div>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-900 leading-relaxed">Customer responses more than three times longer than average.</p>

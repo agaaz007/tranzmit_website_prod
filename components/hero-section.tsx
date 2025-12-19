@@ -9,15 +9,15 @@ const MESSAGES = [
 ]
 
 export function HeroSection() {
-  return (
+  return (  
     <section className="relative overflow-hidden bg-background py-8 sm:py-12 md:py-16 lg:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-tight text-balance leading-[1.1] max-w-6xl mx-auto">
-            <span className="bg-gradient-to-r from-[#7FB3E7] to-[#050849] bg-clip-text text-transparent">Your Autonomous</span>
+          <h1 className="text-5xl sm:text-[41px] md:text-[41px] lg:text-[41px] xl:text-[51px] 2xl:text-[70px] font-bold tracking-tight leading-[1.1] max-w-6xl mx-auto text-center">
+            <span className="bg-gradient-to-r from-[#7FB3E7] to-[#050849] bg-clip-text text-transparent inline-block">Your Autonomous</span>
             <br />
-            <span className="bg-gradient-to-r from-[#2F82AC] to-[#050849] bg-clip-text text-transparent">Customer Research </span>
-            <span className="text-[#6B8CC7]">Team</span>
+            <span className="bg-gradient-to-r from-[#2F82AC] to-[#050849] bg-clip-text text-transparent inline-block">Customer Research </span>
+            <span className="text-[#6B8CC7] inline-block">Team</span>
           </h1>
 
           <div className="mx-auto mt-6 sm:mt-8 w-full overflow-hidden">
@@ -43,10 +43,10 @@ export function HeroSection() {
                 {/* Triple duplication to ensure smooth loop on wide screens */}
                 {[...MESSAGES, ...MESSAGES, ...MESSAGES].map((msg, i) => (
                   <div key={i} className="flex items-center">
-                    <span className="mx-4 sm:mx-6 md:mx-8 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold italic text-[#113177]">
+                    <span className="mx-4 sm:mx-6 md:mx-8 text-lg sm:text-[18px] md:text-[23px] lg:text-[28px] xl:text-[37px] font-semibold italic text-[#113177]">
                       {msg}
                     </span>
-                    <span className="text-[#6B8CC7] text-base sm:text-xl md:text-2xl">•</span>
+                    <span className="text-[#6B8CC7] text-base sm:text-[15px] md:text-[18px]">•</span>
                   </div>
                 ))}
               </div>
@@ -59,23 +59,23 @@ export function HeroSection() {
             product and marketing teams in hours, not months.
           </p>
 
-          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 sm:px-0">
-            <Button size="lg" className="w-full sm:w-auto px-8 sm:px-10 py-5 sm:py-6 text-sm sm:text-base font-semibold rounded-full" asChild>
+          <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 sm:px-0">
+            <Button size="lg" className="w-full max-w-[280px] sm:w-auto px-6 sm:px-10 py-2.5 sm:py-6 text-sm sm:text-base font-semibold rounded-full" asChild>
               <a href="/book-demo">Request Demo</a>
             </Button>
            
-            <Button variant="outline" size="lg" className="w-full sm:w-auto px-8 sm:px-10 py-5 sm:py-6 text-sm sm:text-base font-semibold rounded-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" asChild>
+            <Button variant="outline" size="lg" className="w-full max-w-[280px] sm:w-auto px-6 sm:px-10 py-2.5 sm:py-6 text-sm sm:text-base font-semibold rounded-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" asChild>
               <a href="/sample-report">View Sample Report</a>
             </Button>
           </div>
 
-          <div className="mt-12 sm:mt-16 md:mt-20">
-            <div className="relative mx-auto max-w-5xl">
+          <div className="mt-8 sm:mt-16 md:mt-20 px-4 sm:px-0">
+            <div className="relative mx-auto max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-5xl">
               {/* Product demo container with black border on top, left, and right */}
-              <div className="relative shadow-xl sm:shadow-2xl">
+              <div className="relative shadow-lg sm:shadow-2xl">
                 <div className="relative">
                   {/* Black border overlay on top, left, and right */}
-                  <div className="absolute inset-0 border-t-4 sm:border-t-8 md:border-t-12 border-l-4 sm:border-l-8 md:border-l-12 border-r-4 sm:border-r-8 md:border-r-12 border-black rounded-t-lg z-10 pointer-events-none"></div>
+                  <div className="absolute inset-0 border-t-[6px] sm:border-t-8 md:border-t-12 border-l-[6px] sm:border-l-8 md:border-l-12 border-r-[6px] sm:border-r-8 md:border-r-12 border-black rounded-t-lg z-10 pointer-events-none"></div>
                   
                   {/* Image container */}
                   <div className="aspect-video rounded-t-lg overflow-hidden bg-white">

@@ -22,10 +22,10 @@ export function PlatformSection() {
         </div>
 
         {/* Modern Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-8 md:gap-10 max-w-7xl mx-auto">
           
           {/* AI Interview Dashboard */}
-          <div className="group relative bg-white p-5 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 min-h-[400px] sm:min-h-[450px] md:min-h-[520px] flex flex-col">
+          <div className="group relative bg-white p-4 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 min-h-[320px] sm:min-h-[450px] md:min-h-[520px] flex flex-col">
             <div className="mb-4 sm:mb-6 md:mb-8">
               <div className="flex items-center gap-2 mb-3 sm:mb-4">
                 <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-green-500 rounded-full animate-pulse"></div>
@@ -67,7 +67,7 @@ export function PlatformSection() {
           </div>
 
           {/* Analytics Dashboard */}
-          <div className="group relative bg-white p-5 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 min-h-[400px] sm:min-h-[450px] md:min-h-[520px] flex flex-col">
+          <div className="group relative bg-white p-4 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 min-h-[320px] sm:min-h-[450px] md:min-h-[520px] flex flex-col">
             <div className="mb-4 sm:mb-6 md:mb-8">
               <div className="flex items-center gap-2 mb-3 sm:mb-4">
                 <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-purple-500 rounded-full"></div>
@@ -115,10 +115,10 @@ export function PlatformSection() {
         </div>
 
         {/* Bottom Row - Language & Communication */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-7xl mx-auto mt-6 sm:mt-8 md:mt-10">
+        <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-8 md:gap-10 max-w-7xl mx-auto mt-3 sm:mt-8 md:mt-10">
           
           {/* Language Translation */}
-          <div className="group relative bg-white p-5 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 min-h-[300px] sm:min-h-[350px] md:min-h-[400px] flex flex-col">
+          <div className="group relative bg-white p-4 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 min-h-[260px] sm:min-h-[350px] md:min-h-[400px] flex flex-col">
             <div className="mb-4 sm:mb-6 md:mb-8">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Global Reach</h3>
               <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mt-2">Automatically translate between 28+ languages instantly.</p>
@@ -143,7 +143,7 @@ export function PlatformSection() {
           </div>
 
           {/* Communication Methods */}
-          <div className="group relative bg-white p-5 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 min-h-[300px] sm:min-h-[350px] md:min-h-[400px] flex flex-col">
+          <div className="group relative bg-white p-4 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 hover:shadow-lg transition-all duration-300 min-h-[260px] sm:min-h-[350px] md:min-h-[400px] flex flex-col">
             <div className="mb-4 sm:mb-6 md:mb-8">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Multi-Modal Interviews</h3>
               <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mt-2">Video, audio, or text - whatever works best for your users.</p>

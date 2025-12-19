@@ -31,10 +31,10 @@ export function ComparisonSection() {
           {/* Background Decorative Element */}
           <div className="absolute inset-0 bg-[#050849] rounded-xl sm:rounded-2xl lg:rounded-3xl translate-x-1 sm:translate-x-2 translate-y-1 sm:translate-y-2 -z-10 opacity-5 blur-lg sm:blur-xl"></div>
           
-          <div className="flex flex-col lg:flex-row gap-0 rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-md sm:shadow-lg lg:shadow-xl border border-gray-100">
+          <div className="grid grid-cols-2 lg:flex lg:flex-row gap-0 rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-md sm:shadow-lg lg:shadow-xl border border-gray-100">
             
             {/* Left: The Old Way (The Pain) */}
-            <div className="flex-1 bg-gray-50/50 p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col text-left relative overflow-hidden border-b lg:border-b-0 lg:border-r border-gray-100">
+            <div className="flex-1 bg-gray-50/50 p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col text-left relative overflow-hidden border-r lg:border-b-0 lg:border-r border-gray-100">
               <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,rgba(239,68,68,0.03),transparent_50%)]"></div>
               
               <div className="flex items-center justify-between mb-4 sm:mb-5 md:mb-6 relative z-10">
@@ -124,32 +124,32 @@ export function ComparisonSection() {
              <span className="bg-white px-4 sm:px-6 md:px-8 text-xs sm:text-sm md:text-base font-black text-gray-300 uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em]">Meet your new AI team</span>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-6 md:gap-8 max-w-5xl mx-auto justify-items-center sm:justify-items-stretch">
             {/* The Recruiter */}
-            <div className="group text-left p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white border border-gray-50 hover:border-blue-100 hover:shadow-md sm:hover:shadow-lg transition-all duration-500">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg sm:rounded-xl flex items-center justify-center mb-4 sm:mb-5 border border-blue-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm">
+            <div className="group w-full text-center sm:text-left p-3 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white border border-gray-50 hover:border-blue-100 hover:shadow-md sm:hover:shadow-lg transition-all duration-500">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg sm:rounded-xl flex items-center justify-center mb-2 sm:mb-5 border border-blue-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm mx-auto sm:mx-0">
                 <Target className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 stroke-[1.5]" />
               </div>
-              <h4 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-3 tracking-tight">The Recruiter</h4>
-              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed font-semibold">Finds your exact target audience from verified panels and schedules them instantly.</p>
+              <h4 className="text-sm sm:text-lg md:text-xl font-bold text-gray-900 mb-0 sm:mb-3 tracking-tight">The Recruiter</h4>
+              <p className="hidden sm:block text-gray-500 text-xs sm:text-sm leading-relaxed font-semibold">Finds your exact target audience from verified panels and schedules them instantly.</p>
             </div>
 
             {/* The Interviewer */}
-            <div className="group text-left p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white border border-gray-50 hover:border-purple-100 hover:shadow-md sm:hover:shadow-lg transition-all duration-500">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg sm:rounded-xl flex items-center justify-center mb-4 sm:mb-5 border border-purple-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm">
+            <div className="group w-full text-center sm:text-left p-3 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white border border-gray-50 hover:border-purple-100 hover:shadow-md sm:hover:shadow-lg transition-all duration-500">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg sm:rounded-xl flex items-center justify-center mb-2 sm:mb-5 border border-purple-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm mx-auto sm:mx-0">
                 <Mic className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600 stroke-[1.5]" />
               </div>
-              <h4 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-3 tracking-tight">The Interviewer</h4>
-              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed font-semibold">Conducts voice-to-voice 1:1 interviews, asking dynamic follow-up questions to dig deeper.</p>
+              <h4 className="text-sm sm:text-lg md:text-xl font-bold text-gray-900 mb-0 sm:mb-3 tracking-tight">The Interviewer</h4>
+              <p className="hidden sm:block text-gray-500 text-xs sm:text-sm leading-relaxed font-semibold">Conducts voice-to-voice 1:1 interviews, asking dynamic follow-up questions to dig deeper.</p>
             </div>
 
             {/* The Analyst */}
-            <div className="group text-left p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white border border-gray-50 hover:border-emerald-100 hover:shadow-md sm:hover:shadow-lg transition-all duration-500 sm:col-span-2 md:col-span-1">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg sm:rounded-xl flex items-center justify-center mb-4 sm:mb-5 border border-emerald-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm">
+            <div className="group w-full text-center sm:text-left p-3 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-white border border-gray-50 hover:border-emerald-100 hover:shadow-md sm:hover:shadow-lg transition-all duration-500 col-span-1 sm:col-span-2 md:col-span-1">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg sm:rounded-xl flex items-center justify-center mb-2 sm:mb-5 border border-emerald-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm mx-auto sm:mx-0">
                 <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600 stroke-[1.5]" />
               </div>
-              <h4 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-3 tracking-tight">The Analyst</h4>
-              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed font-semibold">Synthesizes hours of audio into key themes, quotes, and actionable insights in minutes.</p>
+              <h4 className="text-sm sm:text-lg md:text-xl font-bold text-gray-900 mb-0 sm:mb-3 tracking-tight">The Analyst</h4>
+              <p className="hidden sm:block text-gray-500 text-xs sm:text-sm leading-relaxed font-semibold">Synthesizes hours of audio into key themes, quotes, and actionable insights in minutes.</p>
             </div>
           </div>
         </div>
