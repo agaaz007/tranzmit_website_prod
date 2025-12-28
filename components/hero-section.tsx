@@ -14,10 +14,10 @@ export function HeroSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl text-center">
           <h1 className="text-5xl sm:text-[41px] md:text-[41px] lg:text-[41px] xl:text-[51px] 2xl:text-[70px] font-bold tracking-tight leading-[1.1] max-w-6xl mx-auto text-center">
-            <span className="bg-gradient-to-r from-[#7FB3E7] to-[#050849] bg-clip-text text-transparent inline-block">Your Autonomous</span>
+            <span className="bg-gradient-to-r from-[#7FB3E7] to-[#050849] bg-clip-text text-transparent inline-block">AI Chief Growth Officer</span>
             <br />
-            <span className="bg-gradient-to-r from-[#2F82AC] to-[#050849] bg-clip-text text-transparent inline-block">Customer Research </span>
-            <span className="text-[#6B8CC7] inline-block">Team</span>
+            <span className="bg-gradient-to-r from-[#2F82AC] to-[#050849] bg-clip-text text-transparent inline-block">for Modern Consumer Brands </span>
+            <span className="text-[#6B8CC7] inline-block"></span>
           </h1>
 
           <div className="mx-auto mt-6 sm:mt-8 w-full overflow-hidden">
