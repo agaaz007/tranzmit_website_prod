@@ -80,7 +80,7 @@ export function HeroSection() {
                   {/* Image container */}
                   <div className="aspect-video rounded-t-lg overflow-hidden bg-white">
                     <Image
-                      src="/product_demo.png"
+                      src="/product_demo2.png"
                       alt="Tranzmit Product Demo"
                       fill
                       className="object-cover"
