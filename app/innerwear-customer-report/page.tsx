@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import type { ReactNode } from "react"
+import { usePostHog } from 'posthog-js/react'
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -49,9 +50,11 @@ declare global {
 }
 
 export default function InnerwearCustomerReportPage() {
+  const posthog = usePostHog()
   const [plotlyLoaded, setPlotlyLoaded] = useState(false)
   const [activeTab, setActiveTab] = useState("summary")
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [scrollMilestones, setScrollMilestones] = useState({ 25: false, 50: false, 75: false, 100: false })
   
   // Respondent data from the prompt
   const respondents = [
@@ -208,6 +211,24 @@ export default function InnerwearCustomerReportPage() {
     }
   ]
   
+  // Track page view on mount
+  useEffect(() => {
+    posthog?.capture('report_viewed', {
+      report_name: 'innerwear-customer-report',
+      report_type: 'customer_intelligence'
+    })
+  }, [posthog])
+
+  // Track tab changes
+  const handleTabChange = (newTab: string) => {
+    posthog?.capture('report_tab_changed', {
+      report_name: 'innerwear-customer-report',
+      from_tab: activeTab,
+      to_tab: newTab
+    })
+    setActiveTab(newTab)
+  }
+
   // Track scroll progress
   useEffect(() => {
     const handleScroll = () => {
@@ -217,13 +238,26 @@ export default function InnerwearCustomerReportPage() {
       const scrollableHeight = documentHeight - windowHeight
       const progress = scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0
       setScrollProgress(Math.min(100, Math.max(0, progress)))
+
+      // Track scroll milestones
+      const milestones = [25, 50, 75, 100] as const
+      milestones.forEach(milestone => {
+        if (progress >= milestone && !scrollMilestones[milestone]) {
+          posthog?.capture('report_scroll_milestone', {
+            report_name: 'innerwear-customer-report',
+            milestone_percent: milestone,
+            current_tab: activeTab
+          })
+          setScrollMilestones(prev => ({ ...prev, [milestone]: true }))
+        }
+      })
     }
 
     window.addEventListener('scroll', handleScroll)
     handleScroll() // Initial calculation
     
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [posthog, scrollMilestones, activeTab])
 
   // Render charts when Plotly is loaded or tab changes
   useEffect(() => {
@@ -579,7 +613,7 @@ export default function InnerwearCustomerReportPage() {
           </div>
 
           {/* Tabs */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full mb-16">
+          <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full mb-16">
             <TabsList className="grid w-full grid-cols-3 mb-8 h-14 bg-muted p-1.5">
               <TabsTrigger value="summary" className="text-base font-semibold px-4 py-2">Executive Summary</TabsTrigger>
               <TabsTrigger value="question-by-question" className="text-base font-semibold px-4 py-2">Deep Dive Charts</TabsTrigger>

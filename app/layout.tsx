@@ -5,6 +5,8 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
+import { PostHogProvider } from './providers'
+
 
 export const metadata: Metadata = {
   title: "Tranzmit - AI interviews reveal what people want, fast.",
@@ -20,14 +22,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: ReactNode
+}) {
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Suspense fallback={null}>{children}</Suspense>
-        <Analytics />
+        {/* PostHogProvider wraps your entire app UI */}
+        <PostHogProvider>
+          {children}
+          {/* Vercel Analytics works globally too */}
+          <Analytics />
+        </PostHogProvider>
       </body>
     </html>
   )
