@@ -497,7 +497,7 @@ export default function GojekReportPage() {
                 <div className="relative w-full overflow-hidden rounded-2xl shadow-lg border border-gray-200" style={{ height: '100vh' }}>
                   <iframe 
                     ref={iframeRef}
-                    src="/gojek-combined-report.html"
+                    src="/gojek-report/combined"
                     className="absolute inset-0 w-full h-full border-0"
                     title="Gojek Combined Report"
                   />
