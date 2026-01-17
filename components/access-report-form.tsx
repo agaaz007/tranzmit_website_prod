@@ -14,7 +14,8 @@ const reportRoutes: Record<string, { path: string; password: string }> = {
   'SAMPLE-001': { path: '/sample-report', password: 'demo123' },
   'INNERWEAR-001': { path: '/innerwear-report', password: 'innerwear123' },
   'RPT-LIQUID-DEATH': { path: '/sample-report', password: 'liquideath' },
-  'RPT-INNERWEAR': { path: '/innerwear-report', password: 'innerwear' }
+  'RPT-INNERWEAR': { path: '/innerwear-report', password: 'innerwear' },
+  'GOJEK-001': { path: '/gojek-report', password: 'gojek@tranzmit' }
 }
 
 export function AccessReportForm() {
