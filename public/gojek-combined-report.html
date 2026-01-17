@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gojek Consumer Intelligence | Sports Vertical Deep Dive</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.0"></script>
+
+    <style>
+        :root {
+            --bg-body: #F4F4F5;
+            --bg-paper: #FFFFFF;
+            --bg-nav: #18181B;
+            --text-primary: #18181B;
+            --text-secondary: #3F3F46;
+            --text-muted: #71717A;
+            --signal-pain: #BE123C;
+            --signal-gap: #B45309;
+            --signal-flow: #047857;
+            --signal-neutral: #E4E4E7;
+            --signal-insight: #4338ca;
+            --content-width: 950px;
+            --nav-width: 280px;
+            --font-serif: 'Crimson Pro', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            font-family: var(--font-serif);
+            font-size: 19px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Navigation Sidebar --- */
+        .nav-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--nav-width);
+            height: 100vh;
+            background: var(--bg-nav);
+            color: #fff;
+            padding: 40px 0;
+            overflow-y: auto;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nav-logo {
+            padding: 0 30px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .nav-logo h2 {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--signal-flow);
+            margin-bottom: 8px;
+        }
+        
+        .nav-logo h1 {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 800;
+            line-height: 1.3;
+        }
+        
+        .nav-section-title {
+            font-family: var(--font-sans);
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.4);
+            padding: 20px 30px 10px;
+        }
+        
+        .nav-links {
+            list-style: none;
+            flex: 1;
+        }
+        
+        .nav-links a {
+            display: block;
+            padding: 14px 30px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            border-left-color: var(--signal-flow);
+        }
+        
+        .nav-links a .archetype {
+            display: block;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: 3px;
+            font-weight: 400;
+        }
+        
+        .nav-footer {
+            padding: 20px 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            margin-left: var(--nav-width);
+            min-height: 100vh;
+        }
+
+        /* --- Cover Section --- */
+        .cover-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #18181B 0%, #27272A 50%, #3F3F46 100%);
+            color: #fff;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cover-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .cover-badge {
+            display: inline-block;
+            background: var(--signal-flow);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 8px 20px;
+            border-radius: 100px;
+            margin-bottom: 40px;
+        }
+        
+        .cover-title {
+            font-family: var(--font-sans);
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+        
+        .cover-subtitle {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+            margin-bottom: 50px;
+        }
+        
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .cover-meta strong {
+            display: block;
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* --- Report Container (shared styles) --- */
+        .report-section {
+            padding: 80px 40px;
+            border-bottom: 1px solid var(--signal-neutral);
+        }
+        
+        .report-container {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            background: var(--bg-paper);
+            padding: 90px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 30px 60px rgba(0,0,0,0.05);
+            border-top: 8px solid var(--text-primary);
+        }
+
+        h1.report-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 3rem;
+            color: var(--text-primary);
+            margin: 0 0 15px 0;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--signal-neutral);
+        }
+
+        h2 {
+            font-family: var(--font-sans);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 80px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 32px;
+            background: var(--text-primary);
+            margin-right: 20px;
+        }
+
+        h3 {
+            font-family: var(--font-sans);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-top: 45px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        p { margin-bottom: 28px; }
+
+        .analysis-module {
+            margin-bottom: 60px;
+        }
+
+        .verbatim-block {
+            background-color: #FAFAFA;
+            border-left: 3px solid var(--text-muted);
+            padding: 30px 35px;
+            margin-bottom: 35px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .verbatim-text {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .verbatim-label {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .insight-card {
+            padding-left: 25px;
+        }
+        
+        .insight-card.gap { border-left: 3px solid var(--signal-gap); }
+        .insight-card.pain { border-left: 3px solid var(--signal-pain); }
+        .insight-card.behavior { border-left: 3px solid var(--signal-flow); }
+        .insight-card.insight { border-left: 3px solid var(--signal-insight); }
+        .insight-card.neutral { border-left: 3px solid var(--signal-neutral); }
+
+        .card-label {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .gap .card-label { color: var(--signal-gap); }
+        .pain .card-label { color: var(--signal-pain); }
+        .behavior .card-label { color: var(--signal-flow); }
+        .insight .card-label { color: var(--signal-insight); }
+        .neutral .card-label { color: var(--text-muted); }
+
+        .card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .card-body {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .chart-wrapper {
+            margin: 60px 0;
+            padding: 40px;
+            background: #fff;
+            border: 1px solid var(--signal-neutral);
+            border-radius: 6px;
+            height: 450px;
+            position: relative;
+        }
+        
+        .chart-wrapper.tall { height: 500px; }
+        
+        .chart-caption {
+            text-align: center;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 20px;
+        }
+
+        .summary-box {
+            background-color: #F8F9FA;
+            padding: 50px;
+            margin-bottom: 80px;
+            border-radius: 4px;
+        }
+        
+        .summary-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--text-primary);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .report-footer {
+            margin-top: 120px;
+            padding-top: 50px;
+            border-top: 1px solid var(--signal-neutral);
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* --- Section Divider --- */
+        .section-divider {
+            background: linear-gradient(135deg, #18181B 0%, #27272A 100%);
+            padding: 80px 40px;
+            text-align: center;
+            color: #fff;
+        }
+        
+        .section-divider .number {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--signal-flow);
+            margin-bottom: 15px;
+        }
+        
+        .section-divider h2 {
+            font-family: var(--font-sans);
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            justify-content: center;
+        }
+        
+        .section-divider h2::before { display: none; }
+        
+        .section-divider .archetype {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 1200px) {
+            .nav-sidebar { width: 240px; }
+            .main-content { margin-left: 240px; }
+        }
+        
+        @media (max-width: 992px) {
+            .nav-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .nav-sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .mobile-nav-toggle {
+                display: flex !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .report-container { padding: 40px 25px; width: 100%; }
+            h1.report-title { font-size: 2.2rem; }
+            .cover-title { font-size: 2.5rem; }
+            .cover-meta { flex-direction: column; gap: 20px; }
+        }
+        
+        .mobile-nav-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+            background: var(--bg-nav);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Mobile Nav Toggle -->
+<button class="mobile-nav-toggle" onclick="document.querySelector('.nav-sidebar').classList.toggle('open')">☰</button>
+
+<!-- Navigation Sidebar -->
+<nav class="nav-sidebar">
+    <div class="nav-logo">
+        <h2>Gojek Intelligence</h2>
+        <h1>Sports Vertical Consumer Deep Dive</h1>
+    </div>
+    
+    <div class="nav-section-title">Respondent Profiles</div>
+    <ul class="nav-links">
+        <li><a href="#cover">Overview<span class="archetype">Executive Summary</span></a></li>
+        <li><a href="#profile-1">Anggun<span class="archetype">The Service-Optimized Soloist</span></a></li>
+        <li><a href="#profile-2">Faris<span class="archetype">The Reactivated Specialist</span></a></li>
+        <li><a href="#profile-3">Tias<span class="archetype">The Admin-Averse Pragmatist</span></a></li>
+        <li><a href="#profile-4">Agung (Running)<span class="archetype">The Agency Disciplinarian</span></a></li>
+        <li><a href="#profile-5">Irfan<span class="archetype">The Functional Subuh</span></a></li>
+        <li><a href="#profile-6">Agung (Social)<span class="archetype">The Parallel Socializer</span></a></li>
+    </ul>
+    
+    <div class="nav-footer">
+        Gojek Intelligence Unit<br>
+        Internal Research • 2026
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="main-content">
+
+    <!-- Cover Section -->
+    <section class="cover-section" id="cover">
+        <div class="cover-content">
+            <div class="cover-badge">Internal Research Document</div>
+            <h1 class="cover-title">Consumer Intelligence Audit</h1>
+            <p class="cover-subtitle">A comprehensive behavioral analysis of six distinct user archetypes within the Indonesian sports vertical ecosystem, examining adoption patterns, friction points, and opportunity landscapes.</p>
+            <div class="cover-meta">
+                <div>
+                    <strong>6</strong>
+                    Respondent Profiles
+                </div>
+                <div>
+                    <strong>4</strong>
+                    Sport Verticals
+                </div>
+                <div>
+                    <strong>2026</strong>
+                    Research Period
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">Scroll to explore ↓</div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- PROFILE 1: ANGGUN -->
+    <!-- ========================================= -->
+    <div class="section-divider" id="profile-1">
+        <div class="number">Profile 01</div>
+        <h2>Anggun</h2>
+        <div class="archetype">The "Service-Optimized" Soloist</div>
+    </div>
+    
+    <section class="report-section">
+        <div class="report-container">
+            <header>
+                <h1 class="report-title">Consumer Intelligence Audit</h1>
+                <div class="subtitle">Subject: The "Service-Optimized" Soloist (Respondent ID: Anggun)</div>
+            </header>
+
+            <div class="summary-box">
+                <div class="summary-title">Executive Behavioral Synthesis</div>
+                <p>The respondent exemplifies a distinct and sophisticated behavioral archetype within the racket sport vertical: <strong>The Service-Optimized Soloist</strong>. Unlike the "Social Gatherer" archetype often targeted by community apps, Anggun has systematically engineered "social friction" out of her routine by transitioning from a "Crowd-Dependent" model (relying on friends) to a "Service-Based" model (monetizing her partner via a private coach).</p>
+                <p>A critical finding from the analysis is the <strong>Platform Bifurcation</strong> in her user journey. While vertical-specific apps like <strong>ReClub</strong> have successfully captured the "Discovery" and "Directory" phases of her lifecycle, the high-frequency "Transaction" and "Retention" loops have leaked almost entirely to <strong>Dark Social (WhatsApp)</strong>. This migration is not accidental but functional: the respondent prefers the "Conversational Liquidity" of chat apps over the rigid inventory slots of booking platforms to manage her schedule.</p>
+                <p>Furthermore, her digital behavior reveals a latent <strong>"Cloud Archive" Heuristic</strong>. She utilizes social media (Instagram Stories) not primarily for social signaling, but as a utilitarian cloud storage solution to offload performance data (video form checks) from her device. This "upload-and-delete" behavior signals a significant unmet need for performance archival tools within the sports ecosystem.</p>
+            </div>
+
+            <section>
+                <h2>I. The Economics of Participation (Adopt Phase)</h2>
+                
+                <p>To understand the respondent's current behavior, we must first analyze the structural friction she encountered during her re-entry into the sport. Squash, unlike running or gym, possesses a unique <strong>"Fatigue Barrier."</strong> The high intensity of the sport dictates that amateur players cannot sustain 2-hour sessions individually, necessitating a group rotation system to manage physical exertion.</p>
+
+                <div class="chart-wrapper">
+                    <canvas id="chart1-dependency"></canvas>
+                    <div class="chart-caption">Figure 1: The Inverse Correlation between Peer Reliance and Financial Investment</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Nyari teman yang banyak karena harganya lumayan... kalau cuma dua tiga orang kayaknya bakal capek banget. Jadi kayak nyari-nyari teman untuk ya minimal lima orang lah."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card pain">
+                            <span class="card-label">Structural Friction</span>
+                            <div class="card-title">The "Minimum Viable Group" (MVG)</div>
+                            <div class="card-body">
+                                The respondent articulates a clear "Crowd Dependency" in the early adoption phase. The requirement to aggregate at least five participants creates a high-friction entry barrier. This is not just financial (splitting court costs) but physiological (splitting fatigue). This dependency makes the habit fragile; if the social coordination fails (e.g., 2 friends cancel), the session collapses because the remaining players cannot physically sustain the court time.
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card behavior">
+                            <span class="card-label">Behavioral Adaptation</span>
+                            <div class="card-title">Transition to "Service-Based" Reliability</div>
+                            <div class="card-body">
+                                The respondent successfully navigated this friction by altering her operational model. By relocating her activity to a lower-cost geography (Cibubur), she utilized the cost savings to hire a private coach ("booking lapangan via coach-nya"). This is a critical behavioral pivot: she removed the variable of "unreliable friends" and replaced it with a "contracted professional." Her commitment is now financial (paying a coach) rather than social (coordinating a group), significantly increasing habit stability.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>The Psychology of Commitment</h3>
+                <p>A key driver for her retention is not just the sport itself, but the financial structure surrounding it. The respondent leverages the <strong>Sunk Cost Fallacy</strong> as a productivity tool.</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Biasanya komitmen sih... karena sudah booking, itu yang membuat aku walaupun capek tetap dipaksa lah buat datang, karena sudah keburu bayar."</div>
+                    </div>
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Psychographic Driver</span>
+                            <div class="card-title">The "Discipline Tax"</div>
+                            <div class="card-body">
+                                The user explicitly views the booking fee as a binding contract with herself. The fear of financial loss ("Sayang uang") overrides the physical inertia ("Capek/Mager"). This suggests that "Pay-in-Advance" models are not merely revenue assurance for the venue, but a vital psychological service for the user—effectively outsourcing her discipline to the payment gateway.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>II. The "Dark Social" Retention Loop</h2>
+                
+                <p>The interview data highlights a sharp discrepancy between the intended use of sports platforms and the user's actual workflow. While the respondent is a verified user of the ReClub app, her transactional loyalty has shifted off-platform. This phenomenon suggests that while the app succeeds as a directory, it fails as a relationship management tool.</p>
+
+                <div class="chart-wrapper">
+                    <canvas id="chart1-platform"></canvas>
+                    <div class="chart-caption">Figure 2: The User Journey Bifurcation (Public Discovery vs. Private Transaction)</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Kalau buat private biasanya lebih banyaknya pakai WhatsApp... Langsung ke coach-nya... Tinggal bilang aja sih 'Coach mau main hari Sabtu seperti biasa'."</div>
+                    </div>
+
+                    <div class="insight-grid">
+                        <div class="insight-card gap">
+                            <span class="card-label">Systemic Gap</span>
+                            <div class="card-title">Rigid UI vs. Fluid Negotiation</div>
+                            <div class="card-body">
+                                The user prefers WhatsApp because the scheduling process is <strong>Conversational</strong>, not transactional. The interaction described ("Usually 8 AM, but coach says 9 AM, okay deal") represents a negotiation flow that rigid booking calendars often fail to capture. The platform leakage occurs because the app demands definitive inputs, whereas the user and provider operate in a state of fluid availability. The app is the "Phonebook," but WhatsApp is the "Counter."
+                            </div>
+                        </div>
+
+                        <div class="insight-card pain">
+                            <span class="card-label">Friction Point</span>
+                            <div class="card-title">Authentication Fatigue</div>
+                            <div class="card-body">
+                                The respondent explicitly cites "Sering banget ke logout... suka lupa password" as a major deterrent for ReClub. For a user who has already established a direct channel (WhatsApp) with the service provider, any friction at the app login layer serves as a definitive "exit trigger." The cost of password recovery outweighs the benefit of in-app booking, solidifying the behavior of bypassing the platform entirely.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>III. The "Archivist" Content Behavior (Sustain Phase)</h2>
+                
+                <p>The respondent's engagement with social media (Instagram) reveals a secondary utility beyond mere social signaling. Her behavior suggests she is using social platforms as a workaround for data management and performance tracking.</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Aku ngerekam main tuh supaya bisa tahu... langkahnya harusnya kayak gini. Biar yang di HP bisa aku delete nanti, kalau mau lihat lagi dari IG-nya."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Latent Need</span>
+                            <div class="card-title">The "Upload-to-Delete" Heuristic</div>
+                            <div class="card-body">
+                                The user is engaged in a complex "Data Migration" ritual. She records gameplay for self-analysis (form correction), but lacks adequate local storage or a dedicated sports portfolio tool. Consequently, she utilizes Instagram Stories as a "Free Cloud Archive." This indicates a strong desire for <strong>Visual Progress Tracking</strong>, but the current ecosystem forces her to use a social media tool for a utilitarian storage need. She is hacking the social platform to function as a "Media Vault."
+                            </div>
+                        </div>
+
+                        <div class="insight-card gap">
+                            <span class="card-label">Opportunity Landscape</span>
+                            <div class="card-title">The Performance Diary Void</div>
+                            <div class="card-body">
+                                There is an observable gap for a "Media Vault" or "Digital Locker" functionality within the sports app ecosystem. The user values the *content* (the video of the play) but treats the *medium* (Instagram) as a necessary evil for storage. A platform that offers organized, private, or semi-private archiving of gameplay footage would directly address this workaround behavior.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>IV. Ecosystem Discontinuities (The Holistic View)</h2>
+
+                <p>The final phase of the analysis identifies where the user's journey transcends the "Court" and enters the broader lifestyle vertical. The respondent's narrative exposes specific discontinuities between the "Exertion" phase and the "Recovery" phase.</p>
+
+                <div class="analysis-module">
+                    <div class="insight-grid">
+                        <div class="insight-card gap">
+                            <span class="card-label">Unmet Need</span>
+                            <div class="card-title">The Post-Activity Nutrition Void</div>
+                            <div class="card-body">
+                                "Mungkin rekomendasi makanan kali ya... yang cocok habis olahraga." <br>
+                                The respondent experiences a "Decision Fatigue" moment immediately following the session. While she has optimized the booking and playing process, the recovery phase remains unoptimized. She expresses a direct desire for curated nutritional guidance that is contextually aware of her just-completed activity. This represents a breakdown in the holistic journey—the ecosystem supports the calorie burn but abandons the user during the calorie replenishment.
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card behavior">
+                            <span class="card-label">Cross-Vertical Aspiration</span>
+                            <div class="card-title">The Multi-Sport Disconnect</div>
+                            <div class="card-body">
+                                The respondent is inherently a "Multi-Sport" user, engaging in Squash, Pilates, and Gym. However, she perceives these activities as siloed experiences. Her suggestion for "Cross-sell olahraga cabang lain" indicates a willingness to accept algorithmic recommendations that bridge these verticals. Currently, the mental model is fragmented; she desires a platform that recognizes the athletic adjacencies between her interests (e.g., "If you like Squash, try this Pilates mobility class").
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="report-footer">
+                <div class="footer-text">
+                    Gojek Intelligence Unit • Internal Research Document • 2026
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- PROFILE 2: FARIS -->
+    <!-- ========================================= -->
+    <div class="section-divider" id="profile-2">
+        <div class="number">Profile 02</div>
+        <h2>Faris</h2>
+        <div class="archetype">The "Reactivated" Performance Archetype</div>
+    </div>
+    
+    <section class="report-section">
+        <div class="report-container">
+            <header>
+                <h1 class="report-title">Consumer Intelligence Audit</h1>
+                <div class="subtitle">Subject: The "Reactivated" Performance Archetype (Respondent ID: Faris)</div>
+            </header>
+
+            <div class="summary-box">
+                <div class="summary-title">Executive Behavioral Synthesis</div>
+                <p>The respondent, Faris, exemplifies a distinct and highly valuable behavioral archetype: <strong>The Reactivated Specialist</strong>. Unlike the "Discovery" user who enters a sport out of curiosity, Faris is a "Lapsed Native"—an individual who played Softball in his youth and has been reactivated by peer influence after a period of dormancy. This distinction is critical because his engagement is not tentative; it is committed, equipment-heavy, and performance-oriented.</p>
+                <p>His sporting behavior is biologically gated by his professional life. As a private employee with a morning shift, his "Sporting Window" is rigidly locked to the late evening (20:00 – 22:00). This creates a dependency on infrastructure that supports the "Night Economy" of sports—specifically lighting, safety, and late-night booking availability.</p>
+                <p>The analysis uncovers a fractured digital journey. While the respondent is highly engaged, his user experience is fragmented across a "Swivel-Chair" ecosystem: <strong>ReClub</strong> for community rosters, <strong>Kuy (Kyoo)</strong> for slot booking, <strong>WhatsApp</strong> for coordination, and <strong>External Banking</strong> for payments. The most significant friction point identified is the disconnection between booking and payment, creating a "Transaction Gap" where the user is forced to leave the platform to complete a purchase.</p>
+                <p>Furthermore, his motivation has evolved from simple social reconnection to "Competitive Validation." He exhibits a latent desire for "Vertical Social Media"—a space to showcase technical stats and progress to a niche audience, rather than the generalized audience of Instagram. This suggests an opportunity for the utility platform to evolve into a validation engine.</p>
+            </div>
+
+            <section>
+                <h2>I. Identity & Contextual Framework: The "Lapsed Native"</h2>
+                
+                <p>To understand the respondent's friction points, we must first analyze the origin of his habit. Faris is not discovering a new sport; he is reclaiming an old identity. He mentions playing "from childhood" but experiencing a significant gap until his recent 5-year stint. This distinction is crucial as it lowers the barrier to entry for <em>skill</em> but raises the barrier for <em>logistics</em> and <em>equipment</em>.</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Saya udah main dari kecil tapi baru bisa main lagi karena ada teman-teman yang main... Langsung beli alat-alat kayak glove, terus beli batnya juga, beli batting glove."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Economic Behavior</span>
+                            <div class="card-title">Immediate CapEx (Capital Expenditure)</div>
+                            <div class="card-body">
+                                Upon reactivation, the user engaged in immediate, high-value consumption. He did not rent gear; he purchased a full kit (Glove, Bat, Batting Glove). This indicates that "Reactivated" users have a significantly higher initial Life Time Value (LTV) than new beginners who might hesitate to invest. The confidence in their past skill justifies the immediate expense.
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card gap">
+                            <span class="card-label">The "Solo Joiner" Paradox</span>
+                            <div class="card-title">Dependency on the Roster</div>
+                            <div class="card-body">
+                                Faris states, "Kalau main sendiri nggak bisa" (Can't play alone). Unlike running or gym-going, Softball is a "Roster-Dependent" sport. His primary anxiety is not <em>how</em> to play, but <em>who</em> to play with. This shifts the utility value of any app from "Facility Booking" to "Roster Filling." He needs assurance that a session will have enough bodies to be viable before he commits, forcing him to verify attendance on ReClub before booking on Kuy.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>II. The Bio-Chronological Constraint: The "Night Economy"</h2>
+                
+                <p>The respondent's professional life as a "Karyawan Swasta" (Private Employee) with a morning shift creates a non-negotiable temporal lock. His sporting activity is restricted to the late evening, specifically the 20:00 to 22:00 slot.</p>
+
+                <div class="chart-wrapper">
+                    <canvas id="chart2-time"></canvas>
+                    <div class="chart-caption">Figure 1: The "Night Economy" Activity Window (20:00 - 22:00)</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Orangnya sih tiap jam delapan sampai jam sepuluh malam... jadi masih bisa pulang kerja. Jatuh pas."</div>
+                    </div>
+
+                    <p>This "Night Owl" schedule dictates his logistical needs. He requires facilities that are operational and safe at night, and his booking behavior reflects this rigidity. He plans days in advance because his window of opportunity is narrow—if he misses the 8 PM slot, there is no alternative until the next week.</p>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card pain">
+                            <span class="card-label">Logistical Vulnerability</span>
+                            <div class="card-title">Inventory Scarcity</div>
+                            <div class="card-body">
+                                Operating in the "Night Window" means Faris competes for the scarcest resource: lighted courts at prime time (8-10 PM). The availability of this specific inventory is the hard constraint on his frequency. Any friction in the booking process that causes a delay might result in him losing this slot, making him highly sensitive to app performance and real-time inventory accuracy.
+                            </div>
+                        </div>
+
+                        <div class="insight-card behavior">
+                            <span class="card-label">Ritualistic Behavior</span>
+                            <div class="card-title">The "Decompression" Buffer</div>
+                            <div class="card-body">
+                                Faris uses sport as a buffer between work and sleep. He mentions going home to eat <em>after</em> the sport and photos. This implies a specific sequence: Work -> Commute -> Sport -> Content Creation -> Food -> Sleep. Disruption to the "Sport" block disrupts the entire evening ritual, highlighting the importance of reliability.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>III. The "Toggle Tax": Digital Ecosystem Audit</h2>
+                
+                <p>The respondent's digital experience is characterized by high friction and app-switching. He acts as a manual API, transferring information between disparate apps to complete a single sporting event. This "Toggle Tax" is the primary source of user effort and frustration.</p>
+
+                <p>His stack consists of <strong>ReClub</strong> (for seeing who is playing), <strong>Kuy</strong> (for the actual booking/gatekeeping), <strong>WhatsApp</strong> (for the "real" conversation), and <strong>Instagram</strong> (for validation). He navigates this triangle for every single session.</p>
+
+                <div class="chart-wrapper">
+                    <canvas id="chart2-stack"></canvas>
+                    <div class="chart-caption">Figure 2: The "Toggle Tax" - Friction Heatmap across the User Journey</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Paling ribet pembayaran karena setiap join harus bayar di aplikasi lain lagi... Coba bayar booking di aplikasi yang sama."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card pain">
+                            <span class="card-label">Critical Pain Point</span>
+                            <div class="card-title">The Payment Disconnect</div>
+                            <div class="card-body">
+                                This is the most explicit friction point in the interview. Faris finds the slot in the app (Kuy) but is forced to exit the app to pay (likely via bank transfer or e-wallet upload elsewhere).
+                                <br><br>
+                                This break in the flow—the "Payment Gap"—is not just an inconvenience; it is a conversion killer. The user explicitly asks for embedded finance: "Coba bayar booking di aplikasi yang sama" (Try paying for booking in the same app). Integrating payment directly into the booking flow would eliminate the single biggest "Hassle Factor" in his routine.
+                            </div>
+                        </div>
+
+                        <div class="insight-card behavior">
+                            <span class="card-label">Adoption Driver</span>
+                            <div class="card-title">Coercive Adoption via Community</div>
+                            <div class="card-body">
+                                Faris uses Kuy not because he discovered it, but because he was <em>forced</em> to. "Dari komunitasnya yang share kalau misalnya untuk daftar via Kui." The Community Admin is the Gatekeeper.
+                                <br><br>
+                                This highlights a B2B2C adoption model. The user (Faris) will adopt whatever tool the Community Admin mandates. Therefore, the "User" in the acquisition strategy is actually the Admin, not the Player. The "Stickiness" of the app is social, not functional—he cannot leave Kuy because his community is there.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>IV. Motivation Dynamics: From "Fun" to "Mastery"</h2>
+                
+                <p>A significant finding in this profile is the <strong>Evolution of Motivation</strong>. Faris is no longer in the "Honeymoon Phase" of just having fun. He has transitioned into the "Mastery Phase." He explicitly mentions "Persiapan ikut turnamen-turnamen besar" (Preparing for big tournaments) and "Improving skills."</p>
+
+                <div class="chart-wrapper">
+                    <canvas id="chart2-motivation"></canvas>
+                    <div class="chart-caption">Figure 3: Psychographic Shift - From Social Bonding to Competitive Mastery</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Sekarang sih lebih ke jernihkan skill dan persiapan ikut turnamen... Penting banget sih untuk improving."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Psychographic Shift</span>
+                            <div class="card-title">The "Competence" Pivot</div>
+                            <div class="card-body">
+                                Faris has moved up Maslow's hierarchy of sporting needs. Level 1 was "Social Connection" (Meeting friends). Level 2 is now "Esteem & Achievement" (Winning tournaments).
+                                <br><br>
+                                Currently, booking apps treat all sessions as generic "Play." There is an opportunity to differentiate "Casual Sessions" from "Training/Competitive Sessions" to cater to this desire for improvement. He is looking for "Progression," not just "Participation."
+                            </div>
+                        </div>
+
+                        <div class="insight-card gap">
+                            <span class="card-label">Unmet Need</span>
+                            <div class="card-title">The "Teacher" Archetype</div>
+                            <div class="card-body">
+                                When asked about community, Faris mentions "Sharing knowledge" and "Share tips-tips." He derives satisfaction not just from learning, but from <em>teaching</em> others.
+                                <br><br>
+                                Current platforms offer no outlet for this. There is no "Forum," "Review," or "Tips" section where a senior player like Faris can build reputation by helping newbies. He is forced to do this on Instagram or WhatsApp. Enabling "Community Contributions" within the app could unlock a powerful retention hook for experienced users.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>V. The "Vertical Social" Opportunity</h2>
+
+                <p>The interview concludes with a revealing wish for the "CEO of the App": Faris wants social features <em>inside</em> the booking utility. He mentions wanting to "Share progress, update, share foto-foto" so people can see "what I am doing."</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Mungkin saja media... tapi bisa share progress, update, share foto-foto... jadi orang-orang ngelihat account-ku langsung tahu apa aja yang aku lakuin."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card gap">
+                            <span class="card-label">Strategic Opportunity</span>
+                            <div class="card-title">The "Walled Garden" Social Feed</div>
+                            <div class="card-body">
+                                Faris is suffering from <strong>Context Collapse</strong> on Instagram. His "Throwing Stats" and "Softball Drills" are niche content that may clutter his general social feed. He explicitly desires a <strong>Vertical Social Feed</strong> within the utility app.
+                                <br><br>
+                                He wants his "Booking History" to act as a public "Athlete Resume." He wants a space where his activity is validated by peers who <em>understand</em> the data, rather than a general audience who does not. He is asking for the platform to transition from a "Booking Tool" (Utility) to a "Validation Engine" (Identity).
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card insight">
+                            <span class="card-label">Content Hierarchy</span>
+                            <div class="card-title">Documentation as Ritual</div>
+                            <div class="card-body">
+                                When asked what he does immediately after playing, Faris said "Foto-foto dulu" (Photos first), even before "Makan malam" (Dinner). This hierarchy—Content > Food—proves that the <strong>Digital Artifact</strong> of the session is as valuable as the physical benefit. Any feature that automates this capture (e.g., auto-generated stats cards) would be highly utilized.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="report-footer">
+                <div class="footer-text">
+                    Gojek Intelligence Unit • Internal Research Document • 2026
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- PROFILE 3: TIAS -->
+    <!-- ========================================= -->
+    <div class="section-divider" id="profile-3">
+        <div class="number">Profile 03</div>
+        <h2>Tias</h2>
+        <div class="archetype">The "Admin-Averse" Pragmatist</div>
+    </div>
+    
+    <section class="report-section">
+        <div class="report-container">
+            <header>
+                <h1 class="report-title">Consumer Intelligence Audit</h1>
+                <div class="subtitle">Subject: The "Admin-Averse" Pragmatist (Respondent ID: Tias)</div>
+            </header>
+
+            <div class="summary-box">
+                <div class="summary-title">Executive Behavioral Synthesis</div>
+                <p>The respondent, Tias, represents a highly specific and rapidly expanding urban archetype: <strong>The Friction-Averse Participant</strong>. This segment is characterized by a high desire for social sport (Squash, Padel, Tennis) coupled with a near-zero tolerance for the administrative burden of organizing it. Her engagement with the sports vertical is fundamentally transactional; she is not seeking to build a new community, but rather to <strong>outsource the "Coordination Tax"</strong> of finding a game.</p>
+                <p>A critical finding from the analysis is the <strong>"Bifurcation of Trust vs. Liquidity."</strong> Tias maintains two distinct social graphs: a "High Trust / High Friction" graph managed via WhatsApp (Close Friends), and a "Low Trust / High Liquidity" graph managed via ReClub (Strangers). The platform is currently acting as a <strong>"Backup Generator"</strong>—a utility she activates only when her primary social circle fails to converge.</p>
+                <p>Furthermore, the customer journey is marred by a significant <strong>"Physical-Digital Disconnect."</strong> While the digital booking process is seamless, the physical entry into the venue is fraught with "Social Performance Anxiety" (the awkwardness of finding the group, known as <em>SKSD</em>) and "Bio-Hygiene Anxiety" (uncertainty regarding showers).</p>
+            </div>
+
+            <section>
+                <h2>I. Psychographic Deep Dive: The "Gerak Aja" Philosophy</h2>
+                
+                <p>To understand the user's retention drivers, we must first deconstruct her relationship with the sport itself. Tias is a "Karyawan Swasta" (Private Sector Employee) whose sporting habit is squeezed into the "After-Office" or "Weekend" decompression windows. Her primary motivation is explicitly <strong>Anti-Competitive</strong>. She adopts a "Metabolic Maintenance" mindset, where the goal is simply to move ("Gerak Aja") rather than to improve performance metrics.</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Tujuan aku yang penting gerak aja sih. Olahraga aja nggak terlalu kayak ambisius harus menang atau gimana... Bukan untuk jago menang, tapi lebih ke maintain the rally biar tetap bisa main terus... kalau terlalu cepet mati itu kayak nggak enak sama partner."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Psychographic Driver</span>
+                            <div class="card-title">Cooperative Flow over Competitive Dominance</div>
+                            <div class="card-body">
+                                The respondent fears "ruining the flow" more than losing the game. This <strong>"Social Performance Anxiety"</strong> is a key behavioral driver. She is not seeking to dominate an opponent; she is seeking to be a "viable partner" who does not disrupt the group's rhythm. This implies that matchmaking algorithms based on pure skill (Win/Loss ratios or Ladders) are functionally misaligned with her needs. She requires matchmaking based on <strong>Consistency and Vibe</strong>.
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card gap">
+                            <span class="card-label">Opportunity Landscape</span>
+                            <div class="card-title">The "Intent-Based" Filtering Gap</div>
+                            <div class="card-body">
+                                The current ecosystem categorizes games by "Skill Level" (Beginner, Intermediate, Advanced). However, Tias's commentary suggests a need for filtering by <strong>Psychological Intent</strong> (e.g., "Casual Rally," "Drills," "Competitive Match"). A high-skill player might still want a "Casual Rally" to decompress. The current binary of Skill Level fails to capture the "Mood" of the session, leading to potential mismatches in expectation.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>II. The "Coordination Tax" & The Value of Liquidity</h2>
+                
+                <p>The respondent's journey from "Manual" to "Platform" usage provides a textbook example of "Friction Arbitrage." Tias is willing to pay a premium (via game fees to strangers) solely to eliminate the "Manual Works" of organizing.</p>
+
+                <div class="chart-wrapper">
+                    <canvas id="chart3-friction"></canvas>
+                    <div class="chart-caption">Figure 1: The "Hassle" Reduction Curve (Manual vs. Platform Models)</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Ngubungin temen satu-satu bisa apa enggak... it's too hassle. Kalau di ReClub gampangnya kayak ada orang ngasih, aku cuma jadi partisipan aja... tinggal join terus transfer."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Role Definition</span>
+                            <div class="card-title">The "Guest" Mental Model</div>
+                            <div class="card-body">
+                                Tias actively avoids the role of "Host." She describes the manual process of texting friends, checking schedules, and booking courts as a significant "Hassle." She views the platform not as a community builder, but as a <strong>Logistics Service Provider</strong>. She is "outsourcing" the role of the organizer. The value proposition she is buying is the <strong>Automated Consensus</strong>—the ability to join a pre-decided slot without negotiation.
+                            </div>
+                        </div>
+
+                        <div class="insight-card gap">
+                            <span class="card-label">Marketplace Dynamics</span>
+                            <div class="card-title">The "Solo Joiner" Liquidity Gap</div>
+                            <div class="card-body">
+                                Her usage of the platform is highest when her primary circle is unavailable (e.g., holidays, busy work weeks). This identifies a massive "Solo Entry" market segment. However, she notes that if she checks the app and finds nothing ("Gak ada yang cocok"), she closes it immediately. This <strong>"Binary Exit"</strong> indicates a missed opportunity for "Demand Aggregation" (e.g., "Notify me if a game opens tonight in Depok"). The platform currently loses this intent signal completely.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>III. The "Last Mile" Problem: Physical-Digital Disconnect</h2>
+                
+                <p>While the digital booking process is described as seamless, the analysis uncovers a severe friction point at the "Last Mile"—the transition from the digital app to the physical court. This phase is characterized by two distinct anxieties: <strong>Social Identification</strong> and <strong>Bio-Hygiene</strong>.</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Pas udah nyampe lapangan tuh kayak misalnya di satu area itu ada tiga lapangan padel... nge-identify yang mana yang club yang gue join, ya jadinya nanti SKSD ke orang-orang... dari club ABC bukan?"</div>
+                    </div>
+
+                    <div class="insight-grid">
+                        <div class="insight-card pain">
+                            <span class="card-label">Social Friction</span>
+                            <div class="card-title">The "SKSD" (Forced Familiarity) Barrier</div>
+                            <div class="card-body">
+                                "SKSD" (*Sok Kenal Sok Dekat*) refers to the awkwardness of acting familiar with strangers to verify information. Tias faces a <strong>"Wayfinding" Crisis</strong> upon arrival. The app successfully gets her <em>to</em> the location but fails to guide her <em>into</em> the specific court/group. For an introverted or "functional" user, this moment of scanning strangers faces to find her group is a high-anxiety barrier. There is a lack of digital-to-physical bridging (e.g., specific court numbers in-app, host attire descriptions, or digital handshakes).
+                            </div>
+                        </div>
+
+                        <div class="insight-card pain">
+                            <span class="card-label">Trust Deficit</span>
+                            <div class="card-title">The "Bio-Hygiene" Trust Gap</div>
+                            <div class="card-body">
+                                Tias highlighted a specific "Dosa" (Sin) of the platform: the lack of verified facility data.
+                                <br><em>"Pernah ikut satu mabar tapi lapangannya jelek... nggak ada kamar mandinya... pengen tau di tempat padel itu fasilitasnya itu apa apakah dia ada kamar mandi atau enggak."</em>
+                                <br><br>
+                                For the working professional playing after hours, a shower is not a luxury; it is a <strong>Logistical Gatekeeper</strong>. The absence of verified "Hygiene Ratings" (Showers/Toilets) creates a "Trust Void." Tias defaults to known courts not out of loyalty, but out of <strong>Risk Aversion</strong> regarding basic sanitation.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>IV. The "Venue-First" Loyalty Paradox</h2>
+                
+                <p>A profound insight from the interview is the disconnect between how apps organize data (Time-First) and how the user organizes her mental map (Place-First). Tias reveals a strong mental anchoring to specific geographical nodes (Depok).</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Bisa nggak ya kayak nyari jadwalnya tuh based on lapangan... aku punya lapangan yang favorit di Depok. Jadi pengen lihat aja nih ada nggak orang-orang yang buka jadwal padel di lapangan favorit aku itu."</div>
+                    </div>
+
+                    <div class="insight-grid">
+                        <div class="insight-card gap">
+                            <span class="card-label">Mental Model Mismatch</span>
+                            <div class="card-title">Venue-Centric Discovery</div>
+                            <div class="card-body">
+                                Current discovery flows are Time-First (What is open Tuesday?). However, Tias's mental model is Place-First (What is open at *My Court*?). She trusts the <strong>Infrastructure</strong> (the court she knows has showers and parking) more than she trusts the <strong>Host</strong>.
+                                <br><br>
+                                This suggests a strategic gap for <strong>"Hyper-Local Subscriptions"</strong>—allowing users to "Follow" a specific physical venue and receive alerts when *any* game opens up there. This would effectively invert the marketplace model, making the Venue the primary anchor of the community rather than the Host.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>V. Digital Behavior: Workarounds & Proxies</h2>
+
+                <p>Tias's interaction with the digital ecosystem reveals how users create "Workarounds" when the product suite fails to meet their specific needs. This is most evident in her wearable usage.</p>
+
+                <div class="chart-wrapper">
+                    <canvas id="chart3-ecosystem"></canvas>
+                    <div class="chart-caption">Figure 2: The Trust vs. Utility Ecosystem Matrix</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Taxonomy Workaround</span>
+                            <div class="card-title">The "Pickleball Proxy"</div>
+                            <div class="card-body">
+                                <em>"Di Apple tuh nggak ada [Padel] jadi aku pilihnya type of sports-nya Pickleball karena kayaknya mirip."</em>
+                                <br><br>
+                                This behavior proves that <strong>Data Completion > Data Accuracy</strong>. She prioritizes closing her "Activity Rings" (Calorie Credit) over sport-specific analytics. She is indifferent to the technical nuances of the data, as long as the <em>effort</em> is registered in her digital health ledger.
+                            </div>
+                        </div>
+
+                        <div class="insight-card behavior">
+                            <span class="card-label">Content Consumption</span>
+                            <div class="card-title">Documentation vs. Validation</div>
+                            <div class="card-body">
+                                She shares photos of "The Squad" to Instagram Stories to document the <em>activity</em> ("Biar seru aja"), but explicitly rejects sharing <em>stats</em> or <em>scores</em>.
+                                <br><br>
+                                This confirms that for the "Participant" archetype, the ROI of the sport is <strong>Identity Signaling</strong> ("I am an active person") rather than <strong>Achievement Signaling</strong> ("I won"). Features that emphasize leaderboards or competitive metrics are optimizing for a user type that Tias does not represent.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="report-footer">
+                <div class="footer-text">
+                    Gojek Intelligence Unit • Internal Research Document • 2026
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- PROFILE 4: AGUNG (Running) -->
+    <!-- ========================================= -->
+    <div class="section-divider" id="profile-4">
+        <div class="number">Profile 04</div>
+        <h2>Agung</h2>
+        <div class="archetype">The "Agency Disciplinarian" Archetype</div>
+    </div>
+    
+    <section class="report-section">
+        <div class="report-container">
+            <header>
+                <h1 class="report-title">Consumer Intelligence Audit</h1>
+                <div class="subtitle">Subject: The "Agency Disciplinarian" Archetype (Respondent ID: Agung)</div>
+            </header>
+
+            <div class="summary-box">
+                <div class="summary-title">Executive Behavioral Synthesis</div>
+                <p>The respondent, Agung, represents a distinct and highly valuable urban professional archetype: <strong>The Agency Disciplinarian</strong>. His engagement with the sports vertical is defined not by leisure or aesthetic vanity, but by a rigid <strong>"Bio-Structural Need"</strong> to counterbalance a high-intensity professional life in the creative agency sector. Operating within a non-negotiable "Time-Box" of 05:00 AM to 08:00 AM, he utilizes sport as a foundational pillar of his daily existence.</p>
+                <p>A critical layer of this analysis uncovers a <strong>"Decoupled Social Protocol."</strong> While the respondent self-identifies as socially motivated, the actual execution of his athleticism is solitary. He coordinates with peers to establish a "Tikum" (Meeting Point) but performs the activity in isolation to adhere to strict personal training metrics. The "Social Value" is realized exclusively <em>post-activity</em> during the coffee ritual.</p>
+                <p>Furthermore, the analysis reveals a profound <strong>"Trust-Validation Paradox"</strong> anchored in Indonesian cultural norms. The user relies on digital tools (Strava) for social proof but is culturally inhibited by the concept of <strong>"Riya"</strong> (Showing off), leading him to actively reject public gamification in favor of "Dark Social" validation (WhatsApp Status).</p>
+            </div>
+
+            <section>
+                <h2>I. The Psychographic Architecture: The "Time-Box" Economy</h2>
+                
+                <p>To understand the user's friction points and loyalty drivers, we must first map the rigid temporal structure of his life. Agung works in an Agency, a sector characterized by unpredictable late hours and high cognitive load. His response to this chaos is an uncompromising morning routine.</p>
+
+                <div class="chart-wrapper tall">
+                    <canvas id="chart4-schedule"></canvas>
+                    <div class="chart-caption">Figure 1: The "Agency Control" Window (05:00 - 08:00)</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Jam sepuluh udah tidur, bangun jam lima pagi... jam enam udah mulai lari, jam delapan udah sama nongkrongnya juga... mandi, udah ngantor. Gampang lah bagi-bagi waktunya."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Behavioral Anchor</span>
+                            <div class="card-title">The "Non-Negotiable" Morning Block</div>
+                            <div class="card-body">
+                                The respondent minimizes the effort required to maintain this schedule, describing it as "Gampang" (Easy). However, the precision of the timeline (Sleep 22:00 → Wake 05:00) suggests a high-discipline framework. This is not casual fitness; it is a "Life Operating System." Any service that disrupts this flow will face immediate rejection because it threatens the structure of his entire workday.
+                            </div>
+                        </div>
+
+                        <div class="insight-card pain">
+                            <span class="card-label">Latent Friction</span>
+                            <div class="card-title">The "Willpower" Initiation Tax</div>
+                            <div class="card-body">
+                                He admits that the hardest part was "Ngumpulin niat" (Gathering the intention). Even now, the friction of 05:00 AM wake-ups requires massive internal energy ("Tarik diri"). He uses friends as an external battery for this willpower via WhatsApp notifications, but the burden of initiation still rests heavily on him. The market currently lacks "Pre-Commitment" mechanisms that lock him in the night before.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>II. The Evolution of Motivation: From Trauma to Fear</h2>
+                
+                <p>The user's journey into the category follows a distinct "Trauma-to-Structure" conversion funnel. Understanding this evolution is key to retention strategies.</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Awal awal lari karena patah hati... Healing karena lari jadinya... [Sekarang] ngapain lagi ya? Ya udah ikutan race aja jadinya. Memimpin personal goal sendiri... Bayangin kalau aku nggak finish, Bro."</div>
+                    </div>
+
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Psychographic Driver</span>
+                            <div class="card-title">The "Crisis" Conversion Trigger</div>
+                            <div class="card-body">
+                                The entry point was emotional regulation ("Patah hati" / Heartbreak). Sport was a therapeutic tool, not a fitness pursuit. This suggests that for this demographic, "Wellness" or "Mental Health" messaging is a more potent acquisition hook than "Performance" or "Weight Loss."
+                            </div>
+                        </div>
+
+                        <div class="insight-card pain">
+                            <span class="card-label">Retention Mechanism</span>
+                            <div class="card-title">The "Fear of DNF" Anchor</div>
+                            <div class="card-body">
+                                When asked about overcoming laziness ("Mager"), he responds: "Bayangin kalau aku nggak finish, Bro." This indicates a shift from positive reinforcement (Feeling good) to negative reinforcement (Fear of failure). He has locked himself into a long-term commitment (Full Marathon 2026). The "Goal" acts as the external boss that his agency life usually provides.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>III. The "Decoupled" Social Architecture & The "Tikum" Economy</h2>
+                
+                <p>A critical finding in this transcript is the redefinition of "Community." The respondent's behavior challenges the assumption that "Social Sports" implies performing the activity <em>together</em>. His model separates the logistics of meeting from the execution of the sport.</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Kita janjian finishnya doang... nentuin tikum [titik kumpul]... Pisah. Pas lari sih ngejar performa ngikutin training... Setelah itu baru ke pusatnya nongkrong."</div>
+                    </div>
+
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Social Protocol</span>
+                            <div class="card-title">The "Parallel Play" Dynamic</div>
+                            <div class="card-body">
+                                Agung runs <em>simultaneously</em> with friends, not <em>with</em> them. They agree on a "Tikum" (Meeting Point) and a Finish Line, but the "During-Activity" phase is solitary ("Pisah"). This allows him to maintain his personal training rigor (guided by his Garmin) without being slowed down or sped up by the group. The social interaction is strictly an "Après-Sport" reward.
+                            </div>
+                        </div>
+
+                        <div class="insight-card gap">
+                            <span class="card-label">Opportunity Landscape</span>
+                            <div class="card-title">The "Sync-Finish" Logistics Gap</div>
+                            <div class="card-body">
+                                The pain point in this "Parallel Play" model is timing. If Friend A runs at Pace 5:00 and Friend B at Pace 7:00, they finish at different times, disrupting the "Nongkrong." There is a clear opportunity for algorithmic coordination—tools that calculate differential start times so that a group of varying abilities arrives at the coffee shop at the exact same moment.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>The "Nongkrong" as the Primary ROI</h3>
+                <p>The interview reveals that the "Nongkrong" (Hangout/Coffee) session post-run is not an add-on; it is the <strong>Reward State</strong>. The run is the labor; the coffee is the payment. Agung explicitly states, "Jam delapan udah sama nongkrongnya," treating it as a fixed schedule block.</p>
+            </section>
+
+            <section>
+                <h2>IV. The "Riya" Paradox & The Digital Trust Economy</h2>
+                
+                <p>Agung's relationship with digital platforms reveals a deep cultural tension between the desire for validation and the cultural mandate of modesty.</p>
+
+                <div class="chart-wrapper tall">
+                    <canvas id="chart4-tech"></canvas>
+                    <div class="chart-caption">Figure 2: The Digital Trust & Validation Hierarchy</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Jarang ambil challenge... malu ah... model ria gitu. Biar aku bisa tahu status aku... Friendly reminder... Buat partner juga sih kalau di show di sosmed."</div>
+                    </div>
+
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Cultural Insight</span>
+                            <div class="card-title">The "Riya" (Arrogance) Avoidance</div>
+                            <div class="card-body">
+                                The respondent explicitly avoids Strava Challenges because he perceives them as "Model Ria" (Arrogant/Show-off behavior). This suggests that <strong>Public Leaderboards</strong> may trigger social anxiety rather than motivation for a subset of Indonesian users. He does not want to compete with strangers; he wants to signal competence to his specific "Circle."
+                            </div>
+                        </div>
+
+                        <div class="insight-card pain">
+                            <span class="card-label">Platform Usage</span>
+                            <div class="card-title">The "Dark Social" Silo</div>
+                            <div class="card-body">
+                                He admits to sharing stats to "Status Rafa" (WhatsApp Status) and Instagram, but *not* primarily for the Strava feed. WhatsApp Status is a "Semi-Private" broadcast—visible only to saved contacts. This confirms a preference for <strong>"Dark Social" Validation</strong>. He is curating his identity for people who actually know him, ensuring the "Show off" is received as "Progress" by supportive peers, rather than "Arrogance" by strangers.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="report-footer">
+                <div class="footer-text">
+                    Gojek Intelligence Unit • Internal Research Document • 2026
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- PROFILE 5: IRFAN -->
+    <!-- ========================================= -->
+    <div class="section-divider" id="profile-5">
+        <div class="number">Profile 05</div>
+        <h2>Irfan</h2>
+        <div class="archetype">The Functional "Subuh" Archetype</div>
+    </div>
+    
+    <section class="report-section">
+        <div class="report-container">
+            <header>
+                <h1 class="report-title">Consumer Intelligence Audit</h1>
+                <div class="subtitle">Subject: The Functional "Subuh" Archetype (Respondent ID: Irfan)</div>
+            </header>
+
+            <div class="summary-box">
+                <div class="summary-title">Executive Behavioral Synthesis</div>
+                <p>The respondent represents a highly distinct behavioral segment that we have classified as <strong>The Derivative Functionalist</strong>. Unlike recreational users driven by aesthetics, weight loss, or generalized wellness, this archetype engages in sport (specifically road and trail running) strictly as a <strong>Utilitarian Necessity</strong> to prepare for high-altitude hiking expeditions (*Gunung*).</p>
+                <p>Critically, his engagement is biologically and culturally gated by the <strong>Subuh (Dawn Prayer) Window</strong>. This creates a rigid, non-negotiable activity slot between 04:30 AM and 06:30 AM, necessitated by his professional role as a Researcher at <strong>BPS (Badan Pusat Statistik)</strong>.</p>
+                <p>The analysis reveals a profound <strong>"Trust Void"</strong> in the discovery phase. The respondent explicitly rejects open-web information sources (Google, Official Sites) in favor of "Dark Social" (WhatsApp) peer validation. This suggests a fractured discovery path where traditional digital marketing fails to penetrate.</p>
+            </div>
+
+            <section>
+                <h2>I. Identity & The Psychology of the "Reluctant Researcher"</h2>
+                
+                <p>To accurately map the user's friction points and potential churn risks, we must first deeply analyze his psychographic reality. Irfan is a professional researcher at <strong>BPS (Badan Pusat Statistik)</strong>. His professional life involves heavy data analysis, bureaucratic rigor, and high mental fatigue. Consequently, in his personal sporting life, he exhibits <strong>Cognitive Miserliness</strong>.</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Sejak tahun lalu, sejak saya berangkat ke Sumatra, saya lari tapi berhenti sementara. Tapi tahun ini mulai lagi... tarik lagi ke kosong."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Behavioral Pattern</span>
+                            <div class="card-title">The "Merantau" (Migration) Fragility</div>
+                            <div class="card-body">
+                                The user's sporting habit is not location-agnostic; it is deeply tethered to his physical and social environment. The act of relocation (*Merantau* to Sumatra) caused a complete collapse of the habit. This indicates that his routine lacks portability. When the supporting infrastructure is removed, the behavior resets to zero.
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card gap">
+                            <span class="card-label">Opportunity Landscape</span>
+                            <div class="card-title">The Post-Relocation Continuity Vacuum</div>
+                            <div class="card-body">
+                                There is currently no digital mechanism supporting the user during the critical transition between cities. The friction of finding new, safe routes and a new "Subuh-compatible" community in a strange city serves as a primary churn driver. A localized "Onboarding" experience for relocated professionals could prevent the "reset to zero."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>II. The "Subuh" Chronotype & Time Economics</h2>
+                
+                <p>The most rigid variable in the respondent's behavioral equation is Time. His activity is biologically and religiously gated. The analysis confirms his routine is anchored to the <strong>Subuh (Dawn Prayer)</strong>, creating a unique "Bio-Religious" timeframe.</p>
+
+                <div class="chart-wrapper">
+                    <canvas id="chart5-time"></canvas>
+                    <div class="chart-caption">Figure 1: The "Subuh" Activity Window (04:30 - 06:30)</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Behavioral Anchor</span>
+                            <div class="card-title">The 90-Minute Hard Stop</div>
+                            <div class="card-body">
+                                Irfan's day has two immovable poles: The Prayer and The Office. This leaves a compressed ~90-minute window for <em>all</em> logistics: waking up, ablution, prayer, dressing, traveling to the location, exercising, and returning. This "Time Poverty" explains his struggle with consistency. If any single variable fails (e.g., oversleeping by 15 minutes, rain), the entire session is aborted because the "Work" pole cannot be moved.
+                            </div>
+                        </div>
+
+                        <div class="insight-card pain">
+                            <span class="card-label">Friction Point</span>
+                            <div class="card-title">The "Willpower" Tax</div>
+                            <div class="card-body">
+                                He describes the need to "tarik diri" (drag himself) to start. Currently, the burden of initiation lies entirely on his internal willpower. There is no external commitment device or logistical automation to lower the activation energy required to leave the house at 05:00 AM.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>III. The "Derivative" Motivation Structure</h2>
+
+                <p>A critical divergence in Irfan's profile is that he does not self-identify primarily as a "Runner." He identifies as a "Hiker." Running is merely a training simulation for the mountains.</p>
+
+                <div class="chart-wrapper">
+                    <canvas id="chart5-motivation"></canvas>
+                    <div class="chart-caption">Figure 2: The Hierarchy of Motivation (Derivative Nature)</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Psychographic Driver</span>
+                            <div class="card-title">Simulation vs. Recreation</div>
+                            <div class="card-body">
+                                The user engages in trail running and road running to build lung capacity and endurance for expeditions. He is immune to the allure of standard "Running Events" (5K/10K races) unless they are explicitly framed as "Summit Preparation." His goal is not speed on the road; it is survivability on the mountain.
+                            </div>
+                        </div>
+
+                        <div class="insight-card gap">
+                            <span class="card-label">Opportunity Landscape</span>
+                            <div class="card-title">The Content Relevance Gap</div>
+                            <div class="card-body">
+                                Current sports platforms predominantly treat running as the end goal. There is a content void for "Urban Training for Mountain Hikers"—programs that utilize city infrastructure (stairs, inclines) to simulate elevation gain. He is currently forced to guess his training regimen.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>IV. The "Trust Void" in Discovery (ADOPT Phase)</h2>
+                
+                <p>The respondent's path to adopting new behaviors, purchasing gear, or finding routes is characterized by a stark rejection of the open web.</p>
+
+                <div class="chart-wrapper">
+                    <canvas id="chart5-trust"></canvas>
+                    <div class="chart-caption">Figure 3: The Trust Hierarchy (Derived from Respondent Sentiment)</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Nggak ada website atau informasi khusus, paling hanya sosmed saja... Tanya teman dulu sih. Tanya teman terus sih ya."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card pain">
+                            <span class="card-label">Friction Point</span>
+                            <div class="card-title">The Information Vacuum</div>
+                            <div class="card-body">
+                                It is notable that a professional researcher claims "no specific websites" exist for his needs. This reflects a failure of discovery, not necessarily a lack of content. The signal-to-noise ratio on the open web is evidently too low for him to consider it viable.
+                            </div>
+                        </div>
+
+                        <div class="insight-card gap">
+                            <span class="card-label">Opportunity Landscape</span>
+                            <div class="card-title">The "Dark Social" Dependency</div>
+                            <div class="card-body">
+                                The reliance on "Tanya Teman" (Asking Friends) indicates that trust is currently trapped in "Dark Social" silos (WhatsApp groups). There is a significant gap for a platform that can institutionalize this peer-to-peer trust—transforming anecdotal advice into structured, accessible data.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>V. Sustainment: The "Nyampe Aja" Philosophy</h2>
+
+                <p>The respondent's motivation for sustaining the habit differs significantly from the competitive "athlete" profile often targeted by sports apps.</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Yang penting nyampe aja sih, jadi lumayan tetep." (The important thing is just arriving/finishing, so I stay consistent.)</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Psychographic Driver</span>
+                            <div class="card-title">Success = Presence</div>
+                            <div class="card-body">
+                                Irfan defines success as <strong>Presence</strong>, not <strong>Performance</strong>. The metric "Nyampe" (Arriving/Finishing) implies that simply showing up is the victory. He seeks "Sustainment" over "Improvement." He is a "Completer," not a "Competer."
+                            </div>
+                        </div>
+
+                        <div class="insight-card gap">
+                            <span class="card-label">Opportunity Landscape</span>
+                            <div class="card-title">Incentive Misalignment</div>
+                            <div class="card-body">
+                                The current market ecosystem predominantly rewards intensity (Speed, Distance, Leaderboards). For a user focused on "Nyampe Aja," these metrics can be demotivating. There is a tangible gap for engagement mechanisms that value <strong>Frequency and Streaks</strong> over intensity.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="report-footer">
+                <div class="footer-text">
+                    Gojek Intelligence Unit • Internal Research Document • 2026
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- PROFILE 6: AGUNG (Social) -->
+    <!-- ========================================= -->
+    <div class="section-divider" id="profile-6">
+        <div class="number">Profile 06</div>
+        <h2>Agung</h2>
+        <div class="archetype">The "Parallel" Socializer Archetype</div>
+    </div>
+    
+    <section class="report-section">
+        <div class="report-container">
+            <header>
+                <h1 class="report-title">Behavioral Intelligence Audit</h1>
+                <div class="subtitle">Subject: The "Parallel" Socializer Archetype (Respondent ID: Agung)</div>
+            </header>
+
+            <div class="summary-box">
+                <div class="summary-title">Executive Behavioral Synthesis</div>
+                <p>The respondent represents a highly sophisticated behavioral segment: <strong>The Agency Disciplinarian</strong>. His engagement with sport is not casual; it is a rigid structural counterweight to his demanding professional life in an agency. He operates on a strict "Sacred Window" (06:00 – 08:00), where athletic discipline serves as the necessary precondition for his primary reward: social connection.</p>
+                <p>The core insight lies in his <strong>"Parallel Play" Social Model</strong>. Unlike recreational joggers who run <em>with</em> friends, Agung runs <em>simultaneously to</em> friends but executes the activity in isolation (guided by data). The group converges only at the "Tikum" (Meeting Point) for the post-run ritual.</p>
+                <p>Furthermore, the analysis reveals a significant <strong>Cultural Friction with Global Gamification</strong>. The respondent actively rejects public badges and challenges due to an internalized aversion to "Riya'" (Vanity/Showing Off). Instead, he utilizes "Dark Social" channels (WhatsApp Status) to seek validation within a trusted, intimate circle.</p>
+            </div>
+
+            <section>
+                <h2>I. Identity Architecture & The "Trauma" Trigger</h2>
+                
+                <p>To understand the user's high retention (3+ years), we must analyze the genesis of his habit. The entry point was not health optimization or peer pressure, but acute emotional distress.</p>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Awal lari karena patah hati... Tapi tahun ini... bayangin kalau aku nggak finish, Bro. Target full marathon 2026."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Longitudinal Motivation Shift</span>
+                            <div class="card-title">From "Healing" to "Fear of Failure"</div>
+                            <div class="card-body">
+                                Agung's motivation has undergone a complete metamorphosis. The initial driver was <strong>Restorative</strong> (healing from heartbreak). However, the current driver is <strong>Existential Fear</strong> (the shame of a DNF in his upcoming Marathon). This shift from "Past-Oriented" to "Future-Oriented" is the defining characteristic of his transition from a casual user to a "Sustain" user.
+                            </div>
+                        </div>
+
+                        <div class="insight-card pain">
+                            <span class="card-label">Adoption Friction</span>
+                            <div class="card-title">The "Scattered" Information Landscape</div>
+                            <div class="card-body">
+                                During his adoption phase, Agung experienced a "Trust Deficit" with the open web. He described information as "Scattered" and contradictory ("One says A, one says B"). This indicates that the current digital ecosystem fails to provide a centralized, authoritative "Zero-to-One" onboarding path for new runners.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>II. The "Parallel Play" Operational Model</h2>
+                
+                <p>A critical operational nuance is how Agung manages the tension between his need for high-performance training and his desire for social interaction. He does not compromise one for the other; he compartmentalizes them spatially and temporally.</p>
+
+                <div class="chart-wrapper tall">
+                    <canvas id="chart6-activity"></canvas>
+                    <div class="chart-caption">Figure 1: The "Activity Hourglass" – Convergence, Divergence, Convergence</div>
+                </div>
+
+                <div class="analysis-module">
+                    <h3>The "Tikum" Protocol</h3>
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Kontak temen, nentuin Tikum [Titik Kumpul] di mana... Janjian finishnya doang... Pisah. Ngikutin aja badannya teman."</div>
+                    </div>
+                    
+                    <div class="insight-grid">
+                        <div class="insight-card behavior">
+                            <span class="card-label">Social Dynamics</span>
+                            <div class="card-title">Asynchronous Unity</div>
+                            <div class="card-body">
+                                The group is anchored by the <strong>Destination</strong>, not the <strong>Route</strong>. By agreeing only on the "Tikum" (Start/Finish point), Agung eliminates the friction of disparate fitness levels. This allows him to follow his strict Garmin training plan (Performance) without being slowed down by friends, while still securing the social reward (Nongkrong/Coffee) immediately upon completion.
+                            </div>
+                        </div>
+
+                        <div class="insight-card gap">
+                            <span class="card-label">Feature Gap</span>
+                            <div class="card-title">The "Pace-Agnostic" Coordination Void</div>
+                            <div class="card-body">
+                                Current social running apps often assume users want to "Run Together" (physically side-by-side). Agung's behavior suggests a need for "Run Separately, Meet Together" coordination tools—features that synchronize the <em>finish time</em> rather than the <em>start time</em> or <em>pace</em>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-module">
+                    <h3>The Padel "Matchmaking" Asymmetry</h3>
+                    <p>While his running routine is autonomous and mature, his entry into Padel reveals a significant dependency friction.</p>
+
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Buka-buka di klub lah buat nyari sparing buat padel."</div>
+                    </div>
+
+                    <div class="insight-grid">
+                        <div class="insight-card pain">
+                            <span class="card-label">Ecosystem Friction</span>
+                            <div class="card-title">The Analog Discovery Barrier</div>
+                            <div class="card-body">
+                                Unlike running, which he can execute solo, Padel requires a partner. Agung is currently forced into "Analog Scavenging"—physically going to clubs to find opponents. This represents a regression in his digital experience. The market lacks a trusted "Tinder for Sparring" mechanism.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>III. Digital Behavior: The "Riya'" Complex & Dark Social</h2>
+                
+                <p>Agung's relationship with digital visibility is complex and heavily influenced by local cultural norms. He is a "Hidden Achiever"—aggressively tracking data for himself, but highly selective about where and how he broadcasts it.</p>
+
+                <div class="chart-wrapper tall">
+                    <canvas id="chart6-social"></canvas>
+                    <div class="chart-caption">Figure 2: The "Intimacy vs. Reach" Sharing Hierarchy</div>
+                </div>
+
+                <div class="analysis-module">
+                    <div class="verbatim-block">
+                        <span class="verbatim-label">Respondent Verbatim</span>
+                        <div class="verbatim-text">"Challenge-challenge itu yang ngumpulin badge aku jarang ambil sih... Malu ah... Model Riya' gitu... Foto stats Strava aja sih yang di-share... di WhatsApp."</div>
+                    </div>
+
+                    <div class="insight-grid">
+                        <div class="insight-card pain">
+                            <span class="card-label">Cultural Barrier</span>
+                            <div class="card-title">The "Riya'" (Vanity) Paradox</div>
+                            <div class="card-body">
+                                Agung explicitly avoids public gamification elements like Strava Badges or Challenges because he perceives them as "Riya'" (an Islamic concept referring to performative vanity or showing off). This suggests that global engagement loops (Leaderboards, Trophies) may be counter-productive or alienating for this segment.
+                            </div>
+                        </div>
+                        
+                        <div class="insight-card behavior">
+                            <span class="card-label">Platform Preference</span>
+                            <div class="card-title">The "Dark Social" Pivot</div>
+                            <div class="card-body">
+                                To resolve the tension between "Wanting Validation" and "Avoiding Riya'," Agung pivots to <strong>WhatsApp Status</strong>. This is "Dark Social." It allows him to share his achievement with a curated, intimate audience who understands his context ("Friendly Reminder"), without exposing himself to the judgment of the open internet. He values <strong>Intimacy</strong> over <strong>Virality</strong>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>IV. Ecosystem & Monetization Sentiment</h2>
+                
+                <p>The respondent's app usage reveals a distinct hierarchy of value. He uses Garmin for <em>Creation</em> (Data recording), Strava for <em>Validation/Storage</em> (The "Social Media of Sport"), and Spotify for <em>Immersion</em>.</p>
+
+                <div class="analysis-module">
+                    <div class="insight-grid">
+                        <div class="insight-card gap">
+                            <span class="card-label">Value Perception Gap</span>
+                            <div class="card-title">The Subscription Resentment</div>
+                            <div class="card-body">
+                                Agung expressed clear frustration with Strava's monetization ("Harus bayar aja kali biar semua fiturnya kebuka"). For a user who primarily seeks the "Social" utility of the app rather than deep analytics (which he already gets from his Garmin device), the paywall feels punitive. He perceives his data as his property; having to pay to view his own full historical analysis creates a negative brand sentiment.
+                            </div>
+                        </div>
+
+                        <div class="insight-card behavior">
+                            <span class="card-label">Retention Driver</span>
+                            <div class="card-title">The "Archive" Effect</div>
+                            <div class="card-body">
+                                Despite the friction, he remains on Strava because it serves as his "Sports Resume." It is the only place where his history is aggregated and visible to his peers. The switching cost is high not because of features, but because of the accumulated social capital and historical data stored on the platform.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="report-footer">
+                <div class="footer-text">
+                    Gojek Intelligence Unit • Internal Research Document • Confidential • 2026
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- End of Report -->
+    <section style="background: var(--bg-nav); padding: 80px 40px; text-align: center; color: #fff;">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <p style="font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--signal-flow); margin-bottom: 20px;">End of Report</p>
+            <h2 style="font-family: var(--font-sans); font-size: 2rem; font-weight: 800; margin-bottom: 20px;">Consumer Intelligence Audit</h2>
+            <p style="font-family: var(--font-serif); color: rgba(255,255,255,0.6); margin-bottom: 40px;">Sports Vertical Deep Dive • 6 Respondent Profiles</p>
+            <p style="font-family: var(--font-sans); font-size: 0.8rem; color: rgba(255,255,255,0.4);">Gojek Intelligence Unit • Internal Research Document • 2026</p>
+        </div>
+    </section>
+    
+</main>
+
+<script>
+    // Initialize Chart.js plugins
+    Chart.register(ChartDataLabels, window['chartjs-plugin-annotation']);
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.color = '#4B5563';
+
+    // ========================================
+    // PROFILE 1 CHARTS (Anggun)
+    // ========================================
+    
+    // Dependency Chart
+    new Chart(document.getElementById('chart1-dependency'), {
+        type: 'line',
+        data: {
+            labels: ['Phase 1: Initial Interest', 'Phase 2: The "Group" Struggle', 'Phase 3: The "Private" Pivot', 'Phase 4: Current Routine'],
+            datasets: [{
+                label: 'Reliance on Peers (Coordination Friction)',
+                data: [20, 95, 30, 10],
+                borderColor: '#BE123C',
+                backgroundColor: 'rgba(190, 18, 60, 0.1)',
+                tension: 0.4,
+                fill: true
+            }, {
+                label: 'Financial Investment (Service Reliability)',
+                data: [10, 20, 80, 85],
+                borderColor: '#047857',
+                borderDash: [5, 5],
+                tension: 0.4,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Behavioral Shift: From Social Dependency to Service Reliability',
+                    font: { size: 16, weight: '700' },
+                    align: 'start',
+                    color: '#1F2937'
+                },
+                legend: { position: 'bottom' }
+            },
+            scales: {
+                y: { display: false },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Platform Chart
+    new Chart(document.getElementById('chart1-platform'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Discovery (ReClub)', 'Community Join (ReClub)', 'Private Booking (WhatsApp)', 'Coordination (WhatsApp)'],
+            datasets: [{
+                label: 'User Journey Flow',
+                data: [30, 20, 35, 15],
+                backgroundColor: ['#047857', '#059669', '#18181B', '#3F3F46'],
+                borderWidth: 0,
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { 
+                    position: 'right',
+                    labels: { usePointStyle: true, font: { size: 12 } }
+                },
+                title: { 
+                    display: true, 
+                    text: 'Platform Usage by "Intimacy" Level',
+                    font: { size: 16, weight: '700' },
+                    align: 'start',
+                    color: '#1F2937'
+                },
+                subtitle: {
+                    display: true,
+                    text: 'Public platforms dominate discovery; Dark Social dominates transactions.',
+                    align: 'start',
+                    padding: { bottom: 20 }
+                },
+                datalabels: {
+                    color: '#fff',
+                    font: { weight: 'bold' },
+                    formatter: (value, ctx) => {
+                        return ctx.chart.data.labels[ctx.dataIndex].includes('WhatsApp') ? 'Dark Social' : 'App';
+                    },
+                    display: function(context) {
+                        return context.dataIndex === 0 || context.dataIndex === 2;
+                    }
+                }
+            }
+        }
+    });
+
+    // ========================================
+    // PROFILE 2 CHARTS (Faris)
+    // ========================================
+    
+    // Time Chart
+    new Chart(document.getElementById('chart2-time'), {
+        type: 'line',
+        data: {
+            labels: ['16:00', '17:00', '18:00 (Commute)', '19:00', '20:00 (Start)', '21:00', '22:00 (Finish)', '23:00', '00:00'],
+            datasets: [{
+                label: 'Activity Probability',
+                data: [0, 5, 10, 30, 95, 100, 90, 40, 10],
+                borderColor: '#4338ca',
+                backgroundColor: 'rgba(67, 56, 202, 0.05)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 6,
+                pointBackgroundColor: '#fff',
+                pointBorderColor: '#4338ca',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                title: { 
+                    display: true, 
+                    text: 'The Rigid "Post-Work" Sports Window',
+                    font: { size: 16, weight: '700' },
+                    align: 'start',
+                    color: '#1F2937',
+                    padding: { bottom: 20 }
+                },
+                annotation: {
+                    annotations: {
+                        box1: {
+                            type: 'box',
+                            xMin: 4,
+                            xMax: 6,
+                            backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                            borderWidth: 0
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: { display: false, min: 0, max: 110 },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Stack Chart
+    new Chart(document.getElementById('chart2-stack'), {
+        type: 'bar',
+        data: {
+            labels: ['Community Check (ReClub)', 'Booking Slot (Kuy)', 'Payment (External)', 'Coordination (WA)', 'Social Proof (IG)'],
+            datasets: [{
+                label: 'Friction Level (Self-Reported Impact)',
+                data: [3, 4, 9, 2, 5],
+                backgroundColor: ['#047857', '#059669', '#BE123C', '#047857', '#B45309'],
+                borderRadius: 4,
+                barThickness: 50
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                    color: '#18181B',
+                    font: { weight: 'bold' }
+                },
+                title: {
+                    display: true,
+                    text: 'The "Toggle Tax": Friction Points Across the User Journey',
+                    font: { size: 16, weight: '700' },
+                    padding: { bottom: 20 }
+                }
+            },
+            scales: {
+                y: { display: false, max: 12 },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Motivation Chart (Radar)
+    new Chart(document.getElementById('chart2-motivation'), {
+        type: 'radar',
+        data: {
+            labels: ['Social Bonding', 'Skill Mastery', 'Teaching/Mentoring', 'Health/Wellness', 'Competition'],
+            datasets: [{
+                label: 'Initial Motivation (Reactivation)',
+                data: [90, 30, 10, 50, 20],
+                fill: true,
+                backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                borderColor: '#94A3B8',
+                pointBackgroundColor: '#94A3B8',
+                pointBorderColor: '#fff'
+            }, {
+                label: 'Current Motivation (Sustainment)',
+                data: [60, 95, 80, 50, 90],
+                fill: true,
+                backgroundColor: 'rgba(4, 120, 87, 0.2)',
+                borderColor: '#047857',
+                pointBackgroundColor: '#047857',
+                pointBorderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Psychographic Evolution: From Social to Competitive',
+                    font: { size: 16, weight: '700' },
+                    padding: { bottom: 20 }
+                },
+                legend: { position: 'bottom' }
+            },
+            scales: {
+                r: {
+                    angleLines: { display: false },
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                }
+            }
+        }
+    });
+
+    // ========================================
+    // PROFILE 3 CHARTS (Tias)
+    // ========================================
+    
+    // Friction Chart
+    new Chart(document.getElementById('chart3-friction'), {
+        type: 'line',
+        data: {
+            labels: ['Initiation', 'Coordination', 'Booking', 'Payment', 'Last Mile (Venue)', 'Play'],
+            datasets: [
+                {
+                    label: 'Manual "WhatsApp" Method',
+                    data: [20, 90, 80, 85, 10, 5],
+                    borderColor: '#BE123C',
+                    backgroundColor: 'transparent',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointRadius: 4
+                },
+                {
+                    label: 'Platform "ReClub" Method',
+                    data: [10, 15, 5, 5, 75, 5],
+                    borderColor: '#047857',
+                    backgroundColor: 'rgba(4, 120, 87, 0.05)',
+                    fill: true,
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointRadius: 4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', align: 'end' },
+                title: { 
+                    display: true, 
+                    text: 'Cognitive Load Analysis (Hassle Score 0-100)',
+                    font: { size: 16, weight: '700' },
+                    align: 'start'
+                }
+            },
+            scales: {
+                y: { title: { display: true, text: 'Mental Effort / Hassle' }, min: 0, max: 100 },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Ecosystem Chart
+    new Chart(document.getElementById('chart3-ecosystem'), {
+        type: 'bubble',
+        data: {
+            datasets: [
+                {
+                    label: 'WhatsApp (Inner Circle)',
+                    data: [{ x: 95, y: 30, r: 25 }],
+                    backgroundColor: '#059669'
+                },
+                {
+                    label: 'ReClub (Platform)',
+                    data: [{ x: 50, y: 90, r: 30 }],
+                    backgroundColor: '#047857'
+                },
+                {
+                    label: 'Instagram (Discovery)',
+                    data: [{ x: 30, y: 60, r: 15 }],
+                    backgroundColor: '#D1D5DB'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' },
+                title: { 
+                    display: true, 
+                    text: 'Platform Roles: Trust (X) vs. Liquidity/Utility (Y)',
+                    font: { size: 14, weight: '700' }
+                }
+            },
+            scales: {
+                x: { 
+                    min: 0, max: 100, 
+                    title: { display: true, text: 'Social Trust Level' },
+                    grid: { display: false }
+                },
+                y: { 
+                    min: 0, max: 100, 
+                    title: { display: true, text: 'Logistical Ease / Liquidity' },
+                    grid: { display: false }
+                }
+            }
+        }
+    });
+
+    // ========================================
+    // PROFILE 4 CHARTS (Agung - Running)
+    // ========================================
+
+    // Schedule Chart
+    new Chart(document.getElementById('chart4-schedule'), {
+        type: 'line',
+        data: {
+            labels: ['04:00', '05:00 (Wake)', '06:00 (Run Start)', '07:00 (Running)', '08:00 (Nongkrong/Finish)', '09:00 (Commute/Office)', '10:00'],
+            datasets: [{
+                label: 'Energy / Focus Level',
+                data: [10, 60, 90, 85, 95, 70, 50],
+                borderColor: '#047857',
+                backgroundColor: 'rgba(4, 120, 87, 0.1)',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 6,
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: 'The "Agency" Efficiency Curve', font: {size: 14} },
+                annotation: {
+                    annotations: {
+                        box1: {
+                            type: 'box',
+                            xMin: 1,
+                            xMax: 4,
+                            backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                            borderWidth: 0
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: { display: false },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Tech Trust Chart
+    new Chart(document.getElementById('chart4-tech'), {
+        type: 'bar',
+        data: {
+            labels: ['Garmin (Data Truth)', 'WhatsApp (Trusted Circle)', 'Instagram (Curated Image)', 'Strava (Passive Tracking)', 'Public Leaderboards'],
+            datasets: [{
+                label: 'Psychological Safety Score',
+                data: [95, 90, 75, 60, 20],
+                backgroundColor: ['#047857', '#047857', '#D97706', '#D97706', '#BE123C'],
+                borderRadius: 4,
+                barThickness: 40
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: 'Platform Trust & Comfort Levels', font: {size: 14} },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'right',
+                    color: '#18181B',
+                    font: { weight: 'bold' }
+                }
+            },
+            scales: {
+                x: { display: false, max: 110 },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // ========================================
+    // PROFILE 5 CHARTS (Irfan)
+    // ========================================
+
+    // Time Chart
+    new Chart(document.getElementById('chart5-time'), {
+        type: 'line',
+        data: {
+            labels: ['04:00', '04:30 (Subuh)', '05:00', '06:00', '06:30 (Commute)', '08:00 (Work)', '18:00'],
+            datasets: [{
+                label: 'Activity Probability',
+                data: [5, 20, 95, 85, 20, 0, 10],
+                borderColor: '#00AA13',
+                backgroundColor: 'rgba(0, 170, 19, 0.05)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 5,
+                pointBackgroundColor: '#fff',
+                pointBorderColor: '#00AA13',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                title: { 
+                    display: true, 
+                    text: 'The "Subuh" Activity Window Analysis',
+                    font: { size: 16, weight: '700' },
+                    align: 'start',
+                    color: '#1F2937',
+                    padding: { bottom: 20 }
+                },
+                annotation: {
+                    annotations: {
+                        box1: {
+                            type: 'box',
+                            xMin: 2,
+                            xMax: 4,
+                            backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                            borderWidth: 0
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: { display: false, min: 0, max: 100 },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Motivation Chart (Doughnut)
+    new Chart(document.getElementById('chart5-motivation'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Hiking Preparation (Functional)', 'Social Signaling (Proof)', 'General Health', 'Competitive Speed'],
+            datasets: [{
+                data: [60, 20, 15, 5],
+                backgroundColor: ['#047857', '#D97706', '#6B7280', '#E5E7EB'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'right' },
+                title: {
+                    display: true,
+                    text: 'Drivers of Activity',
+                    font: { size: 16 }
+                },
+                datalabels: {
+                    color: '#fff',
+                    font: { weight: 'bold' },
+                    formatter: (value) => value + "%"
+                }
+            }
+        }
+    });
+
+    // Trust Chart
+    new Chart(document.getElementById('chart5-trust'), {
+        type: 'bar',
+        data: {
+            labels: ['Peer Recommendation (WhatsApp)', 'Legacy Social (Facebook/Nike+)', 'Social Media Discovery', 'Official Websites/Search'],
+            datasets: [{
+                label: 'Trust Index (Derived)',
+                data: [95, 75, 50, 15],
+                backgroundColor: ['#047857', '#059669', '#D1D5DB', '#BE123C'],
+                borderRadius: 4,
+                barThickness: 50
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'right',
+                    color: '#18181B',
+                    font: { weight: 'bold' }
+                }
+            },
+            scales: {
+                x: { display: false, max: 110 },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // ========================================
+    // PROFILE 6 CHARTS (Agung - Social)
+    // ========================================
+
+    // Activity Hourglass Chart
+    new Chart(document.getElementById('chart6-activity'), {
+        type: 'line',
+        data: {
+            labels: ['Pre-Run (WhatsApp)', 'Start (Tikum)', 'Mid-Run (Solo)', 'Finish (Tikum)', 'Post-Run (Coffee)'],
+            datasets: [{
+                label: 'Social Proximity (Physical & Digital)',
+                data: [80, 100, 10, 100, 95],
+                borderColor: '#047857', 
+                backgroundColor: 'rgba(4, 120, 87, 0.1)',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: { display: true, text: 'The "Parallel Play" Dynamic: Social -> Solo -> Social', align: 'start', font: { size: 16 } },
+                annotation: {
+                    annotations: {
+                        box1: {
+                            type: 'box',
+                            xMin: 1.5,
+                            xMax: 2.5,
+                            backgroundColor: 'rgba(190, 18, 60, 0.1)'
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: { display: false },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Social Chart
+    new Chart(document.getElementById('chart6-social'), {
+        type: 'bar',
+        data: {
+            labels: ['WhatsApp Status (Intimate)', 'Strava Feed (Semi-Public)', 'Instagram Feed (Public)', 'Global Leaderboards (Public)'],
+            datasets: [{
+                label: 'Comfort / Usage Frequency',
+                data: [95, 75, 25, 5],
+                backgroundColor: ['#047857', '#059669', '#D97706', '#BE123C'],
+                borderRadius: 4,
+                barThickness: 50
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'right',
+                    color: '#18181B',
+                    font: { weight: 'bold' }
+                },
+                title: {
+                    display: true,
+                    text: 'Agung\'s "Riya" Avoidance Curve',
+                    font: { size: 14 }
+                }
+            },
+            scales: {
+                x: { display: false, max: 110 },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Active nav link highlighting
+    const sections = document.querySelectorAll('.section-divider, .cover-section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
