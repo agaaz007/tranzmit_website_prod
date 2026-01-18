@@ -1,5 +1,4 @@
 {
   "/page": "app/page.js",
-  "/gojek-report/combined/page": "app/gojek-report/combined/page.js",
   "/gojek-report/page": "app/gojek-report/page.js"
 }

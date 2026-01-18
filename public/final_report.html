@@ -1,0 +1,412 @@
+
+        <!DOCTYPE html><html lang="en">
+        
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Innerwear Market Research Report</title>
+        <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+            body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; color: #212529; margin: 0; padding: 0; }
+            .main-container { max-width: 1140px; margin: 40px auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #dee2e6; }
+            header { padding: 24px 40px; border-bottom: 1px solid #dee2e6; }
+            header h1 { color: #000; margin: 0; font-weight: 700; font-size: 28px; }
+            .tab-buttons { display: flex; border-bottom: 1px solid #dee2e6; background-color: #ffffff; padding: 0 40px; }
+            .tab-button { background: transparent; border: none; padding: 18px 0; margin-right: 32px; cursor: pointer; font-size: 16px; font-weight: 600; color: #6c757d; border-bottom: 3px solid transparent; }
+            .tab-button:hover { color: #000; }
+            .tab-button.active { color: #0d6efd; border-bottom: 3px solid #0d6efd; }
+            .tab-content { display: none; padding: 40px; }
+            .tab-content.active { display: block; }
+            .tab-content h2 { font-size: 24px; font-weight: 700; margin-top: 0; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid #e9ecef; }
+            .tab-content h3 { font-size: 20px; font-weight: 600; color: #343a40; margin-top: 32px; margin-bottom: 16px; }
+            .tab-content p, .tab-content li { font-size: 16px; line-height: 1.7; color: #495057; }
+            .tab-content ul { background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 5px; padding: 20px; padding-left: 40px; margin: 10px 0 20px 0; }
+            .tab-content ul ul { background-color: #fff; border: none; padding-top: 10px; padding-bottom: 0px; margin-top: 10px; }
+            .chart-container { width: 100%; min-height: 400px; margin: 20px 0; }
+            .chart-container-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 20px 0; }
+            .chart-container-small { width: 100%; min-height: 350px; }
+            .plotly-chart-container { width: 100%; min-height: 450px; margin: 20px 0; }
+            .styled-table { border-collapse: collapse; margin: 25px 0; font-size: 14px; width: 100%; box-shadow: 0 0 20px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+            .styled-table thead tr { background-color: #0d6efd; color: #ffffff; text-align: left; font-weight: 600; }
+            .styled-table th, .styled-table td { padding: 12px 15px; }
+            .styled-table tbody tr { border-bottom: 1px solid #dee2e6; }
+            .styled-table tbody tr:nth-of-type(even) { background-color: #f8f9fa; }
+            .styled-table tbody tr:last-of-type { border-bottom: 2px solid #0d6efd; }
+            .styled-table td { color: #495057; min-width: 120px; }
+            #Responses { overflow-x: auto; }
+        </style>
+    </head>
+    
+        
+    <body>
+        <div class="main-container">
+            <header><h1>Innerwear Market Research Report</h1></header>
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="openTab(event, 'Summary')">Executive Summary</button>
+                <button class="tab-button" onclick="openTab(event, 'QBQ')">Question-by-Question</button>
+                <button class="tab-button" onclick="openTab(event, 'Responses')">All Responses</button>
+            </div>
+    
+            
+    <div id="Summary" class="tab-content active">
+        <h2>Executive Summary: From Default Choice to Active Upgrade</h2>
+        <p>This report reveals a critical vulnerability in the innerwear market: the leader, Jockey, dominates not through superior product passion but through <strong>Passive Inertia.</strong> Consumers default to it out of habit and overwhelming convenience, creating a significant opportunity for a challenger brand to win by being an <strong>intelligent upgrade</strong>. Key frustrations like poor durability (specifically 'shape decay') and unmet needs in the female market around sizing and inclusivity are widespread yet accepted as normal. The path to growth lies not in being another option, but in being the clear solution to these unspoken problems.</p>
+
+        <h2>🔑 Key Actionable Learnings</h2>
+        <ul>
+            <li><strong>Attack the Habit by Weaponizing Convenience:</strong> Jockey's strength is its physical ubiquity. It is the 'default setting' because it's available everywhere from <i>'local shops though'</i> to being the <i>'easiest, most accessible, closest thing to my house.'</i> To break this habit, FreeCultr must win the battle for digital convenience, specifically on Quick Commerce platforms like Blinkit, where one user now buys their innerwear when they 'run out.'</li>
+            <li><strong>Win on 'Shape Retention,' Not Just 'Durability':</strong> Consumers have a 6-month psychological expiry date for innerwear. While durability issues like tearing are a concern, a highly consistent and detailed complaint is about <strong>'Shape Decay'</strong>: fabric getting looser and elastic wearing out. R&D must focus on engineering waistbands and fabrics that prevent this, as focusing on lasting fit is more powerful than owning the generic claim of 'Comfort.'</li>
+            <li><strong>Address the 'Cotton Paradox':</strong> Users overwhelmingly state a preference for '100% Cotton' while simultaneously complaining about the exact failures of mass-market cotton, such as fabric getting rough and stretching. Marketing must frame advanced fabrics like Modal not as alien synthetics, but as a 'Next-Generation Cotton' that offers the softness they desire without the durability issues they have come to expect.</li>
+            <li><strong>Reframe 'Fitter' to 'Fit':</strong> The concept of innerwear that makes one 'look fitter' was met with widespread skepticism, rooted in a deep-seated aversion to discomfort and 'shapewear.' The message must pivot from aesthetic promises of compression to functional benefits of a <strong>'structured fit'</strong> or <strong>'sharp silhouette'</strong>.</li>
+            <li><strong>Target the Hidden Gatekeeper with a Bifurcated Strategy:</strong> For a significant portion of the young male demographic, the primary purchaser is the mother. A dual marketing strategy is essential.
+                <ul>
+                    <li><strong>Track A (Instagram/YouTube):</strong> Brand building for the son, focusing on style and aspiration.</li>
+                    <li><strong>Track B (Facebook/Search):</strong> Utility and value-based marketing for the parent, focusing on bulk packs and durability.</li>
+                </ul>
+            </li>
+        </ul>
+        <hr>
+
+        <h3>Respondent Profile</h3>
+        <p>The audience surveyed consists of male and female participants primarily concentrated in the 18-25 age bracket.</p>
+        <div class="chart-container-grid">
+            <div class="chart-container-small"><div>                            <div id="d4427e73-5de8-4fcf-900b-7ff362ed0cb9" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("d4427e73-5de8-4fcf-900b-7ff362ed0cb9")) {                    Plotly.newPlot(                        "d4427e73-5de8-4fcf-900b-7ff362ed0cb9",                        [{"domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"hole":0.3,"hovertemplate":"G_Gender=%{label}\u003cbr\u003evalue=%{value}\u003cextra\u003e\u003c\u002fextra\u003e","labels":["Male","Female"],"legendgroup":"","name":"","showlegend":true,"values":[16,13],"type":"pie","pull":[0.05,0],"textinfo":"percent+label"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"legend":{"tracegroupgap":0},"title":{"text":"Gender Distribution"},"showlegend":false},                        {"responsive": true}                    )                };                            </script>        </div></div>
+            <div class="chart-container-small"><div>                            <div id="5f24c888-6f82-4624-970d-e64bfbd8a088" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("5f24c888-6f82-4624-970d-e64bfbd8a088")) {                    Plotly.newPlot(                        "5f24c888-6f82-4624-970d-e64bfbd8a088",                        [{"direction":"clockwise","domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"hovertemplate":"Age_Group=%{label}\u003cbr\u003eCount=%{value}\u003cextra\u003e\u003c\u002fextra\u003e","labels":["18-20","21-25","26-30"],"legendgroup":"","name":"","showlegend":true,"sort":false,"values":[6,22,1],"type":"pie","textinfo":"percent+label"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"legend":{"tracegroupgap":0,"title":{"text":"Age Group"}},"title":{"text":"Age Distribution"},"piecolorway":["#adddce","#43a2ca","#225ea8"]},                        {"responsive": true}                    )                };                            </script>        </div></div>
+        </div>
+        <hr>
+
+        <h3>Brand Landscape & Purchase Drivers</h3>
+        <p>Jockey is the undisputed market leader with over <strong>55.2%</strong> of respondents citing it as their primary brand. Its dominance is built on a foundation of convenience and habit. As users stated, their choice was driven by inertia: <i>'Maybe I was just using it since last few years and I continue,'</i> and the fact that <i>'its available in all stores.'</i></p>
+        <p>In contrast, a niche of consumers views innerwear as a form of self-expression. They choose Calvin Klein because it <i>'has a style to it,'</i> and appreciate brands that are <i>'good looking like when we wear low waist pants or have to show off something.'</i> This reveals an opportunity for a brand to offer 'daily luxury' that sits between basic utility and high-end fashion.</p>
+        <div class="plotly-chart-container"><div>                            <div id="71b551bf-d57b-4789-8a9d-f7d19a70126d" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("71b551bf-d57b-4789-8a9d-f7d19a70126d")) {                    Plotly.newPlot(                        "71b551bf-d57b-4789-8a9d-f7d19a70126d",                        [{"alignmentgroup":"True","hovertemplate":"Percentage=%{text}\u003cbr\u003eBrand=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#225ea8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"text":[55.2,10.3,6.9,6.9,3.4,3.4,3.4,3.4,3.4,3.4],"textposition":"auto","x":[55.2,10.3,6.9,6.9,3.4,3.4,3.4,3.4,3.4,3.4],"xaxis":"x","y":["Jockey","Calvin Klein","Marks & Spencer","Enamor","Unbranded\u002fLocal","Uniqlo","Other","Victoria's Secret","H&M","Marks and Spencers"],"yaxis":"y","type":"bar","texttemplate":"%{text:.1f}%"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Percentage of Respondents"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{},"categoryorder":"total ascending"},"legend":{"tracegroupgap":0},"title":{"text":"Primary Innerwear Brand Usage"},"barmode":"relative"},                        {"responsive": true}                    )                };                            </script>        </div></div>
+        <hr>
+
+        <h3>Product Lifecycle & The Durability Problem</h3>
+        <p>Consumers have a clear psychological shelf-life for innerwear, with a median expectation of just <strong>6.0 months</strong>. The universal definition of 'end of life' involves both outright failure like tearing and the gradual loss of structural integrity. This 'Shape Decay' is one of the market's single biggest product flaws.</p>
+        <ul><li><strong>The Core Problem:</strong> Users consistently complain that after a few washes, <i>'the cotton starts to get looser and the elastic starts to get loose.'</i> Another stated, <i>'I guess sometimes they become loose.'</i> This is accepted as an unavoidable reality.</li></ul>
+        <div class="chart-container-grid">
+            <div class="chart-container-small"><div>                            <div id="4d02f916-c03d-4add-a65a-97d86a43aef8" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("4d02f916-c03d-4add-a65a-97d86a43aef8")) {                    Plotly.newPlot(                        "4d02f916-c03d-4add-a65a-97d86a43aef8",                        [{"alignmentgroup":"True","boxpoints":"all","hovertemplate":"x=%{x}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#225ea8"},"name":"","notched":false,"offsetgroup":"","orientation":"h","showlegend":false,"x":[7.5,6.5,12.0,6.0,12.0,3.5,4.5,3.5,6.0,6.5,2.5,3.0,18.0,18.0,6.0,4.5,6.0,6.0,4.5,6.0,6.0,12.0,12.0,5.0,2.5],"x0":" ","xaxis":"x","y0":" ","yaxis":"y","type":"box"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Expected Durability (Months)"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{}},"legend":{"tracegroupgap":0},"title":{"text":"Distribution of Durability Expectation (Months)"},"boxmode":"group"},                        {"responsive": true}                    )                };                            </script>        </div></div>
+            <div class="chart-container-small"><div>                            <div id="657c698e-5ebb-4ec5-90b5-e6db72745144" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("657c698e-5ebb-4ec5-90b5-e6db72745144")) {                    Plotly.newPlot(                        "657c698e-5ebb-4ec5-90b5-e6db72745144",                        [{"alignmentgroup":"True","hovertemplate":"Percentage=%{text}\u003cbr\u003eIssue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#cb2a2a","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"text":[17.2,10.3,6.9,6.9,6.9],"textposition":"auto","x":[17.2,10.3,6.9,6.9,6.9],"xaxis":"x","y":["Poor Durability \u002f Tearing","Fabric \u002f Elastic Loosening","Causes Discomfort \u002f Heat","Fit \u002f Sizing Issues","Other"],"yaxis":"y","type":"bar","texttemplate":"%{text:.1f}%"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Percentage of Respondents"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{},"categoryorder":"array","categoryarray":["Other","Fit \u002f Sizing Issues","Causes Discomfort \u002f Heat","Fabric \u002f Elastic Loosening","Poor Durability \u002f Tearing"]},"legend":{"tracegroupgap":0},"title":{"text":"Top Mentioned Issues"},"barmode":"relative"},                        {"responsive": true}                    )                };                            </script>        </div></div>
+        </div>
+        <hr>
+
+        <h3>Persistent Issues & Frustrations</h3>
+        <p>Beyond shape decay, a number of specific and highly actionable frustrations were uncovered, particularly in the female market, presenting clear opportunities for product innovation.</p>
+        <ul>
+            <li><strong>Sizing and Inclusivity Gap:</strong> There is a palpable frustration with inconsistent and limited sizing. One respondent noted, <i>'I think at least with upperwear, the sizes are a problem. Not all brands are catered to provide most sizes. They\'re not very inclusive in terms of size diversity.'</i></li>
+            <li><strong>The Skin-Tone Opportunity:</strong> An unmet need was identified for concealed wear that matches Indian skin tones. As one user explained, <i>'Specially concealed clothing, sometimes it\'s not all skin tone friendly... [brands] should have more skin tone options closer to Indian skin tone.'</i></li>
+        </ul>
+        <hr>
+
+        <h3>New Concept Market Test: The "Fitter Look"</h3>
+        <p>The concept of innerwear that makes the wearer 'look noticeably fitter' was met with <strong>76.9% skepticism.</strong> This reaction is not driven by disbelief in the claim, but by a fear that 'fitter' is a synonym for 'uncomfortable.'</p>
+        <ul><li><strong>The Voice of Fear:</strong> The primary concern was comfort, with one user stating, <i>'I would be skeptical... I\'m not a fan of shapewear.'</i> Another was skeptical about both <i>'the claims and the comfort.'</i> Marketing for such a product should be focused on making it relatable and comfortable, perhaps by utilizing 'everyman' influencers.</li></ul>
+    </div>
+    
+            <div id="QBQ" class="tab-content"><h2>Question-by-Question Analysis</h2><h3>Respondent Profile</h3><div class="chart-container-grid"><div class="chart-container-small"><div>                            <div id="qbq-gender" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("qbq-gender")) {                    Plotly.newPlot(                        "qbq-gender",                        [{"domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"hole":0.3,"hovertemplate":"G_Gender=%{label}\u003cbr\u003evalue=%{value}\u003cextra\u003e\u003c\u002fextra\u003e","labels":["Male","Female"],"legendgroup":"","name":"","showlegend":true,"values":[16,13],"type":"pie","pull":[0.05,0],"textinfo":"percent+label"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"legend":{"tracegroupgap":0},"title":{"text":"Gender Distribution"},"showlegend":false},                        {"responsive": true}                    )                };                            </script>        </div></div><div class="chart-container-small"><div>                            <div id="qbq-age" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("qbq-age")) {                    Plotly.newPlot(                        "qbq-age",                        [{"direction":"clockwise","domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"hovertemplate":"Age_Group=%{label}\u003cbr\u003eCount=%{value}\u003cextra\u003e\u003c\u002fextra\u003e","labels":["18-20","21-25","26-30"],"legendgroup":"","name":"","showlegend":true,"sort":false,"values":[6,22,1],"type":"pie","textinfo":"percent+label"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"legend":{"tracegroupgap":0,"title":{"text":"Age Group"}},"title":{"text":"Age Distribution"},"piecolorway":["#adddce","#43a2ca","#225ea8"]},                        {"responsive": true}                    )                };                            </script>        </div></div></div><hr><h3>Brand Landscape & Purchase Drivers</h3><p><strong>Insight: Different Brands for Different Occasions.</strong><br>Jockey is not an active choice but the baseline for innerwear. Consumers rarely stick to one brand, often owning a "Daily Driver" (like Jockey) and a "Special Occasion" pair (like Calvin Klein or M&S). This signals an opportunity to position a brand as the "Daily Luxury" that upgrades their everyday experience.</p><div class="plotly-chart-container"><div>                            <div id="qbq-primary-brands" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("qbq-primary-brands")) {                    Plotly.newPlot(                        "qbq-primary-brands",                        [{"alignmentgroup":"True","hovertemplate":"Percentage=%{text}\u003cbr\u003eBrand=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#225ea8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"text":[55.2,10.3,6.9,6.9,3.4,3.4,3.4,3.4,3.4,3.4],"textposition":"auto","x":[55.2,10.3,6.9,6.9,3.4,3.4,3.4,3.4,3.4,3.4],"xaxis":"x","y":["Jockey","Calvin Klein","Marks & Spencer","Enamor","Unbranded\u002fLocal","Uniqlo","Other","Victoria's Secret","H&M","Marks and Spencers"],"yaxis":"y","type":"bar","texttemplate":"%{text:.1f}%"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Percentage of Respondents"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{},"categoryorder":"total ascending"},"legend":{"tracegroupgap":0},"title":{"text":"Primary Innerwear Brand Usage"},"barmode":"relative"},                        {"responsive": true}                    )                };                            </script>        </div></div><p><strong>Insight: The "Comfort" Placebo.</strong><br>"Comfort" is a generic placeholder. The real insight comes from the secondary words: premium brand users use aspirational words ("Style," "Look," "Luxury"), while Jockey users use functional words ("Durable," "Price," "Accessible"). <strong>Strategic Action:</strong> Do not market generic "Comfort." Market a specific type of comfort: <strong>"Cooling," "Invisible,"</strong> or <strong>"Zero-Chafe."</strong></p><h5>Top Associations by Brand</h5><ul><li><strong>Jockey:</strong> Comfort, Style / Look, Softness</li><li><strong>Calvin Klein:</strong> Style / Look, Comfort, Brand Identity</li><li><strong>Marks & Spencer:</strong> Fabric, Quality, Brand Reputation</li></ul><h5>Overall Word Frequency</h5><img src="wordcloud.jpeg" alt="Key Purchase Drivers Word Cloud" style="width: 100%; max-width: 600px; margin: 20px auto; display: block; border-radius: 8px;"><div class="plotly-chart-container"><div>                            <div id="6d176c9d-061a-4e49-803d-37d7c3d9b749" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("6d176c9d-061a-4e49-803d-37d7c3d9b749")) {                    Plotly.newPlot(                        "6d176c9d-061a-4e49-803d-37d7c3d9b749",                        [{"alignmentgroup":"True","hovertemplate":"Count=%{text}\u003cbr\u003eDriver=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#43a2ca","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"text":[27.0,13.0,6.0,6.0,4.0,3.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,1.0],"textposition":"auto","x":[27,13,6,6,4,3,2,2,2,2,2,2,2,2,1],"xaxis":"x","y":["Comfort","Style \u002f Look","Softness","Quality","Durable","Affordable","Fabric","Brand Reputation","Habit","Availability","Good Quality","Popularity","Variety","Inclusivity","Durability"],"yaxis":"y","type":"bar"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Number of Mentions"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{},"categoryorder":"total ascending"},"legend":{"tracegroupgap":0},"title":{"text":"Key Purchase Drivers (Overall Word Frequency)"},"barmode":"relative"},                        {"responsive": true}                    )                };                            </script>        </div></div><hr><h3>Brand Awareness & Ranking</h3><p><strong>Insight: The Blind Spot of D2C.</strong><br>This was a critical finding. Many respondents <strong>did not know</strong> challenger brands like XYXX or Damensch. They ranked Jockey #1 simply because they recognized the name. <strong>The Implication:</strong> Brand equity for new players is near zero in the general populace. <strong>Strategic Action:</strong> Awareness is the primary bottleneck. A significant investment in top-of-funnel brand awareness (YouTube, Social Media) is required before conversion-focused ads can be effective.</p><div class="chart-container-grid"><div class="plotly-chart-container"><div>                            <div id="4cad9b12-dd83-4194-bc7d-0b811c256325" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("4cad9b12-dd83-4194-bc7d-0b811c256325")) {                    Plotly.newPlot(                        "4cad9b12-dd83-4194-bc7d-0b811c256325",                        [{"alignmentgroup":"True","hovertemplate":"Score=%{x}\u003cbr\u003eBrand=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#225ea8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[40,28,20,17],"xaxis":"x","y":["Jockey","XYXX","Damensch","Lux Cozi"],"yaxis":"y","type":"bar"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Weighted Rank Score"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{},"categoryorder":"total ascending"},"legend":{"tracegroupgap":0},"title":{"text":"Brand Ladder (Male Respondents)"},"barmode":"relative"},                        {"responsive": true}                    )                };                            </script>        </div></div><div class="plotly-chart-container"><div>                            <div id="093692c7-ea23-4d79-84a4-dd536eac01cc" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("093692c7-ea23-4d79-84a4-dd536eac01cc")) {                    Plotly.newPlot(                        "093692c7-ea23-4d79-84a4-dd536eac01cc",                        [{"alignmentgroup":"True","hovertemplate":"Score=%{x}\u003cbr\u003eBrand=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#225ea8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[36,32,18,10],"xaxis":"x","y":["Jockey","Enamor","Zivame","Clovia"],"yaxis":"y","type":"bar"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Weighted Rank Score"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{},"categoryorder":"total ascending"},"legend":{"tracegroupgap":0},"title":{"text":"Brand Ladder (Female Respondents)"},"barmode":"relative"},                        {"responsive": true}                    )                };                            </script>        </div></div></div><hr><h3>Durability & Persistent Issues</h3><p><strong>Insight: Durability failures are twofold, focusing on tearing and "Shape Decay."</strong><br>While poor durability and tearing are key frustrations, a highly consistent and detailed complaint is about the product's loss of structural integrity. Users frequently mention that <i>"the elastic starts to get loose"</i> and the fabric <i>"becomes loose"</i> after washes.</p><div class="chart-container"><div>                            <div id="qbq-durability" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("qbq-durability")) {                    Plotly.newPlot(                        "qbq-durability",                        [{"alignmentgroup":"True","boxpoints":"all","hovertemplate":"x=%{x}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#225ea8"},"name":"","notched":false,"offsetgroup":"","orientation":"h","showlegend":false,"x":[7.5,6.5,12.0,6.0,12.0,3.5,4.5,3.5,6.0,6.5,2.5,3.0,18.0,18.0,6.0,4.5,6.0,6.0,4.5,6.0,6.0,12.0,12.0,5.0,2.5],"x0":" ","xaxis":"x","y0":" ","yaxis":"y","type":"box"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Expected Durability (Months)"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{}},"legend":{"tracegroupgap":0},"title":{"text":"Distribution of Durability Expectation (Months)"},"boxmode":"group"},                        {"responsive": true}                    )                };                            </script>        </div></div><div class="plotly-chart-container"><div>                            <div id="qbq-issues" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("qbq-issues")) {                    Plotly.newPlot(                        "qbq-issues",                        [{"alignmentgroup":"True","hovertemplate":"Percentage=%{text}\u003cbr\u003eIssue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#cb2a2a","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"text":[17.2,10.3,6.9,6.9,6.9],"textposition":"auto","x":[17.2,10.3,6.9,6.9,6.9],"xaxis":"x","y":["Poor Durability \u002f Tearing","Fabric \u002f Elastic Loosening","Causes Discomfort \u002f Heat","Fit \u002f Sizing Issues","Other"],"yaxis":"y","type":"bar","texttemplate":"%{text:.1f}%"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Percentage of Respondents"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{},"categoryorder":"array","categoryarray":["Other","Fit \u002f Sizing Issues","Causes Discomfort \u002f Heat","Fabric \u002f Elastic Loosening","Poor Durability \u002f Tearing"]},"legend":{"tracegroupgap":0},"title":{"text":"Top Mentioned Issues"},"barmode":"relative"},                        {"responsive": true}                    )                };                            </script>        </div></div><hr><h3>New Concept Test: The "Fitter Look"</h3><p><strong>Insight: The pitch triggers a fear of compression and discomfort.</strong><br>The term "fitter" is immediately associated with restrictive "shapewear." Skepticism is high because users are unwilling to trade comfort for an aesthetic benefit. As one user put it, <i>"I will be more skeptical about comfort. Comfort comes first for me."</i></p><div class="chart-container-small" style="max-width: 600px; margin: auto;"><div>                            <div id="qbq-reaction" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("qbq-reaction")) {                    Plotly.newPlot(                        "qbq-reaction",                        [{"domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"hovertemplate":"Reaction_Category=%{label}\u003cbr\u003evalue=%{value}\u003cextra\u003e\u003c\u002fextra\u003e","labels":["Skeptical","Interested \u002f Willing to Try"],"legendgroup":"","name":"","showlegend":true,"values":[20,6],"type":"pie","pull":[0.05,0],"textinfo":"percent+label"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"legend":{"tracegroupgap":0},"title":{"text":"Reaction to 'Noticeably Fitter' Concept"},"showlegend":false},                        {"responsive": true}                    )                };                            </script>        </div></div><hr><h3>Purchase Behavior & Fabric Preference</h3><p><strong>Insight: The "Cotton Paradox" reveals a key marketing angle.</strong><br>"100% Cotton" is the reflexive, "safe" answer. However, this preference directly contradicts users' primary complaints about fabric getting rough and losing shape. <strong>The Analytical Diagnosis:</strong> Consumers do not know what Micro-modal or Tencel is, so they retreat to the familiar term "Cotton." Marketing a synthetic-sounding name will face resistance. <strong>Strategic Action:</strong> Frame advanced fabrics as an <strong>"Enhanced Cotton"</strong> or <strong>"The Cotton That Stays Soft,"</strong> connecting the new material directly to the solution for their existing frustrations.</p><div class="plotly-chart-container"><div>                            <div id="9cb27a9d-3ce3-46a6-88b1-125fe769bb69" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("9cb27a9d-3ce3-46a6-88b1-125fe769bb69")) {                    Plotly.newPlot(                        "9cb27a9d-3ce3-46a6-88b1-125fe769bb69",                        [{"alignmentgroup":"True","hovertemplate":"Percentage=%{text}\u003cbr\u003eF=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#43a2ca","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"text":[65.5,3.4,10.3,10.3],"textposition":"auto","x":[65.5,3.4,10.3,10.3],"xaxis":"x","y":["Cotton","Tencel","Micromodal","Supima"],"yaxis":"y","type":"bar","texttemplate":"%{text:.1f}%"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Percentage of Respondents"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{},"categoryorder":"total ascending"},"legend":{"tracegroupgap":0},"title":{"text":"Preferred Fabric"},"barmode":"relative"},                        {"responsive": true}                    )                };                            </script>        </div></div><p><strong>Insight: The "Mother" Economy is a key channel for young men.</strong><br>A significant portion of men in the sample do not fully control the transaction. The purchase is often delegated to a parent, who follows a "replenishment loop" based on habit and value.</p><div class="plotly-chart-container"><div>                            <div id="3fdeb42c-7a9e-46fa-93a3-ca103adca35a" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("3fdeb42c-7a9e-46fa-93a3-ca103adca35a")) {                    Plotly.newPlot(                        "3fdeb42c-7a9e-46fa-93a3-ca103adca35a",                        [{"alignmentgroup":"True","hovertemplate":"Percentage=%{text}\u003cbr\u003eP=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#225ea8","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"text":[79.3,17.2],"textposition":"auto","x":[79.3,17.2],"xaxis":"x","y":["Self","Parent \u002f Mother"],"yaxis":"y","type":"bar","texttemplate":"%{text:.1f}%"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Percentage of Respondents"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{},"categoryorder":"total ascending"},"legend":{"tracegroupgap":0},"title":{"text":"Who Buys the Innerwear?"},"barmode":"relative"},                        {"responsive": true}                    )                };                            </script>        </div></div><hr><h3>Brand Familiarity: Freecultr</h3><p><strong>Insight: Brand awareness is currently near zero.</strong><br>Familiarity with the Freecultr brand is extremely low among this sample, underscoring the primary challenge of building top-of-funnel awareness before any other strategic action can be effective.</p><div class="chart-container-grid"><div class="chart-container-small"><div>                            <div id="qbq-heard" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("qbq-heard")) {                    Plotly.newPlot(                        "qbq-heard",                        [{"domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"hovertemplate":"FC_Freecultr_Familiarity.heard_of=%{label}\u003cbr\u003evalue=%{value}\u003cextra\u003e\u003c\u002fextra\u003e","labels":["No","Yes"],"legendgroup":"","name":"","showlegend":true,"values":[20,7],"type":"pie","pull":[0.05,0],"textinfo":"percent+label"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"legend":{"tracegroupgap":0},"title":{"text":"Heard of Freecultr Before?"}},                        {"responsive": true}                    )                };                            </script>        </div></div><div class="chart-container-small"><div>                            <div id="qbq-purchased" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("qbq-purchased")) {                    Plotly.newPlot(                        "qbq-purchased",                        [{"domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"hovertemplate":"FC_Freecultr_Familiarity.purchased=%{label}\u003cbr\u003evalue=%{value}\u003cextra\u003e\u003c\u002fextra\u003e","labels":["No"],"legendgroup":"","name":"","showlegend":true,"values":[27],"type":"pie","pull":[0,0.05],"textinfo":"percent+label"}],                        {"template":{"layout":{"colorway":["#225ea8","#43a2ca","#adddce","#cb2a2a","#E74C3C","#2ECC71"],"font":{"color":"#343a40","family":"Inter, sans-serif","size":14},"paper_bgcolor":"white","plot_bgcolor":"white","title":{"font":{"color":"#000"}},"xaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2},"yaxis":{"gridcolor":"#e9ecef","linecolor":"#dee2e6","zerolinecolor":"#e9ecef","zerolinewidth":2}}},"legend":{"tracegroupgap":0},"title":{"text":"Purchased from Freecultr Before?"}},                        {"responsive": true}                    )                };                            </script>        </div></div></div></div>
+            
+    <div id="Responses" class="tab-content">
+        <h2>All Responses</h2>
+        <div style="overflow-x:auto;"><table border="1" class="dataframe styled-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>S. No</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Primary Brand</th>
+      <th>Purchase Drivers</th>
+      <th>Persistent Issue</th>
+      <th>Concept Test Reaction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>22</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Comfortable, Long-Lasting</td>
+      <td>The cotton material starts to get looser and the elastic starts to get loose.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>18</td>
+      <td>Male</td>
+      <td>Marks &amp; Spencer</td>
+      <td>Comfort, Fabric, Price</td>
+      <td>No nothing yet</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>19</td>
+      <td>Female</td>
+      <td>Enamor</td>
+      <td>Comfortable, Colors</td>
+      <td>They don't last very long</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>20</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Durable, Comfortable, Appealing</td>
+      <td>They become loose.</td>
+      <td>Interested / Willing to Try</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>22</td>
+      <td>Female</td>
+      <td>Jockey</td>
+      <td>Comfortable, Cheap, Accessible</td>
+      <td>Their elastics wear out, but the user believes this is normal for all elastics after a while.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>21</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Comfort, Fit, Relaxation</td>
+      <td>They shrink on subsequent washes, the fabric becomes rough, and they stop fitting well.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>22</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Comfort, Cotton, Freedom</td>
+      <td></td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>20</td>
+      <td>Male</td>
+      <td>Calvin Klein</td>
+      <td>Brand Identity, Comfort, The Designs</td>
+      <td>Socks start stinking after some time.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>22</td>
+      <td>Female</td>
+      <td>Jockey</td>
+      <td>Comfort, Affordable, Stylish</td>
+      <td>User could not think of any issues.</td>
+      <td>Interested / Willing to Try</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>20</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Innerwear, Outerwear, Sportswear</td>
+      <td></td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>20</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Comfortable, Soft</td>
+      <td>Not very comfortable in general during extreme heat.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>22</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Comfort, Popularity, Design</td>
+      <td>No, I don't think so. No, there is no issue.</td>
+      <td>Interested / Willing to Try</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>28</td>
+      <td>Male</td>
+      <td>Unbranded/Local</td>
+      <td>Reputation, Logo, Colour Palette</td>
+      <td></td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>21</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Softness</td>
+      <td>It gets a little hot in there.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>22</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Comfort, Stylish, Elegant</td>
+      <td></td>
+      <td>Interested / Willing to Try</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>21</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Comfortable, Reliable, Long Life</td>
+      <td>No issues.</td>
+      <td>Interested / Willing to Try</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>22</td>
+      <td>Female</td>
+      <td>Uniqlo</td>
+      <td>Quality</td>
+      <td></td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>22</td>
+      <td>Male</td>
+      <td>Calvin Klein</td>
+      <td>Comfortable, Soft, Excellent</td>
+      <td>The fabric gets ruined after multiple washes.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>22</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Soft, Elegant, Comfortable</td>
+      <td>Fabric gets ruined after multiple washes.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>23</td>
+      <td>Female</td>
+      <td>Jockey</td>
+      <td>Comfortable, Versatile, Cheap</td>
+      <td>No, not really.</td>
+      <td>Interested / Willing to Try</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>22</td>
+      <td>Female</td>
+      <td>Calvin Klein</td>
+      <td>Looks Good, Comfortable, Nice To Wear</td>
+      <td>No nothing</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>22</td>
+      <td>Female</td>
+      <td>Other</td>
+      <td>Comfort, Good Quality, Durable</td>
+      <td>User stated there are no persistent issues.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>22</td>
+      <td>Female</td>
+      <td>Victoria's Secret</td>
+      <td>Comfort, Variety, Inclusivity</td>
+      <td>The seamless innerwear is not that comfortable.</td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>21</td>
+      <td>Female</td>
+      <td>Marks &amp; Spencer</td>
+      <td>Fashion, Comfort, Luxury</td>
+      <td>For upperwear, sizes are a problem as brands are not inclusive in size diversity. For other innerwear like socks and underwear, there are problems with quality and durability.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>22</td>
+      <td>Female</td>
+      <td>H&amp;M</td>
+      <td>Comfort, Variety, Inclusivity</td>
+      <td></td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>22</td>
+      <td>Male</td>
+      <td>Jockey</td>
+      <td>Comfortable, Premium, Durable</td>
+      <td></td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>22</td>
+      <td>Female</td>
+      <td>Marks and Spencers</td>
+      <td>Soft, Padded, Plast</td>
+      <td>Doesn't know their correct size.</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>23</td>
+      <td>Female</td>
+      <td>Enamor</td>
+      <td>Comfort, Style, Options</td>
+      <td>Specially concealed clothing, sometimes it's not all skin tone friendly Sometimes they are lighter or sometimes they are darker... should have maore skin tone options closer to Indian skin tone</td>
+      <td>Skeptical</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>24</td>
+      <td>Female</td>
+      <td>Jockey</td>
+      <td>Comfortable, Economical, Durable</td>
+      <td></td>
+      <td>Skeptical</td>
+    </tr>
+  </tbody>
+</table></div>
+    </div>
+    
+        
+                <script>
+                    function openTab(evt, tabName) {
+                        var i, tabcontent, tabbuttons;
+                        tabcontent = document.getElementsByClassName("tab-content");
+                        for (i = 0; i < tabcontent.length; i++) {
+                            tabcontent[i].style.display = "none";
+                        }
+                        tabbuttons = document.getElementsByClassName("tab-button");
+                        for (i = 0; i < tabbuttons.length; i++) {
+                            tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+                        }
+                        document.getElementById(tabName).style.display = "block";
+                        evt.currentTarget.className += " active";
+                    }
+                    if(document.getElementsByClassName("tab-button").length > 0) {
+                        document.getElementsByClassName("tab-button")[0].click();
+                    }
+                </script>
+            </div>
+        </body>
+        
+        </html>
+        

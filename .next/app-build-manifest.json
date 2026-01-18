@@ -15,11 +15,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/gojek-report/page.js"
-    ],
-    "/gojek-report/combined/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/gojek-report/combined/page.js"
     ]
   }
 }
