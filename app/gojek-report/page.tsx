@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import { usePostHog } from 'posthog-js/react'
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -12,7 +13,11 @@ import Script from "next/script"
 
 // Audio Player Component
 function AudioPlayer({ audioUrl }: { audioUrl: string }) {
+  const posthog = usePostHog()
   const openInDrive = () => {
+    posthog?.capture('audio_opened_in_drive', {
+      audio_url: audioUrl
+    })
     window.open(audioUrl, '_blank')
   }
 
@@ -275,12 +280,70 @@ function RespondentCard({
 }
 
 export default function GojekReportPage() {
+  const posthog = usePostHog()
   const [selectedRespondent, setSelectedRespondent] = useState<Respondent | null>(null)
   const [activeTab, setActiveTab] = useState("conversations")
   const [isDownloading, setIsDownloading] = useState(false)
+  const [scrollMilestones, setScrollMilestones] = useState({ 25: false, 50: false, 75: false, 100: false })
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
+  // Track page view on mount
+  useEffect(() => {
+    posthog?.capture('report_viewed', {
+      report_name: 'gojek-sports-report',
+      report_type: 'user_research'
+    })
+  }, [posthog])
+
+  // Track scroll milestones
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      const scrollableHeight = documentHeight - windowHeight
+      const progress = scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0
+
+      const milestones = [25, 50, 75, 100] as const
+      milestones.forEach(milestone => {
+        if (progress >= milestone && !scrollMilestones[milestone]) {
+          posthog?.capture('report_scroll_milestone', {
+            report_name: 'gojek-sports-report',
+            milestone_percent: milestone,
+            current_tab: activeTab
+          })
+          setScrollMilestones(prev => ({ ...prev, [milestone]: true }))
+        }
+      })
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [posthog, scrollMilestones, activeTab])
+
+  const handleTabChange = (newTab: string) => {
+    posthog?.capture('report_tab_changed', {
+      report_name: 'gojek-sports-report',
+      from_tab: activeTab,
+      to_tab: newTab
+    })
+    setActiveTab(newTab)
+  }
+
+  const handleRespondentClick = (respondent: Respondent) => {
+    posthog?.capture('respondent_viewed', {
+      report_name: 'gojek-sports-report',
+      respondent_id: respondent.id,
+      respondent_name: respondent.name
+    })
+    setSelectedRespondent(respondent)
+  }
+
   const handleDownloadPDF = async () => {
+    posthog?.capture('report_downloaded', {
+      report_name: 'gojek-sports-report',
+      format: 'pdf'
+    })
     setIsDownloading(true)
     try {
       // Check if html2pdf is loaded
@@ -408,7 +471,7 @@ export default function GojekReportPage() {
           </div>
 
           {/* Tabs Section */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
             <div className="border-b border-gray-200 bg-white">
               <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <TabsList className="flex w-full justify-center h-auto bg-transparent border-0 p-0 gap-12 -mb-px">
@@ -447,7 +510,7 @@ export default function GojekReportPage() {
                       key={respondent.id}
                       respondent={respondent}
                       index={index}
-                      onClick={() => setSelectedRespondent(respondent)}
+                      onClick={() => handleRespondentClick(respondent)}
                     />
                   ))}
                 </div>
