@@ -15,7 +15,7 @@ import Script from "next/script"
 function AudioPlayer({ audioUrl }: { audioUrl: string }) {
   const posthog = usePostHog()
   const openInDrive = () => {
-    posthog?.capture('audio_opened_in_drive', {
+    posthog?.capture('gojek_audio_opened', {
       audio_url: audioUrl
     })
     window.open(audioUrl, '_blank')
@@ -289,7 +289,7 @@ export default function GojekReportPage() {
 
   // Track page view on mount
   useEffect(() => {
-    posthog?.capture('report_viewed', {
+    posthog?.capture('gojek_report_viewed', {
       report_name: 'gojek-sports-report',
       report_type: 'user_research'
     })
@@ -307,7 +307,7 @@ export default function GojekReportPage() {
       const milestones = [25, 50, 75, 100] as const
       milestones.forEach(milestone => {
         if (progress >= milestone && !scrollMilestones[milestone]) {
-          posthog?.capture('report_scroll_milestone', {
+          posthog?.capture('gojek_report_scroll_milestone', {
             report_name: 'gojek-sports-report',
             milestone_percent: milestone,
             current_tab: activeTab
@@ -322,7 +322,7 @@ export default function GojekReportPage() {
   }, [posthog, scrollMilestones, activeTab])
 
   const handleTabChange = (newTab: string) => {
-    posthog?.capture('report_tab_changed', {
+    posthog?.capture('gojek_report_tab_changed', {
       report_name: 'gojek-sports-report',
       from_tab: activeTab,
       to_tab: newTab
@@ -331,7 +331,7 @@ export default function GojekReportPage() {
   }
 
   const handleRespondentClick = (respondent: Respondent) => {
-    posthog?.capture('respondent_viewed', {
+    posthog?.capture('gojek_respondent_viewed', {
       report_name: 'gojek-sports-report',
       respondent_id: respondent.id,
       respondent_name: respondent.name
@@ -340,7 +340,7 @@ export default function GojekReportPage() {
   }
 
   const handleDownloadPDF = async () => {
-    posthog?.capture('report_downloaded', {
+    posthog?.capture('gojek_report_downloaded', {
       report_name: 'gojek-sports-report',
       format: 'pdf'
     })
