@@ -1,3 +1,6 @@
 {
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/access-report/page": "app/access-report/page.js",
+  "/gojek-report/page": "app/gojek-report/page.js",
+  "/sample-report/page": "app/sample-report/page.js"
 }
