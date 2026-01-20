@@ -74,7 +74,7 @@ export function Header() {
               <a href="/access-report">Access Report</a>
             </Button>
             <Button size="default" className="text-sm font-medium px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white" asChild>
-              <a href="/book-demo">Request Demo</a>
+              <a href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener noreferrer">Request Demo</a>
             </Button>
           </div>
 
@@ -115,7 +115,9 @@ export function Header() {
             Access Report
           </a>
           <a 
-            href="/book-demo" 
+            href="https://calendly.com/tranzmitai/new-meeting" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full flex items-center justify-center py-4 px-6 text-base font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors text-center"
             onClick={() => setMobileMenuOpen(false)}
           >

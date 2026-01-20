@@ -61,7 +61,7 @@ export function HeroSection() {
 
           <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 sm:px-0">
             <Button size="lg" className="w-full max-w-[280px] sm:w-auto px-6 sm:px-10 py-2.5 sm:py-6 text-sm sm:text-base font-semibold rounded-full" asChild>
-              <a href="/book-demo">Request Demo</a>
+              <a href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener noreferrer">Request Demo</a>
             </Button>
            
             <Button variant="outline" size="lg" className="w-full max-w-[280px] sm:w-auto px-6 sm:px-10 py-2.5 sm:py-6 text-sm sm:text-base font-semibold rounded-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" asChild>

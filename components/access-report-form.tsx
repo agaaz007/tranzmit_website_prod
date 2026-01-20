@@ -223,7 +223,7 @@ export function AccessReportForm() {
                     <p className="text-sm text-muted-foreground">
                       Need help?{" "}
                       <a 
-                        href="/book-demo" 
+                        href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener noreferrer" 
                         className="text-primary hover:underline font-semibold"
                       >
                         Contact Support
