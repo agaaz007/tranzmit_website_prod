@@ -8,69 +8,86 @@ const USE_CASES = [
   {
     icon: (
       <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    ),
+    title: "Reduce Churn by Understanding Why Users Leave",
+    outcome: "Keep more customers",
+    description: "Tranzmit AI talks to churned or inactive users, surfaces their reasons in structured insights, so teams can fix the top drivers of churn.",
+    promise: "Reduce cancelations by up to 40% within 30 days.",
+    bgColor: "bg-red-100",
+    iconColor: "text-red-500",
+    accentColor: "#EF4444"
+  },
+  {
+    icon: (
+      <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+    ),
+    title: "Recover Lost Users with Targeted Follow-Up Insights",
+    outcome: "Win back revenue",
+    description: "Automatically interview recent drop-offs and generate insight-driven re-engagement strategies.",
+    promise: "Recover previously lost users with personalized campaigns.",
+    bgColor: "bg-amber-100",
+    iconColor: "text-amber-600",
+    accentColor: "#D97706"
+  },
+  {
+    icon: (
+      <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    title: "Eliminate Onboarding Drop-Offs",
+    outcome: "Increase activation & retention",
+    description: "Diagnose why users fail to activate within the critical first week — directly via voice feedback — and iterate flows based on real reasons.",
+    promise: "Higher Day-7 and Day-30 retention.",
+    bgColor: "bg-blue-100",
+    iconColor: "text-blue-600",
+    accentColor: "#2563EB"
+  },
+  {
+    icon: (
+      <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
       </svg>
     ),
-    title: "Concept Testing",
-    description: "Qualitative and quantitative feedback on new concepts and ideas.",
-    bgColor: "bg-pink-100",
-    iconColor: "text-pink-500"
+    title: "Improve Feature Adoption with Real User Feedback",
+    outcome: "More value realized → fewer cancellations",
+    description: "Flag features users aren't using and collect qualitative barriers automatically.",
+    promise: "Increase meaningful usage of key features.",
+    bgColor: "bg-purple-100",
+    iconColor: "text-purple-600",
+    accentColor: "#9333EA"
   },
   {
     icon: (
       <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
       </svg>
     ),
-    title: "Product Test",
-    description: "Understand how people react and what they think about your product.",
+    title: "Reduce Support Load with Automated User Q&A",
+    outcome: "Lower support costs",
+    description: "Use insights from Tranzmit conversations to proactively answer top user questions before they become tickets.",
+    promise: "Cut support volume and response time.",
     bgColor: "bg-teal-100",
-    iconColor: "text-teal-500"
+    iconColor: "text-teal-600",
+    accentColor: "#0D9488"
   },
   {
     icon: (
       <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
       </svg>
     ),
-    title: "Foundational Research",
-    description: "Discover new opportunities through open-ended conversations.",
-    bgColor: "bg-cyan-100",
-    iconColor: "text-cyan-500"
-  },
-  {
-    icon: (
-      <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>
-    ),
-    title: "Brand Perception",
-    description: "Understand how customers and prospects view your brand.",
-    bgColor: "bg-rose-100",
-    iconColor: "text-rose-400"
-  },
-  {
-    icon: (
-      <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-      </svg>
-    ),
-    title: "Creative Testing",
-    description: "Test ads and get real-time feedback from your target audience.",
-    bgColor: "bg-orange-100",
-    iconColor: "text-orange-500"
-  },
-  {
-    icon: (
-      <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-      </svg>
-    ),
-    title: "Usability Testing",
-    description: "Watch how people use your product and identify pain points.",
-    bgColor: "bg-emerald-100",
-    iconColor: "text-emerald-500"
+    title: "Hyper-Targeted Creative Iteration",
+    outcome: "Better retention messaging",
+    description: "Turn voice feedback into messaging themes that improve onboarding flows, UX copy, and in-product nudges tailored to real user concerns.",
+    promise: "Messaging that actually resonates.",
+    bgColor: "bg-pink-100",
+    iconColor: "text-pink-600",
+    accentColor: "#DB2777"
   }
 ]
 
@@ -93,19 +110,18 @@ export function UseCasesSection() {
             className="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 border border-gray-300 rounded-full text-xs sm:text-sm font-medium text-gray-700 mb-4 sm:mb-6"
             whileHover={{ scale: 1.05, borderColor: "#2F82AC" }}
           >
-            USE CASES ARE INFINITE
+            USE CASES
           </motion.div>
-          <h2 className="text-4xl lg:text-5xl font-semibold italic tracking-tight text-foreground mb-3 sm:mb-4 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground mb-3 sm:mb-4 leading-tight">
             See Tranzmit in action
           </h2>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-muted-foreground max-w-2xl mx-auto px-2 sm:px-0">
-            From validating new ideas to in-depth user interviews, our AI agents handle
-            the heavy lifting.
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-2 sm:px-0">
+            From reducing churn to improving feature adoption, our AI agents deliver actionable insights.
           </p>
         </motion.div>
 
         {/* Use case cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 max-w-7xl mx-auto">
           {USE_CASES.map((useCase, index) => (
             <motion.div
               key={useCase.title}
@@ -120,35 +136,66 @@ export function UseCasesSection() {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <motion.div
-                whileHover={{ y: -8, scale: 1.02 }}
+                whileHover={{ y: -8, scale: 1.01 }}
                 transition={{ duration: 0.3 }}
               >
-                <Card className="overflow-hidden p-3 sm:p-5 md:p-6 bg-white min-h-[130px] sm:min-h-[170px] border border-gray-200 relative">
+                <Card className="overflow-hidden p-5 sm:p-6 bg-white min-h-[280px] sm:min-h-[320px] border border-gray-200 relative flex flex-col">
                   {/* Animated highlight */}
                   <motion.div 
-                    className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0"
+                    className="absolute inset-0 opacity-0"
+                    style={{
+                      background: `linear-gradient(135deg, ${useCase.accentColor}08 0%, transparent 60%)`
+                    }}
                     animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
                     transition={{ duration: 0.3 }}
                   />
                   
-                  {/* Icon */}
-                  <motion.div 
-                    className={`relative w-9 h-9 sm:w-11 sm:h-11 rounded-lg ${useCase.bgColor} flex items-center justify-center mb-2 sm:mb-4`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                  >
-                    <span className={useCase.iconColor}>{useCase.icon}</span>
-                  </motion.div>
+                  {/* Top row: Icon + Outcome badge */}
+                  <div className="relative flex items-start justify-between mb-4">
+                    <motion.div 
+                      className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl ${useCase.bgColor} flex items-center justify-center`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      <span className={useCase.iconColor}>{useCase.icon}</span>
+                    </motion.div>
+                    
+                    <motion.span 
+                      className="text-xs font-semibold px-3 py-1.5 rounded-full"
+                      style={{ 
+                        backgroundColor: `${useCase.accentColor}15`,
+                        color: useCase.accentColor
+                      }}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {useCase.outcome}
+                    </motion.span>
+                  </div>
                   
-                  <h3 className="relative text-sm sm:text-xl lg:text-2xl font-semibold text-foreground mb-1 sm:mb-2 leading-snug">
+                  {/* Title */}
+                  <h3 className="relative text-lg sm:text-xl font-bold text-foreground mb-3 leading-snug">
                     {useCase.title}
                   </h3>
-                  <p className="relative text-muted-foreground text-xs sm:text-base md:text-lg leading-relaxed">
+                  
+                  {/* Description */}
+                  <p className="relative text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 flex-grow">
                     {useCase.description}
                   </p>
                   
+                  {/* Promise */}
+                  <div className="relative mt-auto pt-4 border-t border-gray-100">
+                    <div className="flex items-center gap-2">
+                      <svg className="w-4 h-4 flex-shrink-0" style={{ color: useCase.accentColor }} fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-sm font-medium text-gray-700">
+                        {useCase.promise}
+                      </span>
+                    </div>
+                  </div>
+                  
                   {/* Hover arrow */}
                   <motion.div 
-                    className="absolute bottom-3 right-3 sm:bottom-5 sm:right-5"
+                    className="absolute bottom-5 right-5"
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ 
                       opacity: hoveredIndex === index ? 1 : 0,
@@ -156,9 +203,14 @@ export function UseCasesSection() {
                     }}
                     transition={{ duration: 0.2 }}
                   >
-                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                    <div 
+                      className="w-8 h-8 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: `${useCase.accentColor}15` }}
+                    >
+                      <svg className="w-4 h-4" style={{ color: useCase.accentColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
                   </motion.div>
                 </Card>
               </motion.div>
