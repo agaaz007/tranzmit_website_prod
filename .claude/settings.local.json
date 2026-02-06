@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:milq.ai)",
+      "Bash(npm run build:*)"
+    ]
+  }
+}

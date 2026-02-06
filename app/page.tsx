@@ -4,21 +4,29 @@ import { useEffect, useState } from "react"
 import { usePostHog } from 'posthog-js/react'
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
-import { TestimonialsSection } from "@/components/testimonials-section"
-import { UseCasesSection } from "@/components/use-cases-section"
-import { PlatformSection } from "@/components/platform-section"
-import { ComparisonSection } from "@/components/comparison-section"
-import { StreamlinedResearchSection } from "@/components/streamlined-research-section"
-import { MoreThanWordsSection } from "@/components/more-than-words-section"
-import { StatisticsSection } from "@/components/statistics-section"
-import { GetCloserCustomersSection } from "@/components/get-closer-customers-section"
+import { LogoMarquee } from "@/components/logo-marquee"
+import { ProblemSection } from "@/components/problem-section"
+import { HowItWorksSection } from "@/components/how-it-works-section"
+import { ImpactSection } from "@/components/impact-section"
+import { WhyItWorksSection } from "@/components/why-it-works-section"
+import { VisionSection } from "@/components/vision-section"
+import { ForTeamsSection } from "@/components/for-teams-section"
+import { TrialSection } from "@/components/trial-section"
+import { FinalCtaSection } from "@/components/final-cta-section"
 import { Footer } from "@/components/footer"
+
+function Divider() {
+  return (
+    <div className="max-w-3xl mx-auto px-5">
+      <div className="h-px" style={{ backgroundColor: "var(--t-border)" }} />
+    </div>
+  )
+}
 
 export default function HomePage() {
   const posthog = usePostHog()
   const [scrollMilestones, setScrollMilestones] = useState({ 25: false, 50: false, 75: false, 100: false })
 
-  // Track page view on mount
   useEffect(() => {
     posthog?.capture('page_viewed', {
       page_name: 'landing_page',
@@ -26,7 +34,6 @@ export default function HomePage() {
     })
   }, [posthog])
 
-  // Track scroll milestones
   useEffect(() => {
     const handleScroll = () => {
       const windowHeight = window.innerHeight
@@ -51,18 +58,25 @@ export default function HomePage() {
   }, [posthog, scrollMilestones])
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden">
       <Header />
-      <main className="pt-16 sm:pt-18 md:pt-20">
+      <main>
         <HeroSection />
-        <TestimonialsSection />
-        <UseCasesSection />
-        <PlatformSection />
-        <ComparisonSection />
-        <StreamlinedResearchSection />
-        <GetCloserCustomersSection />
-        {/* <MoreThanWordsSection /> */}
-        <StatisticsSection />
+        <LogoMarquee />
+        <Divider />
+        <ProblemSection />
+        <Divider />
+        <HowItWorksSection />
+        <Divider />
+        <ImpactSection />
+        <Divider />
+        <WhyItWorksSection />
+        <VisionSection />
+        <ForTeamsSection />
+        <Divider />
+        <TrialSection />
+        <Divider />
+        <FinalCtaSection />
       </main>
       <Footer />
     </div>

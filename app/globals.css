@@ -3,21 +3,29 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Original Tranzmit color system */
+  /* Semantic tokens for light/dark */
+  --t-bg: #F8F8F7;
+  --t-bg-card: #FFFFFF;
+  --t-bg-subtle: #F0F0EE;
+  --t-text: #1A1A1A;
+  --t-text-secondary: #555555;
+  --t-text-muted: #888888;
+  --t-border: #E5E5E1;
+  --t-border-hover: #CCCCCC;
+  --t-btn-bg: #1A1A1A;
+  --t-btn-bg-hover: #333333;
+  --t-btn-text: #FFFFFF;
+
+  /* Tranzmit brand colors */
   --deep-navy: #050849;
   --tranzmit-blue: #113177;
   --light-blue: #7FB3E7;
   --medium-blue: #2F82AC;
   --accent-blue: #6B8CC7;
-  
-  /* Neutral Grays */
-  --text-gray: #4A4A4A;
-  --subtext-gray: #6B7280;
-  --light-bg-gray: #F6F7F9;
-  
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.28 0 0);
   --card: oklch(1 0 0);
@@ -54,6 +62,18 @@
 }
 
 .dark {
+  --t-bg: #0F0F0F;
+  --t-bg-card: #1A1A1A;
+  --t-bg-subtle: #252525;
+  --t-text: #F0F0F0;
+  --t-text-secondary: #A0A0A0;
+  --t-text-muted: #666666;
+  --t-border: #2A2A2A;
+  --t-border-hover: #404040;
+  --t-btn-bg: #F0F0F0;
+  --t-btn-bg-hover: #DDDDDD;
+  --t-btn-text: #0F0F0F;
+
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
@@ -130,87 +150,45 @@
 }
 
 @layer base {
-  /* Responsive base font size */
   html {
-    font-size: 14px;
-  }
-  
-  @media (min-width: 640px) {
-    html {
-      font-size: 14px;
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    html {
-      font-size: 13px;
-    }
-  }
-  
-  @media (min-width: 1280px) {
-    html {
-      font-size: 14px;
-    }
-  }
-  
-  @media (min-width: 1536px) {
-    html {
-      font-size: 15px;
-    }
+    font-size: 16px;
   }
 
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+    background-color: var(--t-bg);
+    color: var(--t-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-  
-  /* Prevent horizontal scroll on all viewports */
+
   html, body {
     width: 100%;
     max-width: 100vw;
     overflow-x: hidden;
   }
-  
-  /* Make all headings bold */
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
   }
-  
-  /* Make CTA buttons bold */
-  button, 
-  .btn, 
-  [role="button"],
-  .button {
-    @apply font-bold;
-  }
-  
-  /* Specifically target common CTA button patterns */
-  button[type="submit"],
-  button.primary,
-  .btn-primary,
-  .cta-button,
-  a.button {
-    @apply font-bold;
-  }
-  
-  /* Responsive images */
+
   img {
     max-width: 100%;
     height: auto;
   }
-  
-  /* Better touch targets for mobile */
+
   @media (max-width: 640px) {
-    button, 
-    a, 
+    button,
+    a,
     [role="button"] {
       min-height: 44px;
     }
   }
-  
-  /* Custom animations for book demo page */
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -221,27 +199,38 @@
       transform: translateY(0);
     }
   }
-  
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
   .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
   }
-  
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
   .animation-delay-200 {
     animation-delay: 0.2s;
     opacity: 0;
   }
-  
+
   .animation-delay-400 {
     animation-delay: 0.4s;
     opacity: 0;
   }
-  
-  /* Smooth scrolling */
+
   html {
     scroll-behavior: smooth;
   }
-  
-  /* Better text rendering */
+
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -249,28 +238,27 @@
   }
 }
 
-/* Responsive container adjustments */
 @layer utilities {
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
-  
+
   @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-  
-  @media (min-width: 1024px) {
     .container {
       padding-left: 2rem;
       padding-right: 2rem;
     }
   }
-}
 
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+      max-width: 1200px;
+    }
+  }
+}

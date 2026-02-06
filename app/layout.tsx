@@ -6,12 +6,13 @@ import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
 import { PostHogProvider } from './providers'
+import { ThemeProvider } from 'next-themes'
 
 
 export const metadata: Metadata = {
-  title: "Tranzmit - AI interviews reveal what people want, fast.",
+  title: "Tranzmit - AI to reduce churn and recover lost customers",
   description:
-    "Tranzmit finds the right participants, conducts interviews, analyzes responses, and delivers actionable insights — with results in hours, not weeks.",
+    "Automatically detect at-risk users, reduce churn, and recover lost customers — before it's too late.",
   generator: "v0.app",
   icons: {
     icon: "/logo_16x16.png",
@@ -26,14 +27,14 @@ export default function RootLayout({
   children: ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        {/* PostHogProvider wraps your entire app UI */}
-        <PostHogProvider>
-          {children}
-          {/* Vercel Analytics works globally too */}
-          <Analytics />
-        </PostHogProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          <PostHogProvider>
+            {children}
+            <Analytics />
+          </PostHogProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

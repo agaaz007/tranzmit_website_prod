@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 60" fill="none">
+  <rect x="2" y="2" width="56" height="56" rx="14" fill="#FFA840"/>
+  <circle cx="22" cy="30" r="4.5" fill="#3D2200"/>
+  <circle cx="38" cy="30" r="4.5" fill="#3D2200"/>
+  <circle cx="22" cy="28" r="1.5" fill="#FFFFFF"/>
+  <circle cx="38" cy="28" r="1.5" fill="#FFFFFF"/>
+  <path d="M24 38 Q30 44 36 38" stroke="#3D2200" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <text x="72" y="42" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#333333">juno</text>
+</svg>

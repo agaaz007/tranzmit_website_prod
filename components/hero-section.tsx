@@ -1,345 +1,287 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { motion } from "framer-motion"
 
-// Value propositions that rotate
-const VALUE_PROPS = [
-  {
-    title: "Reduce Churn",
-    subtitle: "Identify at-risk customers before they leave",
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-      </svg>
-    ),
-    color: "#2F82AC"
-  },
-  {
-    title: "Unlock Growth",
-    subtitle: "Find expansion opportunities in your ICP",
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-      </svg>
-    ),
-    color: "#7FB3E7"
-  },
-  {
-    title: "Product Insights",
-    subtitle: "Qualitative feedback that drives decisions",
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-      </svg>
-    ),
-    color: "#113177"
-  }
-]
-
-const MARQUEE_MESSAGES = [
-  "AI-led customer interviews that drive Growth",
-  "Reduce churn with real feedback — not guesses",
-  "Accelerate product and GTM decisions with AI-driven evidence",
-  "Uncover growth opportunities in your ICP"
-]
-
-export function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  })
-  
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 100])
-  const imageScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.98])
-
-  // Rotate through value props
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % VALUE_PROPS.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (  
-    <section ref={containerRef} className="relative overflow-hidden bg-background py-8 sm:py-12 md:py-16 lg:py-20">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          className="absolute -top-[30%] -right-[15%] w-[60vw] h-[60vw] rounded-full opacity-30"
-          style={{
-            background: "radial-gradient(circle, rgba(127, 179, 231, 0.3) 0%, rgba(127, 179, 231, 0) 70%)",
-          }}
-          animate={{
-            scale: [1, 1.15, 1],
-            x: [0, 30, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute -bottom-[20%] -left-[10%] w-[50vw] h-[50vw] rounded-full opacity-20"
-          style={{
-            background: "radial-gradient(circle, rgba(47, 130, 172, 0.3) 0%, rgba(47, 130, 172, 0) 70%)",
-          }}
-          animate={{
-            scale: [1.1, 1, 1.1],
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="mx-auto max-w-6xl text-center">
-          {/* Animated headline */}
-          <motion.h1 
-            className="text-5xl sm:text-[41px] md:text-[41px] lg:text-[41px] xl:text-[51px] 2xl:text-[70px] font-bold tracking-tight leading-[1.1] max-w-6xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <motion.span 
-              className="bg-gradient-to-r from-[#7FB3E7] to-[#050849] bg-clip-text text-transparent inline-block"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              AI Chief Growth Officer
-            </motion.span>
-            <br />
-            <motion.span 
-              className="bg-gradient-to-r from-[#2F82AC] to-[#050849] bg-clip-text text-transparent inline-block"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              for Modern Consumer Brands
-            </motion.span>
-          </motion.h1>
-
-          {/* Animated Value Proposition Cards */}
-          <motion.div 
-            className="mt-8 sm:mt-10 flex justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <div className="relative h-20 sm:h-24 w-full max-w-lg overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  className="absolute inset-0 flex items-center justify-center"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -40 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <div 
-                    className="flex items-center gap-4 px-6 py-4 rounded-2xl border-2 bg-white/80 backdrop-blur-sm shadow-lg"
-                    style={{ borderColor: VALUE_PROPS[activeIndex].color }}
-                  >
-                    <div 
-                      className="p-3 rounded-xl"
-                      style={{ backgroundColor: `${VALUE_PROPS[activeIndex].color}15`, color: VALUE_PROPS[activeIndex].color }}
-                    >
-                      {VALUE_PROPS[activeIndex].icon}
-                    </div>
-                    <div className="text-left">
-                      <div 
-                        className="font-bold text-lg sm:text-xl"
-                        style={{ color: VALUE_PROPS[activeIndex].color }}
-                      >
-                        {VALUE_PROPS[activeIndex].title}
-                      </div>
-                      <div className="text-sm sm:text-base text-gray-600">
-                        {VALUE_PROPS[activeIndex].subtitle}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-              
-              {/* Progress indicators */}
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2">
-                {VALUE_PROPS.map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="h-1.5 rounded-full cursor-pointer"
-                    style={{ 
-                      width: i === activeIndex ? 24 : 8,
-                      backgroundColor: i === activeIndex ? VALUE_PROPS[i].color : '#E5E7EB'
-                    }}
-                    onClick={() => setActiveIndex(i)}
-                    whileHover={{ scale: 1.2 }}
-                    animate={{ width: i === activeIndex ? 24 : 8 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Marquee */}
-          <motion.div 
-            className="mx-auto mt-8 sm:mt-10 w-full overflow-hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-          >
-            <style>{`
-              @keyframes marquee {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(-50%); }
-              }
-              .animate-marquee {
-                animation: marquee 40s linear infinite;
-              }
-              .animate-marquee:hover {
-                animation-play-state: paused;
-              }
-              @media (max-width: 640px) {
-                .animate-marquee {
-                  animation: marquee 30s linear infinite;
-                }
-              }
-            `}</style>
-            <div className="relative flex overflow-x-hidden group">
-              <div className="animate-marquee whitespace-nowrap flex items-center">
-                {[...MARQUEE_MESSAGES, ...MARQUEE_MESSAGES, ...MARQUEE_MESSAGES].map((msg, i) => (
-                  <div key={i} className="flex items-center">
-                    <span className="mx-4 sm:mx-6 md:mx-8 text-lg sm:text-[18px] md:text-[23px] lg:text-[28px] xl:text-[37px] font-semibold italic text-[#113177]">
-                      {msg}
-                    </span>
-                    <span className="text-[#6B8CC7] text-base sm:text-[15px] md:text-[18px]">•</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-          
-          {/* Subheadline */}
-          <motion.p 
-            className="mx-auto mt-6 sm:mt-8 max-w-5xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed sm:leading-7 text-muted-foreground font-light px-2 sm:px-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            Tranzmit deploys swarms of AI interviewers that find the right participants,
-            conducts interviews, analyzes responses, and delivers actionable insights to
-            product and marketing teams in hours, not months.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div 
-            className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 sm:px-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-          >
-            <motion.div
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Button 
-                size="lg" 
-                className="w-full max-w-[280px] sm:w-auto px-6 sm:px-10 py-2.5 sm:py-6 text-sm sm:text-base font-semibold rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/25" 
-                asChild
-              >
-                <a href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener noreferrer">
-                  Request Demo
-                  <motion.span 
-                    className="ml-2"
-                    initial={{ x: 0 }}
-                    whileHover={{ x: 4 }}
-                  >
-                    →
-                  </motion.span>
-                </a>
-              </Button>
-            </motion.div>
-           
-            <motion.div
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="w-full max-w-[280px] sm:w-auto px-6 sm:px-10 py-2.5 sm:py-6 text-sm sm:text-base font-semibold rounded-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" 
-                asChild
-              >
-                <a href="/sample-report">View Sample Report</a>
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          {/* Product Demo */}
-          <motion.div 
-            className="mt-8 sm:mt-16 md:mt-20 px-4 sm:px-0"
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1, ease: [0.22, 1, 0.36, 1] }}
-            style={{ y: imageY, scale: imageScale }}
-          >
-            <div className="relative mx-auto max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-5xl">
-              {/* Glow effect */}
-              <motion.div 
-                className="absolute -inset-4 sm:-inset-8 bg-gradient-to-r from-[#7FB3E7]/20 via-[#2F82AC]/20 to-[#050849]/20 rounded-3xl blur-3xl"
-                animate={{
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              
-              {/* Product demo container */}
-              <motion.div 
-                className="relative shadow-lg sm:shadow-2xl"
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative">
-                  {/* Black border overlay */}
-                  <div className="absolute inset-0 border-t-[6px] sm:border-t-8 md:border-t-12 border-l-[6px] sm:border-l-8 md:border-l-12 border-r-[6px] sm:border-r-8 md:border-r-12 border-black rounded-t-lg z-10 pointer-events-none"></div>
-                  
-                  {/* Image container */}
-                  <div className="aspect-video rounded-t-lg overflow-hidden bg-white">
-                    <Image
-                      src="/product_demo2.png"
-                      alt="Tranzmit Product Demo"
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                  </div>
-                </div>
-                
-                {/* Divider */}
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
-              </motion.div>
-            </div>
-          </motion.div>
+function DashboardMockup() {
+  return (
+    <div
+      className="rounded-2xl overflow-hidden"
+      style={{
+        backgroundColor: "var(--t-bg-card)",
+        border: "1px solid var(--t-border)",
+        boxShadow: "0 8px 40px rgba(0,0,0,0.08)",
+      }}
+    >
+      {/* Title bar */}
+      <div
+        className="flex items-center gap-2 px-5 py-3"
+        style={{ borderBottom: "1px solid var(--t-border)" }}
+      >
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/60" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/60" />
+        </div>
+        <div
+          className="ml-3 text-xs font-medium"
+          style={{ color: "var(--t-text-muted)" }}
+        >
+          Tranzmit Dashboard
         </div>
       </div>
-      
-      {/* Section divider */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-100 to-transparent mt-4"></div>
+
+      <div className="p-5 sm:p-6">
+        {/* Top stats row */}
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-5">
+          {[
+            { label: "At-Risk Users", value: "142", trend: "-23%", good: true },
+            { label: "Recovered", value: "89", trend: "+31%", good: true },
+            { label: "Churn Rate", value: "4.2%", trend: "-1.8%", good: true },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-xl p-3 sm:p-4"
+              style={{ backgroundColor: "var(--t-bg-subtle)" }}
+            >
+              <p
+                className="text-[10px] sm:text-xs font-medium"
+                style={{ color: "var(--t-text-muted)" }}
+              >
+                {stat.label}
+              </p>
+              <div className="flex items-baseline gap-1.5 mt-1">
+                <span
+                  className="text-lg sm:text-2xl font-bold"
+                  style={{ color: "var(--t-text)" }}
+                >
+                  {stat.value}
+                </span>
+                <span className="text-[10px] sm:text-xs font-semibold text-emerald-500">
+                  {stat.trend}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Two column layout: Session + Interview */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Session Analysis Panel */}
+          <div
+            className="rounded-xl p-4"
+            style={{ border: "1px solid var(--t-border)" }}
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+              <span
+                className="text-xs font-semibold"
+                style={{ color: "var(--t-text)" }}
+              >
+                Session Analysis
+              </span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-medium ml-auto">
+                QUANT
+              </span>
+            </div>
+            {/* Mini session timeline */}
+            <div className="space-y-2">
+              {[
+                { page: "/pricing", time: "2m 14s", flag: true },
+                { page: "/settings", time: "0m 08s", flag: false },
+                { page: "/cancel", time: "1m 42s", flag: true },
+              ].map((s) => (
+                <div
+                  key={s.page}
+                  className="flex items-center justify-between text-[10px] sm:text-xs py-1.5 px-2 rounded-lg"
+                  style={{ backgroundColor: s.flag ? "rgba(239,68,68,0.06)" : "var(--t-bg-subtle)" }}
+                >
+                  <span
+                    className="font-mono"
+                    style={{ color: "var(--t-text-secondary)" }}
+                  >
+                    {s.page}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span style={{ color: "var(--t-text-muted)" }}>
+                      {s.time}
+                    </span>
+                    {s.flag && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/* Mini bar chart */}
+            <div className="flex items-end gap-1 mt-3 h-10">
+              {[40, 65, 30, 80, 55, 20, 70, 45, 15, 60, 35, 75].map(
+                (h, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 rounded-sm transition-all"
+                    style={{
+                      height: `${h}%`,
+                      backgroundColor:
+                        h < 30
+                          ? "rgba(239,68,68,0.5)"
+                          : "rgba(59,130,246,0.3)",
+                    }}
+                  />
+                )
+              )}
+            </div>
+          </div>
+
+          {/* Interview Panel */}
+          <div
+            className="rounded-xl p-4"
+            style={{ border: "1px solid var(--t-border)" }}
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
+              <span
+                className="text-xs font-semibold"
+                style={{ color: "var(--t-text)" }}
+              >
+                AI Interview
+              </span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-violet-500/10 text-violet-500 font-medium ml-auto">
+                QUAL
+              </span>
+            </div>
+            {/* Chat bubbles */}
+            <div className="space-y-2">
+              <div
+                className="text-[10px] sm:text-xs px-3 py-2 rounded-xl rounded-bl-sm max-w-[85%]"
+                style={{
+                  backgroundColor: "var(--t-bg-subtle)",
+                  color: "var(--t-text-secondary)",
+                }}
+              >
+                What made you consider cancelling?
+              </div>
+              <div
+                className="text-[10px] sm:text-xs px-3 py-2 rounded-xl rounded-br-sm max-w-[85%] ml-auto"
+                style={{
+                  backgroundColor: "rgba(139,92,246,0.1)",
+                  color: "var(--t-text)",
+                }}
+              >
+                The pricing tier jumped too fast. I only need 2 features.
+              </div>
+              <div
+                className="text-[10px] sm:text-xs px-3 py-2 rounded-xl rounded-bl-sm max-w-[85%]"
+                style={{
+                  backgroundColor: "var(--t-bg-subtle)",
+                  color: "var(--t-text-secondary)",
+                }}
+              >
+                Which 2 features do you use most?
+              </div>
+              <div
+                className="text-[10px] sm:text-xs px-3 py-2 rounded-xl rounded-br-sm max-w-[85%] ml-auto"
+                style={{
+                  backgroundColor: "rgba(139,92,246,0.1)",
+                  color: "var(--t-text)",
+                }}
+              >
+                Reports and the alert system. Everything else I never open.
+              </div>
+            </div>
+            {/* Insight tag */}
+            <div
+              className="mt-3 flex items-center gap-1.5 text-[10px] sm:text-xs px-2.5 py-1.5 rounded-lg"
+              style={{ backgroundColor: "rgba(16,185,129,0.08)" }}
+            >
+              <svg className="w-3 h-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <span className="font-semibold text-emerald-600">Insight:</span>
+              <span style={{ color: "var(--t-text-secondary)" }}>
+                Pricing misaligned with usage pattern
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function HeroSection() {
+  return (
+    <section className="relative pt-32 sm:pt-40 pb-10 sm:pb-14">
+      <div className="container mx-auto">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-bold leading-[1.1] tracking-tight"
+            style={{ color: "var(--t-text)" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            AI to reduce churn
+            <br />
+            and recover{" "}
+            <span className="italic font-medium" style={{ color: "var(--t-text-secondary)" }}>
+              lost customers
+            </span>
+          </motion.h1>
+
+          <motion.p
+            className="mt-6 sm:mt-8 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto"
+            style={{ color: "var(--t-text-secondary)" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Combine qualitative interviews with quantitative session data to
+            find out{" "}
+            <strong style={{ color: "var(--t-text)" }}>who to fix</strong> and{" "}
+            <strong style={{ color: "var(--t-text)" }}>what to build</strong> — 20x faster.
+          </motion.p>
+
+          <motion.div
+            className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <a
+              href="https://calendly.com/tranzmitai/new-meeting"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 text-base font-semibold rounded-full transition-all hover:shadow-lg"
+              style={{
+                backgroundColor: "var(--t-btn-bg)",
+                color: "var(--t-btn-text)",
+              }}
+            >
+              Request a Demo
+            </a>
+            <a
+              href="/sample-report"
+              className="px-8 py-3.5 text-base font-medium rounded-full transition-all"
+              style={{
+                color: "var(--t-text)",
+                border: "1px solid var(--t-border)",
+              }}
+            >
+              Watch a 60-sec Example
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Product mockup */}
+        <motion.div
+          className="mt-14 sm:mt-20 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <DashboardMockup />
+        </motion.div>
+      </div>
     </section>
   )
 }
