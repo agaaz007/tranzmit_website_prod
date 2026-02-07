@@ -260,7 +260,9 @@ export function HeroSection() {
               Request a Demo
             </a>
             <a
-              href="/sample-report"
+              href="https://x.com/agaazsinghal007/status/2019920921285521780?s=20"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-3.5 text-base font-medium rounded-full transition-all"
               style={{
                 color: "var(--t-text)",
