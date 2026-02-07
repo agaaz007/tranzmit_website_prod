@@ -14,11 +14,11 @@ export function Footer() {
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
             <a
-              href="mailto:contact@tranzmit.com"
+              href="mailto:contact@trazmit.com"
               className="text-sm transition-colors"
               style={{ color: "var(--t-text-secondary)" }}
             >
-              contact@tranzmit.com
+              contact@trazmit.com
             </a>
             <a
               href="https://calendly.com/tranzmitai/new-meeting"
