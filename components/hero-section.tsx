@@ -237,7 +237,7 @@ export function HeroSection() {
           >
             Combine qualitative interviews with quantitative session data to
             find out{" "}
-            <strong style={{ color: "var(--t-text)" }}>who to fix</strong> and{" "}
+            <strong style={{ color: "var(--t-text)" }}>What to fix</strong> and{" "}
             <strong style={{ color: "var(--t-text)" }}>what to build</strong> — 20x faster.
           </motion.p>
 
