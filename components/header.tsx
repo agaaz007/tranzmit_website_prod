@@ -50,10 +50,10 @@ export function Header() {
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
-            <a href="#how-it-works" className="text-sm font-medium transition-colors" style={{ color: "var(--t-text-secondary)" }}>
+            <a href="/interactive-demo.html" className="text-sm font-medium transition-colors" style={{ color: "var(--t-text-secondary)" }}>
               How it works
             </a>
-            <a href="#impact" className="text-sm font-medium transition-colors" style={{ color: "var(--t-text-secondary)" }}>
+            <a href="/insights-dashboard.html" className="text-sm font-medium transition-colors" style={{ color: "var(--t-text-secondary)" }}>
               Impact
             </a>
             <a href="#for-teams" className="text-sm font-medium transition-colors" style={{ color: "var(--t-text-secondary)" }}>
@@ -103,8 +103,8 @@ export function Header() {
           >
             <div className="flex flex-col items-center pt-12 px-8 space-y-6">
               {[
-                { href: "#how-it-works", label: "How it works" },
-                { href: "#impact", label: "Impact" },
+                { href: "/interactive-demo.html", label: "How it works" },
+                { href: "/insights-dashboard.html", label: "Impact" },
                 { href: "#for-teams", label: "For teams" },
               ].map((item) => (
                 <a

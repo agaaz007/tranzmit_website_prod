@@ -235,10 +235,11 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           >
-            Combine qualitative interviews with quantitative session data to
-            find out{" "}
-            <strong style={{ color: "var(--t-text)" }}>What to fix</strong> and{" "}
-            <strong style={{ color: "var(--t-text)" }}>what to build</strong> — 20x faster.
+            AI Native Cancel Button for Consumer Apps <br></br>
+           to
+            {" "}
+            <strong style={{ color: "var(--t-text)" }}>Reduce Churn by up to 40% </strong> and{" "}
+            <strong style={{ color: "var(--t-text)" }}>Recover Lost Customers</strong> 
           </motion.p>
 
           <motion.div

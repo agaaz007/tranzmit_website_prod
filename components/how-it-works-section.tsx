@@ -120,7 +120,7 @@ export function HowItWorksSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Session analysis + customer interviews
+            Session analysis + customer interviews on your Cancel Button
             <br />
             <span className="italic font-medium" style={{ color: "var(--t-text-secondary)" }}>
               = 20x faster clarity

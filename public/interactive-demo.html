@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Demo - Tranzmit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F8F8F7;
+      --bg-alt: #F1F0EE;
+      --card: #FFFFFF;
+      --text: #1A1A1A;
+      --text-muted: #6B7280;
+      --accent: #5046E5;
+      --accent-hover: #4338CA;
+      --accent-light: #EEF2FF;
+      --danger: #EF4444;
+      --danger-light: #FEF2F2;
+      --success: #10B981;
+      --success-light: #ECFDF5;
+      --warning: #F59E0B;
+      --warning-light: #FFFBEB;
+      --border: #E5E5E1;
+      --shadow: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --max-w: 1200px;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    section { padding: 60px 32px; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; }
+
+    .section-label {
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--accent); margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px); font-weight: 700;
+      line-height: 1.2; margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px; color: var(--text-muted); max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 100px; font-size: 15px;
+      font-weight: 600; text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.25s; font-family: var(--font);
+    }
+
+    .btn-secondary {
+      background: var(--card); color: var(--text); border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { background: var(--bg-alt); transform: translateY(-1px); }
+
+    .badge {
+      display: inline-block; padding: 4px 12px; border-radius: 100px;
+      font-size: 12px; font-weight: 600;
+    }
+
+    .badge-critical { background: var(--danger-light); color: var(--danger); }
+    .badge-high { background: #FFF7ED; color: #EA580C; }
+    .badge-medium { background: var(--warning-light); color: #B45309; }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow);
+    }
+
+    .serif-accent { font-family: var(--font-serif); font-style: italic; }
+
+    .reveal { opacity: 1; transform: translateY(0); }
+
+    #demo { background: var(--bg); }
+
+    .demo-container {
+      margin-top: 48px; display: grid; grid-template-columns: 400px 1fr; gap: 32px;
+      align-items: start;
+    }
+
+    .mock-app {
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border); box-shadow: var(--shadow-lg);
+      background: var(--card);
+    }
+
+    .mock-app-bar {
+      display: flex; align-items: center; gap: 8px; padding: 12px 16px;
+      background: #FAFAFA; border-bottom: 1px solid var(--border);
+    }
+
+    .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mock-dot-r { background: #FF5F57; }
+    .mock-dot-y { background: #FEBC2E; }
+    .mock-dot-g { background: #28C840; }
+
+    .mock-app-title { margin-left: 8px; font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    .mock-app-body { padding: 28px; }
+
+    .mock-app-body h4 { font-size: 16px; margin-bottom: 20px; font-weight: 600; }
+
+    .plan-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .plan-label { color: var(--text-muted); }
+    .plan-value { font-weight: 600; }
+
+    .mock-buttons { margin-top: 24px; display: flex; gap: 12px; }
+
+    .btn-manage {
+      padding: 10px 18px; border-radius: 10px; font-size: 13px;
+      font-weight: 600; border: 1px solid var(--border);
+      background: var(--card); color: var(--text); cursor: default;
+      font-family: var(--font);
+    }
+
+    .btn-cancel-demo {
+      padding: 10px 18px; border-radius: 10px; font-size: 13px;
+      font-weight: 600; border: 1px solid var(--danger);
+      background: var(--danger-light); color: var(--danger); cursor: pointer;
+      font-family: var(--font); transition: all 0.2s;
+    }
+
+    .btn-cancel-demo:hover { background: var(--danger); color: #fff; }
+
+    .demo-output { min-height: 500px; }
+
+    .demo-placeholder {
+      height: 100%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      color: var(--text-muted); padding: 60px 40px;
+      border: 2px dashed var(--border); border-radius: var(--radius);
+    }
+
+    .demo-placeholder .icon { font-size: 48px; margin-bottom: 16px; opacity: 0.4; }
+
+    .demo-placeholder p { font-size: 15px; max-width: 300px; line-height: 1.6; }
+
+    .demo-step {
+      display: none; animation: fadeUp 0.5s ease;
+    }
+
+    .demo-step.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .friction-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .friction-score-ring {
+      width: 72px; height: 72px; position: relative;
+    }
+
+    .friction-score-ring svg { transform: rotate(-90deg); }
+
+    .friction-score-ring .score-text {
+      position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: center; font-size: 22px; font-weight: 700;
+    }
+
+    .signal-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .signal-item {
+      display: flex; align-items: flex-start; gap: 12px; padding: 14px;
+      background: var(--bg); border-radius: var(--radius-sm);
+      animation: slideIn 0.4s ease both;
+      font-size: 13px;
+    }
+
+    .signal-item:nth-child(2) { animation-delay: 0.15s; }
+    .signal-item:nth-child(3) { animation-delay: 0.3s; }
+    .signal-item:nth-child(4) { animation-delay: 0.45s; }
+    .signal-item:nth-child(5) { animation-delay: 0.6s; }
+    .signal-item:nth-child(6) { animation-delay: 0.75s; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .signal-icon {
+      width: 32px; height: 32px; border-radius: 8px; display: flex;
+      align-items: center; justify-content: center; font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .signal-icon.error { background: var(--danger-light); }
+    .signal-icon.rage { background: #FFF7ED; }
+    .signal-icon.dwell { background: var(--warning-light); }
+    .signal-icon.form { background: var(--accent-light); }
+    .signal-icon.repeat { background: #F0FDF4; }
+    .signal-icon.nav { background: #EFF6FF; }
+
+    .signal-detail strong { color: var(--text); }
+    .signal-detail span { color: var(--text-muted); }
+    .signal-page { font-size: 11px; color: var(--text-muted); font-family: monospace; margin-top: 2px; }
+
+    .chat-container {
+      max-height: 400px; overflow-y: auto; display: flex;
+      flex-direction: column; gap: 16px; padding: 4px;
+    }
+
+    .chat-msg {
+      max-width: 85%; padding: 14px 18px; border-radius: 16px;
+      font-size: 14px; line-height: 1.6; animation: fadeUp 0.4s ease;
+    }
+
+    .chat-msg.assistant {
+      background: var(--accent-light); color: #3730A3;
+      align-self: flex-start; border-bottom-left-radius: 4px;
+    }
+
+    .chat-msg.user {
+      background: var(--bg-alt); color: var(--text);
+      align-self: flex-end; border-bottom-right-radius: 4px;
+    }
+
+    .chat-msg .role-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.05em; margin-bottom: 4px; opacity: 0.6;
+    }
+
+    .typing-indicator {
+      display: inline-flex; gap: 4px; padding: 14px 18px;
+      background: var(--accent-light); border-radius: 16px;
+      border-bottom-left-radius: 4px; align-self: flex-start;
+    }
+
+    .typing-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #818CF8;
+      animation: typingBounce 1.2s infinite;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.15s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-6px); opacity: 1; }
+    }
+
+    .fix-item {
+      display: flex; gap: 12px; align-items: flex-start; padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .fix-item:last-child { border-bottom: none; }
+    .fix-item:nth-child(2) { animation-delay: 0.12s; }
+    .fix-item:nth-child(3) { animation-delay: 0.24s; }
+
+    .fix-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .fix-item p { font-size: 13px; color: var(--text-muted); }
+
+    .demo-progress {
+      display: flex; gap: 8px; margin-bottom: 24px;
+    }
+
+    .demo-progress-step {
+      flex: 1; height: 4px; border-radius: 2px; background: var(--border);
+      transition: background 0.4s;
+    }
+
+    .demo-progress-step.done { background: var(--accent); }
+    .demo-progress-step.active { background: var(--accent); animation: pulse 1.5s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .demo-step-label {
+      font-size: 12px; color: var(--text-muted); font-weight: 500;
+      margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    .choice-grid {
+      display: flex; flex-direction: column; gap: 12px; margin-top: 8px;
+    }
+
+    .choice-card {
+      display: flex; align-items: center; gap: 16px; padding: 20px 24px;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      background: var(--card); cursor: pointer; transition: all 0.25s;
+      font-family: var(--font); text-align: left; width: 100%;
+    }
+
+    .choice-card:hover {
+      border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light);
+      transform: translateY(-1px);
+    }
+
+    .choice-card-icon {
+      width: 48px; height: 48px; border-radius: 14px; display: flex;
+      align-items: center; justify-content: center; font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .choice-card-icon.voice { background: var(--accent-light); }
+    .choice-card-icon.chat { background: var(--success-light); }
+
+    .choice-card-body { flex: 1; }
+    .choice-card-body h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+    .choice-card-body p { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+    .choice-card-featured {
+      position: relative; border-color: var(--accent);
+      background: linear-gradient(135deg, #FAFAFF 0%, #EEF2FF 100%);
+      box-shadow: 0 0 0 3px var(--accent-light), 0 4px 16px rgba(80,70,229,0.10);
+      padding: 24px 24px 24px 24px;
+    }
+
+    .choice-card-featured:hover {
+      box-shadow: 0 0 0 3px rgba(80,70,229,0.25), 0 8px 24px rgba(80,70,229,0.15);
+      border-color: var(--accent-hover);
+    }
+
+    .choice-card-featured .choice-card-icon {
+      width: 56px; height: 56px; border-radius: 16px;
+      font-size: 26px; background: var(--accent); color: #fff;
+    }
+
+    .choice-card-featured h4 { font-size: 17px; }
+
+    .choice-recommended {
+      position: absolute; top: -10px; left: 20px;
+      background: var(--accent); color: #fff;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; padding: 3px 12px;
+      border-radius: 100px;
+    }
+
+    .choice-card-reward {
+      font-size: 18px; font-weight: 800; color: var(--success);
+      white-space: nowrap; flex-shrink: 0; background: var(--success-light);
+      padding: 8px 16px; border-radius: 100px;
+      animation: rewardPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes rewardPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .choice-cancel-link {
+      display: inline-block; margin-top: 16px; padding: 0; background: none;
+      border: none; color: var(--text-muted); font-size: 13px; cursor: pointer;
+      font-family: var(--font); text-decoration: underline;
+      text-underline-offset: 3px; transition: color 0.2s;
+    }
+
+    .choice-cancel-link:hover { color: var(--danger); }
+
+    .resurrected-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: #fff;
+      padding: 32px 48px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4), 0 0 0 4px rgba(16, 185, 129, 0.2);
+      z-index: 1000;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .resurrected-popup.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .resurrected-popup .popup-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      animation: celebrateBounce 0.6s ease infinite;
+    }
+
+    .resurrected-popup h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .resurrected-popup p {
+      font-size: 15px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    .resurrected-popup .popup-close {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: var(--font);
+    }
+
+    .resurrected-popup .popup-close:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .resurrected-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .resurrected-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @keyframes celebrateBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-8px) rotate(-5deg); }
+      75% { transform: translateY(-8px) rotate(5deg); }
+    }
+
+    .send-to-eng-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font);
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .send-to-eng-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
+    .send-to-eng-btn.sent {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    }
+
+    @media (max-width: 1024px) {
+      .demo-container { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<section id="demo">
+  <div class="container">
+    <p class="section-label">Interactive Demo</p>
+    <h2 class="section-title">See it in <span class="serif-accent">action.</span></h2>
+    <p class="section-sub">Click "Cancel Subscription" on the mock app to trigger the full AI-powered cancellation flow.</p>
+
+    <div class="demo-container">
+      <div>
+        <div class="mock-app reveal">
+          <div class="mock-app-bar">
+            <span class="mock-dot mock-dot-r"></span>
+            <span class="mock-dot mock-dot-y"></span>
+            <span class="mock-dot mock-dot-g"></span>
+            <span class="mock-app-title">StreamFlow &mdash; Settings</span>
+          </div>
+          <div class="mock-app-body">
+            <h4>Subscription Settings</h4>
+            <div class="plan-row">
+              <span class="plan-label">Plan</span>
+              <span class="plan-value">Pro</span>
+            </div>
+            <div class="plan-row">
+              <span class="plan-label">Status</span>
+              <span class="plan-value" style="color: var(--success);">Active</span>
+            </div>
+            <div class="plan-row">
+              <span class="plan-label">Billing</span>
+              <span class="plan-value">$49/mo</span>
+            </div>
+            <div class="plan-row">
+              <span class="plan-label">Member since</span>
+              <span class="plan-value">Jun 2025</span>
+            </div>
+            <div class="plan-row">
+              <span class="plan-label">User</span>
+              <span class="plan-value">Sarah Chen</span>
+            </div>
+            <div class="mock-buttons">
+              <button class="btn-manage">Manage Plan</button>
+              <button class="btn-cancel-demo" id="demo-cancel-btn">Cancel Subscription</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="demo-reset-wrap" style="display:none; margin-top: 16px; text-align: center;">
+          <button class="btn btn-secondary" id="demo-reset-btn" style="font-size: 13px; padding: 10px 20px;">Reset Demo</button>
+        </div>
+      </div>
+
+      <div class="demo-output">
+        <div id="demo-placeholder" class="demo-placeholder">
+          <div class="icon">&larr;</div>
+          <p>Click <strong>"Cancel Subscription"</strong> on the mock app to see the AI-powered cancellation flow in real&nbsp;time.</p>
+        </div>
+
+        <div id="demo-step-1" class="demo-step">
+          <div class="demo-progress">
+            <div class="demo-progress-step active"></div>
+            <div class="demo-progress-step"></div>
+            <div class="demo-progress-step"></div>
+            <div class="demo-progress-step"></div>
+          </div>
+          <div class="demo-step-label">Step 1 &mdash; Friction Analysis</div>
+          <div class="card">
+            <div class="friction-header">
+              <div>
+                <h3 style="font-size: 18px; font-weight: 600;">Session Analysis</h3>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Analyzing Sarah's last 30 days of activity&hellip;</p>
+              </div>
+              <div class="friction-score-ring">
+                <svg width="72" height="72" viewBox="0 0 72 72">
+                  <circle cx="36" cy="36" r="30" fill="none" stroke="#E5E5E1" stroke-width="6"/>
+                  <circle cx="36" cy="36" r="30" fill="none" stroke="var(--danger)" stroke-width="6"
+                    stroke-dasharray="188.5" stroke-dashoffset="188.5" stroke-linecap="round"
+                    id="friction-ring"/>
+                </svg>
+                <div class="score-text" id="friction-score-num">0</div>
+              </div>
+            </div>
+            <div class="signal-list" id="signal-list"></div>
+          </div>
+        </div>
+
+        <div id="demo-step-2" class="demo-step">
+          <div class="demo-progress">
+            <div class="demo-progress-step done"></div>
+            <div class="demo-progress-step active"></div>
+            <div class="demo-progress-step"></div>
+            <div class="demo-progress-step"></div>
+          </div>
+          <div class="demo-step-label">Step 2 &mdash; User Chooses</div>
+          <div class="card">
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">Before you go&hellip;</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">We&rsquo;d love to understand your experience. Pick how you&rsquo;d like to share your feedback.</p>
+            <div class="choice-grid">
+              <button class="choice-card choice-card-featured" id="choice-voice">
+                <span class="choice-recommended">Recommended</span>
+                <div class="choice-card-icon voice">&#x1f399;</div>
+                <div class="choice-card-body">
+                  <h4>Speak with us &mdash; earn $5</h4>
+                  <p>A quick 3-minute voice call. We&rsquo;ll credit <strong>$5 to your account</strong> just for sharing your experience.</p>
+                </div>
+                <div class="choice-card-reward">+$5</div>
+              </button>
+              <button class="choice-card" id="choice-chat">
+                <div class="choice-card-icon chat">&#x1f4ac;</div>
+                <div class="choice-card-body">
+                  <h4>Chat with us</h4>
+                  <p>Quick text-based chat &mdash; answer a few questions at your own pace.</p>
+                </div>
+              </button>
+            </div>
+            <button class="choice-cancel-link" id="choice-cancel-now">Skip and cancel my subscription</button>
+          </div>
+        </div>
+
+        <div id="demo-step-3" class="demo-step">
+          <div class="demo-progress">
+            <div class="demo-progress-step done"></div>
+            <div class="demo-progress-step done"></div>
+            <div class="demo-progress-step active"></div>
+            <div class="demo-progress-step"></div>
+          </div>
+          <div class="demo-step-label" id="interview-step-label">Step 3 &mdash; AI Voice Interview</div>
+          <div class="card">
+            <div id="interview-live-badge" style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--danger); animation: pulse 1.5s infinite;"></div>
+              <span style="font-size: 13px; color: var(--text-muted); font-weight: 500;" id="interview-live-text">Live &mdash; Voice Interview in Progress</span>
+            </div>
+            <div class="chat-container" id="chat-container"></div>
+          </div>
+        </div>
+
+        <div id="demo-step-4" class="demo-step">
+          <div class="demo-progress">
+            <div class="demo-progress-step done"></div>
+            <div class="demo-progress-step done"></div>
+            <div class="demo-progress-step done"></div>
+            <div class="demo-progress-step done"></div>
+          </div>
+          <div class="demo-step-label">Step 4 &mdash; Prioritized Engineering Fixes</div>
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+              <div>
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">Prioritized Engineering Fixes from This Session</h3>
+                <p style="font-size: 13px; color: var(--text-muted);">Automatically extracted for the engineering team.</p>
+              </div>
+              <button class="send-to-eng-btn" id="send-to-eng-btn">
+                <span>&#x1F4E8;</span> Send to Engineering Team
+              </button>
+            </div>
+            <div id="fixes-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="resurrected-overlay" id="resurrected-overlay"></div>
+<div class="resurrected-popup" id="resurrected-popup">
+  <div class="popup-icon">&#127881;</div>
+  <h2>User Resurrected</h2>
+  <p>Sarah accepted the offer and is staying!</p>
+  <button class="popup-close" id="popup-close">Continue</button>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const FRICTION_SIGNALS = [
+    { icon: '&#x26a0;', iconClass: 'error', label: 'Rendering Crash', detail: '3 export crashes (500 errors) in 7 days', page: '/editor/export' },
+    { icon: '&#x1f4a2;', iconClass: 'rage', label: 'Rage Clicks', detail: '6 clicks in 2 seconds on export button', page: '/editor/export' },
+    { icon: '&#x1f501;', iconClass: 'repeat', label: 'Repeated Action', detail: '"retry_render" triggered 8 times', page: '/editor/render' },
+    { icon: '&#x23f1;', iconClass: 'dwell', label: 'Long Dwell Time', detail: '14 minutes on timeline — likely stuck', page: '/editor/timeline' },
+    { icon: '&#x1f4dd;', iconClass: 'form', label: 'Form Abandonment', detail: 'Abandoned billing form once', page: '/settings/billing' },
+    { icon: '&#x21c4;', iconClass: 'nav', label: 'Rapid Navigation', detail: 'Left help articles after 1s — 4 times', page: '/help/articles' },
+  ];
+
+  const TRANSCRIPT = [
+    { role: 'assistant', content: "I'm sorry to hear you're thinking about leaving, Sarah. I'd love to understand — what's been the most frustrating part of your experience with Juno?" },
+    { role: 'user', content: "Honestly the AI just cycles through the same preset questions. It doesn't actually listen to what I'm saying. It feels robotic, not like a real conversation." },
+    { role: 'assistant', content: "That's really valuable feedback, thank you. We're actually working on fixing that this week — we're adding better contextual awareness so the AI actually responds to what you're saying instead of just cycling through preset questions. Would you be open to giving Juno another shot once that fix goes live, maybe with a free month to test it out?" },
+    { role: 'user', content: "Yeah, I'd be willing to give it another chance if it didn't do that." },
+  ];
+
+  const FIXES = [
+    { severity: 'critical', title: 'Fix multi-layer export crash', desc: 'OOM error when project has 4+ layers. Affects 23% of Pro users.', action: 'Implement chunked rendering pipeline.' },
+    { severity: 'critical', title: 'AI cycles preset questions instead of listening', desc: 'Users report AI feels robotic, not responding to actual input. Causes frustration.', action: 'Add contextual awareness and dynamic response generation.' },
+    { severity: 'high', title: 'Optimize rendering speed', desc: 'Time scales exponentially with layers. 5-layer project takes 12min.', action: 'Add GPU-accelerated compositing via WebGPU.' },
+    { severity: 'high', title: 'Add auto-save recovery', desc: 'Users lose all progress on export crash. No recovery mechanism.', action: 'Periodic auto-save to IndexedDB every 30s.' },
+    { severity: 'medium', title: 'Improve help search relevance', desc: 'Users abandon help articles after 1s. Content not matching queries.', action: 'Implement semantic search with embeddings.' },
+  ];
+
+  var demoRunning = false;
+  var cancelBtn = document.getElementById('demo-cancel-btn');
+  var resetBtn = document.getElementById('demo-reset-btn');
+  var resetWrap = document.getElementById('demo-reset-wrap');
+  var choiceVoice = document.getElementById('choice-voice');
+  var choiceChat = document.getElementById('choice-chat');
+  var choiceCancelNow = document.getElementById('choice-cancel-now');
+  var resurrectedPopup = document.getElementById('resurrected-popup');
+  var resurrectedOverlay = document.getElementById('resurrected-overlay');
+  var popupClose = document.getElementById('popup-close');
+
+  function showResurrectedPopup() {
+    resurrectedOverlay.classList.add('show');
+    resurrectedPopup.classList.add('show');
+  }
+
+  function hideResurrectedPopup() {
+    resurrectedOverlay.classList.remove('show');
+    resurrectedPopup.classList.remove('show');
+  }
+
+  popupClose.addEventListener('click', hideResurrectedPopup);
+  resurrectedOverlay.addEventListener('click', hideResurrectedPopup);
+
+  var sendToEngBtn = document.getElementById('send-to-eng-btn');
+  sendToEngBtn.addEventListener('click', function() {
+    sendToEngBtn.classList.add('sent');
+    sendToEngBtn.innerHTML = '<span>&#x2714;</span> Sent to Engineering Team';
+    sendToEngBtn.disabled = true;
+  });
+
+  cancelBtn.addEventListener('click', function() {
+    if (demoRunning) return;
+    demoRunning = true;
+    cancelBtn.disabled = true;
+    cancelBtn.textContent = 'Processing...';
+    document.getElementById('demo-placeholder').style.display = 'none';
+    runDemoFlow();
+  });
+
+  resetBtn.addEventListener('click', resetDemo);
+
+  choiceVoice.addEventListener('click', function() {
+    document.getElementById('interview-step-label').textContent = 'Step 3 — AI Voice Interview';
+    document.getElementById('interview-live-text').textContent = 'Live — Voice Interview in Progress';
+    showStep('demo-step-3');
+    playTranscript();
+  });
+
+  choiceChat.addEventListener('click', function() {
+    document.getElementById('interview-step-label').textContent = 'Step 3 — AI Chat Interview';
+    document.getElementById('interview-live-text').textContent = 'Live — Chat Interview in Progress';
+    showStep('demo-step-3');
+    playTranscript();
+  });
+
+  choiceCancelNow.addEventListener('click', function() {
+    showStep('demo-step-4');
+    renderFixes();
+  });
+
+  function resetDemo() {
+    demoRunning = false;
+    cancelBtn.disabled = false;
+    cancelBtn.textContent = 'Cancel Subscription';
+    resetWrap.style.display = 'none';
+    document.getElementById('demo-placeholder').style.display = 'flex';
+    hideResurrectedPopup();
+    ['demo-step-1','demo-step-2','demo-step-3','demo-step-4'].forEach(function(id) {
+      document.getElementById(id).classList.remove('active');
+    });
+    document.getElementById('signal-list').innerHTML = '';
+    document.getElementById('chat-container').innerHTML = '';
+    document.getElementById('fixes-list').innerHTML = '';
+    sendToEngBtn.classList.remove('sent');
+    sendToEngBtn.innerHTML = '<span>&#x1F4E8;</span> Send to Engineering Team';
+    sendToEngBtn.disabled = false;
+    document.getElementById('friction-ring').style.strokeDashoffset = '188.5';
+    document.getElementById('friction-score-num').textContent = '0';
+  }
+
+  function runDemoFlow() {
+    showStep('demo-step-1');
+    animateFrictionScore(73, 1500);
+
+    var signalList = document.getElementById('signal-list');
+    FRICTION_SIGNALS.forEach(function(s, i) {
+      setTimeout(function() {
+        var el = document.createElement('div');
+        el.className = 'signal-item';
+        el.innerHTML =
+          '<div class="signal-icon ' + s.iconClass + '">' + s.icon + '</div>' +
+          '<div class="signal-detail"><strong>' + s.label + '</strong><br>' +
+          '<span>' + s.detail + '</span>' +
+          '<div class="signal-page">' + s.page + '</div></div>';
+        signalList.appendChild(el);
+      }, 400 + i * 350);
+    });
+
+    setTimeout(function() {
+      showStep('demo-step-2');
+    }, 400 + FRICTION_SIGNALS.length * 350 + 800);
+  }
+
+  function showStep(id) {
+    document.getElementById(id).classList.add('active');
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function animateFrictionScore(target, duration) {
+    var ring = document.getElementById('friction-ring');
+    var num = document.getElementById('friction-score-num');
+    var circumference = 188.5;
+    var start = performance.now();
+
+    function tick(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.round(target * eased);
+      num.textContent = current;
+      ring.style.strokeDashoffset = circumference - (circumference * (current / 100));
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  function playTranscript() {
+    var container = document.getElementById('chat-container');
+    var delay = 0;
+
+    TRANSCRIPT.forEach(function(msg, i) {
+      delay += (i === 0) ? 400 : 1800;
+
+      setTimeout(function() {
+        var typing = document.createElement('div');
+        typing.className = 'typing-indicator';
+        typing.id = 'typing-' + i;
+        typing.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+        if (msg.role === 'user') typing.style.alignSelf = 'flex-end';
+        container.appendChild(typing);
+        container.scrollTop = container.scrollHeight;
+      }, delay);
+
+      var typingDuration = Math.min(msg.content.length * 15, 2000);
+      delay += typingDuration;
+
+      setTimeout(function() {
+        var typing = document.getElementById('typing-' + i);
+        if (typing) typing.remove();
+
+        var el = document.createElement('div');
+        el.className = 'chat-msg ' + msg.role;
+        el.innerHTML = '<div class="role-label">' + (msg.role === 'assistant' ? 'AI Agent' : 'Sarah') + '</div>' + msg.content;
+        container.appendChild(el);
+        container.scrollTop = container.scrollHeight;
+      }, delay);
+    });
+
+    delay += 1000;
+    setTimeout(function() {
+      showResurrectedPopup();
+    }, delay);
+
+    delay += 2500;
+    setTimeout(function() {
+      showStep('demo-step-4');
+      renderFixes();
+    }, delay);
+  }
+
+  function renderFixes() {
+    var list = document.getElementById('fixes-list');
+    FIXES.forEach(function(fix) {
+      var el = document.createElement('div');
+      el.className = 'fix-item';
+      el.innerHTML =
+        '<span class="badge badge-' + fix.severity + '">' + fix.severity.toUpperCase() + '</span>' +
+        '<div><h4>' + fix.title + '</h4><p>' + fix.desc + '</p></div>';
+      list.appendChild(el);
+    });
+
+    resetWrap.style.display = 'block';
+    cancelBtn.textContent = 'Cancelled';
+  }
+
+})();
+</script>
+
+</body>
+</html>
