@@ -1,230 +1,241 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 
-function DashboardMockup() {
+const CONVERSATIONS = [
+  {
+    scenario: "Subscription Cancellation",
+    messages: [
+      { role: "ai", text: "Hi Sarah! I noticed you're considering cancelling. Before you go — can I ask what's not working?" },
+      { role: "user", text: "The pricing jumped from $29 to $79. I only use reports and alerts." },
+      { role: "ai", text: "That makes sense. What if I could offer a custom plan at $35/mo with just reports and alerts?" },
+      { role: "user", text: "Wait, really? That would be perfect actually." },
+    ],
+    insight: "Pricing misaligned with usage — recovered with custom plan",
+    tag: "RECOVERED",
+  },
+  {
+    scenario: "Feature Frustration",
+    messages: [
+      { role: "ai", text: "Hey Marcus! I see you've been spending time on the exports page. Running into any issues?" },
+      { role: "user", text: "Yeah, exporting to CSV takes forever and crashes half the time." },
+      { role: "ai", text: "I'm sorry about that. Our team is shipping a fix next week. Can I notify you when it's live?" },
+      { role: "user", text: "Sure, that would be great. I'll hold off on switching then." },
+    ],
+    insight: "Export bug causing churn — escalated to engineering",
+    tag: "RETAINED",
+  },
+  {
+    scenario: "Competitor Switch",
+    messages: [
+      { role: "ai", text: "Hi Priya! Looks like you haven't logged in for 2 weeks. Is everything okay with your experience?" },
+      { role: "user", text: "Honestly, I found another tool that has better integrations with Slack." },
+      { role: "ai", text: "We actually just launched Slack integration last week! Want me to walk you through it?" },
+      { role: "user", text: "Oh I didn't know that! Yes please." },
+    ],
+    insight: "Feature awareness gap — resolved with education",
+    tag: "RECOVERED",
+  },
+]
+
+function ConversationDemo() {
+  const [activeIdx, setActiveIdx] = useState(0)
+  const [visibleMessages, setVisibleMessages] = useState(0)
+
+  useEffect(() => {
+    setVisibleMessages(0)
+    const conversation = CONVERSATIONS[activeIdx]
+    const timers: NodeJS.Timeout[] = []
+
+    conversation.messages.forEach((_, i) => {
+      timers.push(setTimeout(() => setVisibleMessages(i + 1), 800 + i * 1200))
+    })
+
+    const nextTimer = setTimeout(() => {
+      setActiveIdx((prev) => (prev + 1) % CONVERSATIONS.length)
+    }, 800 + conversation.messages.length * 1200 + 2000)
+    timers.push(nextTimer)
+
+    return () => timers.forEach(clearTimeout)
+  }, [activeIdx])
+
+  const conversation = CONVERSATIONS[activeIdx]
+
   return (
     <div
-      className="rounded-2xl overflow-hidden"
+      className="rounded-2xl overflow-hidden w-full max-w-lg"
       style={{
         backgroundColor: "var(--t-bg-card)",
         border: "1px solid var(--t-border)",
-        boxShadow: "0 8px 40px rgba(0,0,0,0.08)",
+        boxShadow: "0 20px 60px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.02)",
       }}
     >
-      {/* Title bar */}
+      {/* Header */}
       <div
-        className="flex items-center gap-2 px-5 py-3"
+        className="flex items-center justify-between px-5 py-3.5"
         style={{ borderBottom: "1px solid var(--t-border)" }}
       >
-        <div className="flex gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
-          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/60" />
-          <div className="w-2.5 h-2.5 rounded-full bg-green-400/60" />
+        <div className="flex items-center gap-2.5">
+          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-xs font-semibold" style={{ color: "var(--t-text)" }}>
+            Tranzmit AI
+          </span>
         </div>
-        <div
-          className="ml-3 text-xs font-medium"
-          style={{ color: "var(--t-text-muted)" }}
+        <span
+          className="text-[10px] font-medium px-2 py-0.5 rounded-full"
+          style={{ backgroundColor: "var(--t-bg-subtle)", color: "var(--t-text-muted)" }}
         >
-          Tranzmit Dashboard
-        </div>
+          {conversation.scenario}
+        </span>
       </div>
 
-      <div className="p-5 sm:p-6">
-        {/* Top stats row */}
-        <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-5">
-          {[
-            { label: "At-Risk Users", value: "142", trend: "-23%", good: true },
-            { label: "Recovered", value: "89", trend: "+31%", good: true },
-            { label: "Churn Rate", value: "4.2%", trend: "-1.8%", good: true },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-xl p-3 sm:p-4"
-              style={{ backgroundColor: "var(--t-bg-subtle)" }}
-            >
-              <p
-                className="text-[10px] sm:text-xs font-medium"
-                style={{ color: "var(--t-text-muted)" }}
-              >
-                {stat.label}
-              </p>
-              <div className="flex items-baseline gap-1.5 mt-1">
-                <span
-                  className="text-lg sm:text-2xl font-bold"
-                  style={{ color: "var(--t-text)" }}
-                >
-                  {stat.value}
-                </span>
-                <span className="text-[10px] sm:text-xs font-semibold text-emerald-500">
-                  {stat.trend}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Two column layout: Session + Interview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* Session Analysis Panel */}
-          <div
-            className="rounded-xl p-4"
-            style={{ border: "1px solid var(--t-border)" }}
+      {/* Messages */}
+      <div className="p-5 space-y-3 min-h-[220px]">
+        {conversation.messages.slice(0, visibleMessages).map((msg, i) => (
+          <motion.div
+            key={`${activeIdx}-${i}`}
+            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-              <span
-                className="text-xs font-semibold"
-                style={{ color: "var(--t-text)" }}
-              >
-                Session Analysis
-              </span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-medium ml-auto">
-                QUANT
-              </span>
-            </div>
-            {/* Mini session timeline */}
-            <div className="space-y-2">
-              {[
-                { page: "/pricing", time: "2m 14s", flag: true },
-                { page: "/settings", time: "0m 08s", flag: false },
-                { page: "/cancel", time: "1m 42s", flag: true },
-              ].map((s) => (
-                <div
-                  key={s.page}
-                  className="flex items-center justify-between text-[10px] sm:text-xs py-1.5 px-2 rounded-lg"
-                  style={{ backgroundColor: s.flag ? "rgba(239,68,68,0.06)" : "var(--t-bg-subtle)" }}
-                >
-                  <span
-                    className="font-mono"
-                    style={{ color: "var(--t-text-secondary)" }}
-                  >
-                    {s.page}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <span style={{ color: "var(--t-text-muted)" }}>
-                      {s.time}
-                    </span>
-                    {s.flag && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-            {/* Mini bar chart */}
-            <div className="flex items-end gap-1 mt-3 h-10">
-              {[40, 65, 30, 80, 55, 20, 70, 45, 15, 60, 35, 75].map(
-                (h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-sm transition-all"
-                    style={{
-                      height: `${h}%`,
-                      backgroundColor:
-                        h < 30
-                          ? "rgba(239,68,68,0.5)"
-                          : "rgba(59,130,246,0.3)",
-                    }}
-                  />
-                )
-              )}
-            </div>
-          </div>
-
-          {/* Interview Panel */}
-          <div
-            className="rounded-xl p-4"
-            style={{ border: "1px solid var(--t-border)" }}
-          >
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
-              <span
-                className="text-xs font-semibold"
-                style={{ color: "var(--t-text)" }}
-              >
-                AI Interview
-              </span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-violet-500/10 text-violet-500 font-medium ml-auto">
-                QUAL
-              </span>
-            </div>
-            {/* Chat bubbles */}
-            <div className="space-y-2">
-              <div
-                className="text-[10px] sm:text-xs px-3 py-2 rounded-xl rounded-bl-sm max-w-[85%]"
-                style={{
-                  backgroundColor: "var(--t-bg-subtle)",
-                  color: "var(--t-text-secondary)",
-                }}
-              >
-                What made you consider cancelling?
-              </div>
-              <div
-                className="text-[10px] sm:text-xs px-3 py-2 rounded-xl rounded-br-sm max-w-[85%] ml-auto"
-                style={{
-                  backgroundColor: "rgba(139,92,246,0.1)",
-                  color: "var(--t-text)",
-                }}
-              >
-                The pricing tier jumped too fast. I only need 2 features.
-              </div>
-              <div
-                className="text-[10px] sm:text-xs px-3 py-2 rounded-xl rounded-bl-sm max-w-[85%]"
-                style={{
-                  backgroundColor: "var(--t-bg-subtle)",
-                  color: "var(--t-text-secondary)",
-                }}
-              >
-                Which 2 features do you use most?
-              </div>
-              <div
-                className="text-[10px] sm:text-xs px-3 py-2 rounded-xl rounded-br-sm max-w-[85%] ml-auto"
-                style={{
-                  backgroundColor: "rgba(139,92,246,0.1)",
-                  color: "var(--t-text)",
-                }}
-              >
-                Reports and the alert system. Everything else I never open.
-              </div>
-            </div>
-            {/* Insight tag */}
             <div
-              className="mt-3 flex items-center gap-1.5 text-[10px] sm:text-xs px-2.5 py-1.5 rounded-lg"
-              style={{ backgroundColor: "rgba(16,185,129,0.08)" }}
+              className={`text-[13px] leading-relaxed px-4 py-2.5 max-w-[85%] ${
+                msg.role === "user"
+                  ? "rounded-2xl rounded-br-md"
+                  : "rounded-2xl rounded-bl-md"
+              }`}
+              style={{
+                backgroundColor:
+                  msg.role === "user"
+                    ? "var(--t-bg-subtle)"
+                    : "rgba(16,185,129,0.08)",
+                color: "var(--t-text)",
+              }}
             >
-              <svg className="w-3 h-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
-              <span className="font-semibold text-emerald-600">Insight:</span>
-              <span style={{ color: "var(--t-text-secondary)" }}>
-                Pricing misaligned with usage pattern
-              </span>
+              {msg.text}
             </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Insight footer */}
+      {visibleMessages >= conversation.messages.length && (
+        <motion.div
+          className="px-5 pb-4"
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div
+            className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-[12px]"
+            style={{ backgroundColor: "rgba(16,185,129,0.06)" }}
+          >
+            <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+            <span className="text-emerald-600 font-semibold">{conversation.tag}</span>
+            <span className="mx-1" style={{ color: "var(--t-border)" }}>|</span>
+            <span style={{ color: "var(--t-text-secondary)" }}>{conversation.insight}</span>
           </div>
-        </div>
+        </motion.div>
+      )}
+
+      {/* Dots indicator */}
+      <div className="flex justify-center gap-1.5 pb-4">
+        {CONVERSATIONS.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActiveIdx(i)}
+            className="w-1.5 h-1.5 rounded-full transition-all duration-300"
+            style={{
+              backgroundColor: i === activeIdx ? "var(--t-text)" : "var(--t-border)",
+              transform: i === activeIdx ? "scale(1.3)" : "scale(1)",
+            }}
+          />
+        ))}
       </div>
     </div>
   )
 }
 
+function StatsBar() {
+  return (
+    <motion.div
+      className="flex flex-wrap justify-center gap-8 sm:gap-14 mt-16 sm:mt-20"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.8 }}
+    >
+      {[
+        { value: "40%", label: "Churn Reduction" },
+        { value: "3x", label: "Faster Insights" },
+        { value: "<5min", label: "Setup Time" },
+      ].map((stat) => (
+        <div key={stat.label} className="text-center">
+          <p className="text-3xl sm:text-4xl font-bold" style={{ color: "var(--t-text)" }}>
+            {stat.value}
+          </p>
+          <p className="text-sm mt-1" style={{ color: "var(--t-text-muted)" }}>
+            {stat.label}
+          </p>
+        </div>
+      ))}
+    </motion.div>
+  )
+}
+
 export function HeroSection() {
   return (
-    <section className="relative pt-32 sm:pt-40 pb-10 sm:pb-14">
-      <div className="container mx-auto">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-bold leading-[1.1] tracking-tight"
-            style={{ color: "var(--t-text)" }}
+    <section className="relative pt-32 sm:pt-40 pb-16 sm:pb-24 overflow-hidden">
+      {/* Subtle gradient background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16,185,129,0.06), transparent)",
+        }}
+      />
+
+      <div className="container mx-auto relative">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            className="mb-5"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            AI to reduce churn
+            <span
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium"
+              style={{
+                backgroundColor: "var(--t-bg-subtle)",
+                color: "var(--t-text-secondary)",
+                border: "1px solid var(--t-border)",
+              }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              AI-Native Cancel Flow
+            </span>
+          </motion.div>
+
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight"
+            style={{ color: "var(--t-text)" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Better retention.
             <br />
-            and recover{" "}
-            <span className="italic font-medium" style={{ color: "var(--t-text-secondary)" }}>
-              lost customers
+            <span
+              className="bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(135deg, #10B981, #3B82F6, #8B5CF6)",
+              }}
+            >
+              Built on Tranzmit.
             </span>
           </motion.h1>
 
@@ -233,13 +244,10 @@ export function HeroSection() {
             style={{ color: "var(--t-text-secondary)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            AI Native Cancel Button for Consumer Apps <br></br>
-           to
-            {" "}
-            <strong style={{ color: "var(--t-text)" }}>Reduce Churn by up to 40% </strong> and{" "}
-            <strong style={{ color: "var(--t-text)" }}>Recover Lost Customers</strong> 
+            Deploy an AI agent on your cancel button that understands why customers leave,
+            recovers them in real time, and turns churn into growth.
           </motion.p>
 
           <motion.div
@@ -252,38 +260,47 @@ export function HeroSection() {
               href="https://calendly.com/tranzmitai/new-meeting"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 text-base font-semibold rounded-full transition-all hover:shadow-lg"
+              className="group px-8 py-3.5 text-base font-semibold rounded-full transition-all hover:shadow-lg flex items-center gap-2"
               style={{
                 backgroundColor: "var(--t-btn-bg)",
                 color: "var(--t-btn-text)",
               }}
             >
-              Request a Demo
+              Book a Demo
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </a>
             <a
               href="https://x.com/agaazsinghal007/status/2019920921285521780?s=20"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 text-base font-medium rounded-full transition-all"
+              className="px-8 py-3.5 text-base font-medium rounded-full transition-all hover:shadow-sm flex items-center gap-2"
               style={{
                 color: "var(--t-text)",
                 border: "1px solid var(--t-border)",
               }}
             >
-              Watch a 60-sec Example
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Watch it Work
             </a>
           </motion.div>
         </div>
 
-        {/* Product mockup */}
+        {/* Interactive conversation demo */}
         <motion.div
-          className="mt-14 sm:mt-20 max-w-4xl mx-auto"
+          className="mt-16 sm:mt-24 flex justify-center"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <DashboardMockup />
+          <ConversationDemo />
         </motion.div>
+
+        <StatsBar />
       </div>
     </section>
   )

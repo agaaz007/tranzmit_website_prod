@@ -13,8 +13,8 @@ export function LogoMarquee() {
   const items = [...BRANDS, ...BRANDS, ...BRANDS, ...BRANDS]
 
   return (
-    <section className="pt-6 pb-14 sm:pt-8 sm:pb-20 overflow-hidden">
-      <div className="container mx-auto mb-8">
+    <section className="py-10 sm:py-16 overflow-hidden">
+      <div className="container mx-auto mb-6">
         <p
           className="text-center text-xs font-semibold tracking-[0.2em] uppercase"
           style={{ color: "var(--t-text-muted)" }}
@@ -25,13 +25,13 @@ export function LogoMarquee() {
 
       <div className="relative w-full overflow-hidden">
         <div
-          className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 z-10 pointer-events-none"
+          className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 z-10 pointer-events-none"
           style={{
             background: "linear-gradient(to right, var(--t-bg), transparent)",
           }}
         />
         <div
-          className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 z-10 pointer-events-none"
+          className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 z-10 pointer-events-none"
           style={{
             background: "linear-gradient(to left, var(--t-bg), transparent)",
           }}
@@ -41,14 +41,14 @@ export function LogoMarquee() {
           {items.map((brand, i) => (
             <div
               key={i}
-              className="mx-8 sm:mx-14 flex-shrink-0 opacity-50 hover:opacity-100 transition-opacity duration-300 dark:brightness-0 dark:invert dark:opacity-40 dark:hover:opacity-70"
+              className="mx-8 sm:mx-14 flex-shrink-0 opacity-40 hover:opacity-70 transition-opacity duration-300 dark:brightness-0 dark:invert dark:opacity-30 dark:hover:opacity-60"
             >
               <Image
                 src={brand.logo}
                 alt={brand.name}
                 width={brand.width}
                 height={brand.height}
-                className="h-8 sm:h-10 w-auto object-contain select-none pointer-events-none"
+                className="h-7 sm:h-9 w-auto object-contain select-none pointer-events-none"
               />
             </div>
           ))}
