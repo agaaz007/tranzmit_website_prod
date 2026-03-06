@@ -8,7 +8,7 @@ const FEATURES = [
     title: "Understand every churn",
     description:
       "AI interviews users at the moment of cancellation — surfacing the real reasons behind every lost customer.",
-    gradient: "linear-gradient(135deg, #0F766E 0%, #10B981 50%, #34D399 100%)",
+    gradient: "linear-gradient(160deg, #5B7FA6 0%, #7BA4CC 40%, #A8C8E8 100%)",
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
         <circle cx="16" cy="12" r="6" stroke="white" strokeWidth="2" />
@@ -21,7 +21,7 @@ const FEATURES = [
     title: "Recover in real time",
     description:
       "Personalized offers, objection handling, and smart routing — all powered by AI that understands context.",
-    gradient: "linear-gradient(135deg, #1E40AF 0%, #3B82F6 50%, #60A5FA 100%)",
+    gradient: "linear-gradient(160deg, #5A7A52 0%, #7A9E6E 40%, #A3C493 100%)",
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
         <path d="M16 4v8l6 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -34,7 +34,7 @@ const FEATURES = [
     title: "Insights that drive action",
     description:
       "Qual meets quant in one dashboard. See who's churning, why, and exactly what to build next.",
-    gradient: "linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #C084FC 100%)",
+    gradient: "linear-gradient(160deg, #9E6B5A 0%, #C4897A 40%, #DBA99C 100%)",
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
         <rect x="4" y="4" width="24" height="24" rx="4" stroke="white" strokeWidth="2" />
