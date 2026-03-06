@@ -33,10 +33,10 @@ export function Header() {
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.05)]'
+          ? 'backdrop-blur-xl shadow-[0_1px_0_rgba(0,0,0,0.04)]'
           : 'bg-transparent'
       }`}
-      style={scrolled ? { backgroundColor: "color-mix(in srgb, var(--t-bg) 90%, transparent)" } : undefined}
+      style={scrolled ? { backgroundColor: "color-mix(in srgb, var(--t-bg) 85%, transparent)" } : undefined}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -50,13 +50,13 @@ export function Header() {
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
-            <a href="/interactive-demo.html" className="text-sm font-medium transition-colors" style={{ color: "var(--t-text-secondary)" }}>
+            <a href="/interactive-demo.html" className="text-sm font-medium transition-opacity hover:opacity-60" style={{ color: "var(--t-text-secondary)" }}>
               How it works
             </a>
-            <a href="/insights-dashboard.html" className="text-sm font-medium transition-colors" style={{ color: "var(--t-text-secondary)" }}>
+            <a href="/insights-dashboard.html" className="text-sm font-medium transition-opacity hover:opacity-60" style={{ color: "var(--t-text-secondary)" }}>
               Impact
             </a>
-            <a href="#for-teams" className="text-sm font-medium transition-colors" style={{ color: "var(--t-text-secondary)" }}>
+            <a href="#for-teams" className="text-sm font-medium transition-opacity hover:opacity-60" style={{ color: "var(--t-text-secondary)" }}>
               For teams
             </a>
             <ThemeToggle />
@@ -64,13 +64,16 @@ export function Header() {
               href="https://calendly.com/tranzmitai/new-meeting"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2.5 text-sm font-semibold rounded-full transition-colors"
+              className="group px-5 py-2.5 text-sm font-semibold rounded-full transition-all hover:shadow-md flex items-center gap-1.5"
               style={{
                 backgroundColor: "var(--t-btn-bg)",
                 color: "var(--t-btn-text)",
               }}
             >
-              Request a Demo
+              Book a Demo
+              <svg className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </a>
           </div>
 
@@ -128,7 +131,7 @@ export function Header() {
                 }}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Request a Demo
+                Book a Demo
               </a>
             </div>
           </motion.div>

@@ -6,6 +6,7 @@ import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { LogoMarquee } from "@/components/logo-marquee"
 import { ProblemSection } from "@/components/problem-section"
+import { FeatureCardsSection } from "@/components/feature-cards-section"
 import { HowItWorksSection } from "@/components/how-it-works-section"
 import { ImpactSection } from "@/components/impact-section"
 import { WhyItWorksSection } from "@/components/why-it-works-section"
@@ -14,14 +15,6 @@ import { ForTeamsSection } from "@/components/for-teams-section"
 import { TrialSection } from "@/components/trial-section"
 import { FinalCtaSection } from "@/components/final-cta-section"
 import { Footer } from "@/components/footer"
-
-function Divider() {
-  return (
-    <div className="max-w-3xl mx-auto px-5">
-      <div className="h-px" style={{ backgroundColor: "var(--t-border)" }} />
-    </div>
-  )
-}
 
 export default function HomePage() {
   const posthog = usePostHog()
@@ -63,19 +56,14 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <LogoMarquee />
-        <Divider />
+        <FeatureCardsSection />
         <ProblemSection />
-        <Divider />
         <HowItWorksSection />
-        <Divider />
-        <ImpactSection />
-        <Divider />
         <WhyItWorksSection />
+        <ImpactSection />
         <VisionSection />
         <ForTeamsSection />
-        <Divider />
         <TrialSection />
-        <Divider />
         <FinalCtaSection />
       </main>
       <Footer />
