@@ -33,7 +33,7 @@ export function FinalCtaSection() {
               className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight"
               style={{ color: "var(--t-text)" }}
             >
-              Stop losing customers.
+              Your cancel button is
               <br />
               <span
                 className="bg-clip-text text-transparent"
@@ -41,7 +41,7 @@ export function FinalCtaSection() {
                   backgroundImage: "linear-gradient(135deg, #10B981, #3B82F6)",
                 }}
               >
-                Start recovering them.
+                leaking revenue right now.
               </span>
             </h2>
 
@@ -49,7 +49,7 @@ export function FinalCtaSection() {
               className="mt-6 text-lg max-w-xl mx-auto"
               style={{ color: "var(--t-text-secondary)" }}
             >
-              Join the teams using Tranzmit to understand churn, recover revenue, and build what customers actually need.
+              20 minutes. We&apos;ll show you what the first week looks like on your product.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">

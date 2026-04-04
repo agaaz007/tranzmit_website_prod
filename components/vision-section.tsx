@@ -53,9 +53,9 @@ export function VisionSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              The end of{" "}
+              The cancel button is{" "}
               <span className="italic font-medium text-white/60">
-                guessing
+                the wedge.
               </span>
             </motion.h2>
 
@@ -66,16 +66,15 @@ export function VisionSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <p className="text-lg sm:text-xl leading-relaxed text-white/70">
-                Product teams shouldn&apos;t spend months collecting feedback
-                or stare at dashboards hoping for answers.
+                The real prize is a product layer that knows what&apos;s breaking before your team does, and acts on it. That&apos;s what we&apos;re building.
               </p>
 
               <div className="space-y-3 pt-4">
                 {[
-                  "Session analysis surfaces what's broken",
-                  "AI interviews reveal why it matters",
-                  "Qual + quant fuse into a single source of truth",
-                  "Teams execute on decisions — not data wrangling",
+                  "Knows what's breaking before your team does",
+                  "Acts on signals automatically — not after a meeting",
+                  "Compounds intelligence with every cancellation",
+                  "Becomes the product layer between you and churn",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
@@ -91,7 +90,7 @@ export function VisionSection() {
               </div>
 
               <p className="text-xl sm:text-2xl font-semibold text-white pt-4">
-                Tranzmit is the first step toward that future.
+                Tranzmit is the wedge into that future.
               </p>
             </motion.div>
           </div>

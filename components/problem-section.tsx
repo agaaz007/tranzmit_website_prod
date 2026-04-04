@@ -69,10 +69,10 @@ export function ProblemSection() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                You have the data.
+                You see the drop-off.
                 <br />
                 <span className="italic font-medium" style={{ color: "var(--t-text-muted)" }}>
-                  You don&apos;t have the why.
+                  You never see the decision.
                 </span>
               </motion.h2>
 
@@ -83,7 +83,7 @@ export function ProblemSection() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                You need qual + quant together — in real time, not next quarter.
+                By the time churn shows up in your dashboard, the user is already gone. Tranzmit sits at the decision moment. Not after it.
               </motion.p>
             </div>
 
