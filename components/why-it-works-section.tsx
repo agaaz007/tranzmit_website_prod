@@ -33,10 +33,10 @@ export function WhyItWorksSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Most tools observe churn.
+              People leave because they feel ignored.
               <br />
               <span className="italic font-medium" style={{ color: "var(--t-text-secondary)" }}>
-                Tranzmit operates inside it.
+                Being heard changes everything.
               </span>
             </motion.h2>
           </div>
@@ -52,19 +52,19 @@ export function WhyItWorksSection() {
               {
                 step: "Detect",
                 title: "Early Signals",
-                description: "Every interaction builds an asset no dashboard can replicate",
+                description: "AI detects risk before dashboards do",
                 color: "#3B82F6",
               },
               {
                 step: "Understand",
                 title: "Real Conversations",
-                description: "We're in the execution path, not reading from it",
+                description: "AI interviews uncover the real why",
                 color: "#8B5CF6",
               },
               {
                 step: "Retain",
                 title: "Revenue Recovered",
-                description: "Intelligence that compounds with every conversation",
+                description: "Customers stay because they feel heard",
                 color: "#10B981",
               },
             ].map((item, index) => (

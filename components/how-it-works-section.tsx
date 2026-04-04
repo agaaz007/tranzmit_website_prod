@@ -8,7 +8,7 @@ const STEPS = [
     number: "01",
     title: "Deploy on your cancel flow",
     description:
-      "Tranzmit intercepts the cancellation moment, engages the user, and handles the rest — recovery, root cause, and intelligence that gets sharper with every interaction.",
+      "Drop in a single script tag. Tranzmit intercepts cancellation attempts and engages users with a personalized AI conversation.",
     visual: (
       <div className="flex items-center gap-2 mt-4">
         <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "var(--t-bg-subtle)" }}>
@@ -117,10 +117,10 @@ export function HowItWorksSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            One script tag.
+            From cancel click to
             <br />
             <span className="italic font-medium" style={{ color: "var(--t-text-secondary)" }}>
-              Then it runs itself.
+              customer recovered
             </span>
           </motion.h2>
         </div>
