@@ -169,9 +169,9 @@ function StatsBar() {
       transition={{ duration: 0.6, delay: 0.8 }}
     >
       {[
-        { value: "40%", label: "of at-risk users retained" },
-        { value: "<5min", label: "to deploy" },
-        { value: "Zero", label: "eng lift" },
+        { value: "40%", label: "Churn Reduction" },
+        { value: "3x", label: "Faster Insights" },
+        { value: "<5min", label: "Setup Time" },
       ].map((stat) => (
         <div key={stat.label} className="text-center">
           <p className="text-3xl sm:text-4xl font-bold" style={{ color: "var(--t-text)" }}>
@@ -226,7 +226,7 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            The cancel button is the most valuable real estate
+            Better retention.
             <br />
             <span
               className="bg-clip-text text-transparent"
@@ -235,7 +235,7 @@ export function HeroSection() {
                   "linear-gradient(135deg, #10B981, #3B82F6, #8B5CF6)",
               }}
             >
-              in your product.
+              Built on Tranzmit.
             </span>
           </motion.h1>
 
@@ -246,7 +246,8 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            Tranzmit turns the cancellation moment into a retention engine. Real-time. Automatic. Self-improving.
+            Deploy an AI agent on your cancel button that understands why customers leave,
+            recovers them in real time, and turns churn into growth.
           </motion.p>
 
           <motion.div
