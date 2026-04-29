@@ -10,20 +10,8 @@ export function Nav() {
         borderColor: "var(--tz-line)",
       }}>
       <Link href="/" className="flex items-center gap-2.5 no-underline"
-        style={{ color: "var(--tz-ink)", fontWeight: 600, fontSize: 20, letterSpacing: "-0.03em" }}>
-        <span className="relative w-5 h-5 rounded-[5px]"
-          style={{
-            background: "var(--tz-accent-grad)",
-            backgroundSize: "200% 100%",
-            animation: "tz-shimmer 6s ease-in-out infinite",
-          }}>
-          <span className="absolute inset-[3px] rounded-[2px]"
-            style={{
-              background: "var(--tz-bg)",
-              clipPath: "polygon(20% 0, 100% 0, 100% 30%, 50% 30%, 50% 100%, 20% 100%)",
-            }} />
-        </span>
-        tranzmit
+        style={{ color: "var(--tz-ink)", fontWeight: 650, fontSize: 20, letterSpacing: "-0.035em" }}>
+        Tranzmit AI
       </Link>
       <div className="hidden md:flex items-center gap-8">
         <Link href="#how" className="text-sm font-medium no-underline transition-colors hover:text-[var(--tz-ink)]"
@@ -38,7 +26,7 @@ export function Nav() {
           style={{ color: "var(--tz-ink-2)" }}>
           Docs
         </Link>
-        <Link href="#cta"
+        <Link href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener noreferrer"
           className="whitespace-nowrap rounded-full text-[13px] font-medium no-underline"
           style={{
             background: "var(--tz-ink)",

@@ -19,7 +19,7 @@ export function FinalCta() {
         We&apos;ll run a custom 50-variant experiment on your current paywall during the call.
         See results before you hang up.
       </p>
-      <Link href="#"
+      <Link href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener noreferrer"
         className="inline-flex items-center gap-2 rounded-full font-medium no-underline transition-all hover:-translate-y-px"
         style={{ fontSize: 16, padding: "16px 32px", background: "var(--tz-ink)", color: "var(--tz-bg)" }}>
         Book a 15-minute demo

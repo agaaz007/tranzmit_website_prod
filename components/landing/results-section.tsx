@@ -11,7 +11,7 @@ function WatercolorStat({ v, l, palette = 0 }: { v: string; l: string; palette?:
   const id = `wc-${palette}`
 
   return (
-    <div className="relative rounded-[22px] overflow-hidden p-8 flex flex-col justify-end"
+    <div className="relative rounded-[22px] overflow-hidden p-6 sm:p-8 flex flex-col justify-end min-h-[220px] sm:min-h-0"
       style={{ aspectRatio: "1 / 1", background: p.bg, boxShadow: "0 1px 2px rgba(0,0,0,0.03)" }}>
       <svg viewBox="0 0 200 200" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
         <defs>
@@ -27,10 +27,10 @@ function WatercolorStat({ v, l, palette = 0 }: { v: string; l: string; palette?:
         </g>
       </svg>
       <div className="relative z-[1]">
-        <div style={{ fontSize: 52, fontWeight: 600, letterSpacing: "-0.04em", color: "#1a1520", lineHeight: 1, marginBottom: 14 }}>
+        <div style={{ fontSize: "clamp(40px, 11vw, 52px)", fontWeight: 600, letterSpacing: "-0.04em", color: "#1a1520", lineHeight: 1, marginBottom: 14 }}>
           {v}
         </div>
-        <div style={{ fontSize: 14, color: "rgba(40,30,55,0.7)", lineHeight: 1.45, maxWidth: "80%" }}>
+        <div style={{ fontSize: "clamp(13px, 3.4vw, 14px)", color: "rgba(40,30,55,0.7)", lineHeight: 1.45, maxWidth: "92%" }}>
           {l}
         </div>
       </div>
@@ -40,14 +40,14 @@ function WatercolorStat({ v, l, palette = 0 }: { v: string; l: string; palette?:
 
 export function ResultsSection() {
   return (
-    <section className="py-[120px] px-6" id="results">
+    <section className="py-20 sm:py-[120px] px-6" id="results">
       <div className="max-w-[1120px] mx-auto">
         <div className="mb-14">
           <div style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "var(--tz-accent)", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 16 }}>
             Results
           </div>
           <h2 style={{
-            fontSize: "clamp(40px, 6vw, 72px)",
+            fontSize: "clamp(36px, 10vw, 72px)",
             fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 1.02, marginBottom: 20, maxWidth: 720,
           }}>
             The perfect paywall<br />for every user
@@ -57,7 +57,7 @@ export function ResultsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-14 sm:mb-20">
           <WatercolorStat v="+214%" l="Average conversion rate lift across production deployments" palette={0} />
           <WatercolorStat v="1,847" l="Variants tested last week, judged by ensemble AI" palette={1} />
           <WatercolorStat v="9.4m" l="Average time from variant generated to live traffic" palette={2} />
@@ -65,9 +65,9 @@ export function ResultsSection() {
         </div>
 
         {/* Closer text */}
-        <div className="max-w-[980px] mx-auto text-center pt-10">
+        <div className="max-w-[980px] mx-auto text-center pt-6 sm:pt-10">
           <p style={{
-            fontSize: "clamp(32px, 5vw, 56px)",
+            fontSize: "clamp(30px, 8.5vw, 56px)",
             fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1,
             textWrap: "balance",
           }}>

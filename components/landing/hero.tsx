@@ -95,7 +95,7 @@ export function Hero() {
       </p>
 
       <div className="relative z-[2] flex flex-wrap items-center justify-center gap-3">
-        <Link href="#cta"
+        <Link href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full text-[15px] font-medium no-underline transition-all hover:-translate-y-px"
           style={{
             padding: "13px 24px",
