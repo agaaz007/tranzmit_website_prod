@@ -13,21 +13,21 @@ function LiveBadge() {
     return () => clearInterval(id)
   }, [])
   return (
-    <div className="relative z-[2] inline-flex items-center gap-4 rounded-full px-6 py-3 backdrop-blur-[12px] mb-10"
+    <div className="relative z-[2] inline-flex items-center gap-3 rounded-full px-4 py-2 backdrop-blur-[10px] mb-8"
       style={{
         fontFamily: "var(--font-geist-mono), monospace",
         color: "var(--tz-ink)",
-        fontSize: "clamp(18px, 2vw, 26px)",
-        fontWeight: 550,
-        letterSpacing: "-0.02em",
+        fontSize: "clamp(14px, 1.35vw, 18px)",
+        fontWeight: 500,
+        letterSpacing: "-0.005em",
         background: "rgba(255,255,255,0.72)",
         border: "1px solid var(--tz-line-2)",
-        boxShadow: "0 24px 52px -32px rgba(80,60,120,0.48), inset 0 1px 1px rgba(255,255,255,0.72)",
+        boxShadow: "0 18px 42px -30px rgba(80,60,120,0.42), inset 0 1px 1px rgba(255,255,255,0.72)",
       }}>
-      <span className="w-3 h-3 rounded-full shrink-0"
+      <span className="w-2 h-2 rounded-full shrink-0"
         style={{
           background: "var(--tz-green)",
-          boxShadow: "0 0 0 6px oklch(0.55 0.15 150 / 0.16)",
+          boxShadow: "0 0 0 4px oklch(0.55 0.15 150 / 0.16)",
           animation: "tz-pulse 2s infinite",
         }} />
       {count.toLocaleString()} variants tested today
@@ -67,7 +67,7 @@ export function Hero() {
           letterSpacing: "-0.035em",
           textWrap: "balance",
         }}>
-        Your paywall converts{" "}
+        Self-improving paywalls<br />that convert{" "}
         <span className="font-bold"
           style={{
             background: "var(--tz-accent-grad)",
@@ -77,18 +77,7 @@ export function Hero() {
             WebkitTextFillColor: "transparent",
             color: "transparent",
             animation: "tz-shimmer 6s ease-in-out infinite",
-          }}>3%</span>.<br />
-        It should convert{" "}
-        <span className="font-bold"
-          style={{
-            background: "var(--tz-accent-grad)",
-            backgroundSize: "200% 100%",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            color: "transparent",
-            animation: "tz-shimmer 6s ease-in-out infinite",
-          }}>12%</span>.
+          }}>4× better</span>.
       </h1>
 
       <p className="relative z-[2] text-lg max-w-[580px] mb-9"
