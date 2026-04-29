@@ -13,21 +13,21 @@ function LiveBadge() {
     return () => clearInterval(id)
   }, [])
   return (
-    <div className="relative z-[2] inline-flex items-center gap-6 rounded-full px-10 py-5 backdrop-blur-[14px] mb-14"
+    <div className="relative z-[2] inline-flex items-center gap-4 rounded-full px-6 py-3 backdrop-blur-[12px] mb-10"
       style={{
         fontFamily: "var(--font-geist-mono), monospace",
         color: "var(--tz-ink)",
-        fontSize: "clamp(28px, 3.6vw, 46px)",
-        fontWeight: 600,
-        letterSpacing: "-0.045em",
+        fontSize: "clamp(18px, 2vw, 26px)",
+        fontWeight: 550,
+        letterSpacing: "-0.02em",
         background: "rgba(255,255,255,0.72)",
         border: "1px solid var(--tz-line-2)",
-        boxShadow: "0 34px 70px -38px rgba(80,60,120,0.58), inset 0 1px 1px rgba(255,255,255,0.72)",
+        boxShadow: "0 24px 52px -32px rgba(80,60,120,0.48), inset 0 1px 1px rgba(255,255,255,0.72)",
       }}>
-      <span className="w-5 h-5 rounded-full shrink-0"
+      <span className="w-3 h-3 rounded-full shrink-0"
         style={{
           background: "var(--tz-green)",
-          boxShadow: "0 0 0 10px oklch(0.55 0.15 150 / 0.16)",
+          boxShadow: "0 0 0 6px oklch(0.55 0.15 150 / 0.16)",
           animation: "tz-pulse 2s infinite",
         }} />
       {count.toLocaleString()} variants tested today
