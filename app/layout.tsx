@@ -1,4 +1,4 @@
-import type React from "react"
+import type { ReactNode } from "react"
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
@@ -10,10 +10,9 @@ import { ThemeProvider } from 'next-themes'
 
 
 export const metadata: Metadata = {
-  title: "Tranzmit - AI to reduce churn and recover lost customers",
+  title: "Tranzmit — Money that's self-improving",
   description:
-    "Automatically detect at-risk users, reduce churn, and recover lost customers — before it's too late.",
-  generator: "v0.app",
+    "Tranzmit runs hundreds of paywall experiments autonomously every day — synthetic users, ensemble AI judges, auto-deploy. You set the guardrails. We find the winners.",
   icons: {
     icon: "/logo_16x16.png",
     shortcut: "/logo_16x16.png",

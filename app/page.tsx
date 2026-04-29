@@ -2,19 +2,15 @@
 
 import { useEffect, useState } from "react"
 import { usePostHog } from 'posthog-js/react'
-import { Header } from "@/components/header"
-import { HeroSection } from "@/components/hero-section"
-import { LogoMarquee } from "@/components/logo-marquee"
-import { ProblemSection } from "@/components/problem-section"
-import { FeatureCardsSection } from "@/components/feature-cards-section"
-import { HowItWorksSection } from "@/components/how-it-works-section"
-import { ImpactSection } from "@/components/impact-section"
-import { WhyItWorksSection } from "@/components/why-it-works-section"
-import { VisionSection } from "@/components/vision-section"
-import { ForTeamsSection } from "@/components/for-teams-section"
-import { TrialSection } from "@/components/trial-section"
-import { FinalCtaSection } from "@/components/final-cta-section"
-import { Footer } from "@/components/footer"
+import { Nav } from "@/components/landing/nav"
+import { Hero } from "@/components/landing/hero"
+import { LiveDemo } from "@/components/landing/live-demo"
+import { ProblemSection } from "@/components/landing/problem-section"
+import { HowItWorks } from "@/components/landing/how-it-works"
+import { ResultsSection } from "@/components/landing/results-section"
+import { MonetizationSection } from "@/components/landing/monetization-section"
+import { FinalCta } from "@/components/landing/final-cta"
+import { LandingFooter } from "@/components/landing/landing-footer"
 
 export default function HomePage() {
   const posthog = usePostHog()
@@ -51,22 +47,18 @@ export default function HomePage() {
   }, [posthog, scrollMilestones])
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      <Header />
+    <div className="overflow-x-hidden" style={{ background: "var(--tz-bg)", color: "var(--tz-ink)", lineHeight: 1.6 }}>
+      <Nav />
       <main>
-        <HeroSection />
-        <LogoMarquee />
-        <FeatureCardsSection />
+        <Hero />
+        <LiveDemo />
         <ProblemSection />
-        <HowItWorksSection />
-        <WhyItWorksSection />
-        <ImpactSection />
-        <VisionSection />
-        <ForTeamsSection />
-        <TrialSection />
-        <FinalCtaSection />
+        <HowItWorks />
+        <ResultsSection />
+        <MonetizationSection />
+        <FinalCta />
       </main>
-      <Footer />
+      <LandingFooter />
     </div>
   )
 }

@@ -3,10 +3,23 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 :root {
-  /* Semantic tokens for light/dark */
+  /* Warm light theme — Tranzmit landing */
+  --tz-bg: oklch(0.985 0.005 80);
+  --tz-bg-2: oklch(0.97 0.008 70);
+  --tz-bg-card: oklch(0.99 0.004 80);
+  --tz-bg-card-hover: oklch(0.96 0.008 70);
+  --tz-ink: oklch(0.18 0.01 60);
+  --tz-ink-2: oklch(0.42 0.015 60);
+  --tz-ink-3: oklch(0.62 0.015 60);
+  --tz-line: oklch(0.92 0.008 70);
+  --tz-line-2: oklch(0.86 0.012 70);
+  --tz-green: oklch(0.55 0.15 150);
+  --tz-accent-grad: linear-gradient(92deg, #c97a4a 0%, #b85490 35%, #6b4eb0 65%, #3a4ec8 100%);
+  --tz-accent: #c97a4a;
+  --tz-accent-soft: rgba(201, 122, 74, 0.12);
+
+  /* Legacy semantic tokens */
   --t-bg: #F8F8F7;
   --t-bg-card: #FFFFFF;
   --t-bg-subtle: #F0F0EE;
@@ -18,13 +31,6 @@
   --t-btn-bg: #1A1A1A;
   --t-btn-bg-hover: #333333;
   --t-btn-text: #FFFFFF;
-
-  /* Tranzmit brand colors */
-  --deep-navy: #050849;
-  --tranzmit-blue: #113177;
-  --light-blue: #7FB3E7;
-  --medium-blue: #2F82AC;
-  --accent-blue: #6B8CC7;
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.28 0 0);
@@ -203,6 +209,16 @@
   @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+  }
+
+  @keyframes tz-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @keyframes tz-shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
   .animate-fade-in-up {
