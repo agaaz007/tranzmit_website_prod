@@ -43,17 +43,17 @@ export function Hero() {
       <div className="hidden 2xl:block absolute inset-0 pointer-events-none z-[1]">
         <HoloCard
           variant="mint" kind="tiers"
-          style={{ top: 200, left: -40 }}
+          style={{ top: 210, left: 150 }}
           drift={{ rotX: 14, rotY: 22, rotZ: 8, ax: 10, ay: 12, phase: 0 }}
         />
         <HoloCard
           variant="lilac" kind="annual"
-          style={{ top: 160, right: -30 }}
+          style={{ top: 175, right: 135 }}
           drift={{ rotX: 16, rotY: -24, rotZ: -8, ax: 12, ay: 10, phase: 1.7 }}
         />
         <HoloCard
           variant="sunset" kind="winner"
-          style={{ bottom: 40, right: 30, opacity: 0.94 }}
+          style={{ bottom: 55, right: 185, opacity: 0.94 }}
           drift={{ rotX: 22, rotY: -14, rotZ: -4, ax: 8, ay: 10, phase: 3.4, sx: 0.45 }}
         />
       </div>
