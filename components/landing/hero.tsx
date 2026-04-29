@@ -77,7 +77,7 @@ export function Hero() {
             WebkitTextFillColor: "transparent",
             color: "transparent",
             animation: "tz-shimmer 6s ease-in-out infinite",
-          }}>4× better</span>.
+          }}>4× better</span>
       </h1>
 
       <p className="relative z-[2] text-lg max-w-[580px] mb-9"
