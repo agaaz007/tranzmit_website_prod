@@ -14,6 +14,10 @@ export function Nav() {
         Tranzmit AI
       </Link>
       <div className="hidden md:flex items-center gap-8">
+        <Link href="#problem" className="text-sm font-medium no-underline transition-colors hover:text-[var(--tz-ink)]"
+          style={{ color: "var(--tz-ink-2)" }}>
+          Problem
+        </Link>
         <Link href="#how" className="text-sm font-medium no-underline transition-colors hover:text-[var(--tz-ink)]"
           style={{ color: "var(--tz-ink-2)" }}>
           How it works
@@ -21,10 +25,6 @@ export function Nav() {
         <Link href="#results" className="text-sm font-medium no-underline transition-colors hover:text-[var(--tz-ink)]"
           style={{ color: "var(--tz-ink-2)" }}>
           Results
-        </Link>
-        <Link href="#" target="_blank" className="text-sm font-medium no-underline transition-colors hover:text-[var(--tz-ink)]"
-          style={{ color: "var(--tz-ink-2)" }}>
-          Docs
         </Link>
         <Link href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener noreferrer"
           className="whitespace-nowrap rounded-full text-[13px] font-medium no-underline"

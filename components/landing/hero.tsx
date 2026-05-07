@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import { HoloCard } from "./holo-card"
 
 function LiveBadge() {
@@ -30,17 +31,17 @@ function LiveBadge() {
           boxShadow: "0 0 0 4px oklch(0.55 0.15 150 / 0.16)",
           animation: "tz-pulse 2s infinite",
         }} />
-      {count.toLocaleString()} variants tested today
+      {count.toLocaleString()} paywall variants scored today
     </div>
   )
 }
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center text-center"
-      style={{ padding: "140px 24px 80px", perspective: 1400 }}>
+    <section className="relative min-h-[92svh] lg:min-h-screen flex flex-col items-center justify-start lg:justify-center text-center px-6 pt-[116px] pb-12 lg:pt-[140px] lg:pb-20"
+      style={{ perspective: 1400 }}>
 
-      <div className="hidden 2xl:block absolute inset-0 pointer-events-none z-[1]">
+      <div className="hidden xl:block absolute inset-0 pointer-events-none z-[1]">
         <HoloCard
           variant="mint" kind="tiers"
           style={{ top: 210, left: 150 }}
@@ -51,11 +52,13 @@ export function Hero() {
           style={{ top: 175, right: 135 }}
           drift={{ rotX: 16, rotY: -24, rotZ: -8, ax: 12, ay: 10, phase: 1.7 }}
         />
-        <HoloCard
-          variant="sunset" kind="winner"
-          style={{ bottom: 55, right: 185, opacity: 0.94 }}
-          drift={{ rotX: 22, rotY: -14, rotZ: -4, ax: 8, ay: 10, phase: 3.4, sx: 0.45 }}
-        />
+        <div className="hidden 2xl:block">
+          <HoloCard
+            variant="sunset" kind="winner"
+            style={{ bottom: 55, right: 185, opacity: 0.94 }}
+            drift={{ rotX: 22, rotY: -14, rotZ: -4, ax: 8, ay: 10, phase: 3.4, sx: 0.45 }}
+          />
+        </div>
       </div>
 
       <LiveBadge />
@@ -67,7 +70,7 @@ export function Hero() {
           letterSpacing: "-0.035em",
           textWrap: "balance",
         }}>
-        Self-improving paywalls<br />that convert{" "}
+        Find the paywall<br />that makes more users{" "}
         <span className="font-bold"
           style={{
             background: "var(--tz-accent-grad)",
@@ -77,14 +80,13 @@ export function Hero() {
             WebkitTextFillColor: "transparent",
             color: "transparent",
             animation: "tz-shimmer 6s ease-in-out infinite",
-          }}>4× better</span>
+          }}>pay</span>
       </h1>
 
       <p className="relative z-[2] text-lg max-w-[580px] mb-9"
         style={{ color: "var(--tz-ink-2)", lineHeight: 1.55 }}>
-        Tranzmit runs hundreds of paywall experiments autonomously every day -
-        synthetic users, ensemble AI judges, auto-deploy.
-        You set the guardrails. We find the winners.
+        Most teams test one screen for weeks. Tranzmit screens thousands safely,
+        shows the winner, and explains why buyers choose it.
       </p>
 
       <div className="relative z-[2] flex flex-wrap items-center justify-center gap-3">
@@ -96,7 +98,7 @@ export function Hero() {
             color: "var(--tz-bg)",
           }}>
           Get a free paywall audit
-          <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5-5-5-5" /></svg>
+          <ArrowRight size={16} strokeWidth={2} />
         </Link>
         <Link href="#how"
           className="inline-flex items-center gap-2 rounded-full text-[15px] font-medium no-underline transition-all"
@@ -109,22 +111,28 @@ export function Hero() {
         </Link>
       </div>
 
-      <div className="relative z-[2] mt-12 flex flex-wrap items-center justify-center gap-6">
-        <div className="flex items-center gap-5"
-          style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 13, color: "var(--tz-ink-3)", letterSpacing: "0.05em" }}>
-          <span>Jungle AI</span>
-          <span>Zeo</span>
-          <span>Auto</span>
-        </div>
-        <div className="h-[22px] w-px" style={{ background: "var(--tz-line-2)" }} />
-        <div style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 13, color: "var(--tz-ink-3)" }}>
-          <strong style={{
-            background: "var(--tz-accent-grad)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
-            fontWeight: 700,
-          }}>+214%</strong> avg. conversion lift
+      <div className="relative z-[2] mt-10 sm:mt-12 grid w-full max-w-[520px] grid-cols-3 items-start gap-3 sm:flex sm:max-w-none sm:flex-wrap sm:items-center sm:justify-center sm:gap-6">
+        {[
+          ["14d", "test cycle"],
+          ["1,847", "variants/week"],
+          ["+214%", "avg. lift"],
+        ].map(([value, label]) => (
+          <div key={label} className="flex flex-col items-center gap-1 sm:flex-row sm:items-baseline sm:gap-2"
+            style={{ fontFamily: "var(--font-geist-mono), monospace", color: "var(--tz-ink-3)" }}>
+            <strong style={{
+              fontSize: 15,
+              background: "var(--tz-accent-grad)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+              fontWeight: 700,
+            }}>{value}</strong>
+            <span style={{ fontSize: 12, lineHeight: 1.25 }}>{label}</span>
+          </div>
+        ))}
+        <div className="hidden h-[22px] w-px sm:block" style={{ background: "var(--tz-line-2)" }} />
+        <div className="hidden sm:block" style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "var(--tz-ink-3)" }}>
+          AI apps · SaaS · subscription media
         </div>
       </div>
     </section>

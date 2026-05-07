@@ -38,6 +38,57 @@ function WatercolorStat({ v, l, palette = 0 }: { v: string; l: string; palette?:
   )
 }
 
+function LiftPanel() {
+  const rows = [
+    { label: "Current", value: 4.2, color: "var(--tz-ink-3)" },
+    { label: "Tranzmit pick", value: 7.0, color: "var(--tz-accent-grad)" },
+  ]
+
+  return (
+    <div className="rounded-[24px] p-6 sm:p-8"
+      style={{
+        background: "var(--tz-bg-card)",
+        border: "1px solid var(--tz-line)",
+        boxShadow: "0 30px 70px -52px rgba(80,60,120,0.42)",
+      }}>
+      <div className="flex flex-col lg:flex-row gap-8 lg:items-end lg:justify-between">
+        <div>
+          <div style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "var(--tz-accent)", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 14 }}>
+            Example decision
+          </div>
+          <h3 style={{ fontSize: "clamp(26px, 4vw, 42px)", fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.05, maxWidth: 540 }}>
+            4.2% to 7.0% means 67% more buyers from the same traffic.
+          </h3>
+        </div>
+        <div className="rounded-2xl px-5 py-4 min-w-[220px]"
+          style={{ background: "linear-gradient(90deg, rgba(201,122,74,0.14), rgba(184,84,144,0.08), rgba(107,78,176,0.1))", border: "1px solid rgba(201,122,74,0.22)" }}>
+          <div style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "var(--tz-ink-3)", marginBottom: 6 }}>
+            Why it won
+          </div>
+          <div style={{ fontSize: 15, color: "var(--tz-ink)", lineHeight: 1.45 }}>
+            Less choice, clearer annual value, stronger proof.
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-8 grid gap-4">
+        {rows.map((row) => (
+          <div key={row.label}>
+            <div className="mb-2 flex items-center justify-between"
+              style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "var(--tz-ink-3)" }}>
+              <span>{row.label}</span>
+              <span>{row.value.toFixed(1)}%</span>
+            </div>
+            <div className="h-4 rounded-full overflow-hidden" style={{ background: "var(--tz-line)" }}>
+              <div className="h-full rounded-full" style={{ width: `${(row.value / 8) * 100}%`, background: row.color }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function ResultsSection() {
   return (
     <section className="py-20 sm:py-[120px] px-6" id="results">
@@ -50,34 +101,21 @@ export function ResultsSection() {
             fontSize: "clamp(36px, 10vw, 72px)",
             fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 1.02, marginBottom: 20, maxWidth: 720,
           }}>
-            The perfect paywall<br />for every user
+            More buyers.<br />Less live guessing.
           </h2>
           <p style={{ fontSize: 16, color: "var(--tz-ink-3)", maxWidth: 360, lineHeight: 1.5 }}>
-            Personalized paywall wins from live deployments — measured by conversion, not opinions.
+            The output is a clear decision, measured by conversion instead of opinions.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-14 sm:mb-20">
-          <WatercolorStat v="+214%" l="Average conversion rate lift across production deployments" palette={0} />
-          <WatercolorStat v="1,847" l="Variants tested last week, judged by ensemble AI" palette={1} />
-          <WatercolorStat v="9.4m" l="Average time from variant generated to live traffic" palette={2} />
-          <WatercolorStat v="±6%" l="Calibrated prediction accuracy versus measured outcomes" palette={3} />
+          <WatercolorStat v="+214%" l="Average paid conversion lift across deployments" palette={0} />
+          <WatercolorStat v="1,847" l="Paywall variants screened last week" palette={1} />
+          <WatercolorStat v="9.4m" l="Average time to a recommended winner" palette={2} />
+          <WatercolorStat v="±6%" l="Prediction accuracy versus measured outcomes" palette={3} />
         </div>
 
-        {/* Closer text */}
-        <div className="max-w-[980px] mx-auto text-center pt-6 sm:pt-10">
-          <p style={{
-            fontSize: "clamp(30px, 8.5vw, 56px)",
-            fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1,
-            textWrap: "balance",
-          }}>
-            <span style={{ color: "#c97a4a" }}>Generate variants fast &amp;</span>{" "}
-            <span style={{ color: "#6b4eb0" }}>sleek. Run synthetic users,</span>{" "}
-            <span style={{ color: "#c97a4a" }}>judge with ensembles, ship</span>{" "}
-            <span style={{ color: "#6b4eb0" }}>winners autonomously,</span>{" "}
-            <span style={{ color: "#b85490" }}>all in one platform.</span>
-          </p>
-        </div>
+        <LiftPanel />
       </div>
     </section>
   )

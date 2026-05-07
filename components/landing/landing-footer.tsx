@@ -10,7 +10,7 @@ export function LandingFooter() {
           © 2026 Tranzmit Technologies · Delaware C-Corp
         </div>
         <div className="flex gap-6">
-          {["Privacy", "Terms", "Docs", "Blog", "Contact"].map((l) => (
+          {["Privacy", "Terms", "Contact"].map((l) => (
             <Link key={l} href="#" className="text-[13px] no-underline transition-colors hover:text-[var(--tz-ink)]"
               style={{ color: "var(--tz-ink-3)" }}>
               {l}

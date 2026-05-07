@@ -45,7 +45,7 @@ export function LiveDemo() {
       <div className="absolute left-1/2 top-[-18px] z-[3] -translate-x-1/2 rounded-full px-4 py-2 hidden sm:flex items-center gap-2"
         style={{ background: "rgba(255,255,255,0.78)", border: "1px solid var(--tz-line)", boxShadow: "0 18px 45px -28px rgba(80,60,120,0.45)", backdropFilter: "blur(12px)", fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "var(--tz-ink-2)", letterSpacing: "0.04em" }}>
         <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--tz-green)", boxShadow: "0 0 0 4px oklch(0.55 0.15 150 / 0.14)", animation: "tz-pulse 2s infinite" }} />
-        Live winner found in 9.4 minutes
+        Winner found in 9.4 minutes
       </div>
       <div className="relative z-[2] w-full max-w-[980px] rounded-[24px] overflow-hidden transition-transform duration-500 hover:-translate-y-1"
         style={{
@@ -60,7 +60,7 @@ export function LiveDemo() {
             <div className="w-2 h-2 rounded-full"
               style={{ background: "var(--tz-green)", animation: "tz-pulse 2s infinite" }} />
             <span style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 13, color: "var(--tz-ink-2)" }}>
-              Live experiment · Jungle AI pricing wall
+              Live scan · one paywall decision
             </span>
           </div>
           <span className="rounded-md px-2.5 py-1"
@@ -71,7 +71,7 @@ export function LiveDemo() {
               color: "var(--tz-green)",
               border: "1px solid oklch(0.55 0.15 150 / 0.2)",
             }}>
-            Experiment #847
+            50 variants screened
           </span>
         </div>
 
@@ -82,10 +82,10 @@ export function LiveDemo() {
             <div className="rounded-2xl p-5"
               style={{ background: "var(--tz-bg)", border: "1px solid var(--tz-line)", opacity: winning ? 0.78 : 1 }}>
               <div style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 11, color: "var(--tz-ink-3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12 }}>
-                Control · Current
+                Current paywall
               </div>
               <div style={{ fontSize: 14, fontWeight: 500, marginBottom: 16, color: "var(--tz-ink)" }}>
-                3-tier grid, monthly toggle, free trial CTA
+                Three plans, monthly toggle, free trial
               </div>
               <div className="h-1.5 rounded-full overflow-hidden mb-2" style={{ background: "var(--tz-line)" }}>
                 <div className="h-full rounded-full transition-all duration-[2s] ease-out"
@@ -94,7 +94,7 @@ export function LiveDemo() {
               <div style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 26, fontWeight: 700, letterSpacing: "-0.02em", color: "var(--tz-ink-2)" }}>
                 {controlVal === 0 ? "—" : controlVal.toFixed(1) + "%"}
               </div>
-              <div style={{ fontSize: 12, color: "var(--tz-ink-3)", marginTop: 2 }}>simulated conversion rate</div>
+              <div style={{ fontSize: 12, color: "var(--tz-ink-3)", marginTop: 2 }}>users who pay</div>
             </div>
 
             {/* Challenger */}
@@ -112,10 +112,10 @@ export function LiveDemo() {
                 Winner
               </div>
               <div style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 11, color: "var(--tz-ink-3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12 }}>
-                Challenger · V847
+                Tranzmit pick
               </div>
               <div style={{ fontSize: 14, fontWeight: 500, marginBottom: 16, color: "var(--tz-ink)" }}>
-                Single plan, annual anchor, social proof strip
+                Annual anchor, proof strip, simpler choice
               </div>
               <div className="h-1.5 rounded-full overflow-hidden mb-2" style={{ background: "var(--tz-line)" }}>
                 <div className="h-full rounded-full transition-all duration-[2s] ease-out"
@@ -127,7 +127,7 @@ export function LiveDemo() {
               }}>
                 {challengerVal === 0 ? "—" : challengerVal.toFixed(1) + "%"}
               </div>
-              <div style={{ fontSize: 12, color: "var(--tz-ink-3)", marginTop: 2 }}>simulated conversion rate</div>
+              <div style={{ fontSize: 12, color: "var(--tz-ink-3)", marginTop: 2 }}>users who pay</div>
             </div>
           </div>
 
@@ -140,10 +140,10 @@ export function LiveDemo() {
               boxShadow: done ? "0 18px 45px -34px rgba(184,84,144,0.55)" : "none",
             }}>
             <span style={{ fontSize: 14, fontWeight: 500, color: "var(--tz-ink)" }}>
-              Challenger wins — <span style={{ color: "var(--tz-green)", fontFamily: "var(--font-geist-mono), monospace", fontWeight: 700 }}>+{lift}%</span> predicted lift
+              Better paywall found: <span style={{ color: "var(--tz-green)", fontFamily: "var(--font-geist-mono), monospace", fontWeight: 700 }}>+{lift}%</span> predicted lift
             </span>
             <span style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "var(--tz-accent)" }}>
-              ▸ Auto-deploying to 5% traffic
+              Guardrailed rollout to 5% traffic
             </span>
           </div>
         </div>

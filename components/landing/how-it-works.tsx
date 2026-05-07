@@ -3,24 +3,24 @@
 const steps = [
   {
     number: "01",
-    title: "Model the users hitting your paywall",
-    desc: "Tranzmit learns from the moments that matter — who hits the wall, what they tried first, which plan they hover on, and where they churn — so every test starts with your real buying context.",
-    label: "Buyer context",
-    chips: ["Wall hits", "Intent", "Churn risk"],
+    title: "Read the buying moment",
+    desc: "What users saw, where they hesitated, and which path brought them to the paywall.",
+    label: "Context",
+    chips: ["Saw", "Clicked", "Left"],
   },
   {
     number: "02",
-    title: "Test the paywall ideas you cannot afford to A/B",
-    desc: "Hundreds of pricing, copy, layout, plan, trial, and proof combinations are simulated before they touch live traffic. Weak guesses get filtered out before they burn CAC.",
-    label: "Risk filtered",
-    chips: ["Pricing", "Plans", "Proof"],
+    title: "Screen the variants safely",
+    desc: "Pricing, copy, proof, plan, and trial combinations are scored before live buyers see them.",
+    label: "Pre-test",
+    chips: ["Price", "Copy", "Proof"],
   },
   {
     number: "03",
-    title: "Send only high-confidence winners live",
-    desc: "Variants that beat the control and clear confidence thresholds go to production with guardrails. You see what changed, why it won, and how it performs against real conversion.",
-    label: "Revenue live",
-    chips: ["Guardrails", "Lift", "Why"],
+    title: "Ship the best answer",
+    desc: "The winner goes live with guardrails, the expected lift, and the reason it should work.",
+    label: "Winner",
+    chips: ["Lift", "Why", "Live"],
   },
 ]
 
@@ -77,10 +77,10 @@ export function HowItWorks() {
           fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.08, marginBottom: 18,
           textWrap: "balance",
         }}>
-          From paywall signal to shipped winner<br />without waiting two weeks.
+          Read behavior, test safely,<br />ship the winner.
         </h2>
         <p className="max-w-[600px] mb-14" style={{ fontSize: 17, color: "var(--tz-ink-2)", lineHeight: 1.55 }}>
-          Instead of exposing every idea to paid traffic, Tranzmit pre-screens variants, explains the winners, and deploys only the ones worth testing live.
+          One answer: which screen should go live, and why it will convert more buyers.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {steps.map((step, index) => (

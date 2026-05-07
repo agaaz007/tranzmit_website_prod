@@ -5,37 +5,37 @@ import { HoloCard } from "./holo-card"
 const cards = [
   {
     metric: "+214%",
-    metricLabel: "avg. paid conversion lift",
+    metricLabel: "paid conversion lift",
     title: "Paywalls",
-    desc: <>The free → paid wall is your highest-leverage surface. Tranzmit auto-tests pricing, plan structure, copy, social proof, urgency, and layout — then ships the winners. <strong>Avg. +214% paid conversion lift.</strong></>,
-    bullets: ["Hard, soft, and metered walls", "Annual vs monthly anchoring", "Trial length & gating logic"],
+    desc: "Find the price, plan, proof, and CTA that turns more free users into buyers.",
+    bullets: ["Price", "Plan", "Proof"],
   },
   {
     metric: "ARPU",
-    metricLabel: "lift without trust burn",
+    metricLabel: "upgrade moments",
     title: "Upsells",
-    desc: "Mid-flow upgrade prompts, plan-tier nudges, and add-on offers — surfaced at the moments your users are most likely to say yes. We score every prompt against churn risk so you lift ARPU without burning trust.",
-    bullets: ["In-product upgrade prompts", "Usage-cap & quota nudges", "Tier ladders & add-on bundles"],
-  },
-  {
-    metric: "2nd",
-    metricLabel: "product line expansion",
-    title: "Cross-sells",
-    desc: "Second product, companion app, or partner offer — Tranzmit finds the right placement, copy, and audience cohort to convert existing users into multi-product customers without cannibalizing the primary subscription.",
-    bullets: ["Companion product launches", "Partner & affiliate placements", "Bundle & package experiments"],
+    desc: "Show the upgrade when intent is high, not when the product feels pushy.",
+    bullets: ["Usage cap", "Tier ladder", "Add-on"],
   },
   {
     metric: "Save",
-    metricLabel: "subscriptions before churn",
-    title: "Retention & win-back",
-    desc: "Cancel flows, pause offers, downgrade rescues, and lapsed-user win-back campaigns — tested at the same velocity as acquisition. Every saved subscription compounds against acquisition cost.",
-    bullets: ["Cancel-intent intercepts", "Pause vs. discount logic", "Lapsed-user reactivation"],
+    metricLabel: "before churn",
+    title: "Cancel saves",
+    desc: "Test pause, discount, downgrade, and education paths before users fully leave.",
+    bullets: ["Pause", "Downgrade", "Discount"],
+  },
+  {
+    metric: "2nd",
+    metricLabel: "chance to convert",
+    title: "Win-back",
+    desc: "Bring lapsed users back with the offer they actually needed the first time.",
+    bullets: ["Email", "Offer", "Timing"],
   },
 ]
 
 const audiences = [
-  "Consumer AI apps", "EdTech & study tools", "Productivity",
-  "Freemium SaaS", "Subscription media", "Mobile-first apps",
+  "Consumer AI", "EdTech", "Productivity",
+  "Freemium SaaS", "Subscription media", "Mobile apps",
 ]
 
 function MonetizationCard({ card, palette }: { card: typeof cards[number]; palette: number }) {
@@ -118,10 +118,11 @@ export function MonetizationSection() {
           fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.08, marginBottom: 18,
           textWrap: "balance",
         }}>
-          Every monetization moment,<br />self-improving in production
+          Anywhere a user decides<br />to pay or stay
         </h2>
         <p className="max-w-[600px] mb-14" style={{ fontSize: 17, color: "var(--tz-ink-2)", lineHeight: 1.55 }}>
-          Tranzmit isn&apos;t just paywalls. We optimize every revenue surface in your product — from the first wall a free user hits, to the upsell that doubles their plan, to the cross-sell that adds a second product line.
+          Keep the same engine. Change the decision surface.
+          Paywalls, upgrades, cancel flows, and win-back offers all become measurable.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-14">

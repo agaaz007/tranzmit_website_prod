@@ -4,28 +4,50 @@ const problems = [
   {
     number: "01",
     metric: "14d",
-    label: "per answer",
-    title: "Learning is trapped in two-week cycles",
-    desc: "One paywall, one audience, one result. By the time significance lands, pricing, traffic mix, and user intent have already moved.",
+    label: "one answer",
+    title: "Learning is too slow",
+    desc: "One screen, one audience, one result. The buying moment moves before the lesson lands.",
     tone: "#e6ecf6",
   },
   {
     number: "02",
     metric: "CAC",
-    label: "spent on guesses",
-    title: "Every weak variant burns paid traffic",
-    desc: "The experiment is not free: real users see the wrong price, the wrong promise, or the wrong layout while you wait for proof.",
+    label: "on guesses",
+    title: "Bad variants are expensive",
+    desc: "Real buyers see the wrong price, offer, or layout before you know it is weak.",
     tone: "#f4dde2",
   },
   {
     number: "03",
     metric: "0",
     label: "reasons why",
-    title: "A winner still does not explain itself",
-    desc: "A/B tools tell you which screen won, not which audience, objection, price anchor, or message actually changed the decision.",
+    title: "The winner does not teach you",
+    desc: "You learn what won, but not which objection, proof point, or price anchor changed the decision.",
     tone: "#ebe6f0",
   },
 ]
+
+function BuyerDots() {
+  return (
+    <div className="grid grid-cols-10 gap-1.5 sm:gap-2 max-w-[340px]">
+      {Array.from({ length: 100 }).map((_, index) => {
+        const bought = index < 4
+        return (
+          <span
+            key={index}
+            className="block rounded-full"
+            style={{
+              width: "100%",
+              aspectRatio: "1 / 1",
+              background: bought ? "var(--tz-green)" : "rgba(40,30,55,0.14)",
+              boxShadow: bought ? "0 0 0 4px oklch(0.55 0.15 150 / 0.12)" : "none",
+            }}
+          />
+        )
+      })}
+    </div>
+  )
+}
 
 export function ProblemSection() {
   return (
@@ -39,11 +61,11 @@ export function ProblemSection() {
           fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.08, marginBottom: 18,
           textWrap: "balance",
         }}>
-          Your paywall is leaking revenue<br />while A/B tests wait for significance
+          The problem is simple:<br />too few buyers, too slow to learn
         </h2>
         <p className="max-w-[600px] mb-14" style={{ fontSize: 17, color: "var(--tz-ink-2)", lineHeight: 1.55 }}>
-          The bottleneck is not ideas. It is the cost of testing them on real users,
-          one slow variant at a time.
+          A paywall is usually the highest-leverage screen in the product.
+          Most teams still optimize it one live test at a time.
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-5">
           <div className="rounded-[22px] p-8 sm:p-10 relative overflow-hidden min-h-[440px] flex flex-col justify-between"
@@ -61,16 +83,19 @@ export function ProblemSection() {
               </g>
             </svg>
             <div className="relative z-[1] flex items-center justify-between gap-4" style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "rgba(40,30,55,0.62)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-              <span>Current loop</span>
-              <span>One answer</span>
+              <span>The simple math</span>
+              <span>At 4.2% conversion</span>
             </div>
             <div className="relative z-[1]">
               <div style={{ fontSize: "clamp(76px, 11vw, 132px)", fontWeight: 600, letterSpacing: "-0.06em", lineHeight: 0.9, color: "#1a1520", marginBottom: 18 }}>
-                14 days
+                96/100
               </div>
               <p style={{ maxWidth: 430, fontSize: 18, color: "rgba(40,30,55,0.72)", lineHeight: 1.45 }}>
-                to validate one screen, while high-intent users keep meeting an unproven paywall.
+                users still leave. The question is which price, proof, and offer would have changed their mind.
               </p>
+            </div>
+            <div className="relative z-[1] mt-8">
+              <BuyerDots />
             </div>
           </div>
 

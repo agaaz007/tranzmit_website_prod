@@ -10,9 +10,9 @@ import { ThemeProvider } from 'next-themes'
 
 
 export const metadata: Metadata = {
-  title: "Tranzmit — Money that's self-improving",
+  title: "Tranzmit | Find the paywall that makes more users pay",
   description:
-    "Tranzmit runs hundreds of paywall experiments autonomously every day — synthetic users, ensemble AI judges, auto-deploy. You set the guardrails. We find the winners.",
+    "Tranzmit screens paywall variants safely, shows the winner, and explains why buyers choose it.",
   icons: {
     icon: "/logo_16x16.png",
     shortcut: "/logo_16x16.png",
