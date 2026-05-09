@@ -1,29 +1,35 @@
 "use client"
 
+import Image from "next/image"
+import { Clock, DollarSign, HelpCircle } from "lucide-react"
+
 const problems = [
   {
     number: "01",
     metric: "14d",
     label: "one answer",
     title: "Learning is too slow",
-    desc: "One screen, one audience, one result. The buying moment moves before the lesson lands.",
+    desc: "One live test can burn two weeks before you learn what to change.",
     tone: "#e6ecf6",
+    Icon: Clock,
   },
   {
     number: "02",
     metric: "CAC",
     label: "on guesses",
     title: "Bad variants are expensive",
-    desc: "Real buyers see the wrong price, offer, or layout before you know it is weak.",
+    desc: "Weak prices, offers, and layouts cost real buyers while the test runs.",
     tone: "#f4dde2",
+    Icon: DollarSign,
   },
   {
     number: "03",
     metric: "0",
     label: "reasons why",
     title: "The winner does not teach you",
-    desc: "You learn what won, but not which objection, proof point, or price anchor changed the decision.",
+    desc: "You need to know which proof, price anchor, or CTA changed the decision.",
     tone: "#ebe6f0",
+    Icon: HelpCircle,
   },
 ]
 
@@ -64,8 +70,7 @@ export function ProblemSection() {
           The problem is simple:<br />too few buyers, too slow to learn
         </h2>
         <p className="max-w-[600px] mb-14" style={{ fontSize: 17, color: "var(--tz-ink-2)", lineHeight: 1.55 }}>
-          A paywall is usually the highest-leverage screen in the product.
-          Most teams still optimize it one live test at a time.
+          Slow tests spend traffic on guesses. A useful audit shows why people stall before you run another live experiment.
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-5">
           <div className="rounded-[22px] p-8 sm:p-10 relative overflow-hidden min-h-[440px] flex flex-col justify-between"
@@ -101,11 +106,18 @@ export function ProblemSection() {
 
           <div className="grid grid-cols-1 gap-3">
             {problems.map((problem) => (
-              <div key={problem.number} className="rounded-[18px] p-6 sm:p-7 transition-all hover:-translate-y-0.5"
-                style={{ background: "var(--tz-bg-card)", border: "1px solid var(--tz-line)" }}>
+              <div key={problem.number} className="rounded-[18px] p-5 sm:p-6 transition-all hover:-translate-y-0.5"
+                style={{
+                  background: problem.number === "01"
+                    ? "linear-gradient(135deg, rgba(255,255,255,0.92), rgba(230,236,246,0.72))"
+                    : "var(--tz-bg-card)",
+                  border: problem.number === "01" ? "1px solid rgba(107,78,176,0.18)" : "1px solid var(--tz-line)",
+                  boxShadow: problem.number === "01" ? "0 22px 48px -40px rgba(80,60,120,0.46)" : "none",
+                }}>
                 <div className="flex items-start gap-5">
-                  <div className="w-[86px] h-[86px] rounded-2xl shrink-0 flex flex-col items-center justify-center text-center"
+                  <div className="w-[92px] h-[92px] rounded-2xl shrink-0 flex flex-col items-center justify-center text-center"
                     style={{ background: problem.tone, color: "#1a1520", boxShadow: "inset 0 1px 1px rgba(255,255,255,0.55)" }}>
+                    <problem.Icon size={18} strokeWidth={2} style={{ marginBottom: 7, color: "rgba(40,30,55,0.72)" }} />
                     <div style={{ fontSize: problem.metric.length > 2 ? 26 : 38, fontWeight: 600, letterSpacing: "-0.055em", lineHeight: 1 }}>
                       {problem.metric}
                     </div>
@@ -114,19 +126,58 @@ export function ProblemSection() {
                     </div>
                   </div>
                   <div>
-                    <div style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "var(--tz-accent)", letterSpacing: "0.1em", marginBottom: 8 }}>
+                    <div className="inline-flex rounded-full px-2.5 py-1" style={{
+                      fontFamily: "var(--font-geist-mono), monospace",
+                      fontSize: 11,
+                      color: "var(--tz-accent)",
+                      letterSpacing: "0.1em",
+                      marginBottom: 10,
+                      background: "rgba(201,122,74,0.08)",
+                    }}>
                       {problem.number}
                     </div>
-                    <div style={{ fontSize: 18, fontWeight: 600, marginBottom: 8, letterSpacing: "-0.015em" }}>
+                    <div style={{ fontSize: 20, fontWeight: 650, marginBottom: 8, letterSpacing: "-0.02em" }}>
                       {problem.title}
                     </div>
-                    <div style={{ fontSize: 14, color: "var(--tz-ink-2)", lineHeight: 1.6 }}>
+                    <div style={{ fontSize: 15, color: "var(--tz-ink-2)", lineHeight: 1.55 }}>
                       {problem.desc}
                     </div>
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="mt-8 rounded-[28px] p-4 sm:p-6 lg:p-8"
+          style={{
+            background: "linear-gradient(135deg, rgba(255,255,255,0.86), rgba(232,238,240,0.62))",
+            border: "1px solid var(--tz-line)",
+            boxShadow: "0 30px 80px -58px rgba(80,60,120,0.44)",
+          }}>
+          <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "var(--tz-accent)", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 10 }}>
+                Audit output
+              </div>
+              <h3 style={{ fontSize: "clamp(24px, 3.6vw, 38px)", fontWeight: 650, letterSpacing: "-0.035em", lineHeight: 1.08 }}>
+                See exactly why buyers stall.
+              </h3>
+            </div>
+            <p className="max-w-[390px]" style={{ fontSize: 15, color: "var(--tz-ink-2)", lineHeight: 1.55 }}>
+              The audit points to concrete decision blockers: too many choices, weak proof, and hidden annual value.
+            </p>
+          </div>
+          <div className="overflow-hidden rounded-[24px] px-1 py-3 sm:px-3"
+            style={{ background: "rgba(255,255,255,0.42)", border: "1px solid var(--tz-line)" }}>
+            <Image
+              src="/generated/paywall-diagnosis.png"
+              alt="Paywall diagnosis artifact showing a current paywall and the reasons buyers stall"
+              width={1700}
+              height={936}
+              className="block w-full"
+              style={{ height: "auto", objectFit: "contain" }}
+            />
           </div>
         </div>
       </div>

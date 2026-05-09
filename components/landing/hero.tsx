@@ -85,8 +85,8 @@ export function Hero() {
 
       <p className="relative z-[2] text-lg max-w-[580px] mb-9"
         style={{ color: "var(--tz-ink-2)", lineHeight: 1.55 }}>
-        Most teams test one screen for weeks. Tranzmit screens thousands safely,
-        shows the winner, and explains why buyers choose it.
+        Upload your current paywall. Tranzmit finds a higher-converting version,
+        shows the lift, and explains why it wins.
       </p>
 
       <div className="relative z-[2] flex flex-wrap items-center justify-center gap-3">
@@ -111,29 +111,33 @@ export function Hero() {
         </Link>
       </div>
 
-      <div className="relative z-[2] mt-10 sm:mt-12 grid w-full max-w-[520px] grid-cols-3 items-start gap-3 sm:flex sm:max-w-none sm:flex-wrap sm:items-center sm:justify-center sm:gap-6">
+      <div className="relative z-[2] mt-10 sm:mt-12 grid w-full max-w-[620px] grid-cols-3 items-stretch gap-3 rounded-[22px] px-3 py-3 sm:max-w-[760px] sm:px-4"
+        style={{
+          background: "rgba(255,255,255,0.62)",
+          border: "1px solid var(--tz-line-2)",
+          boxShadow: "0 24px 58px -42px rgba(80,60,120,0.42), inset 0 1px 1px rgba(255,255,255,0.72)",
+          backdropFilter: "blur(14px)",
+        }}>
         {[
-          ["14d", "test cycle"],
-          ["1,847", "variants/week"],
-          ["+214%", "avg. lift"],
+          ["50", "variants in your audit"],
+          ["9.4 min", "median winner direction"],
+          ["+67%", "more buyers, same traffic"],
         ].map(([value, label]) => (
-          <div key={label} className="flex flex-col items-center gap-1 sm:flex-row sm:items-baseline sm:gap-2"
-            style={{ fontFamily: "var(--font-geist-mono), monospace", color: "var(--tz-ink-3)" }}>
+          <div key={label} className="flex min-h-[76px] flex-col items-center justify-center gap-1 rounded-[16px] px-2 text-center"
+            style={{ fontFamily: "var(--font-geist-mono), monospace", color: "var(--tz-ink-3)", background: "rgba(255,255,255,0.5)" }}>
             <strong style={{
-              fontSize: 15,
+              fontSize: "clamp(20px, 4.6vw, 34px)",
               background: "var(--tz-accent-grad)",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
               color: "transparent",
               fontWeight: 700,
+              lineHeight: 1,
+              whiteSpace: "nowrap",
             }}>{value}</strong>
-            <span style={{ fontSize: 12, lineHeight: 1.25 }}>{label}</span>
+            <span style={{ fontSize: 11, lineHeight: 1.25 }}>{label}</span>
           </div>
         ))}
-        <div className="hidden h-[22px] w-px sm:block" style={{ background: "var(--tz-line-2)" }} />
-        <div className="hidden sm:block" style={{ fontFamily: "var(--font-geist-mono), monospace", fontSize: 12, color: "var(--tz-ink-3)" }}>
-          AI apps · SaaS · subscription media
-        </div>
       </div>
     </section>
   )

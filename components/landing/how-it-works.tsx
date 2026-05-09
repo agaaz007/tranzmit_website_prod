@@ -4,21 +4,21 @@ const steps = [
   {
     number: "01",
     title: "Read the buying moment",
-    desc: "What users saw, where they hesitated, and which path brought them to the paywall.",
+    desc: "Map what users saw before the paywall and where they hesitated.",
     label: "Context",
     chips: ["Saw", "Clicked", "Left"],
   },
   {
     number: "02",
     title: "Screen the variants safely",
-    desc: "Pricing, copy, proof, plan, and trial combinations are scored before live buyers see them.",
+    desc: "Score price, proof, plan, and CTA variants before live buyers see them.",
     label: "Pre-test",
     chips: ["Price", "Copy", "Proof"],
   },
   {
     number: "03",
     title: "Ship the best answer",
-    desc: "The winner goes live with guardrails, the expected lift, and the reason it should work.",
+    desc: "Launch the winner with expected lift, rollout guardrails, and the reason it works.",
     label: "Winner",
     chips: ["Lift", "Why", "Live"],
   },
@@ -77,10 +77,10 @@ export function HowItWorks() {
           fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.08, marginBottom: 18,
           textWrap: "balance",
         }}>
-          Read behavior, test safely,<br />ship the winner.
+          Read the moment, score variants,<br />ship the winner.
         </h2>
         <p className="max-w-[600px] mb-14" style={{ fontSize: 17, color: "var(--tz-ink-2)", lineHeight: 1.55 }}>
-          One answer: which screen should go live, and why it will convert more buyers.
+          One answer: which paywall to ship, what lift to expect, and why it should convert.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {steps.map((step, index) => (
@@ -100,6 +100,7 @@ export function HowItWorks() {
             </div>
           ))}
         </div>
+
       </div>
     </section>
   )

@@ -47,7 +47,7 @@ export function LiveDemo() {
         <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--tz-green)", boxShadow: "0 0 0 4px oklch(0.55 0.15 150 / 0.14)", animation: "tz-pulse 2s infinite" }} />
         Winner found in 9.4 minutes
       </div>
-      <div className="relative z-[2] w-full max-w-[980px] rounded-[24px] overflow-hidden transition-transform duration-500 hover:-translate-y-1"
+      <div className="relative z-[2] w-full max-w-[1120px] rounded-[24px] overflow-hidden transition-transform duration-500 hover:-translate-y-1"
         style={{
           background: "var(--tz-bg-card)",
           border: "1px solid rgba(201,122,74,0.24)",
@@ -77,6 +77,28 @@ export function LiveDemo() {
 
         {/* Body */}
         <div className="relative p-6 sm:p-8">
+          <div className="mb-5 grid grid-cols-1 gap-2 sm:grid-cols-3">
+            {[
+              ["1", "Score before launch", "No live traffic spent on weak variants"],
+              ["2", "Explain the winner", "Price, proof, offer, and friction called out"],
+              ["3", "Roll out safely", "Ship to 5% traffic before full release"],
+            ].map(([step, title, desc]) => (
+              <div key={step} className="rounded-2xl px-4 py-3"
+                style={{ background: "rgba(255,255,255,0.62)", border: "1px solid var(--tz-line)" }}>
+                <div className="flex items-center gap-2" style={{ marginBottom: 4 }}>
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full"
+                    style={{ background: "var(--tz-accent-soft)", color: "var(--tz-accent)", fontFamily: "var(--font-geist-mono), monospace", fontSize: 11, fontWeight: 700 }}>
+                    {step}
+                  </span>
+                  <span style={{ fontSize: 13, fontWeight: 650, color: "var(--tz-ink)" }}>{title}</span>
+                </div>
+                <div style={{ fontSize: 12, color: "var(--tz-ink-3)", lineHeight: 1.4 }}>
+                  {desc}
+                </div>
+              </div>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             {/* Control */}
             <div className="rounded-2xl p-5"

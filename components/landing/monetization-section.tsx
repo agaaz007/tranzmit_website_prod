@@ -7,8 +7,8 @@ const cards = [
     metric: "+214%",
     metricLabel: "paid conversion lift",
     title: "Paywalls",
-    desc: "Find the price, plan, proof, and CTA that turns more free users into buyers.",
-    bullets: ["Price", "Plan", "Proof"],
+    desc: "Start here: find the price, plan, proof, and CTA that turns more free users into buyers.",
+    bullets: ["Price", "Plan", "Proof", "CTA"],
   },
   {
     metric: "ARPU",
@@ -38,7 +38,7 @@ const audiences = [
   "Freemium SaaS", "Subscription media", "Mobile apps",
 ]
 
-function MonetizationCard({ card, palette }: { card: typeof cards[number]; palette: number }) {
+function MonetizationCard({ card, palette, featured = false }: { card: typeof cards[number]; palette: number; featured?: boolean }) {
   const palettes = [
     { background: "#e6ecf6", primary: "#b8c4ea", secondary: "#d8b8e0" },
     { background: "#f4dde2", primary: "#e8b4c0", secondary: "#c8b0d8" },
@@ -50,9 +50,9 @@ function MonetizationCard({ card, palette }: { card: typeof cards[number]; palet
   const holoKinds = ["tiers", "annual", "winner", "annual"] as const
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-0 rounded-[22px] overflow-hidden transition-all hover:-translate-y-0.5"
+    <div className={`grid grid-cols-1 gap-0 overflow-hidden rounded-[22px] transition-all hover:-translate-y-0.5 ${featured ? "sm:grid-cols-[260px_1fr]" : "sm:grid-cols-[180px_1fr]"}`}
       style={{ background: "var(--tz-bg-card)", border: "1px solid var(--tz-line)" }}>
-      <div className="relative min-h-[180px] p-6 flex flex-col justify-end overflow-hidden"
+      <div className={`relative flex flex-col justify-end overflow-hidden p-6 ${featured ? "min-h-[220px]" : "min-h-[180px]"}`}
         style={{ background: colors.background }}>
         <svg viewBox="0 0 180 180" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
           <defs>
@@ -83,20 +83,27 @@ function MonetizationCard({ card, palette }: { card: typeof cards[number]; palet
           </div>
         </div>
       </div>
-      <div className="p-7 sm:p-8">
-        <h3 style={{ fontSize: 22, fontWeight: 600, letterSpacing: "-0.025em", marginBottom: 12 }}>
+      <div className={featured ? "p-7 sm:p-10" : "p-7 sm:p-8"}>
+        <h3 style={{ fontSize: featured ? 30 : 22, fontWeight: 650, letterSpacing: "-0.03em", marginBottom: 12, lineHeight: 1.08 }}>
           {card.title}
         </h3>
-        <p style={{ fontSize: 14, color: "var(--tz-ink-2)", lineHeight: 1.6, marginBottom: 18 }}>
+        <p style={{ fontSize: featured ? 16 : 14, color: "var(--tz-ink-2)", lineHeight: 1.6, marginBottom: 18, maxWidth: featured ? 560 : "none" }}>
           {card.desc}
         </p>
-        <ul className="flex flex-col gap-2 pt-4"
+        <ul className={featured ? "flex flex-wrap gap-2.5 pt-4" : "flex flex-col gap-2 pt-4"}
           style={{ listStyle: "none", padding: 0, margin: 0, borderTop: "1px solid var(--tz-line)" }}>
           {card.bullets.map((bullet) => (
-            <li key={bullet} className="relative pl-4"
-              style={{ fontSize: 13, color: "var(--tz-ink-3)", fontFamily: "var(--font-geist-mono), monospace", letterSpacing: "0.01em" }}>
-              <span className="absolute left-0 top-[8px] w-[5px] h-[5px] rounded-full"
-                style={{ background: "var(--tz-accent)" }} />
+            <li key={bullet} className={featured ? "rounded-full px-4 py-2" : "relative pl-4"}
+              style={{
+                fontSize: 13,
+                color: featured ? "var(--tz-ink-2)" : "var(--tz-ink-3)",
+                fontFamily: "var(--font-geist-mono), monospace",
+                letterSpacing: "0.01em",
+                background: featured ? "rgba(255,255,255,0.64)" : "transparent",
+                border: featured ? "1px solid var(--tz-line)" : "none",
+              }}>
+              {!featured && <span className="absolute left-0 top-[8px] w-[5px] h-[5px] rounded-full"
+                style={{ background: "var(--tz-accent)" }} />}
               {bullet}
             </li>
           ))}
@@ -118,16 +125,18 @@ export function MonetizationSection() {
           fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.08, marginBottom: 18,
           textWrap: "balance",
         }}>
-          Anywhere a user decides<br />to pay or stay
+          Start with the paywall.<br />Extend once the math works.
         </h2>
         <p className="max-w-[600px] mb-14" style={{ fontSize: 17, color: "var(--tz-ink-2)", lineHeight: 1.55 }}>
-          Keep the same engine. Change the decision surface.
-          Paywalls, upgrades, cancel flows, and win-back offers all become measurable.
+          The first job is simple: make more visitors pay from the same traffic.
+          The same testing engine can later move into upgrades, cancel flows, and win-back offers.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-14">
           {cards.map((card, index) => (
-            <MonetizationCard key={card.title} card={card} palette={index} />
+            <div key={card.title} className={index === 0 ? "lg:col-span-2" : ""}>
+              <MonetizationCard card={card} palette={index} featured={index === 0} />
+            </div>
           ))}
         </div>
 

@@ -27,13 +27,13 @@ export function Nav() {
           Results
         </Link>
         <Link href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener noreferrer"
-          className="whitespace-nowrap rounded-full text-[13px] font-medium no-underline"
+          className="whitespace-nowrap rounded-full text-[13px] font-medium no-underline transition-all hover:-translate-y-px"
           style={{
             background: "var(--tz-ink)",
             color: "var(--tz-bg)",
             padding: "9px 18px",
           }}>
-          Book a demo
+          Get free audit
         </Link>
       </div>
     </nav>
