@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { HoloCard } from "./holo-card"
+import { LogoMarquee } from "@/components/logo-marquee"
 
 function LiveBadge() {
   const [count, setCount] = useState(2341)
@@ -110,6 +111,8 @@ export function Hero() {
           See how it works
         </Link>
       </div>
+
+      <LogoMarquee />
 
       <div className="relative z-[2] mt-10 sm:mt-12 grid w-full max-w-[620px] grid-cols-3 items-stretch gap-3 rounded-[22px] px-3 py-3 sm:max-w-[760px] sm:px-4"
         style={{

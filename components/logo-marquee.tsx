@@ -3,57 +3,36 @@
 import Image from "next/image"
 
 const BRANDS = [
-  { name: "Gojek", logo: "/logos/gojek.svg", width: 100, height: 50 },
-  { name: "Freecultr", logo: "/logos/freecultr.svg", width: 150, height: 36 },
-  { name: "Jungle", logo: "/logos/jungle.svg", width: 110, height: 44 },
-  { name: "Juno", logo: "/logos/juno.svg", width: 100, height: 40 },
+  { name: "Jungle AI", logo: "/logos/jungleai.png", width: 140, height: 140 },
+  { name: "Zeo", logo: "/logos/zeoauto.png", width: 140, height: 140 },
+  { name: "Tata 1mg", logo: "/logos/tata1mg.png", width: 140, height: 140 },
 ]
 
 export function LogoMarquee() {
-  const items = [...BRANDS, ...BRANDS, ...BRANDS, ...BRANDS]
-
   return (
-    <section className="py-10 sm:py-16 overflow-hidden">
-      <div className="container mx-auto mb-6">
-        <p
-          className="text-center text-xs font-semibold tracking-[0.2em] uppercase"
-          style={{ color: "var(--t-text-muted)" }}
-        >
-          Trusted by teams at
-        </p>
+    <div className="relative z-[2] flex items-center justify-center gap-2 mt-10 sm:mt-12">
+      <span
+        className="text-xs font-medium tracking-wide"
+        style={{ color: "var(--tz-ink-2)", whiteSpace: "nowrap" }}
+      >
+        Trusted by
+      </span>
+      <div className="flex items-center gap-6 sm:gap-8">
+        {BRANDS.map((brand) => (
+          <div
+            key={brand.name}
+            className="opacity-50 hover:opacity-80 transition-opacity duration-300 grayscale"
+          >
+            <Image
+              src={brand.logo}
+              alt={brand.name}
+              width={brand.width}
+              height={brand.height}
+              className="h-6 sm:h-7 w-auto object-contain select-none pointer-events-none"
+            />
+          </div>
+        ))}
       </div>
-
-      <div className="relative w-full overflow-hidden">
-        <div
-          className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 z-10 pointer-events-none"
-          style={{
-            background: "linear-gradient(to right, var(--t-bg), transparent)",
-          }}
-        />
-        <div
-          className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 z-10 pointer-events-none"
-          style={{
-            background: "linear-gradient(to left, var(--t-bg), transparent)",
-          }}
-        />
-
-        <div className="animate-marquee whitespace-nowrap flex items-center">
-          {items.map((brand, i) => (
-            <div
-              key={i}
-              className="mx-8 sm:mx-14 flex-shrink-0 opacity-40 hover:opacity-70 transition-opacity duration-300 dark:brightness-0 dark:invert dark:opacity-30 dark:hover:opacity-60"
-            >
-              <Image
-                src={brand.logo}
-                alt={brand.name}
-                width={brand.width}
-                height={brand.height}
-                className="h-7 sm:h-9 w-auto object-contain select-none pointer-events-none"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    </div>
   )
 }
