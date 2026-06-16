@@ -1020,10 +1020,13 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
     margin-left: calc(50vw - 50%);
     margin-right: calc(50vw - 50%);
     height: 72px;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 10px;
   }
-  .brand { width: auto !important; flex: 0 0 auto; font-size: 24px; }
-  .nav__cta { display: none; }
+  .brand { width: auto !important; flex: 0 0 auto; flex-shrink: 0; font-size: 20px; white-space: nowrap; }
+  .nav__cta { display: flex; gap: 8px; margin-left: auto; }
+  .nav .btn { padding: 9px 13px; font-size: 13px; gap: 6px; }
+  .nav .btn .arr { display: none; }
   .hero__grid {
     display: flex;
     flex-direction: column;
@@ -1057,19 +1060,29 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   .trust { align-items: center; text-align: center; width: 100%; max-width: 320px; }
   .logos-row { justify-content: center; width: 100%; }
   .stars { text-align: center; }
-  .stage { min-height: 470px; margin: 26px calc(var(--pad) * -1) 0; overflow: hidden; }
-  .stage__hub { top: 49%; }
-  .stage .mock { transform: none !important; }
-  .stage .mock:nth-of-type(2) { width: 176px !important; top: 24px !important; left: 22px !important; }
-  .stage .mock:nth-of-type(3) { width: 190px !important; top: 86px !important; right: 22px !important; }
-  .stage .mock:nth-of-type(4) { width: 178px !important; top: 286px !important; right: 30px !important; }
-  .stage .mock:nth-of-type(5) { width: 206px !important; top: 250px !important; left: 20px !important; }
-  .video-pin { height: 130vh; }
-  .video-sticky { height: 92vh; padding: 0 var(--pad); }
+  .stats .stat:last-child { grid-column: 1 / -1; }
+  .stage { display: none; }
+  .video-pin { height: auto; }
+  .video-sticky { position: static; height: auto; padding: 32px var(--pad); }
   #pinned-video { max-height: 72vh; border-radius: 14px !important; }
   .pcard { flex: 1 1 100%; }
   .sys__cols, .logos3 { grid-template-columns: 1fr; }
   .how h2 { font-size: 38px; }
+  .cta h2 { font-size: 33px; }
+  .hero__cloud { display: none; }
+  .sys__title { font-size: 22px; text-align: center; }
+  .sys__title br:nth-of-type(1),
+  .sys__title br:nth-of-type(3) { display: none; }
+  .integ__h { font-size: 20px; font-weight: 700; text-align: center; }
+  .section--pad:has(.logoband) { text-align: center; }
+  .logoband { flex-direction: column; align-items: center; gap: 20px; }
+  .logoband__txt { max-width: none; }
+  .logoband__set { margin-left: 0; justify-content: center; flex-wrap: nowrap; gap: 10px; }
+  .logoband__set .lg--img img { height: 20px; }
+  .logoband__set .lg--img:nth-child(3) img { height: 24px; }
+}
+@media (max-width: 360px) {
+  .nav__cta a:nth-child(2) { display: none; }
 }
 
 /* ============================================================
@@ -1165,9 +1178,12 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   .cs2-branch { flex-wrap: wrap; }
 }
 @media (max-width: 560px) {
-  .cs2-branch { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .cs2-branch { flex-direction: column; align-items: center; gap: 18px; width: 100%; max-width: calc(100vw - (var(--pad) * 2)); min-width: 0; }
   .cs2-branch-line { display: none; }
-  .cs2-pw-fig--orig, .cs2-variants .cs2-pw-fig { width: 100%; max-width: 300px; }
+  .cs2-variants { width: 100%; max-width: calc(100vw - (var(--pad) * 2)); min-width: 0; align-items: center; }
+  .cs2-pw-fig--orig, .cs2-variants .cs2-pw-fig { width: 100%; max-width: min(340px, calc(100vw - (var(--pad) * 2))); min-width: 0; margin-left: auto; margin-right: auto; }
+  .cs2-pw-fig figcaption { font-size: 14px; white-space: normal; }
+  .cs2-uplift { white-space: nowrap; text-align: center; }
   .cs2-title { font-size: 40px; }
 }
 
@@ -1199,14 +1215,14 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   .exp-side__h { flex: 0 0 100%; padding-bottom: 8px; }
   .exp-side button { width: auto; flex: 1 0 auto; justify-content: center; }
   .exp-main { padding: 18px 14px; overflow: hidden; }
-  .exp-overview { flex-direction: column; gap: 18px; align-items: stretch; }
+  .exp-overview { flex-direction: column; gap: 22px; align-items: stretch; }
   .exp-table-wrap {
     width: 100%;
     padding-right: 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  .exp-table { min-width: 462px; }
+  .exp-table { min-width: 500px; }
   .safe-rollout {
     width: 100%;
     border-left: 0;
