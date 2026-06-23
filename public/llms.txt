@@ -1,0 +1,44 @@
+# Tranzmit AI
+
+> Tranzmit AI is a self-improving paywall optimization platform. It builds, tests, and evolves in-app paywalls that turn more visitors into buyers — using behavioral data, AI generation, simulation, and safe live rollout to find winning paywall experiences faster and with less risk.
+
+Tranzmit AI replaces paywall guesswork with a continuous, evidence-based system. Paywalls are one of the highest-leverage surfaces in a product, but most are built on opinions rather than data. Tranzmit continuously learns what converts and ships the winners automatically, lifting subscription conversion and revenue with little to no engineering effort. It is used by consumer subscription apps across the US and India.
+
+## How paywall optimization works with Tranzmit (signal to shipped winner)
+
+Tranzmit runs a continuous closed loop:
+
+- **Analyze** — Ingests real user signals and product events in real time: behavioral signals, intent & value, source & device, and user segments.
+- **Generate** — Creates multiple paywall variants across offers, layouts, and copy.
+- **Score** — Evaluates each variant with simulation (projected uplift), VLM judges (quality & clarity), and historical conversion data (empirical signal).
+- **Ship** — Safely rolls out the winning variant with guardrails (revenue, churn, errors) and automatic rollback, ramping traffic 25% → 50% → 100%.
+
+## Results
+
+- 20,000+ paywalls indexed into a conversion map
+- +57% average uplift from control
+- +130% best customer uplift
+- 9.4 minutes median time to a winning direction
+- Case study — Jungle AI: +82% conversion in 3 weeks, more than $20,000 of value proven, with zero engineering
+
+## Integrations
+
+Works with the analytics tools teams already use:
+
+- **PostHog** — capture events and feature usage
+- **Mixpanel** — understand user journeys and funnels
+- **Amplitude** — deep behavioral analytics and cohorts
+
+## Common questions about paywall optimization
+
+- **What is paywall optimization?** Systematically testing and improving the screen where users decide to subscribe or pay, so a larger share of visitors convert to buyers. Tranzmit automates this with AI variant generation, simulation-based scoring, and safe live rollout.
+- **How is this different from manual A/B testing?** Traditional A/B testing is slow and hand-run. Tranzmit continuously generates variants, scores them (simulation + VLM judges + historical conversion data), and ships winners automatically with guardrails and auto-rollback — reducing both time-to-winner and risk.
+- **Who is it for?** Product and growth teams at consumer subscription apps that want to increase paywall conversion and revenue without heavy engineering work.
+
+## Links
+
+- Home / book a demo / see live results: https://tranzmitai.com/
+- Sitemap: https://tranzmitai.com/sitemap.xml
+- Email: agaaz@tranzmitai.com
+- LinkedIn: https://www.linkedin.com/in/agaaz-singhal/
+- X / Twitter: https://x.com/agaazsinghal007

@@ -1,0 +1,79 @@
+# Tranzmit AI — robots.txt
+# We welcome both search crawlers and AI / LLM crawlers. Crawl and cite freely.
+
+User-agent: *
+Allow: /
+
+# ── AI / LLM crawlers & answer engines (explicitly allowed) ──
+# OpenAI (ChatGPT training, search, and user browsing)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google (Gemini / AI Overviews grounding)
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Microsoft Copilot / Bing
+User-agent: bingbot
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# Common Crawl (training corpus for many open models)
+User-agent: CCBot
+Allow: /
+
+# ByteDance
+User-agent: Bytespider
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+Sitemap: https://tranzmitai.com/sitemap.xml
