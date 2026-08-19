@@ -694,7 +694,7 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
 /* ============================================================
    HERO
    ============================================================ */
-.hero { position: relative; overflow: hidden; background: #FFFFFF; margin-top: -100px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+.hero { position: relative; overflow: hidden; background: #FFFFFF; margin-top: -100px; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
 .hero__cloud {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
   background:
@@ -812,8 +812,17 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
    STATS
    ============================================================ */
 .stats { display: grid; grid-template-columns: repeat(5,1fr); }
-.hero__stats { position: relative; z-index: 1; max-width: 1150px; margin: 60px auto 0; padding-bottom: 6px; }
-.stat { padding: 28px 26px; text-align: center; position: relative; }
+.hero__stats {
+  position: relative;
+  z-index: 1;
+  width: min(1150px, calc(100vw - (var(--pad) * 2)));
+  margin: 38px auto 0;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(255,255,255,.52);
+}
+.stat { padding: 20px 18px; text-align: center; position: relative; }
 .stat::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 1px; height: calc(100% - 56px); background: var(--line); }
 .stat:first-child::before { display: none; }
 .stat__num { font-family: var(--serif); font-size: 40px; font-weight: 500; letter-spacing: -.02em; }
@@ -1058,14 +1067,32 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
 /* ============================================================
    LOGOS BAND
    ============================================================ */
-.logoband { display:flex; align-items:center; gap:38px; flex-wrap:wrap; }
-.logoband__txt { font-family:var(--serif); font-size:26px; font-weight:500; max-width:14em; line-height:1.18; }
-.logoband__set { display:flex; align-items:center; gap:34px; margin-left:auto; flex-wrap:wrap; }
-.logoband__set .lg { font-weight:800; font-size:19px; color:var(--ink); opacity:.82; letter-spacing:-.01em; }
-.logoband__set .lg--img { display:inline-flex; align-items:center; opacity:1; }
-.logoband__set .lg--img img { height:30px; width:auto; max-width:118px; object-fit:contain; display:block; }
-.logoband__set .lg--img:nth-child(3) img { height:38px; }
-.logoband__more { font-size:13px; color:var(--muted); display:inline-flex; gap:6px; align-items:center;}
+.logoband { display:grid; grid-template-columns:minmax(250px,.72fr) minmax(0,1.55fr); align-items:start; gap:clamp(44px,6vw,92px); }
+.logoband__intro { position:sticky; top:112px; }
+.logoband__txt { font-family:var(--sans); font-size:clamp(28px,2.5vw,38px); font-weight:600; max-width:13em; line-height:1.08; letter-spacing:-.035em; text-wrap:balance; }
+.logoband__note { max-width:32em; margin-top:18px; color:var(--muted); font-size:14px; line-height:1.55; }
+.logoband__set { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid var(--line); }
+.proof-app {
+  display:grid;
+  grid-template-columns:54px minmax(0,1fr);
+  grid-template-rows:auto 1fr auto;
+  column-gap:16px;
+  min-height:178px;
+  padding:22px 24px 20px;
+  color:var(--ink);
+  text-decoration:none;
+  border-bottom:1px solid var(--line);
+  transition:background-color .22s ease, transform .22s ease;
+}
+.proof-app:nth-child(even) { border-left:1px solid var(--line); }
+.proof-app:hover { background:rgba(251,243,246,.72); transform:translateY(-2px); }
+.proof-app:focus-visible { outline:2px solid var(--pink); outline-offset:-2px; }
+.proof-app__logo { grid-row:1 / span 2; width:54px; height:54px; display:grid; place-items:center; padding:8px; border:1px solid var(--line-soft); border-radius:14px; background:#fff; }
+.proof-app__logo img { width:100%; height:100%; max-width:100%; object-fit:contain; }
+.proof-app__body h3 { font-size:16px; font-weight:700; letter-spacing:-.015em; }
+.proof-app__body p { margin-top:6px; color:var(--muted); font-size:13px; line-height:1.45; text-wrap:pretty; }
+.proof-app__audience { grid-column:2; align-self:end; margin-top:16px; font-size:12px; font-weight:700; color:var(--pink-deep); letter-spacing:.02em; }
+.proof-app__audience strong { margin-right:5px; color:var(--ink); font-size:19px; font-weight:700; letter-spacing:-.025em; font-variant-numeric:tabular-nums; }
 
 /* ============================================================
    CTA BAND
@@ -1145,6 +1172,9 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   .moat-viz { grid-template-columns: 1fr auto; }
   .cta__grid { grid-template-columns: 1fr; }
   .foot__top { gap: 36px; }
+  .logoband { grid-template-columns:1fr; gap:32px; }
+  .logoband__intro { position:static; }
+  .logoband__txt { max-width:18em; }
 }
 @media (max-width: 820px) {
   :root { --pad: 22px; }
@@ -1159,7 +1189,6 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   .sys__cols { grid-template-columns: 1fr 1fr; }
   .exp-body { grid-template-columns: 1fr; }
   .exp-side { flex-direction:row; flex-wrap:wrap; border-right:0; border-bottom:1px solid var(--line-soft); }
-  .logoband__set { margin-left:0; }
   /* overrides for inline desktop styles — phone/tablet only */
   .broken-grid { grid-template-columns: 1fr 1fr !important; }
   .grow-grid { grid-template-columns: 1fr !important; }
@@ -1201,12 +1230,8 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   .sys__title { font-size: 22px; text-align: center; }
   .sys__title br:nth-of-type(1), .sys__title br:nth-of-type(3) { display: none; }
   .integ__h { font-size: 20px; font-weight: 700; text-align: center; }
-  .section--pad:has(.logoband) { text-align: center; }
-  .logoband { flex-direction: column; align-items: center; gap: 20px; }
-  .logoband__txt { max-width: none; }
-  .logoband__set { margin-left: 0; justify-content: center; flex-wrap: nowrap; gap: 10px; }
-  .logoband__set .lg--img img { height: 20px; }
-  .logoband__set .lg--img:nth-child(3) img { height: 24px; }
+  .logoband__set { grid-template-columns:1fr; }
+  .proof-app:nth-child(even) { border-left:0; }
   /* overrides for inline desktop styles — phone only */
   .hero h1 { font-size: min(44px, 11.6vw) !important; }
   html, body { overflow-x: clip; }
@@ -1419,6 +1444,11 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   }
   .trust { width: 100%; max-width: 320px; text-align: center; }
   .logos-row { width: 100%; }
+  .hero__stats { width:100%; margin-top:30px; padding:4px 0; }
+  .stat { padding:18px 8px; }
+  .logoband { gap:26px; }
+  .logoband__txt { font-size:30px !important; }
+  .proof-app { min-height:0; padding:20px 4px; }
   .cs2-branch,
   .cs2-variants {
     width: 100%;
@@ -1504,17 +1534,9 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
         </div>
       </div>
     </div>
-
-  </div>
-</section>
-
-
-<!-- ============================ VIDEO ============================ -->
-<section class="section video-pin">
-  <div class="video-sticky">
-    <div class="stats" style="width: 100%; max-width: 1150px; margin: 0 auto;">
+    <div class="stats hero__stats" aria-label="Tranzmit AI platform results">
       <div class="stat"><div class="stat__num" data-count="20000" data-suffix="+" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">20,000+</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Paywalls indexed</div></div>
-      <div class="stat"><div class="stat__num" data-count="25" data-suffix="M+" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">25M+</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Monthly paywall views</div></div>
+      <div class="stat"><div class="stat__num" data-count="5" data-suffix="M+" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">5M+</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Monthly paywall views</div></div>
       <div class="stat"><div class="stat__num" data-count="50" data-suffix="x" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">50x</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Faster than manual A/B</div></div>
       <div class="stat"><div class="stat__num" data-count="57" data-prefix="+" data-suffix="%" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">+57%</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Uplift in paid conversion</div></div>
       <div class="stat"><div class="stat__num" data-count="80" data-prefix="+" data-suffix="%" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">+80%</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Uplift in CTA clicks</div></div>
@@ -2131,17 +2153,35 @@ They're saying no to <span style="color: #F23E79; font-style: normal">your paywa
 </section>
 
 <!-- ============================ LOGO BAND ============================ -->
-<section class="section section--pad">
+<section class="section section--pad" id="customers">
   <div class="wrap">
-    <span class="eyebrow eyebrow--muted" style="font-family: Manrope; color: #F23E7A; font-size: 15px">Trusted by innovative teams</span>
-    <div class="logoband" style="margin-top:20px;">
-      <p class="logoband__txt serif" style="font-family: Manrope; width: 418px; height: 88px; font-size: 30px; font-weight: 600">Powering growth across leading consumer apps in the US &amp; India.</p>
+    <div class="logoband">
+      <div class="logoband__intro">
+        <span class="eyebrow eyebrow--muted" style="font-family: Manrope; color: #F23E7A; font-size: 15px">Trusted by innovative teams</span>
+        <p class="logoband__txt" style="font-family: Manrope; margin-top:20px;">Built for consumer apps with real scale.</p>
+        <p class="logoband__note">From study and healthcare to astrology and creator tools, Tranzmit improves the moment users decide whether to pay.</p>
+      </div>
       <div class="logoband__set">
-        <a class="lg lg--img" href="https://app.jungleai.com/" target="_blank" rel="noopener"><img width="190" height="109" src="/tranzmit-ai-landing/assets/a37dddec-8aa7-4b28-bc4c-04401c2eedd1.png" alt="Jungle"></a>
-        <a class="lg lg--img" href="https://www.1mg.com/" target="_blank" rel="noopener"><img width="960" height="214" src="/tranzmit-ai-landing/assets/97d9be4c-b568-4441-8f08-cc0d2a959d80.png" alt="TATA 1mg"></a>
-        <a class="lg lg--img" href="https://www.hiastro.in/" target="_blank" rel="noopener"><picture style="display:contents"><source type="image/webp" srcset="/tranzmit-ai-landing/assets/1770459b-3984-434d-a90e-99b6f91e441f.webp"><img width="512" height="512" src="/tranzmit-ai-landing/assets/1770459b-3984-434d-a90e-99b6f91e441f.png" alt="HiAstro"></picture></a>
-        <a class="lg lg--img" href="https://influish.com/" target="_blank" rel="noopener"><img width="1058" height="369" src="/tranzmit-ai-landing/assets/15095a91-4be3-4ea7-bdb9-d4299936a0c3.png" alt="InFluish"></a>
-        <span class="logoband__more">and more →</span>
+        <a class="proof-app" href="https://app.jungleai.com/" target="_blank" rel="noopener">
+          <span class="proof-app__logo"><img width="190" height="109" src="/tranzmit-ai-landing/assets/a37dddec-8aa7-4b28-bc4c-04401c2eedd1.png" alt="Jungle AI logo"></span>
+          <div class="proof-app__body"><h3>Jungle AI</h3><p>AI study tool that turns course material into practice questions.</p></div>
+          <span class="proof-app__audience"><strong>500K+</strong> monthly active users</span>
+        </a>
+        <a class="proof-app" href="https://www.1mg.com/" target="_blank" rel="noopener">
+          <span class="proof-app__logo"><img width="960" height="214" src="/tranzmit-ai-landing/assets/97d9be4c-b568-4441-8f08-cc0d2a959d80.png" alt="TATA 1mg logo"></span>
+          <div class="proof-app__body"><h3>TATA 1mg</h3><p>Digital healthcare for medicines, lab tests and consultations.</p></div>
+          <span class="proof-app__audience"><strong>12M</strong> average monthly active users</span>
+        </a>
+        <a class="proof-app" href="https://www.hiastro.in/" target="_blank" rel="noopener">
+          <span class="proof-app__logo"><picture style="display:contents"><source type="image/webp" srcset="/tranzmit-ai-landing/assets/1770459b-3984-434d-a90e-99b6f91e441f.webp"><img width="512" height="512" src="/tranzmit-ai-landing/assets/1770459b-3984-434d-a90e-99b6f91e441f.png" alt="HiAstro logo"></picture></span>
+          <div class="proof-app__body"><h3>HiAstro</h3><p>AI astrology for personalized readings and live guidance.</p></div>
+          <span class="proof-app__audience"><strong>1M+</strong> users</span>
+        </a>
+        <a class="proof-app" href="https://influish.com/" target="_blank" rel="noopener">
+          <span class="proof-app__logo"><img width="1058" height="369" src="/tranzmit-ai-landing/assets/15095a91-4be3-4ea7-bdb9-d4299936a0c3.png" alt="Influish logo"></span>
+          <div class="proof-app__body"><h3>Influish</h3><p>Creator tools for Instagram Auto-DM and brand collaborations.</p></div>
+          <span class="proof-app__audience"><strong>3M+</strong> monthly active users</span>
+        </a>
       </div>
     </div>
   </div>
