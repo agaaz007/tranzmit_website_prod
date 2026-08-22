@@ -7,6 +7,10 @@ const nextConfig = {
           source: "/",
           destination: "/tranzmit-ai-landing/index.html",
         },
+        {
+          source: "/assets/:path*",
+          destination: "/tranzmit-ai-landing/assets/:path*",
+        },
       ],
     }
   },
