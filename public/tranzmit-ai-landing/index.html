@@ -752,8 +752,14 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
    HERO WEBGL PAYWALL ENGINE — light, text-safe adaptation
    ============================================================ */
 .hero #hero-webgl-field { position:absolute; z-index:0; inset:0; width:100%; height:100%; display:block; pointer-events:none; opacity:.78; mix-blend-mode:multiply; }
-.hero-engine-cloud { position:absolute; z-index:1; inset:0; overflow:hidden; pointer-events:none; perspective:1400px; }
-.hero-engine-card { --engine-accent:#F23E78; --engine-tint:#FFF0F5; position:absolute; left:50%; top:45%; width:200px; height:316px; opacity:0; transform:translate(-50%,-50%) translate3d(var(--engine-x,-42vw),var(--engine-y,0),var(--engine-z,0)) rotate(var(--engine-r,0deg)) scale(.34); transition:transform 1.25s cubic-bezier(.16,.84,.24,1),opacity .58s ease,filter .58s ease; transition-delay:var(--engine-delay,0ms); filter:blur(3px); will-change:transform,opacity; }
+.hero-engine-vignette { position:absolute; z-index:1; inset:0; pointer-events:none; background:radial-gradient(ellipse 46% 48% at 50% 42%,rgba(255,255,255,.02),rgba(255,255,255,.22) 60%,rgba(251,248,244,.44) 100%); }
+.hero-engine-grain { position:absolute; z-index:2; inset:0; pointer-events:none; opacity:.018; mix-blend-mode:multiply; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E"); }
+.hero .hero__grid { z-index:3; }
+.hero-engine-system-status { position:absolute; z-index:4; top:112px; left:32px; right:32px; display:flex; justify-content:space-between; pointer-events:none; color:rgba(29,25,34,.42); font:700 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.14em; }
+.hero-engine-system-status span:first-child { display:flex; align-items:center; gap:8px; color:rgba(29,25,34,.68); }
+.hero-engine-system-status i { width:5px; height:5px; border-radius:50%; background:#55C766; box-shadow:0 0 12px rgba(85,199,102,.72); animation:heroEngineLive 1.8s ease-in-out infinite; }
+.hero-engine-cloud { position:absolute; z-index:1; inset:0; overflow:hidden; pointer-events:none; perspective:1500px; transform-style:preserve-3d; }
+.hero-engine-card { --engine-accent:#F23E78; --engine-tint:#FFF0F5; position:absolute; left:50%; top:47%; width:200px; height:316px; opacity:0; pointer-events:none; transform:translate(-50%,-50%) translate3d(var(--engine-x,-42vw),var(--engine-y,0),var(--engine-z,0)) rotate(var(--engine-r,0deg)) scale(.34); transition:transform 1.25s cubic-bezier(.16,.84,.24,1),opacity .58s ease,filter .58s ease; transition-delay:var(--engine-delay,0ms); filter:blur(7px); will-change:transform,opacity; transform-style:preserve-3d; }
 .hero-engine-card--intent { --engine-accent:#6E54E8; --engine-tint:#F3F0FE; }
 .hero-engine-card--proof { --engine-accent:#1F8A5B; --engine-tint:#EAF6EF; }
 .hero-engine-card--annual { --engine-accent:#E08A2B; --engine-tint:#FFF5E8; }
@@ -761,6 +767,8 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
 .hero-engine-card--return { --engine-accent:#4D7C73; --engine-tint:#ECF5F2; }
 .hero-engine-card--guided { --engine-accent:#168DB8; --engine-tint:#EAF9FF; }
 .hero-engine-card--minimal { --engine-accent:#242129; --engine-tint:#F2F1F4; }
+.hero-engine-card--trust { --engine-accent:#9C6629; --engine-tint:#FFFAF0; }
+.hero-engine-card--urgent { --engine-accent:#F05A43; --engine-tint:#FFF0EC; }
 .hero-engine-phone { position:relative; width:100%; height:100%; overflow:hidden; padding:13px 12px 11px; border:1px solid rgba(68,55,76,.14); border-radius:24px; color:#29242E; background:linear-gradient(150deg,rgba(255,255,255,.98),var(--engine-tint)); box-shadow:0 26px 54px -28px rgba(82,54,96,.44),inset 0 1px 0 rgba(255,255,255,.92); }
 .hero-engine-phone::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(118deg,rgba(255,255,255,.34),transparent 30%,transparent 70%,rgba(64,47,73,.035)); }
 .hero-engine-phone__top { display:flex; align-items:center; justify-content:space-between; gap:6px; color:var(--engine-accent); font:800 6px/1 Manrope,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
@@ -787,11 +795,35 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
 .hero-engine-phone__cta { display:grid; place-items:center; height:25px; margin-top:6px; border-radius:8px; color:#fff; background:var(--engine-accent); box-shadow:0 9px 18px color-mix(in srgb,var(--engine-accent) 18%,transparent); font:800 6px/1 Manrope,sans-serif; }
 .hero-engine-phone__fineprint { display:block; margin-top:5px; color:#99919C; text-align:center; font:600 4.5px/1 Manrope,sans-serif; }
 .hero-engine-card::after { content:attr(data-variant); position:absolute; left:50%; bottom:-21px; transform:translateX(-50%); color:var(--engine-accent); font:800 8px/1 Manrope,sans-serif; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap; text-shadow:0 1px 0 #fff; }
-.hero.hero-engine-phase-0 .hero-engine-card--control { opacity:1; filter:drop-shadow(0 28px 46px rgba(82,54,96,.22)); transform:translate(-50%,-50%) translate3d(-42vw,-1vh,90px) rotate(-5deg) scale(.84); }
-.hero.hero-engine-phase-1 .hero-engine-card { opacity:.97; filter:drop-shadow(0 26px 38px rgba(82,54,96,.19)); transform:translate(-50%,-50%) translate3d(var(--engine-x),var(--engine-y),var(--engine-z,0)) rotate(var(--engine-r,0deg)) scale(.78); }
+.hero-engine-signal { position:absolute; z-index:3; right:-11px; top:25px; height:14px; display:flex; align-items:center; justify-content:center; gap:3px; opacity:0; transition:opacity .3s ease; }
+.hero-engine-signal span { width:2px; border-radius:2px; background:var(--engine-accent); animation:heroEngineSignal .8s ease-in-out infinite alternate; }
+.hero-engine-signal span:nth-child(1) { height:3px; }
+.hero-engine-signal span:nth-child(2) { height:8px; animation-delay:-.2s; }
+.hero-engine-signal span:nth-child(3) { height:5px; animation-delay:-.4s; }
+.hero-engine-signal span:nth-child(4) { height:10px; animation-delay:-.55s; }
+.hero.hero-engine-phase-0 .hero-engine-card--control { opacity:1; pointer-events:auto; filter:drop-shadow(0 28px 46px rgba(82,54,96,.22)); transform:translate(-50%,-50%) translate3d(-42vw,-1vh,90px) rotate(-5deg) scale(.84); }
+.hero.hero-engine-phase-1 .hero-engine-card { opacity:.97; pointer-events:auto; filter:drop-shadow(0 26px 38px rgba(82,54,96,.19)); transform:translate(-50%,-50%) translate3d(var(--engine-x),var(--engine-y),var(--engine-z,0)) rotate(var(--engine-r,0deg)) scale(var(--engine-s,.68)); }
+.hero.hero-engine-phase-1 .hero-engine-card:hover { z-index:5; transform:translate(-50%,-50%) translate3d(var(--engine-x),calc(var(--engine-y) - 8px),calc(var(--engine-z,0px) + 90px)) rotate(0deg) scale(var(--engine-s,.68)) scale(1.08); }
+.hero.hero-engine-phase-1 .hero-engine-signal { opacity:.82; }
 .hero.hero-engine-phase-2 .hero-engine-card { opacity:.1; filter:blur(1.5px) grayscale(.35); transform:translate(-50%,-50%) translate3d(var(--engine-x),var(--engine-y),-100px) rotate(var(--engine-r,0deg)) scale(.55); }
-.hero.hero-engine-phase-2 .hero-engine-card--control { opacity:.4; filter:grayscale(.72) drop-shadow(0 20px 30px rgba(82,54,96,.12)); transform:translate(-50%,-50%) translate3d(-42vw,-1vh,0) rotate(-5deg) scale(.65); }
-.hero.hero-engine-phase-2 .hero-engine-card--winner { opacity:1; filter:drop-shadow(0 30px 52px rgba(242,62,120,.24)); transform:translate(-50%,-50%) translate3d(42vw,-1vh,100px) rotate(4deg) scale(.86); }
+.hero.hero-engine-phase-2 .hero-engine-card--control { opacity:.4; pointer-events:auto; filter:grayscale(.72) drop-shadow(0 20px 30px rgba(82,54,96,.12)); transform:translate(-50%,-50%) translate3d(-38vw,2vh,0) rotate(-5deg) scale(.65); }
+.hero.hero-engine-phase-2 .hero-engine-card--winner { opacity:1; pointer-events:auto; filter:drop-shadow(0 30px 52px rgba(242,62,120,.24)); transform:translate(-50%,-50%) translate3d(38vw,1vh,100px) rotate(4deg) scale(.86); }
+.hero.hero-engine-phase-2 .hero-engine-card--winner .hero-engine-signal { opacity:1; }
+
+.hero-engine-story-controls { position:relative; z-index:12; width:min(620px,100%); display:flex; align-items:center; justify-content:center; gap:8px; margin:18px auto 0; padding:5px; border:1px solid rgba(33,30,38,.1); border-radius:14px; background:rgba(255,253,249,.76); box-shadow:0 12px 34px -24px rgba(46,35,54,.35); backdrop-filter:blur(14px); }
+.hero-engine-story-controls > button:not(.hero-engine-motion-toggle) { min-width:0; flex:1; display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto; column-gap:7px; padding:8px 9px; border:0; border-radius:9px; background:transparent; color:#8D8791; text-align:left; cursor:pointer; transition:background .2s ease,color .2s ease; }
+.hero-engine-story-controls button span { grid-row:1; font:600 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.hero-engine-story-controls button b { grid-row:1; font:800 7px/1 Manrope,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+.hero-engine-story-controls button i { grid-column:1/-1; width:100%; height:2px; margin-top:8px; overflow:hidden; position:relative; border-radius:99px; background:#DDD7D0; }
+.hero-engine-story-controls button i::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,#F23E78,#F1A139,#62B66C); transform:scaleX(0); transform-origin:left; transition:transform .35s ease; }
+.hero-engine-story-controls button.active { color:#171619; background:#fff; }
+.hero-engine-story-controls button.active i::after { transform:scaleX(1); }
+.hero-engine-story-controls button:focus-visible { outline:2px solid rgba(242,62,120,.5); outline-offset:2px; }
+.hero-engine-motion-toggle { flex:0 0 auto; min-width:58px; padding:9px 10px; border:1px solid rgba(27,23,31,.13); border-radius:9px; background:rgba(255,255,255,.72); color:#706B75; font:800 6px/1 Manrope,sans-serif; letter-spacing:.12em; cursor:pointer; }
+.hero-engine-loop { position:relative; z-index:11; width:min(620px,100%); height:28px; display:flex; align-items:center; margin:8px auto 0; overflow:hidden; border-top:1px solid rgba(27,23,31,.1); border-bottom:1px solid rgba(27,23,31,.07); background:rgba(247,243,236,.58); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+.hero-engine-loop div { width:max-content; display:flex; align-items:center; gap:18px; white-space:nowrap; animation:heroEngineTicker 24s linear infinite; }
+.hero-engine-loop span { color:#6D6872; font:800 7px/1 Manrope,sans-serif; letter-spacing:.2em; }
+.hero-engine-loop b { color:#A19AA4; font-size:8px; }
 
 .hero-engine-mobile { display:none; width:min(540px,100%); height:172px; position:relative; margin:26px auto 0; overflow:hidden; border-top:1px solid rgba(242,62,120,.12); border-bottom:1px solid rgba(242,62,120,.1); background:radial-gradient(circle at 50% 50%,rgba(242,62,120,.1),transparent 57%); }
 .hero-engine-mobile::before { content:'ONE CONTROL  →  MANY TESTABLE PAYWALLS'; position:absolute; z-index:3; left:50%; top:10px; transform:translateX(-50%); color:#8A7F84; font:800 7px/1 Manrope,sans-serif; letter-spacing:.12em; white-space:nowrap; }
@@ -823,15 +855,32 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
 .hero.hero-engine-phase-2 .hero-engine-mobile-card:first-of-type { left:28%; opacity:.38; filter:grayscale(.72); transform:translate(-50%,-50%) rotate(-3deg) scale(.76); }
 .hero.hero-engine-phase-2 .hero-engine-mobile-card:last-child { left:72%; opacity:.98; filter:drop-shadow(0 16px 26px rgba(242,62,120,.2)); transform:translate(-50%,-50%) rotate(3deg) scale(.96); }
 
-@media (max-width:1359px) {
+@keyframes heroEngineLive { 50% { opacity:.28; box-shadow:0 0 3px rgba(85,199,102,.7); } }
+@keyframes heroEngineSignal { to { height:11px; } }
+@keyframes heroEngineTicker { to { transform:translateX(-50%); } }
+
+@media (max-width:1180px) and (min-width:681px) {
+  .hero h1 { font-size:clamp(52px,5.8vw,68px)!important; }
+  .hero-engine-card { width:180px; height:286px; }
+  .hero.hero-engine-phase-0 .hero-engine-card--control { transform:translate(-50%,-50%) translate3d(-41vw,-1vh,90px) rotate(-5deg) scale(.76); }
+  .hero.hero-engine-phase-1 .hero-engine-card { transform:translate(-50%,-50%) translate3d(var(--engine-x),var(--engine-y),var(--engine-z,0)) rotate(var(--engine-r,0deg)) scale(var(--engine-s,.68)) scale(.86); }
+  .hero.hero-engine-phase-2 .hero-engine-card--control { transform:translate(-50%,-50%) translate3d(-38vw,2vh,0) rotate(-5deg) scale(.58); }
+  .hero.hero-engine-phase-2 .hero-engine-card--winner { transform:translate(-50%,-50%) translate3d(38vw,1vh,100px) rotate(4deg) scale(.76); }
+  .hero-engine-system-status { left:18px; right:18px; }
+}
+@media (max-width:680px) {
   .hero-engine-cloud { display:none; }
   .hero-engine-mobile { display:block; }
-  .hero h1 { font-size:clamp(52px,5.8vw,68px)!important; }
+  .hero-engine-system-status { top:96px; left:16px; right:16px; }
+  .hero-engine-system-status span:last-child { display:none; }
   .hero-engine-mobile { height:146px; margin-top:20px; }
   .hero-engine-mobile-card { top:76px; }
-}
-@media (min-width:1360px) {
-  .hero__grid { z-index:3; }
+  .hero-engine-story-controls { gap:3px; margin-top:12px; padding:4px; }
+  .hero-engine-story-controls > button:not(.hero-engine-motion-toggle) { padding:8px 5px; }
+  .hero-engine-story-controls button span { display:none; }
+  .hero-engine-story-controls button b { font-size:6px; }
+  .hero-engine-motion-toggle { min-width:49px; padding:9px 7px; }
+  .hero-engine-loop { margin-top:6px; }
 }
 @media (max-width:560px) {
   .hero #hero-webgl-field { opacity:.52; }
@@ -840,7 +889,8 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   .hero-engine-mobile::before { top:7px; font-size:6px; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .hero-engine-card,.hero-engine-mobile-card { transition-duration:.01ms!important; }
+  .hero-engine-card,.hero-engine-mobile-card,.hero-engine-story-controls * { transition-duration:.01ms!important; }
+  .hero-engine-signal span,.hero-engine-system-status i,.hero-engine-loop div { animation-duration:.01ms!important; animation-iteration-count:1!important; }
 }
 
 /* floating mockup stage */
@@ -1704,8 +1754,11 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   <canvas id="expgrid" style="position:absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%; display:block; z-index:0; pointer-events:none;"></canvas>
   <canvas id="hero-webgl-field" aria-hidden="true"></canvas>
   <div class="hero__cloud"></div>
+  <div class="hero-engine-vignette" aria-hidden="true"></div>
+  <div class="hero-engine-grain" aria-hidden="true"></div>
+  <div class="hero-engine-system-status" aria-hidden="true"><span><i></i>SYSTEM LIVE</span><span>VARIANT MODEL / V3.2</span></div>
   <div class="hero-engine-cloud" aria-hidden="true">
-    <div class="hero-engine-card hero-engine-card--control" data-variant="Control" style="--engine-x:-42vw;--engine-y:-1vh;--engine-z:80px;--engine-r:-5deg;--engine-delay:0ms">
+    <div class="hero-engine-card hero-engine-card--control" data-variant="Control" style="--engine-x:-47vw;--engine-y:0vh;--engine-z:-30px;--engine-r:-5deg;--engine-s:.72;--engine-delay:0ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Control</span></div>
         <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
@@ -1718,8 +1771,9 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
         <div class="hero-engine-phone__cta">Continue</div>
         <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
       </div>
+      <div class="hero-engine-signal"><span></span><span></span><span></span><span></span></div>
     </div>
-    <div class="hero-engine-card hero-engine-card--intent" data-variant="High intent" style="--engine-x:-42vw;--engine-y:-21vh;--engine-z:-40px;--engine-r:5deg;--engine-delay:45ms">
+    <div class="hero-engine-card hero-engine-card--intent" data-variant="High intent" style="--engine-x:-43vw;--engine-y:-27vh;--engine-z:-110px;--engine-r:7deg;--engine-s:.63;--engine-delay:40ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Intent</span></div>
         <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
@@ -1732,22 +1786,24 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
         <div class="hero-engine-phone__cta">Unlock my plan</div>
         <small class="hero-engine-phone__fineprint">Secure checkout · Cancel anytime</small>
       </div>
+      <div class="hero-engine-signal"><span></span><span></span><span></span><span></span></div>
     </div>
-    <div class="hero-engine-card hero-engine-card--guided" data-variant="Fast start" style="--engine-x:-30vw;--engine-y:-40vh;--engine-z:-80px;--engine-r:-3deg;--engine-delay:90ms">
+    <div class="hero-engine-card hero-engine-card--guided" data-variant="Guided" style="--engine-x:-44vw;--engine-y:27vh;--engine-z:-25px;--engine-r:-4deg;--engine-s:.67;--engine-delay:240ms">
       <div class="hero-engine-phone">
-        <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Fast start</span></div>
+        <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Guided</span></div>
         <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
-        <p class="hero-engine-phone__eyebrow">Join in 30 seconds</p>
-        <h3 class="hero-engine-phone__headline">Unlock your full experience</h3>
-        <div class="hero-engine-phone__price"><strong>$1</strong><span>7-day trial</span></div>
-        <div class="hero-engine-phone__benefit">Instant access</div>
-        <div class="hero-engine-phone__benefit">No setup fee</div>
-        <div class="hero-engine-phone__choice">Trial plan <span>⌄</span></div>
-        <div class="hero-engine-phone__cta">Start for $1</div>
+        <p class="hero-engine-phone__eyebrow">Recommended for you</p>
+        <h3 class="hero-engine-phone__headline">Start with the essentials</h3>
+        <div class="hero-engine-phone__price"><strong>$2.99</strong><span>first week</span></div>
+        <div class="hero-engine-phone__benefit">Everything unlocked</div>
+        <div class="hero-engine-phone__benefit">Cancel anytime</div>
+        <div class="hero-engine-phone__choice">Guided plan <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">See my plan</div>
         <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
       </div>
+      <div class="hero-engine-signal"><span></span><span></span><span></span><span></span></div>
     </div>
-    <div class="hero-engine-card hero-engine-card--proof" data-variant="Social proof" style="--engine-x:-42vw;--engine-y:17vh;--engine-z:10px;--engine-r:-3deg;--engine-delay:135ms">
+    <div class="hero-engine-card hero-engine-card--proof" data-variant="Social proof" style="--engine-x:-47vw;--engine-y:-13vh;--engine-z:15px;--engine-r:-2deg;--engine-s:.64;--engine-delay:80ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Proof</span></div>
         <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
@@ -1760,8 +1816,9 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
         <div class="hero-engine-phone__cta">Start for $1</div>
         <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
       </div>
+      <div class="hero-engine-signal"><span></span><span></span><span></span><span></span></div>
     </div>
-    <div class="hero-engine-card hero-engine-card--minimal" data-variant="Minimal" style="--engine-x:30vw;--engine-y:-40vh;--engine-z:-80px;--engine-r:3deg;--engine-delay:180ms">
+    <div class="hero-engine-card hero-engine-card--minimal" data-variant="Minimal" style="--engine-x:45vw;--engine-y:27vh;--engine-z:-50px;--engine-r:-3deg;--engine-s:.63;--engine-delay:320ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Minimal</span></div>
         <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
@@ -1774,8 +1831,9 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
         <div class="hero-engine-phone__cta">Upgrade</div>
         <small class="hero-engine-phone__fineprint">Secure checkout · Cancel anytime</small>
       </div>
+      <div class="hero-engine-signal"><span></span><span></span><span></span><span></span></div>
     </div>
-    <div class="hero-engine-card hero-engine-card--annual" data-variant="Annual value" style="--engine-x:42vw;--engine-y:-21vh;--engine-z:-40px;--engine-r:-4deg;--engine-delay:225ms">
+    <div class="hero-engine-card hero-engine-card--annual" data-variant="Annual value" style="--engine-x:45vw;--engine-y:-27vh;--engine-z:-55px;--engine-r:4deg;--engine-s:.63;--engine-delay:120ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Value</span></div>
         <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
@@ -1788,8 +1846,9 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
         <div class="hero-engine-phone__cta">Choose annual</div>
         <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
       </div>
+      <div class="hero-engine-signal"><span></span><span></span><span></span><span></span></div>
     </div>
-    <div class="hero-engine-card hero-engine-card--winner" data-variant="Winner" style="--engine-x:42vw;--engine-y:-1vh;--engine-z:80px;--engine-r:4deg;--engine-delay:270ms">
+    <div class="hero-engine-card hero-engine-card--winner" data-variant="Winner" style="--engine-x:46vw;--engine-y:13vh;--engine-z:50px;--engine-r:2deg;--engine-s:.70;--engine-delay:280ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Winner</span></div>
         <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
@@ -1802,8 +1861,9 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
         <div class="hero-engine-phone__cta">Start free</div>
         <small class="hero-engine-phone__fineprint">Secure checkout · Cancel anytime</small>
       </div>
+      <div class="hero-engine-signal"><span></span><span></span><span></span><span></span></div>
     </div>
-    <div class="hero-engine-card hero-engine-card--return" data-variant="Return user" style="--engine-x:42vw;--engine-y:17vh;--engine-z:0px;--engine-r:-3deg;--engine-delay:315ms">
+    <div class="hero-engine-card hero-engine-card--return" data-variant="Welcome back" style="--engine-x:44vw;--engine-y:-13vh;--engine-z:-125px;--engine-r:-7deg;--engine-s:.69;--engine-delay:160ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Welcome back</span></div>
         <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
@@ -1816,6 +1876,37 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
         <div class="hero-engine-phone__cta">Claim offer</div>
         <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
       </div>
+      <div class="hero-engine-signal"><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="hero-engine-card hero-engine-card--trust" data-variant="Trust" style="--engine-x:-46vw;--engine-y:13vh;--engine-z:-85px;--engine-r:6deg;--engine-s:.66;--engine-delay:200ms">
+      <div class="hero-engine-phone">
+        <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Trust</span></div>
+        <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
+        <p class="hero-engine-phone__eyebrow">Cancel in one tap</p>
+        <h3 class="hero-engine-phone__headline">Try everything. Risk nothing.</h3>
+        <div class="hero-engine-phone__price"><strong>$4.99</strong><span>/ week</span></div>
+        <div class="hero-engine-phone__benefit">Everything unlocked</div>
+        <div class="hero-engine-phone__benefit">Cancel anytime</div>
+        <div class="hero-engine-phone__choice">Weekly plan <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">Try it now</div>
+        <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
+      </div>
+      <div class="hero-engine-signal"><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="hero-engine-card hero-engine-card--urgent" data-variant="Limited" style="--engine-x:47vw;--engine-y:0vh;--engine-z:-105px;--engine-r:7deg;--engine-s:.66;--engine-delay:360ms">
+      <div class="hero-engine-phone">
+        <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Limited</span></div>
+        <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
+        <p class="hero-engine-phone__eyebrow">Ends at midnight</p>
+        <h3 class="hero-engine-phone__headline">Your offer is ready</h3>
+        <div class="hero-engine-phone__price"><strong>2×</strong><span>more value</span></div>
+        <div class="hero-engine-phone__benefit">Everything unlocked</div>
+        <div class="hero-engine-phone__benefit">Cancel anytime</div>
+        <div class="hero-engine-phone__choice">Limited offer <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">Use my offer</div>
+        <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
+      </div>
+      <div class="hero-engine-signal"><span></span><span></span><span></span><span></span></div>
     </div>
   </div>
   <div class="wrap hero__grid">
@@ -1886,6 +1977,13 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
         </div>
       </div>
     </div>
+    <div class="hero-engine-story-controls" aria-label="Animation stages">
+      <button type="button" data-engine-phase-control="0" class="active" aria-pressed="true"><span>01</span><b>Control</b><i></i></button>
+      <button type="button" data-engine-phase-control="1" aria-pressed="false"><span>02</span><b>Generate</b><i></i></button>
+      <button type="button" data-engine-phase-control="2" aria-pressed="false"><span>03</span><b>Compound</b><i></i></button>
+      <button type="button" class="hero-engine-motion-toggle" data-engine-motion-toggle aria-label="Pause animation">Pause</button>
+    </div>
+    <div class="hero-engine-loop" aria-hidden="true"><div><span>ONE CONTROL</span><b>→</b><span>GENERATE</span><b>→</b><span>TEST</span><b>→</b><span>LEARN</span><b>→</b><span>UPDATE</span><b>→</b><span>ONE CONTROL</span><b>→</b><span>GENERATE</span><b>→</b><span>TEST</span><b>→</b><span>LEARN</span><b>→</b><span>UPDATE</span><b>→</b></div></div>
     <div class="stats hero__stats" aria-label="Tranzmit AI platform results">
       <div class="stat"><div class="stat__num" data-count="20000" data-suffix="+" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">20,000+</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Paywalls indexed</div></div>
       <div class="stat"><div class="stat__num" data-count="5" data-suffix="M+" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">5M+</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Monthly paywall views</div></div>
@@ -1903,22 +2001,60 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const phaseDurations = [2600, 5000, 3600];
+  const phaseButtons = Array.from(hero.querySelectorAll('[data-engine-phase-control]'));
+  const motionToggle = hero.querySelector('[data-engine-motion-toggle]');
   let phase = reduced ? 1 : 0;
   let phaseTarget = phase;
   let phaseTimer = 0;
+  let enginePaused = reduced;
+
+  function syncEngineControls() {
+    phaseButtons.forEach(function(button, index) {
+      const active = index === phase;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    if (motionToggle) {
+      motionToggle.textContent = enginePaused ? 'Play' : 'Pause';
+      motionToggle.setAttribute('aria-label', enginePaused ? 'Play animation' : 'Pause animation');
+      motionToggle.setAttribute('aria-pressed', String(enginePaused));
+    }
+    hero.dataset.enginePaused = String(enginePaused);
+  }
+
+  function scheduleEnginePhase() {
+    window.clearTimeout(phaseTimer);
+    if (enginePaused || reduced) return;
+    phaseTimer = window.setTimeout(function(){ setEnginePhase((phase + 1) % 3); }, phaseDurations[phase]);
+  }
 
   function setEnginePhase(next) {
-    phase = next;
-    phaseTarget = next;
+    phase = ((Number(next) % 3) + 3) % 3;
+    phaseTarget = phase;
     hero.classList.remove('hero-engine-phase-0', 'hero-engine-phase-1', 'hero-engine-phase-2');
-    hero.classList.add('hero-engine-phase-' + next);
-    hero.dataset.enginePhase = String(next);
-    if (!reduced) {
-      window.clearTimeout(phaseTimer);
-      phaseTimer = window.setTimeout(function(){ setEnginePhase((phase + 1) % 3); }, phaseDurations[next]);
-    }
+    hero.classList.add('hero-engine-phase-' + phase);
+    hero.dataset.enginePhase = String(phase);
+    syncEngineControls();
+    scheduleEnginePhase();
   }
+
+  function setEnginePaused(next) {
+    enginePaused = Boolean(next) || reduced;
+    syncEngineControls();
+    scheduleEnginePhase();
+  }
+
+  phaseButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      setEnginePhase(Number(button.dataset.enginePhaseControl));
+    });
+  });
+  if (motionToggle) {
+    motionToggle.addEventListener('click', function() { setEnginePaused(!enginePaused); });
+  }
+
   setEnginePhase(phase);
+  setEnginePaused(enginePaused);
 
   const gl = canvas.getContext('webgl2', { alpha:true, antialias:true, powerPreference:'high-performance' });
   if (!gl) {
