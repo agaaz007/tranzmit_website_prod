@@ -1506,8 +1506,50 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
 .phone-case__screen { position:relative; display:block; overflow:hidden; width:100%; aspect-ratio:9 / 18.6; border-radius:23px; background:#fff; }
 .phone-case__screen::after { content:''; position:absolute; z-index:4; left:50%; bottom:5px; width:36%; height:4px; transform:translateX(-50%); border-radius:999px; background:rgba(255,255,255,.82); box-shadow:0 0 0 1px rgba(0,0,0,.13); }
 .phone-case .cs2-pw-img,.phone-case .surface-paywall-img { width:100%; height:100%; display:block; border:0; border-radius:0; box-shadow:none; object-fit:cover; object-position:top center; }
-.phone-case .cs2-pw-img--jungle { object-position:top center; }
 .cs2-branch--phones figcaption { min-height:3em; white-space:normal !important; }
+
+/* Purpose-built portrait Jungle paywalls. The supplied source comps are wide,
+   so putting them through object-fit:cover discards up to 52% of their content. */
+.phone-case__screen { container-type:inline-size; }
+.jungle-paywall { --jp-accent:#168A46; position:relative; width:100%; height:100%; overflow:hidden; display:flex; flex-direction:column; box-sizing:border-box; padding:13cqw 7cqw 8cqw; color:#102033; background:linear-gradient(180deg,#fff 0%,#fff 88%,#F4FBF6 100%); font-family:Manrope,sans-serif; }
+.jungle-paywall * { box-sizing:border-box; }
+.jungle-paywall__leaves { position:absolute; z-index:0; top:0; left:0; right:0; height:25cqw; overflow:hidden; background:radial-gradient(ellipse at 5% -20%,#2C7A3C 0 19%,transparent 20%),radial-gradient(ellipse at 24% -5%,#6AAA45 0 18%,transparent 19%),radial-gradient(ellipse at 48% -25%,#185F35 0 22%,transparent 23%),radial-gradient(ellipse at 73% -4%,#77B84E 0 17%,transparent 18%),radial-gradient(ellipse at 96% -18%,#276E3D 0 20%,transparent 21%); }
+.jungle-paywall__leaves::after { content:''; position:absolute; left:-8%; right:-8%; bottom:-9cqw; height:14cqw; border-radius:50%; background:#fff; }
+.jungle-paywall__body { position:relative; z-index:1; min-height:0; height:100%; display:flex; flex-direction:column; }
+.jungle-paywall__logo { width:38cqw; height:auto; display:block; margin:0 auto 3cqw; }
+.jungle-paywall__title { margin:0; color:#102033; font-size:8.2cqw; font-weight:800; line-height:1.02; letter-spacing:-.045em; }
+.jungle-paywall--control .jungle-paywall__title { margin-top:13cqw; font-size:7.8cqw; }
+.jungle-paywall__proof { display:flex; align-items:center; gap:2.3cqw; margin:4cqw 0; }
+.jungle-paywall__proof-icons { display:flex; }
+.jungle-paywall__proof-icons b { width:8.5cqw; height:8.5cqw; display:grid; place-items:center; margin-left:-1.3cqw; border:1px solid #D8E8DC; border-radius:50%; color:var(--jp-accent); background:#fff; font-size:3.3cqw; font-weight:800; }
+.jungle-paywall__proof-icons b:first-child { margin-left:0; }
+.jungle-paywall__proof > span { color:#25362E; font-size:3.7cqw; font-weight:700; line-height:1.15; }
+.jungle-paywall__flow { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:center; gap:1.4cqw; min-height:34cqw; padding:3.5cqw; border:1px solid #C9E4D1; border-radius:5cqw; background:linear-gradient(180deg,#F0FAF3,#FBFDFB); }
+.jungle-paywall__node { min-width:0; height:23cqw; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2cqw; border:1px solid #CFE4D5; border-radius:3cqw; color:#176C3B; background:#fff; font-size:3.2cqw; font-weight:800; text-align:center; }
+.jungle-paywall__node i { width:8cqw; height:8cqw; display:block; border:1.5px solid var(--jp-accent); border-radius:2cqw; background:linear-gradient(135deg,#fff,#DDF3E4); }
+.jungle-paywall__arrow { color:var(--jp-accent); font-size:6cqw; font-weight:500; }
+.jungle-paywall__checks { display:grid; gap:2.6cqw; margin:5cqw 0; }
+.jungle-paywall__check { display:flex; align-items:flex-start; gap:3cqw; color:#27332D; font-size:4.05cqw; font-weight:600; line-height:1.18; }
+.jungle-paywall__check::before { content:'✓'; flex:none; color:var(--jp-accent); font-size:4.7cqw; font-weight:900; line-height:.9; }
+.jungle-paywall--control .jungle-paywall__checks { gap:4cqw; margin-top:9cqw; }
+.jungle-paywall--control .jungle-paywall__check { font-size:4.3cqw; }
+.jungle-paywall__plans { display:grid; gap:3cqw; margin-top:auto; }
+.jungle-paywall__plan { min-height:20cqw; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:3cqw; padding:3cqw 4cqw; border:1px solid #D9DEDC; border-radius:4.2cqw; color:#26302B; background:rgba(255,255,255,.94); font-size:4.3cqw; font-weight:750; }
+.jungle-paywall__plan::before { content:''; width:6.5cqw; height:6.5cqw; border:1px solid #C8D0CC; border-radius:50%; background:#fff; }
+.jungle-paywall__plan > span { min-width:0; display:flex; align-items:center; gap:2cqw; }
+.jungle-paywall__plan small { color:#66716C; font-size:3.65cqw; font-weight:650; text-align:right; }
+.jungle-paywall__plan small s { opacity:.62; margin-right:1cqw; }
+.jungle-paywall__plan--selected { border-color:var(--jp-accent); background:#EFFAF2; }
+.jungle-paywall__plan--selected::before { border:2cqw solid var(--jp-accent); }
+.jungle-paywall__save { flex:none; padding:1.5cqw 2.5cqw; border-radius:99px; color:#fff; background:var(--jp-accent); font-size:3.2cqw; font-style:normal; font-weight:800; white-space:nowrap; }
+.jungle-paywall__cta { min-height:19cqw; display:grid; place-items:center; margin-top:4cqw; border-radius:99px; color:#fff; background:linear-gradient(135deg,#139146,#087B39); box-shadow:0 8px 18px -10px rgba(8,123,57,.72); font-size:4.8cqw; font-weight:800; text-align:center; }
+.jungle-paywall__fineprint,.jungle-paywall__dismiss { display:block; margin-top:2.6cqw; color:#66716C; font-size:3.55cqw; font-weight:600; text-align:center; }
+.jungle-paywall__dismiss { color:var(--jp-accent); font-size:4cqw; font-weight:750; }
+.jungle-paywall--clinical .jungle-paywall__checks,.jungle-paywall--pharmacy .jungle-paywall__checks { gap:2cqw; margin:4cqw 0; }
+.jungle-paywall--clinical .jungle-paywall__plan,.jungle-paywall--pharmacy .jungle-paywall__plan { min-height:18cqw; }
+.jungle-paywall--pharmacy { --jp-accent:#137C42; }
+.jungle-paywall--pharmacy .jungle-paywall__title { padding-right:16cqw; }
+.jungle-paywall__capsule { position:absolute; z-index:2; top:30cqw; right:7cqw; width:13cqw; height:7cqw; border-radius:99px; background:linear-gradient(90deg,#E8F0E9 0 48%,var(--jp-accent) 49% 100%); border:1px solid #BFD5C5; transform:rotate(32deg); }
 
 /* ---- right impact card image ---- */
 .cs2-card-img { width: 100%; height: auto; display: block; border-radius: 24px; box-shadow: var(--shadow-float); border: 1px solid var(--line-soft); }
@@ -3077,19 +3119,84 @@ They're saying no to <span style="color: #F23E79; font-style: normal">your paywa
         <div class="cs2-branch cs2-branch--phones">
           <figure class="cs2-pw-fig">
             <div class="phone-case">
-              <span class="phone-case__screen"><picture style="display:contents"><source type="image/webp" srcset="./assets/6fa7201b-1c43-4a1e-81f3-bbe1c0ba4df9.webp"><img width="854" height="1170" class="cs2-pw-img cs2-pw-img--jungle" src="./assets/6fa7201b-1c43-4a1e-81f3-bbe1c0ba4df9.png" alt="Jungle's original generic paywall"></picture></span>
+              <div class="phone-case__screen">
+                <div class="jungle-paywall jungle-paywall--control" role="img" aria-label="Jungle's original generic feature-list paywall">
+                  <div class="jungle-paywall__leaves" aria-hidden="true"></div>
+                  <div class="jungle-paywall__body">
+                    <h3 class="jungle-paywall__title">Don't leave your exams to chance. Upgrade to unlock...</h3>
+                    <div class="jungle-paywall__checks">
+                      <div class="jungle-paywall__check">Unlimited uploads of any size</div>
+                      <div class="jungle-paywall__check">Unlimited live recordings</div>
+                      <div class="jungle-paywall__check">Unlimited AI explanations</div>
+                      <div class="jungle-paywall__check">Advanced question types</div>
+                      <div class="jungle-paywall__check">3x more questions per upload</div>
+                    </div>
+                    <div class="jungle-paywall__plans">
+                      <div class="jungle-paywall__plan"><span>Monthly</span><small>$12 / month</small></div>
+                      <div class="jungle-paywall__plan jungle-paywall__plan--selected"><span>Yearly <em class="jungle-paywall__save">50% off</em></span><small><s>$144</s> $72</small></div>
+                    </div>
+                    <div class="jungle-paywall__cta">Subscribe now</div>
+                    <span class="jungle-paywall__dismiss">Maybe later</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <figcaption style="font-family: Manrope">Original — one generic paywall for everyone.</figcaption>
           </figure>
           <figure class="cs2-pw-fig">
             <div class="phone-case">
-              <span class="phone-case__screen"><picture style="display:contents"><source type="image/webp" srcset="./assets/63102e05-c2a7-41bb-bcf0-452d482b77b4.webp"><img width="1002" height="984" class="cs2-pw-img cs2-pw-img--jungle" src="./assets/63102e05-c2a7-41bb-bcf0-452d482b77b4.png" alt="Variant slotted for clinical students"></picture></span>
+              <div class="phone-case__screen">
+                <div class="jungle-paywall jungle-paywall--clinical" role="img" aria-label="Jungle clinical-student paywall variant">
+                  <div class="jungle-paywall__leaves" aria-hidden="true"></div>
+                  <div class="jungle-paywall__body">
+                    <img class="jungle-paywall__logo" src="./assets/a37dddec-8aa7-4b28-bc4c-04401c2eedd1.png" alt="Jungle">
+                    <h3 class="jungle-paywall__title">Turn dense lectures into clinical recall</h3>
+                    <div class="jungle-paywall__proof"><span class="jungle-paywall__proof-icons"><b>Rx</b><b>NYU</b><b>U</b></span><span>Join 1M+ students studying smarter</span></div>
+                    <div class="jungle-paywall__flow">
+                      <span class="jungle-paywall__node"><i></i>Notes</span><b class="jungle-paywall__arrow">→</b>
+                      <span class="jungle-paywall__node"><i></i>Case</span><b class="jungle-paywall__arrow">→</b>
+                      <span class="jungle-paywall__node"><i></i>Recall</span>
+                    </div>
+                    <div class="jungle-paywall__checks">
+                      <div class="jungle-paywall__check">Case-style questions from notes and PDFs</div>
+                      <div class="jungle-paywall__check">AI explanations for every reasoning step</div>
+                      <div class="jungle-paywall__check">Unlimited uploads before exam week</div>
+                    </div>
+                    <div class="jungle-paywall__plans">
+                      <div class="jungle-paywall__plan jungle-paywall__plan--selected"><span>Yearly <em class="jungle-paywall__save">50% off</em></span><small><s>$144</s> $6 / mo</small></div>
+                    </div>
+                    <div class="jungle-paywall__cta">Start clinical exam practice</div>
+                    <small class="jungle-paywall__fineprint">No commitment. Cancel anytime.</small>
+                  </div>
+                </div>
+              </div>
             </div>
             <figcaption style="font-family: Manrope">Variant 1 — clinical-student cohort.</figcaption>
           </figure>
           <figure class="cs2-pw-fig">
             <div class="phone-case">
-              <span class="phone-case__screen"><picture style="display:contents"><source type="image/webp" srcset="./assets/pw02-jungle-variant2.webp"><img width="1002" height="984" class="cs2-pw-img cs2-pw-img--jungle" src="./assets/pw02-jungle-variant2.png" alt="Variant 2 — pharmacy practice paywall"></picture></span>
+              <div class="phone-case__screen">
+                <div class="jungle-paywall jungle-paywall--pharmacy" role="img" aria-label="Jungle pharmacy-practice paywall variant">
+                  <div class="jungle-paywall__leaves" aria-hidden="true"></div>
+                  <span class="jungle-paywall__capsule" aria-hidden="true"></span>
+                  <div class="jungle-paywall__body">
+                    <img class="jungle-paywall__logo" src="./assets/a37dddec-8aa7-4b28-bc4c-04401c2eedd1.png" alt="Jungle">
+                    <h3 class="jungle-paywall__title">Make mechanisms and interactions stick</h3>
+                    <div class="jungle-paywall__proof"><span class="jungle-paywall__proof-icons"><b>Rx</b><b>Ph</b><b>R</b></span><span>Join 1M+ students studying smarter</span></div>
+                    <div class="jungle-paywall__checks">
+                      <div class="jungle-paywall__check">Turn drug tables into active recall questions</div>
+                      <div class="jungle-paywall__check">AI explanations for missed mechanisms</div>
+                      <div class="jungle-paywall__check">Case-style pharmacy practice</div>
+                      <div class="jungle-paywall__check">3x more questions per upload</div>
+                    </div>
+                    <div class="jungle-paywall__plans">
+                      <div class="jungle-paywall__plan jungle-paywall__plan--selected"><span>Yearly <em class="jungle-paywall__save">50% off</em></span><small><s>$144</s> $6 / mo</small></div>
+                    </div>
+                    <div class="jungle-paywall__cta">Unlock pharmacy practice</div>
+                    <small class="jungle-paywall__fineprint">No commitment. Cancel anytime.</small>
+                  </div>
+                </div>
+              </div>
             </div>
             <figcaption style="font-family: Manrope">Variant 2 — +$24,000 revenue growth.</figcaption>
           </figure>
