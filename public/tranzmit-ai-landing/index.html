@@ -1129,7 +1129,8 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
 .surface-card--store .surface-platform { color:rgba(255,255,255,.82); border-color:rgba(255,255,255,.14); background:rgba(255,255,255,.07); }
 .surface-card__visual { position:relative; height:286px; margin:18px 20px 0; border-radius:19px; overflow:hidden; }
 .surface-card--paywall .surface-card__visual { background:radial-gradient(circle at 50% 18%,rgba(242,62,121,.24),transparent 38%),linear-gradient(145deg,#F8E9EF,#F1EDF9 56%,#E7F3EC); border:1px solid rgba(242,62,121,.13); }
-.surface-card--store .surface-card__visual { background:linear-gradient(145deg,#26222F,#121017); border:1px solid rgba(255,255,255,.1); }
+.surface-card--store .surface-card__visual { background:#fff; border:1px solid rgba(255,255,255,.1); }
+.surface-store-page-img { width:100%; height:100%; display:block; object-fit:contain; object-position:center; }
 .surface-paywall-stack { position:absolute; inset:20px 12px -58px; display:flex; align-items:flex-start; justify-content:center; gap:17px; }
 .surface-paywall-stack .phone-case { width:150px; flex:none; }
 .surface-paywall-stack .phone-case:first-child { transform:rotate(-5deg) translateY(10px); }
@@ -2648,28 +2649,7 @@ They're saying no to <span style="color: #F23E79; font-style: normal">your paywa
           </div>
         </div>
         <div class="surface-card__visual" aria-hidden="true">
-          <div class="store-phones">
-            <div class="store-phone">
-              <div class="store-phone__bar"><span>9:41</span><span>● ●</span></div>
-              <div class="store-phone__app">
-                <span class="store-phone__icon"></span>
-                <span class="store-phone__lines"><i></i><i></i></span>
-                <span class="store-phone__get">GET</span>
-              </div>
-              <div class="store-phone__rating"><span><b>4.8</b>RATING</span><span><b>18K</b>REVIEWS</span><span><b>4+</b>AGE</span></div>
-              <div class="store-phone__shots"><span class="store-phone__shot"></span><span class="store-phone__shot"></span></div>
-            </div>
-            <div class="store-phone store-phone--play">
-              <div class="store-phone__bar"><span>9:41</span><span>● ●</span></div>
-              <div class="store-phone__app">
-                <span class="store-phone__icon"></span>
-                <span class="store-phone__lines"><i></i><i></i></span>
-                <span class="store-phone__get">Install</span>
-              </div>
-              <div class="store-phone__rating"><span><b>4.7</b>RATING</span><span><b>50K+</b>DOWNLOADS</span><span><b>E</b>RATED</span></div>
-              <div class="store-phone__shots"><span class="store-phone__shot"></span><span class="store-phone__shot"></span></div>
-            </div>
-          </div>
+          <img class="surface-store-page-img" width="1500" height="946" src="./assets/app-store-product-pages.webp" alt="">
         </div>
         <div class="surface-card__body">
           <h3 style="font-family: Manrope">Match intent before the install.</h3>
