@@ -12,7 +12,7 @@ const assetsUrl = new URL(
   import.meta.url,
 );
 
-test("High Astro case study includes the supplied paywalls and rollout result", async () => {
+test("High Astro case study uses clipped phones and Jungle-style result cards", async () => {
   const landing = await readFile(landingUrl, "utf8");
   const section = landing.match(
     /<section[^>]+id="case-study-high-astro"[\s\S]*?<\/section>/,
@@ -40,6 +40,27 @@ test("High Astro case study includes the supplied paywalls and rollout result", 
     2,
     "both supplied High Astro images should be visible",
   );
-  assert.match(landing, /\.astro-case__image\s*\{[^}]*width:100%;[^}]*height:auto;/s);
-  assert.match(landing, /@media \(max-width: 760px\)[\s\S]*?\.astro-case__visual\s*\{\s*grid-template-columns:1fr;/);
+  assert.equal(
+    [...section.matchAll(/class="cs2-stat astro-case__metric/g)].length,
+    3,
+    "all three results should use the Jungle metric-card component",
+  );
+  assert.match(
+    landing,
+    /\.astro-case__media\s*\{[^}]*aspect-ratio:9 \/ 18\.6;[^}]*overflow:hidden;/s,
+    "each source image should be clipped to a portrait phone viewport",
+  );
+  assert.match(
+    landing,
+    /\.astro-case__image\s*\{[^}]*position:absolute;[^}]*width:208%;[^}]*max-width:none;/s,
+    "the supplied image should be zoomed so its existing iPhone casing fills the viewport",
+  );
+  assert.match(
+    landing,
+    /@media \(max-width: 1080px\)[\s\S]*?\.astro-case__grid\s*\{\s*grid-template-columns:minmax\(0,1fr\);/,
+  );
+  assert.match(
+    landing,
+    /@media \(max-width: 560px\)[\s\S]*?\.astro-case__visual\s*\{\s*grid-template-columns:1fr;/,
+  );
 });
