@@ -753,50 +753,70 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
    ============================================================ */
 .hero #hero-webgl-field { position:absolute; z-index:0; inset:0; width:100%; height:100%; display:block; pointer-events:none; opacity:.78; mix-blend-mode:multiply; }
 .hero-engine-cloud { position:absolute; z-index:1; inset:0; overflow:hidden; pointer-events:none; perspective:1400px; }
-.hero-engine-card { --engine-accent:#F23E78; --engine-tint:#FFF0F5; position:absolute; left:50%; top:45%; width:174px; height:260px; opacity:0; transform:translate(-50%,-50%) translate3d(var(--engine-x,-42vw),var(--engine-y,0),var(--engine-z,0)) rotate(var(--engine-r,0deg)) scale(.38); transition:transform 1.25s cubic-bezier(.16,.84,.24,1),opacity .58s ease,filter .58s ease; transition-delay:var(--engine-delay,0ms); filter:blur(2px); will-change:transform,opacity; }
+.hero-engine-card { --engine-accent:#F23E78; --engine-tint:#FFF0F5; position:absolute; left:50%; top:45%; width:200px; height:316px; opacity:0; transform:translate(-50%,-50%) translate3d(var(--engine-x,-42vw),var(--engine-y,0),var(--engine-z,0)) rotate(var(--engine-r,0deg)) scale(.34); transition:transform 1.25s cubic-bezier(.16,.84,.24,1),opacity .58s ease,filter .58s ease; transition-delay:var(--engine-delay,0ms); filter:blur(3px); will-change:transform,opacity; }
 .hero-engine-card--intent { --engine-accent:#6E54E8; --engine-tint:#F3F0FE; }
 .hero-engine-card--proof { --engine-accent:#1F8A5B; --engine-tint:#EAF6EF; }
 .hero-engine-card--annual { --engine-accent:#E08A2B; --engine-tint:#FFF5E8; }
 .hero-engine-card--winner { --engine-accent:#F23E78; --engine-tint:#FDE8F0; }
 .hero-engine-card--return { --engine-accent:#4D7C73; --engine-tint:#ECF5F2; }
-.hero-engine-phone { width:100%; height:100%; overflow:hidden; padding:12px 11px 11px; border:1px solid rgba(68,55,76,.14); border-radius:22px; background:linear-gradient(150deg,rgba(255,255,255,.97),var(--engine-tint)); box-shadow:0 24px 48px -28px rgba(82,54,96,.42),inset 0 1px 0 rgba(255,255,255,.9); }
+.hero-engine-card--guided { --engine-accent:#168DB8; --engine-tint:#EAF9FF; }
+.hero-engine-card--minimal { --engine-accent:#242129; --engine-tint:#F2F1F4; }
+.hero-engine-phone { position:relative; width:100%; height:100%; overflow:hidden; padding:13px 12px 11px; border:1px solid rgba(68,55,76,.14); border-radius:24px; color:#29242E; background:linear-gradient(150deg,rgba(255,255,255,.98),var(--engine-tint)); box-shadow:0 26px 54px -28px rgba(82,54,96,.44),inset 0 1px 0 rgba(255,255,255,.92); }
+.hero-engine-phone::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(118deg,rgba(255,255,255,.34),transparent 30%,transparent 70%,rgba(64,47,73,.035)); }
 .hero-engine-phone__top { display:flex; align-items:center; justify-content:space-between; gap:6px; color:var(--engine-accent); font:800 6px/1 Manrope,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
 .hero-engine-phone__brand { display:flex; align-items:center; gap:4px; color:#29242E; letter-spacing:0; text-transform:none; }
 .hero-engine-phone__brand::before { content:''; width:7px; height:7px; border-radius:3px; background:var(--engine-accent); box-shadow:0 0 10px color-mix(in srgb,var(--engine-accent) 42%,transparent); }
-.hero-engine-phone__visual { position:relative; height:64px; margin:11px 0 12px; overflow:hidden; border-radius:13px; background:radial-gradient(circle at 50% 52%,color-mix(in srgb,var(--engine-accent) 20%,white),transparent 45%),linear-gradient(145deg,color-mix(in srgb,var(--engine-accent) 13%,white),rgba(255,255,255,.46)); }
+.hero-engine-phone__visual { position:relative; height:68px; margin:10px 0 9px; overflow:hidden; border-radius:14px; background:radial-gradient(circle at 50% 52%,color-mix(in srgb,var(--engine-accent) 20%,white),transparent 45%),linear-gradient(145deg,color-mix(in srgb,var(--engine-accent) 13%,white),rgba(255,255,255,.46)); }
 .hero-engine-phone__visual::before,.hero-engine-phone__visual::after { content:''; position:absolute; left:50%; top:50%; border:1px solid color-mix(in srgb,var(--engine-accent) 35%,white); border-radius:50%; transform:translate(-50%,-50%) rotateX(66deg); }
-.hero-engine-phone__visual::before { width:92px; height:54px; }
-.hero-engine-phone__visual::after { width:58px; height:34px; transform:translate(-50%,-50%) rotateX(66deg) rotateZ(31deg); }
-.hero-engine-phone__visual i { position:absolute; z-index:2; left:50%; top:50%; width:20px; height:20px; border-radius:7px; background:linear-gradient(145deg,color-mix(in srgb,var(--engine-accent) 42%,white),var(--engine-accent)); box-shadow:0 8px 18px color-mix(in srgb,var(--engine-accent) 22%,transparent); transform:translate(-50%,-50%) rotate(45deg); }
-.hero-engine-phone__headline { width:82%; height:7px; border-radius:6px; background:#2F2933; box-shadow:0 12px 0 rgba(47,41,51,.18); }
-.hero-engine-phone__price { width:43%; height:15px; margin-top:23px; border-radius:6px; background:color-mix(in srgb,var(--engine-accent) 18%,white); }
-.hero-engine-phone__choice { height:23px; margin-top:8px; border:1px solid color-mix(in srgb,var(--engine-accent) 24%,white); border-radius:8px; background:rgba(255,255,255,.68); }
-.hero-engine-phone__cta { height:26px; margin-top:8px; border-radius:8px; background:var(--engine-accent); box-shadow:0 9px 18px color-mix(in srgb,var(--engine-accent) 18%,transparent); }
+.hero-engine-phone__visual::before { width:104px; height:58px; }
+.hero-engine-phone__visual::after { width:66px; height:38px; transform:translate(-50%,-50%) rotateX(66deg) rotateZ(31deg); }
+.hero-engine-phone__visual i { position:absolute; z-index:2; left:50%; top:50%; width:21px; height:21px; border-radius:7px; background:linear-gradient(145deg,color-mix(in srgb,var(--engine-accent) 42%,white),var(--engine-accent)); box-shadow:0 8px 18px color-mix(in srgb,var(--engine-accent) 22%,transparent); transform:translate(-50%,-50%) rotate(45deg); }
+.hero-engine-phone__visual span { position:absolute; z-index:3; width:4px; height:4px; border-radius:50%; background:var(--engine-accent); box-shadow:0 0 9px color-mix(in srgb,var(--engine-accent) 65%,white); }
+.hero-engine-phone__visual span:nth-of-type(1) { left:31px; top:21px; }
+.hero-engine-phone__visual span:nth-of-type(2) { right:27px; top:39px; width:3px; height:3px; }
+.hero-engine-phone__visual span:nth-of-type(3) { left:91px; bottom:11px; width:2px; height:2px; }
+.hero-engine-phone__eyebrow { margin:0 0 4px; color:var(--engine-accent); font:800 6px/1.1 Manrope,sans-serif; letter-spacing:.01em; }
+.hero-engine-phone__headline { min-height:29px; margin:0; color:#211E24; font:800 14px/.98 Manrope,sans-serif; letter-spacing:-.045em; }
+.hero-engine-phone__price { display:flex; align-items:baseline; gap:4px; margin:7px 0 6px; }
+.hero-engine-phone__price strong { color:#211E24; font:800 18px/1 Manrope,sans-serif; letter-spacing:-.055em; }
+.hero-engine-phone__price span { color:#817985; font:600 5px/1 Manrope,sans-serif; }
+.hero-engine-phone__benefit { display:flex; align-items:center; gap:5px; margin:4px 0; color:#756E78; font:600 5.5px/1.15 Manrope,sans-serif; }
+.hero-engine-phone__benefit::before { content:'✓'; display:grid; place-items:center; width:8px; height:8px; border-radius:50%; color:var(--engine-accent); background:color-mix(in srgb,var(--engine-accent) 12%,white); font-size:5px; }
+.hero-engine-phone__choice { display:flex; align-items:center; justify-content:space-between; height:21px; margin-top:7px; padding:0 7px; border:1px solid color-mix(in srgb,var(--engine-accent) 20%,white); border-radius:7px; color:#49424D; background:rgba(255,255,255,.72); font:700 5.5px/1 Manrope,sans-serif; }
+.hero-engine-phone__choice span { color:var(--engine-accent); }
+.hero-engine-phone__cta { display:grid; place-items:center; height:25px; margin-top:6px; border-radius:8px; color:#fff; background:var(--engine-accent); box-shadow:0 9px 18px color-mix(in srgb,var(--engine-accent) 18%,transparent); font:800 6px/1 Manrope,sans-serif; }
+.hero-engine-phone__fineprint { display:block; margin-top:5px; color:#99919C; text-align:center; font:600 4.5px/1 Manrope,sans-serif; }
 .hero-engine-card::after { content:attr(data-variant); position:absolute; left:50%; bottom:-21px; transform:translateX(-50%); color:var(--engine-accent); font:800 8px/1 Manrope,sans-serif; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap; text-shadow:0 1px 0 #fff; }
-.hero.hero-engine-phase-0 .hero-engine-card--control { opacity:1; filter:drop-shadow(0 26px 42px rgba(82,54,96,.2)); transform:translate(-50%,-50%) translate3d(-41vw,0,80px) rotate(-5deg) scale(.76); }
-.hero.hero-engine-phase-1 .hero-engine-card { opacity:.98; filter:drop-shadow(0 24px 34px rgba(82,54,96,.17)); transform:translate(-50%,-50%) translate3d(var(--engine-x),var(--engine-y),var(--engine-z,0)) rotate(var(--engine-r,0deg)) scale(.72); }
-.hero.hero-engine-phase-2 .hero-engine-card { opacity:.1; filter:blur(1.5px) grayscale(.35); transform:translate(-50%,-50%) translate3d(var(--engine-x),var(--engine-y),-100px) rotate(var(--engine-r,0deg)) scale(.52); }
-.hero.hero-engine-phase-2 .hero-engine-card--control { opacity:.4; filter:grayscale(.72) drop-shadow(0 20px 30px rgba(82,54,96,.12)); transform:translate(-50%,-50%) translate3d(-41.5vw,0,0) rotate(-5deg) scale(.62); }
-.hero.hero-engine-phase-2 .hero-engine-card--winner { opacity:1; filter:drop-shadow(0 28px 48px rgba(242,62,120,.22)); transform:translate(-50%,-50%) translate3d(41vw,0,90px) rotate(4deg) scale(.8); }
+.hero.hero-engine-phase-0 .hero-engine-card--control { opacity:1; filter:drop-shadow(0 28px 46px rgba(82,54,96,.22)); transform:translate(-50%,-50%) translate3d(-42vw,-1vh,90px) rotate(-5deg) scale(.84); }
+.hero.hero-engine-phase-1 .hero-engine-card { opacity:.97; filter:drop-shadow(0 26px 38px rgba(82,54,96,.19)); transform:translate(-50%,-50%) translate3d(var(--engine-x),var(--engine-y),var(--engine-z,0)) rotate(var(--engine-r,0deg)) scale(.78); }
+.hero.hero-engine-phase-2 .hero-engine-card { opacity:.1; filter:blur(1.5px) grayscale(.35); transform:translate(-50%,-50%) translate3d(var(--engine-x),var(--engine-y),-100px) rotate(var(--engine-r,0deg)) scale(.55); }
+.hero.hero-engine-phase-2 .hero-engine-card--control { opacity:.4; filter:grayscale(.72) drop-shadow(0 20px 30px rgba(82,54,96,.12)); transform:translate(-50%,-50%) translate3d(-42vw,-1vh,0) rotate(-5deg) scale(.65); }
+.hero.hero-engine-phase-2 .hero-engine-card--winner { opacity:1; filter:drop-shadow(0 30px 52px rgba(242,62,120,.24)); transform:translate(-50%,-50%) translate3d(42vw,-1vh,100px) rotate(4deg) scale(.86); }
 
 .hero-engine-mobile { display:none; width:min(540px,100%); height:172px; position:relative; margin:26px auto 0; overflow:hidden; border-top:1px solid rgba(242,62,120,.12); border-bottom:1px solid rgba(242,62,120,.1); background:radial-gradient(circle at 50% 50%,rgba(242,62,120,.1),transparent 57%); }
 .hero-engine-mobile::before { content:'ONE CONTROL  →  MANY TESTABLE PAYWALLS'; position:absolute; z-index:3; left:50%; top:10px; transform:translateX(-50%); color:#8A7F84; font:800 7px/1 Manrope,sans-serif; letter-spacing:.12em; white-space:nowrap; }
-.hero-engine-mobile-card { --mobile-left:50%; --engine-accent:#F23E78; position:absolute; left:50%; top:94px; width:86px; height:126px; opacity:0; transform:translate(-50%,-50%) scale(.46); transition:left 1.15s cubic-bezier(.16,.84,.24,1),transform 1.15s cubic-bezier(.16,.84,.24,1),opacity .62s ease,filter .62s ease; transition-delay:var(--mobile-delay,0ms); filter:blur(6px); }
-.hero-engine-mobile-card:nth-child(2) { --mobile-left:12%; --engine-accent:#6E54E8; }
-.hero-engine-mobile-card:nth-child(3) { --mobile-left:37%; --engine-accent:#1F8A5B; }
-.hero-engine-mobile-card:nth-child(4) { --mobile-left:63%; --engine-accent:#E08A2B; }
-.hero-engine-mobile-card:nth-child(5) { --mobile-left:88%; --engine-accent:#F23E78; }
+.hero-engine-mobile-card { --mobile-left:50%; --engine-accent:#F23E78; --engine-tint:#FFF0F5; position:absolute; left:50%; top:94px; width:98px; height:158px; opacity:0; transform:translate(-50%,-50%) scale(.46); transition:left 1.15s cubic-bezier(.16,.84,.24,1),transform 1.15s cubic-bezier(.16,.84,.24,1),opacity .62s ease,filter .62s ease; transition-delay:var(--mobile-delay,0ms); filter:blur(6px); }
+.hero-engine-mobile-card:nth-child(2) { --mobile-left:12%; --engine-accent:#6E54E8; --engine-tint:#F3F0FE; }
+.hero-engine-mobile-card:nth-child(3) { --mobile-left:37%; --engine-accent:#1F8A5B; --engine-tint:#EAF6EF; }
+.hero-engine-mobile-card:nth-child(4) { --mobile-left:63%; --engine-accent:#E08A2B; --engine-tint:#FFF5E8; }
+.hero-engine-mobile-card:nth-child(5) { --mobile-left:88%; --engine-accent:#F23E78; --engine-tint:#FDE8F0; }
 .hero-engine-mobile-card .hero-engine-phone { padding:7px 6px; border-radius:14px; }
 .hero-engine-mobile-card .hero-engine-phone__top { font-size:4px; }
 .hero-engine-mobile-card .hero-engine-phone__brand::before { width:5px; height:5px; }
-.hero-engine-mobile-card .hero-engine-phone__visual { height:33px; margin:6px 0 7px; border-radius:8px; }
+.hero-engine-mobile-card .hero-engine-phone__visual { height:35px; margin:6px 0 5px; border-radius:8px; }
 .hero-engine-mobile-card .hero-engine-phone__visual::before { width:50px; height:27px; }
 .hero-engine-mobile-card .hero-engine-phone__visual::after { width:31px; height:18px; }
 .hero-engine-mobile-card .hero-engine-phone__visual i { width:12px; height:12px; border-radius:4px; }
-.hero-engine-mobile-card .hero-engine-phone__headline { height:4px; box-shadow:0 7px 0 rgba(47,41,51,.18); }
-.hero-engine-mobile-card .hero-engine-phone__price { height:8px; margin-top:13px; }
-.hero-engine-mobile-card .hero-engine-phone__choice { height:12px; margin-top:5px; border-radius:5px; }
-.hero-engine-mobile-card .hero-engine-phone__cta { height:14px; margin-top:5px; border-radius:5px; }
+.hero-engine-mobile-card .hero-engine-phone__visual span { display:none; }
+.hero-engine-mobile-card .hero-engine-phone__eyebrow { margin-bottom:2px; font-size:3.7px; }
+.hero-engine-mobile-card .hero-engine-phone__headline { min-height:14px; font-size:7px; line-height:.98; }
+.hero-engine-mobile-card .hero-engine-phone__price { margin:3px 0; }
+.hero-engine-mobile-card .hero-engine-phone__price strong { font-size:9px; }
+.hero-engine-mobile-card .hero-engine-phone__price span { font-size:3.3px; }
+.hero-engine-mobile-card .hero-engine-phone__benefit { display:none; }
+.hero-engine-mobile-card .hero-engine-phone__choice { display:none; }
+.hero-engine-mobile-card .hero-engine-phone__cta { height:14px; margin-top:4px; border-radius:5px; font-size:4px; }
+.hero-engine-mobile-card .hero-engine-phone__fineprint { display:none; }
 .hero.hero-engine-phase-0 .hero-engine-mobile-card:first-of-type { opacity:.94; filter:drop-shadow(0 16px 22px rgba(82,54,96,.18)); transform:translate(-50%,-50%) rotate(-3deg) scale(.92); }
 .hero.hero-engine-phase-1 .hero-engine-mobile-card { left:var(--mobile-left); opacity:.9; filter:drop-shadow(0 14px 20px rgba(82,54,96,.14)); transform:translate(-50%,-50%) rotate(var(--mobile-r,0deg)) scale(.82); }
 .hero.hero-engine-phase-2 .hero-engine-mobile-card { opacity:.12; filter:grayscale(.4); transform:translate(-50%,-50%) scale(.68); }
@@ -816,7 +836,7 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
 @media (max-width:560px) {
   .hero #hero-webgl-field { opacity:.52; }
   .hero-engine-mobile { height:130px; margin-top:12px; }
-  .hero-engine-mobile-card { top:68px; width:74px; height:110px; }
+  .hero-engine-mobile-card { top:68px; width:82px; height:136px; }
   .hero-engine-mobile::before { top:7px; font-size:6px; }
 }
 @media (prefers-reduced-motion:reduce) {
@@ -1684,40 +1704,116 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   <canvas id="hero-webgl-field" aria-hidden="true"></canvas>
   <div class="hero__cloud"></div>
   <div class="hero-engine-cloud" aria-hidden="true">
-    <div class="hero-engine-card hero-engine-card--control" data-variant="Control" style="--engine-x:-41.5vw;--engine-y:0vh;--engine-z:70px;--engine-r:-5deg;--engine-delay:0ms">
+    <div class="hero-engine-card hero-engine-card--control" data-variant="Control" style="--engine-x:-42vw;--engine-y:-1vh;--engine-z:80px;--engine-r:-5deg;--engine-delay:0ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Control</span></div>
-        <div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div>
+        <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
+        <p class="hero-engine-phone__eyebrow">One plan. Everything.</p>
+        <h3 class="hero-engine-phone__headline">Unlock your full experience</h3>
+        <div class="hero-engine-phone__price"><strong>$9.99</strong><span>/ month</span></div>
+        <div class="hero-engine-phone__benefit">Everything unlocked</div>
+        <div class="hero-engine-phone__benefit">Cancel anytime</div>
+        <div class="hero-engine-phone__choice">Monthly plan <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">Continue</div>
+        <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
       </div>
     </div>
-    <div class="hero-engine-card hero-engine-card--intent" data-variant="High intent" style="--engine-x:-42vw;--engine-y:-20vh;--engine-z:-40px;--engine-r:5deg;--engine-delay:50ms">
+    <div class="hero-engine-card hero-engine-card--intent" data-variant="High intent" style="--engine-x:-42vw;--engine-y:-21vh;--engine-z:-40px;--engine-r:5deg;--engine-delay:45ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Intent</span></div>
-        <div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div>
+        <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
+        <p class="hero-engine-phone__eyebrow">Built for your goals</p>
+        <h3 class="hero-engine-phone__headline">Your next chapter starts here</h3>
+        <div class="hero-engine-phone__price"><strong>$7.99</strong><span>first month</span></div>
+        <div class="hero-engine-phone__benefit">Personalized plan</div>
+        <div class="hero-engine-phone__benefit">Cancel anytime</div>
+        <div class="hero-engine-phone__choice">Recommended plan <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">Unlock my plan</div>
+        <small class="hero-engine-phone__fineprint">Secure checkout · Cancel anytime</small>
       </div>
     </div>
-    <div class="hero-engine-card hero-engine-card--proof" data-variant="Social proof" style="--engine-x:-41.5vw;--engine-y:17vh;--engine-z:10px;--engine-r:-3deg;--engine-delay:100ms">
+    <div class="hero-engine-card hero-engine-card--guided" data-variant="Fast start" style="--engine-x:-30vw;--engine-y:-40vh;--engine-z:-80px;--engine-r:-3deg;--engine-delay:90ms">
+      <div class="hero-engine-phone">
+        <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Fast start</span></div>
+        <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
+        <p class="hero-engine-phone__eyebrow">Join in 30 seconds</p>
+        <h3 class="hero-engine-phone__headline">Unlock your full experience</h3>
+        <div class="hero-engine-phone__price"><strong>$1</strong><span>7-day trial</span></div>
+        <div class="hero-engine-phone__benefit">Instant access</div>
+        <div class="hero-engine-phone__benefit">No setup fee</div>
+        <div class="hero-engine-phone__choice">Trial plan <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">Start for $1</div>
+        <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
+      </div>
+    </div>
+    <div class="hero-engine-card hero-engine-card--proof" data-variant="Social proof" style="--engine-x:-42vw;--engine-y:17vh;--engine-z:10px;--engine-r:-3deg;--engine-delay:135ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Proof</span></div>
-        <div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div>
+        <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
+        <p class="hero-engine-phone__eyebrow">24,000+ members</p>
+        <h3 class="hero-engine-phone__headline">The plan people stick with</h3>
+        <div class="hero-engine-phone__price"><strong>$1</strong><span>7-day trial</span></div>
+        <div class="hero-engine-phone__benefit">Everything unlocked</div>
+        <div class="hero-engine-phone__benefit">Cancel anytime</div>
+        <div class="hero-engine-phone__choice">Monthly plan <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">Start for $1</div>
+        <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
       </div>
     </div>
-    <div class="hero-engine-card hero-engine-card--annual" data-variant="Annual value" style="--engine-x:41.5vw;--engine-y:-20vh;--engine-z:-40px;--engine-r:-4deg;--engine-delay:150ms">
+    <div class="hero-engine-card hero-engine-card--minimal" data-variant="Minimal" style="--engine-x:30vw;--engine-y:-40vh;--engine-z:-80px;--engine-r:3deg;--engine-delay:180ms">
+      <div class="hero-engine-phone">
+        <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Minimal</span></div>
+        <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
+        <p class="hero-engine-phone__eyebrow">One plan. Everything.</p>
+        <h3 class="hero-engine-phone__headline">Go unlimited</h3>
+        <div class="hero-engine-phone__price"><strong>$6.99</strong><span>/ month</span></div>
+        <div class="hero-engine-phone__benefit">Everything unlocked</div>
+        <div class="hero-engine-phone__benefit">Cancel anytime</div>
+        <div class="hero-engine-phone__choice">Monthly plan <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">Upgrade</div>
+        <small class="hero-engine-phone__fineprint">Secure checkout · Cancel anytime</small>
+      </div>
+    </div>
+    <div class="hero-engine-card hero-engine-card--annual" data-variant="Annual value" style="--engine-x:42vw;--engine-y:-21vh;--engine-z:-40px;--engine-r:-4deg;--engine-delay:225ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Value</span></div>
-        <div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div>
+        <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
+        <p class="hero-engine-phone__eyebrow">Best value · Save 64%</p>
+        <h3 class="hero-engine-phone__headline">Build momentum all year</h3>
+        <div class="hero-engine-phone__price"><strong>$3.58</strong><span>/ month</span></div>
+        <div class="hero-engine-phone__benefit">Everything unlocked</div>
+        <div class="hero-engine-phone__benefit">Cancel anytime</div>
+        <div class="hero-engine-phone__choice">Annual plan <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">Choose annual</div>
+        <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
       </div>
     </div>
-    <div class="hero-engine-card hero-engine-card--winner" data-variant="Winner" style="--engine-x:41.5vw;--engine-y:0vh;--engine-z:70px;--engine-r:4deg;--engine-delay:200ms">
+    <div class="hero-engine-card hero-engine-card--winner" data-variant="Winner" style="--engine-x:42vw;--engine-y:-1vh;--engine-z:80px;--engine-r:4deg;--engine-delay:270ms">
       <div class="hero-engine-phone">
         <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Winner</span></div>
-        <div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div>
+        <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
+        <p class="hero-engine-phone__eyebrow">Your personal offer</p>
+        <h3 class="hero-engine-phone__headline">Get your full plan today</h3>
+        <div class="hero-engine-phone__price"><strong>$0</strong><span>for 3 days</span></div>
+        <div class="hero-engine-phone__benefit">Everything unlocked</div>
+        <div class="hero-engine-phone__benefit">Cancel anytime</div>
+        <div class="hero-engine-phone__choice">Recommended plan <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">Start free</div>
+        <small class="hero-engine-phone__fineprint">Secure checkout · Cancel anytime</small>
       </div>
     </div>
-    <div class="hero-engine-card hero-engine-card--return" data-variant="Return user" style="--engine-x:41.5vw;--engine-y:17vh;--engine-z:0px;--engine-r:-3deg;--engine-delay:250ms">
+    <div class="hero-engine-card hero-engine-card--return" data-variant="Return user" style="--engine-x:42vw;--engine-y:17vh;--engine-z:0px;--engine-r:-3deg;--engine-delay:315ms">
       <div class="hero-engine-phone">
-        <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Return</span></div>
-        <div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div>
+        <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Welcome back</span></div>
+        <div class="hero-engine-phone__visual"><span></span><span></span><span></span><i></i></div>
+        <p class="hero-engine-phone__eyebrow">Picked for you</p>
+        <h3 class="hero-engine-phone__headline">Keep going from where you left</h3>
+        <div class="hero-engine-phone__price"><strong>40%</strong><span>off today</span></div>
+        <div class="hero-engine-phone__benefit">Your progress saved</div>
+        <div class="hero-engine-phone__benefit">Cancel anytime</div>
+        <div class="hero-engine-phone__choice">Annual plan <span>⌄</span></div>
+        <div class="hero-engine-phone__cta">Claim offer</div>
+        <small class="hero-engine-phone__fineprint">Secure checkout · No commitment</small>
       </div>
     </div>
   </div>
@@ -1744,19 +1840,49 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
     </div>
     <div class="hero-engine-mobile" aria-hidden="true">
       <div class="hero-engine-mobile-card" style="--mobile-r:-4deg;--mobile-delay:0ms">
-        <div class="hero-engine-phone"><div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Control</span></div><div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div></div>
+        <div class="hero-engine-phone">
+          <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Control</span></div>
+          <div class="hero-engine-phone__visual"><i></i></div><p class="hero-engine-phone__eyebrow">One plan. Everything.</p>
+          <h3 class="hero-engine-phone__headline">Go unlimited</h3><div class="hero-engine-phone__price"><strong>$9.99</strong><span>/ month</span></div>
+          <div class="hero-engine-phone__benefit">Everything unlocked</div><div class="hero-engine-phone__choice">Monthly plan <span>⌄</span></div>
+          <div class="hero-engine-phone__cta">Continue</div><small class="hero-engine-phone__fineprint">Secure checkout</small>
+        </div>
       </div>
       <div class="hero-engine-mobile-card" style="--mobile-r:4deg;--mobile-delay:45ms">
-        <div class="hero-engine-phone"><div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Intent</span></div><div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div></div>
+        <div class="hero-engine-phone">
+          <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Intent</span></div>
+          <div class="hero-engine-phone__visual"><i></i></div><p class="hero-engine-phone__eyebrow">Built for your goals</p>
+          <h3 class="hero-engine-phone__headline">Your next chapter</h3><div class="hero-engine-phone__price"><strong>$7.99</strong><span>first month</span></div>
+          <div class="hero-engine-phone__benefit">Personalized plan</div><div class="hero-engine-phone__choice">Best plan <span>⌄</span></div>
+          <div class="hero-engine-phone__cta">Unlock plan</div><small class="hero-engine-phone__fineprint">Cancel anytime</small>
+        </div>
       </div>
       <div class="hero-engine-mobile-card" style="--mobile-r:-2deg;--mobile-delay:90ms">
-        <div class="hero-engine-phone"><div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Proof</span></div><div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div></div>
+        <div class="hero-engine-phone">
+          <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Proof</span></div>
+          <div class="hero-engine-phone__visual"><i></i></div><p class="hero-engine-phone__eyebrow">24,000+ members</p>
+          <h3 class="hero-engine-phone__headline">The plan people keep</h3><div class="hero-engine-phone__price"><strong>$1</strong><span>7-day trial</span></div>
+          <div class="hero-engine-phone__benefit">Everything unlocked</div><div class="hero-engine-phone__choice">Trial plan <span>⌄</span></div>
+          <div class="hero-engine-phone__cta">Start for $1</div><small class="hero-engine-phone__fineprint">No commitment</small>
+        </div>
       </div>
       <div class="hero-engine-mobile-card" style="--mobile-r:3deg;--mobile-delay:135ms">
-        <div class="hero-engine-phone"><div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Value</span></div><div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div></div>
+        <div class="hero-engine-phone">
+          <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Value</span></div>
+          <div class="hero-engine-phone__visual"><i></i></div><p class="hero-engine-phone__eyebrow">Save 64%</p>
+          <h3 class="hero-engine-phone__headline">Build momentum all year</h3><div class="hero-engine-phone__price"><strong>$3.58</strong><span>/ month</span></div>
+          <div class="hero-engine-phone__benefit">Everything unlocked</div><div class="hero-engine-phone__choice">Annual plan <span>⌄</span></div>
+          <div class="hero-engine-phone__cta">Choose annual</div><small class="hero-engine-phone__fineprint">Cancel anytime</small>
+        </div>
       </div>
       <div class="hero-engine-mobile-card" style="--mobile-r:-3deg;--mobile-delay:180ms">
-        <div class="hero-engine-phone"><div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Winner</span></div><div class="hero-engine-phone__visual"><i></i></div><div class="hero-engine-phone__headline"></div><div class="hero-engine-phone__price"></div><div class="hero-engine-phone__choice"></div><div class="hero-engine-phone__cta"></div></div>
+        <div class="hero-engine-phone">
+          <div class="hero-engine-phone__top"><span class="hero-engine-phone__brand">Tranzmit</span><span>Winner</span></div>
+          <div class="hero-engine-phone__visual"><i></i></div><p class="hero-engine-phone__eyebrow">Your personal offer</p>
+          <h3 class="hero-engine-phone__headline">Your winning plan</h3><div class="hero-engine-phone__price"><strong>$0</strong><span>for 3 days</span></div>
+          <div class="hero-engine-phone__benefit">Everything unlocked</div><div class="hero-engine-phone__choice">Winner <span>⌄</span></div>
+          <div class="hero-engine-phone__cta">Start free</div><small class="hero-engine-phone__fineprint">Cancel anytime</small>
+        </div>
       </div>
     </div>
     <div class="stats hero__stats" aria-label="Tranzmit AI platform results">
@@ -2394,6 +2520,17 @@ They're saying no to <span style="color: #F23E79; font-style: normal">your paywa
     document.documentElement.style.overflow = '';
     window.removeEventListener('wheel', onWheel);
     window.removeEventListener('scroll', watch);
+    document.removeEventListener('click', onAnchorJump, true);
+  }
+
+  // In-page links are explicit navigation. Complete the graph reveal before the
+  // browser scrolls so the pin observer cannot pull an anchor jump back here.
+  function onAnchorJump(ev){
+    var link = ev.target.closest && ev.target.closest('a[href^="#"]');
+    if (!link || !link.getAttribute('href') || link.getAttribute('href') === '#') return;
+    maxP = 1;
+    apply();
+    unpin();
   }
 
   function watch(){
@@ -2405,6 +2542,7 @@ They're saying no to <span style="color: #F23E79; font-style: normal">your paywa
 
   window.addEventListener('wheel', onWheel, { passive: false });
   window.addEventListener('scroll', watch, { passive: true });
+  document.addEventListener('click', onAnchorJump, true);
   watch();
   apply();
 })();
