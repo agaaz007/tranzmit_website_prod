@@ -20,7 +20,7 @@ test("High Astro case study uses clipped phones and Jungle-style result cards", 
 
   assert.ok(section, "High Astro case-study section should exist");
   assert.match(section, /High Astro Case Study/);
-  assert.match(section, /25% uplift in paywall flickthrough rates/);
+  assert.match(section, /25% uplift in paywall click-through rates/);
   assert.match(section, /more than 400,000 users/);
   assert.match(section, /within two weeks of going live/);
 
