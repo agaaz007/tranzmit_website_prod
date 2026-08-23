@@ -12,14 +12,19 @@ const assetsUrl = new URL(
   import.meta.url,
 );
 
-test("High Astro case study uses clipped phones and Jungle-style result cards", async () => {
+test("HiAstro case study uses clipped phones and Jungle-style result cards", async () => {
   const landing = await readFile(landingUrl, "utf8");
   const section = landing.match(
     /<section[^>]+id="case-study-high-astro"[\s\S]*?<\/section>/,
   )?.[0];
 
-  assert.ok(section, "High Astro case-study section should exist");
-  assert.match(section, /High Astro Case Study/);
+  assert.ok(section, "HiAstro case-study section should exist");
+  assert.match(section, /HiAstro<\/a> Case Study/);
+  assert.equal(
+    [...section.matchAll(/href="https:\/\/www\.hiastro\.in\/"/g)].length,
+    2,
+    "both visible HiAstro labels should link to the official site",
+  );
   assert.match(section, /25% uplift in paywall click-through rates/);
   assert.match(section, /more than 400,000 users/);
   assert.match(section, /within two weeks of going live/);
@@ -38,7 +43,7 @@ test("High Astro case study uses clipped phones and Jungle-style result cards", 
   assert.equal(
     [...section.matchAll(/class="astro-case__image"/g)].length,
     2,
-    "both supplied High Astro images should be visible",
+    "both supplied HiAstro images should be visible",
   );
   assert.equal(
     [...section.matchAll(/class="cs2-stat astro-case__metric/g)].length,
