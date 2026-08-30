@@ -19,7 +19,8 @@ Tranzmit runs a continuous closed loop:
 - +57% average uplift from control
 - +130% best customer uplift
 - 9.4 minutes median time to a winning direction
-- Case study — Jungle AI: +82% conversion in 3 weeks, more than $20,000 of value proven, with zero engineering
+- Case study — Jungle AI: +62% paywall conversion uplift, more than $20,000 of value proven, with zero engineering
+- Case study — Influish: +82% paywall click-through rate, +49% subscription conversion, 1.5x topline revenue
 
 ## Integrations
 
