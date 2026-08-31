@@ -1,8 +1,8 @@
 # Tranzmit AI
 
-> Tranzmit AI is a self-improving paywall optimization platform. It builds, tests, and evolves in-app paywalls that turn more visitors into buyers — using behavioral data, simulation beds, and safe live rollout to find winning screens 50x faster and with less risk.
+> Tranzmit AI builds self-improving interfaces that increase conversion for consumer platforms. It is starting with monetization — paywalls and App Store pages — helping consumer companies automatically improve conversion and revenue.
 
-Tranzmit AI replaces paywall guesswork with a continuous, evidence-based system. Paywalls are one of the highest-leverage surfaces in a product, but most are built on opinions rather than data. Tranzmit continuously learns what converts and ships the winners automatically, lifting subscription conversion and revenue with little to no engineering effort. It is used by consumer subscription apps across the US and India.
+People spend nearly 8 hours a day on screens, and trillions of dollars of spending decisions happen through those interfaces. But today, every user still sees roughly the same interface. Tranzmit replaces that one-size-fits-all guesswork with a continuous, evidence-based system: it builds, tests, and evolves revenue surfaces using behavioral data, simulation beds, and safe live rollout to find winning screens 50x faster and with less risk. It continuously learns what converts and ships the winners automatically, lifting conversion and revenue with little to no engineering effort. It is used by consumer subscription apps across the US and India.
 
 ## How paywall optimization works with Tranzmit (signal to shipped winner)
 

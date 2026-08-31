@@ -10,11 +10,11 @@ import { PostHogProvider } from './providers'
 import { ThemeProvider } from 'next-themes'
 
 const siteDescription =
-  "Tranzmit AI builds, tests, and evolves paywalls that turn more visitors into buyers — using behavioral data, AI generation, simulation, and safe live rollout to find winning paywall experiences faster and with less risk."
+  "Tranzmit AI builds self-improving interfaces that increase conversion for consumer platforms — starting with monetization: paywalls and App Store pages that help consumer companies automatically improve conversion and revenue."
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tranzmitai.com"),
-  title: "Tranzmit AI — Self-improving AI paywalls",
+  title: "Tranzmit AI — Self-improving interfaces",
   description: siteDescription,
   alternates: {
     canonical: "/",
@@ -27,26 +27,26 @@ export const metadata: Metadata = {
     url: "https://tranzmitai.com/",
     siteName: "Tranzmit AI",
     locale: "en_US",
-    title: "Tranzmit AI — Self-improving AI paywalls",
+    title: "Tranzmit AI — Self-improving interfaces",
     description: siteDescription,
     images: [
       {
         url: "/assets/og-card.png",
         width: 1200,
         height: 630,
-        alt: "Tranzmit AI — self-improving AI paywalls",
+        alt: "Tranzmit AI — self-improving interfaces",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@agaazsinghal007",
-    title: "Tranzmit AI — Self-improving AI paywalls",
+    title: "Tranzmit AI — Self-improving interfaces",
     description: siteDescription,
     images: [
       {
         url: "/assets/og-card.png",
-        alt: "Tranzmit AI — self-improving AI paywalls",
+        alt: "Tranzmit AI — self-improving interfaces",
       },
     ],
   },
