@@ -45,6 +45,21 @@ test("HiAstro case study uses clipped phones and Jungle-style result cards", asy
     2,
     "both supplied HiAstro images should be visible",
   );
+
+  assert.match(
+    section,
+    /class="cs2-card__logo"[\s\S]*?alt="HiAstro"/,
+    "the results card should carry the HiAstro brand logo, like Jungle and Influish",
+  );
+  for (const logoName of [
+    "1770459b-3984-434d-a90e-99b6f91e441f.webp",
+    "1770459b-3984-434d-a90e-99b6f91e441f.png",
+  ]) {
+    assert.match(section, new RegExp(`\\.\\/assets\\/${logoName}`));
+    const logo = await stat(new URL(logoName, assetsUrl));
+    assert.ok(logo.size > 0, `${logoName} should contain image data`);
+  }
+
   assert.equal(
     [...section.matchAll(/class="cs2-stat astro-case__metric/g)].length,
     3,
