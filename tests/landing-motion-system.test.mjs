@@ -39,12 +39,16 @@ test("scroll motion is progressive and remains accessible", () => {
   assert.match(landing, /revealNodes\.forEach\(function\(node\)\{ node\.classList\.add\('is-visible'\)/);
 });
 
-test("the contextual cursor is desktop-only and does not replace touch input", () => {
-  assert.match(landing, /id="tz-cursor" aria-hidden="true"/);
-  assert.match(landing, /class="tz-cursor__arrow"/);
-  assert.match(landing, /data-cursor-label="Book"/);
+test("the native cursor is used, with no custom cursor replacing it", () => {
+  assert.doesNotMatch(landing, /tz-cursor/);
+  assert.doesNotMatch(landing, /data-cursor-label/);
+  assert.doesNotMatch(landing, /cursor:\s*none/);
+});
+
+test("the ambient pointer halo survives without the custom cursor", () => {
+  assert.match(landing, /id="cursorHue" aria-hidden="true"/);
   assert.match(landing, /document\.addEventListener\('pointermove',cursorMove/);
   assert.match(landing, /function startCursor\(\)/);
   assert.match(landing, /cancelAnimationFrame\(cursorFrame\)/);
-  assert.match(landing, /@media \(hover:none\),\(pointer:coarse\) \{ #tz-cursor \{ display:none!important; \} \}/);
+  assert.match(landing, /@media \(prefers-reduced-motion: reduce\) \{ #cursorHue \{ display: none; \} \}/);
 });
