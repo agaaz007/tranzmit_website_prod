@@ -15,15 +15,16 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="Tranzmit AI — Revenue surfaces that improve themselves">
 <meta property="og:description" content="Tranzmit AI builds self-improving interfaces that increase conversion for consumer platforms, starting with monetization: paywalls, App Store pages, and Google Play pages.">
-<meta property="og:image" content="https://tranzmitai.com/tranzmit-ai-landing/assets/og-card.png">
+<meta property="og:image" content="https://tranzmitai.com/tranzmit-ai-landing/assets/og-card-v2.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="Tranzmit AI — revenue surfaces that improve themselves">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@agaazsinghal007">
 <meta name="twitter:title" content="Tranzmit AI — Revenue surfaces that improve themselves">
 <meta name="twitter:description" content="Tranzmit AI builds self-improving interfaces that increase conversion for consumer platforms, starting with monetization: paywalls, App Store pages, and Google Play pages.">
-<meta name="twitter:image" content="https://tranzmitai.com/tranzmit-ai-landing/assets/og-card.png">
+<meta name="twitter:image" content="https://tranzmitai.com/tranzmit-ai-landing/assets/og-card-v2.jpg">
 <meta name="twitter:image:alt" content="Tranzmit AI — revenue surfaces that improve themselves">
 <script type="application/ld+json">
 {
@@ -1705,7 +1706,7 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
 .pw-letter { font-weight:800; color:var(--ink); font-size:14px; }
 .pw-badge { font-size:11px; font-weight:700; padding:2px 9px; border-radius:999px; }
 .pw-screen { position:relative; height:244px; border-radius:17px; border:1px solid var(--line); background:#fff; box-shadow:var(--shadow-card); overflow:hidden; padding:14px 13px; display:flex; flex-direction:column; gap:9px; transition:box-shadow .25s ease, transform .25s ease; transform-style:preserve-3d; will-change:transform; animation:pwFloat 5.5s ease-in-out infinite; }
-.pw-card.is-sel .pw-screen { border-color:var(--purple); box-shadow:0 0 0 3px rgba(110,84,232,.2), var(--shadow-card); }
+.pw-card.is-sel .pw-screen { border-color:var(--purple); box-shadow:0 0 0 3px rgba(36,68,127,.2), var(--shadow-card); }
 @keyframes pwFloat { 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-7px);} }
 .pw-bar { height:7px; border-radius:4px; background:rgba(33,30,26,.13); }
 .pw-bar.s { width:52%; } .pw-bar.m { width:78%; } .pw-bar.l { width:100%; }
@@ -1931,7 +1932,7 @@ body::after {
   margin:-24px auto 0;
   padding:20px 0 76px;
   border-radius:28px 28px 0 0;
-  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.72) 62%,rgba(255,255,255,0));
+  background:linear-gradient(180deg,rgba(251,248,242,.96),rgba(251,248,242,.74) 62%,rgba(251,248,242,0));
   box-shadow:0 -26px 80px -62px rgba(70,44,54,.55);
 }
 .hero__proof .hero-engine-story-controls { width:min(760px,calc(100% - 24px)); margin-top:0; }
@@ -1988,7 +1989,7 @@ html.motion-enabled [data-reveal] {
 html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform:none; }
 .section { position:relative; background:rgba(255,255,255,.74); }
 #how { background:radial-gradient(circle at 50% 20%,rgba(42,75,141,.055),transparent 32%),rgba(255,255,255,.76); }
-#system { background:radial-gradient(circle at 15% 35%,rgba(110,84,232,.055),transparent 28%),rgba(255,255,255,.76); }
+#system { background:radial-gradient(circle at 15% 35%,rgba(36,68,127,.055),transparent 28%),rgba(255,255,255,.76); }
 .cs2 { background:radial-gradient(circle at 88% 20%,rgba(31,138,91,.045),transparent 28%),rgba(255,255,255,.8); }
 .astro-case { background:radial-gradient(circle at 12% 24%,rgba(42,75,141,.06),transparent 30%),rgba(255,255,255,.82); }
 .pcard { transform-origin:center; }
@@ -2039,6 +2040,731 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
   .hero-scroll-cue path { animation:none; }
 }
 
+/* ============================================================
+   DESIGN SYSTEM — v2
+   ------------------------------------------------------------
+   The page should read like an instrument, not a brochure.
+   Paper, ink, and exactly one blue.
+
+   The blue is not decoration. It means "this is what the system
+   picked." Anything the system is still deciding between stays
+   neutral graphite. That one rule replaces the nine accent hues
+   the page had accumulated, and it makes the palette carry the
+   product idea instead of fighting it.
+   ============================================================ */
+:root{
+  --sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+
+  /* radius: three steps. everything between them was an accident. */
+  --r-xs:5px;
+  --r:12px;
+  --r-pill:999px;
+  --radius:var(--r);
+  --radius-sm:var(--r-xs);
+
+  /* ---- the one accent ----
+     The first pass used a navy at chroma .36, which is close enough to a
+     dark warm grey that on a white page it stopped reading as blue at all
+     and the whole site went quiet. Same hue family, same lightness, same
+     8.4:1 on paper — but 63% more chroma. It is an ultramarine printing
+     ink now rather than a slate. */
+  --accent:#1F3CB4;
+  --accent-deep:#162E8C;
+  --accent-soft:#ECEFFB;
+  --accent-line:#BFC8EE;
+  --accent-ink:#0E1F63;   /* the full-bleed contrast beat */
+  --rose-text:#1F3CB4;
+
+  /* ---- paper ----
+     Pure white gave the accents nothing to push against. A warm ivory page
+     with white cards does two things at once: it builds a real surface
+     hierarchy, and the warm/cool tension against the ultramarine is what
+     actually makes the blue feel saturated. */
+  --cream:#FBF8F2;
+  --cream-2:#F6F2E9;
+  --paper:#FBF8F2;
+
+  /* candidates: everything the system has not chosen */
+  --cand:#A39D92;
+  --cand-2:#C7C1B5;
+  --cand-soft:#F3F1EC;
+  --purple:#A39D92;
+  --amber:#A39D92;
+
+  --ink:#15120E;
+  --ink-2:#443E36;
+  --line:#E3DCCD;
+  --line-soft:#EDE7DA;
+  --hair:rgba(21,18,14,.09);
+
+  --shadow-card:0 1px 1px rgba(33,30,26,.03),0 12px 30px -24px rgba(33,30,26,.34);
+  --shadow-float:0 2px 6px -3px rgba(33,30,26,.09),0 34px 64px -42px rgba(33,30,26,.30);
+}
+
+/* Anchored sections used to land underneath the fixed nav. */
+:where(#top,#how,#system,#customers,#case-study,#case-study-jungle,#case-study-high-astro,#demo){ scroll-margin-top:104px; }
+
+/* The hero and the two masking gradients were hard-coded to #FFFFFF, so with
+   an ivory page they showed as a white plate with a visible seam. */
+.hero{ background:var(--paper)!important; }
+.section{ background:transparent; }
+
+/* ---------- the contrast beat ----------
+   Eleven screens went by without the contrast level changing once, which is
+   most of why the page read as quiet no matter how saturated the accent got.
+   The close is now a full-bleed ultramarine plate. It is the one place the
+   page raises its voice, and it does it exactly where the reader decides. */
+.cta{ background:var(--accent-ink)!important; border-top:0!important; color:#fff; }
+.cta h2{ color:#fff!important; }
+.cta h2 .accent-ink,.cta h2 span{ color:#A9BCF4!important; }
+.cta p{ color:rgba(255,255,255,.72)!important; }
+.cta__deliver-head{ color:#fff!important; }
+.cta__deliver{ border-top-color:rgba(255,255,255,.26)!important; }
+.cta__deliver li{ border-bottom-color:rgba(255,255,255,.18)!important; }
+.cta__deliver b{ color:#93A9EE!important; }
+.cta__deliver span{ color:rgba(255,255,255,.78)!important; }
+.cta__deliver strong{ color:#fff!important; }
+.cta__deliver-note{ color:rgba(255,255,255,.55)!important; }
+/* On an ultramarine plate the filled navy button disappears, so the primary
+   inverts to paper-on-blue and the secondary becomes a hairline outline. */
+.cta .btn--accent{ background:#fff!important; border-color:#fff!important; color:var(--accent-ink)!important; }
+.cta .btn--accent:hover{ background:#E8ECFA!important; border-color:#E8ECFA!important; }
+.cta .btn--ghost{ background:transparent!important; border-color:rgba(255,255,255,.42)!important; color:#fff!important; }
+.cta .btn--ghost:hover{ background:rgba(255,255,255,.09)!important; border-color:#fff!important; }
+.cta .hero__cloud{ display:none; }
+/* A field of flat hex this large reads as a filled div. The generated ink
+   plate gives it stock: paper tooth and a little roller variation, blended
+   soft-light so it darkens the grain without shifting the hue.
+
+   The !important matters: the rule above sets the `background` shorthand
+   with !important, which resets background-image to none at the same
+   priority, so a plain declaration here loses. */
+.cta{
+  background-image:url("./assets/ink-plate.webp")!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-blend-mode:soft-light;
+}
+
+/* The near-black App Store card was the only dark surface on the page and it
+   answered to nothing — a different hue from every other dark value here. It
+   now shares the closing band's ultramarine, so the two dark moments read as
+   one system with a beat between them rather than as two accidents. */
+.surface-card--store{
+  background:radial-gradient(circle at 85% 10%,rgba(120,150,235,.16),transparent 42%),var(--accent-ink)!important;
+  border-color:#22357A!important;
+  box-shadow:0 24px 58px -38px rgba(14,31,99,.6)!important;
+}
+.surface-card--store .surface-card__number{ background:#fff!important; color:var(--accent-ink)!important; }
+.surface-card--store .surface-proof::before{ background:#93A9EE!important; }
+
+/* ---------- one grid ----------
+   The page had four left edges: 1400px containers for the pipeline and the
+   integrations band, 1340px for the case studies, 1150px for the growth
+   charts, and 1180px for everything else. Scrolling it, the eye's left
+   anchor moved four times, which is why competent sections still did not
+   read as one designed object. Every container is now the same measure. */
+.pipe-wrap,.integ-wrap,.cs2-wrap,.astro-case__wrap{ max-width:var(--maxw)!important; }
+.grow-wrap{ max-width:var(--maxw)!important; padding:0 var(--pad)!important; margin-top:104px!important; }
+.numbers-strip,.broken-grid{ margin-left:0; margin-right:0; }
+
+/* ---------- deletion pass ----------
+   Five permanently-animating radial blobs sat behind every section and
+   put a pink/blue wash over what is meant to be paper. Nothing on the
+   page referred to them. Removed; the cream background stays. */
+.amb-blob{ display:none; }
+#cursorHue{ opacity:.32; }
+
+/* Numerals are the page's texture, so they must not jitter. */
+.stat__num,.numbers-value,.cs2-stat__val,.grow-title,.astro-metric__value,
+[data-count],.exp-legend,.ship-up{ font-variant-numeric:tabular-nums; font-feature-settings:'tnum' 1; }
+
+/* ---------- radius normalisation ----------
+   Panels all land on one radius. Phone frames keep theirs: a phone
+   is a physical object and reads wrong at 12px. */
+.pcard,.cs2-card,.cs2-changed,.cs2-stat,.cs2-card-img,.exp-window,.logo-card,
+.numbers-cell,.rollout-panel,.ship-panel,.surface-card,.surface-card__visual,
+.astro-case__media,.proof-app__logo,.broken-card,.grow-grid > div,
+.hero__proof .hero__stats,.moatmap,.mindmap--card,.radar-wrap{
+  border-radius:var(--r)!important;
+}
+.hero-engine-story-controls{ border-radius:var(--r-pill)!important; }
+/* The active phase indicator ran navy to amber to green in 62px. */
+.hero-engine-story-controls button i::after{ background:var(--accent)!important; }
+
+/* ---------- candidates are neutral, winners are blue ---------- */
+/* Generate step: six candidate paywalls. None has won yet, so none is
+   coloured. They differ the way real variants differ — in structure. */
+.pw--violet,.pw--amber,.pw--teal{ background:linear-gradient(180deg,#F7F5F1,#FCFBF9)!important; }
+.pw--violet .pw__ico,.pw--amber .pw__ico,.pw--teal .pw__ico,
+.pw--violet .pw__cta,.pw--amber .pw__cta,.pw--teal .pw__cta{ background:var(--cand)!important; }
+.pw--violet .pw__price,.pw--amber .pw__price,.pw--teal .pw__price{ background:var(--cand-2)!important; }
+.pwgrid .pw:nth-child(2) .pw__t{ width:58%; }
+.pwgrid .pw:nth-child(2) .pw__t--sm{ width:80%; }
+.pwgrid .pw:nth-child(3) .pw__t{ width:88%; }
+.pwgrid .pw:nth-child(3) .pw__price{ width:66%; }
+.pwgrid .pw:nth-child(4) .pw__t{ width:66%; }
+.pwgrid .pw:nth-child(4) .pw__cta{ width:74%; }
+.pwgrid .pw:nth-child(5) .pw__t--sm{ width:38%; }
+.pwgrid .pw:nth-child(5) .pw__price{ width:32%; }
+.pwgrid .pw:nth-child(6) .pw__t{ width:52%; }
+.pwgrid .pw:nth-child(6) .pw__bar{ width:64%; }
+
+/* Hero cloud: ten candidate paywalls orbiting one control.
+   Only the winner is allowed to be blue. Candidates are slate, not the warm
+   khaki the first pass used — a solid khaki CTA bar on a white card reads as
+   a rendering artefact rather than as an unpicked option. */
+.hero-engine-card{ --engine-accent:#8C919B!important; --engine-tint:#F6F6F7!important; }
+.hero-engine-card--winner{ --engine-accent:var(--accent)!important; --engine-tint:#EDF1F8!important; }
+.hero-engine-mobile-card{ --engine-accent:#8C919B!important; --engine-tint:#F6F6F7!important; }
+.hero-engine-mobile-card:nth-child(5){ --engine-accent:var(--accent)!important; --engine-tint:#EDF1F8!important; }
+.hero-engine-system-status{ display:none!important; }
+
+/* Spread phase: cards used to run to ±47vw and get sliced in half by the
+   viewport on both sides, which read as clipping rather than as a field
+   continuing past the frame. */
+.hero-engine-card--control{ --engine-x:-38vw!important; }
+.hero-engine-card--intent{ --engine-x:-35vw!important; }
+.hero-engine-card--guided{ --engine-x:-36vw!important; }
+.hero-engine-card--proof{ --engine-x:-38vw!important; }
+.hero-engine-card--trust{ --engine-x:-37vw!important; }
+.hero-engine-card--minimal{ --engine-x:37vw!important; }
+.hero-engine-card--annual{ --engine-x:37vw!important; }
+.hero-engine-card--winner{ --engine-x:38vw!important; }
+.hero-engine-card--return{ --engine-x:36vw!important; }
+.hero-engine-card--urgent{ --engine-x:38vw!important; }
+
+/* Candidate paywalls in the spread phase. Ghosting them to 60% made them
+   unreadable without making them quiet — the worst of both, and they still
+   crossed the headline. They are legible now, and the headline sits in a
+   corridor they do not enter. */
+.hero.hero-engine-phase-1 .hero-engine-card{ opacity:.88!important; }
+.hero.hero-engine-phase-1 .hero-engine-card:hover{ opacity:1!important; }
+.hero__sticky .wrap.hero__grid{ position:relative; z-index:6; }
+.hero h1,.hero__copy{ position:relative; z-index:6; }
+.hero h1{
+  /* the corridor: cards drift behind the headline, never through it */
+  background:radial-gradient(ellipse 62% 78% at 50% 46%,var(--paper) 56%,rgba(251,248,242,0) 100%);
+  padding:8px 0 2px;
+}
+
+/* Metric cards: three shades of one blue, not three unrelated hues. */
+.numbers-cell{ --metric-accent:var(--accent)!important; }
+.numbers-cell:nth-child(2){ --metric-accent:#5B7BB0!important; }
+.numbers-cell:nth-child(3){ --metric-accent:#3D8C5A!important; }
+.numbers-cell::before{ display:none; }
+
+/* Score panel legend: control and losing variants read as candidates. */
+/* The variant thumbnails had it backwards: the control was tinted violet and
+   the winner was the darkest of four unrelated hues, so colour tracked row
+   order rather than outcome. Control, C and D are candidates; B won. */
+.vthumb--a,.vthumb--b,.vthumb--c,.vthumb--d{ background:linear-gradient(180deg,#F7F5F1,#FCFBF9)!important; }
+.vthumb--a::after,.vthumb--c::after,.vthumb--d::after{ background:var(--cand)!important; }
+.vthumb--b{ background:linear-gradient(180deg,#EDF1F8,#FBFCFE)!important; }
+.vthumb--b::after{ background:var(--accent)!important; }
+.pw-card.is-sel .pw-screen{ border-color:var(--accent)!important; box-shadow:0 0 0 3px rgba(36,68,127,.18),var(--shadow-card)!important; }
+
+/* ---------- nav ----------
+   The pill floated free of the page and let headings slide under it.
+   It now sits on a hairline and the page-progress bar reads as a rule
+   rather than a rainbow. */
+.nav__inner{ border-radius:var(--r-pill)!important; }
+/* The scroll-progress bar lived inside the pill, starting under the wordmark
+   and growing rightwards in a three-colour gradient. On most screens it read
+   as a stray underline attached to "Tranzmit AI", and it collided with the
+   active-nav underline. It is a page-level indicator, so it sits at the
+   bottom edge of the paper band, full width, one colour, one pixel. */
+.nav__progress{
+  position:fixed!important; top:112px!important; right:0!important; bottom:auto!important; left:0!important;
+  height:1px!important; background:transparent!important; overflow:hidden;
+}
+.nav__progress i{ background:var(--accent)!important; opacity:.55; }
+
+/* ---------- section rhythm ----------
+   Uniform 120px padding everywhere made every section feel equally
+   important. Quiet sections get air; instrument sections get density. */
+.section--pad{ padding-top:104px; padding-bottom:104px; }
+.section{ border-top:1px solid var(--line-soft); }
+
+/* ---------- eyebrows ----------
+   Twelve different eyebrow treatments existed. One now. */
+.eyebrow,.cs2-eyebrow{
+  display:block; color:var(--accent)!important;
+  font:700 12px/1 var(--sans)!important; letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+}
+
+/* ---------- buttons ---------- */
+.btn--accent{ background:var(--accent); border-color:var(--accent); }
+.btn--accent:hover{ background:var(--accent-deep); border-color:var(--accent-deep); }
+.btn--glow::before,.btn--cta-glow::before{ display:none!important; }
+
+/* ---------- case studies ----------
+   Each result was a card holding four cards holding a fifth card. Three
+   levels of container to present eight numbers and four sentences. The
+   panel is now flat: one border, hairline rules between the figures, and
+   nothing decorative competing with the paywall screenshots on the left —
+   which are the actual evidence. */
+.cs2-card{ border-radius:var(--r)!important; padding:0!important; box-shadow:none!important; border:1px solid var(--line)!important; overflow:hidden; }
+.cs2-card__head{ margin:0!important; padding:22px 26px!important; border-bottom:1px solid var(--line); }
+.cs2-card__logo{ width:38px!important; height:38px!important; border-radius:var(--r-xs)!important; background:var(--cand-soft)!important; }
+.cs2-card__logo img{ width:26px!important; }
+.cs2-uplift{
+  background:var(--accent-soft)!important; color:var(--accent)!important;
+  border:1px solid var(--accent-line)!important; border-radius:var(--r-pill)!important;
+  font:700 10.5px/1 var(--sans)!important; letter-spacing:.11em; text-transform:uppercase;
+  padding:6px 12px!important;
+}
+.cs2-stats{ gap:0!important; }
+.cs2-stat{
+  border:0!important; border-radius:0!important; background:none!important; box-shadow:none!important;
+  padding:24px 26px!important; border-right:1px solid var(--line)!important; border-bottom:1px solid var(--line)!important;
+}
+.cs2-stat:nth-child(2n){ border-right:0!important; }
+.cs2-stat:hover{ transform:none!important; box-shadow:none!important; background:none!important; }
+/* Four unrelated glyphs (chart arrow, shield, code brackets, stopwatch) sat
+   above four numbers and explained none of them. */
+.cs2-stat__ic{ display:none!important; }
+.cs2-stat__val{ font-size:30px!important; font-weight:700!important; }
+.cs2-changed{
+  margin:0!important; border:0!important; border-radius:0!important;
+  padding:24px 26px!important; background:var(--cand-soft)!important;
+}
+.cs2-changed__h{ color:var(--ink)!important; letter-spacing:.15em!important; }
+.cs2-changed li{ padding-left:16px!important; }
+.cs2-changed li::before{ top:8px!important; width:4px!important; height:4px!important; background:var(--ink-2)!important; }
+.cs2-title{
+  font-family:var(--serif)!important; font-weight:400!important;
+  font-size:clamp(34px,4vw,54px)!important; line-height:1.04!important; letter-spacing:-.025em!important;
+}
+/* Captions ran one, two, and two lines, so the phones sat on three different
+   baselines. */
+.cs2-pw-fig figcaption{ min-height:2.8em; white-space:normal!important; }
+@media (max-width:560px){ .cs2-pw-fig figcaption{ min-height:0; } }
+
+/* HiAstro shipped later and drifted: a title-case heading where the other two
+   use an eyebrow, a sans claim where they use serif, and metric values that
+   ran inline with their own labels. Same shape as the other two now. */
+.astro-case__title{
+  margin:0 0 14px!important; color:var(--accent)!important;
+  font:700 12px/1 var(--sans)!important; letter-spacing:.16em!important; text-transform:uppercase!important;
+}
+.astro-case__brand-link{ color:inherit; text-decoration:none; }
+.astro-case__title .astro-case__brand-link:hover{ text-decoration:underline; }
+.astro-case__outcome{
+  max-width:15ch; margin:0 0 18px!important; color:var(--ink)!important;
+  font:400 clamp(34px,4vw,54px)/1.04 var(--serif)!important; letter-spacing:-.025em!important;
+}
+.astro-case__lead{ max-width:42ch; color:var(--muted)!important; font-size:15px!important; }
+.astro-case__metrics .cs2-stat{ display:block!important; }
+.astro-case__metrics .cs2-stat__val{ display:block; }
+.astro-case__metrics .cs2-stat__lab{ display:block; }
+.astro-case__metric--wide{ grid-column:1 / -1; border-right:0!important; }
+
+/* ---------- integrations ----------
+   Three analytics logos in three bordered boxes, each with a ragged
+   three-line caption underneath. The boxes carried no information: they
+   said "container" three times. Logos sit on the paper, captions get one
+   line each, and the heading gets a measure it can breathe in. */
+.integ__h{ max-width:20ch!important; }
+.logos3{ display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0!important; border-top:1px solid var(--line); }
+.logo-card{
+  border:0!important; border-right:1px solid var(--line)!important; border-radius:0!important;
+  background:none!important; box-shadow:none!important; padding:22px 22px 20px!important; text-align:left!important;
+}
+.logo-card:last-child{ border-right:0!important; }
+.logo-card:hover{ transform:none!important; box-shadow:none!important; }
+.logo-card__logo{ display:flex!important; justify-content:flex-start!important; height:22px; margin:0 0 14px!important; }
+.logo-card__logo img{ max-width:none!important; max-height:22px!important; width:auto!important; height:100%!important; object-fit:contain; object-position:left center; }
+.logo-card p{ margin:0!important; color:var(--muted)!important; font-size:13px!important; line-height:1.45!important; text-align:left!important; }
+/* This caption hung 14px right of the column it belongs to, and it kept the
+   bold accent styling from back when it was a link to nowhere. */
+.viewall{
+  display:block!important; justify-content:flex-start!important;
+  margin:16px 0 0!important; padding:0!important;
+  color:var(--muted)!important; font-size:13px!important; font-weight:500!important;
+}
+
+/* The two growth panels were sized by their contents, so their bottom edges
+   landed 76px apart. Same height, charts bottom-aligned. */
+.grow-grid{ align-items:stretch!important; }
+.grow-grid > div{ display:flex!important; flex-direction:column; }
+.grow-grid > div > svg{ margin-top:auto!important; }
+@media (max-width:640px){
+  .logos3{ grid-template-columns:1fr; }
+  .logo-card{ border-right:0!important; border-bottom:1px solid var(--line)!important; }
+  .logo-card:last-child{ border-bottom:0!important; }
+}
+
+/* ---------- the specimen plate ----------
+   The page's one owned image. Full bleed, because the whole point is that it
+   is a sheet of paper larger than the column grid — and because after eleven
+   screens of contained blocks, one thing running edge to edge is worth more
+   than any amount of styling inside them.
+
+   It is generated, so it is composited rather than dropped in: the plate is
+   colour-matched to the page's paper, and multiply blending drops its white
+   entirely so the page's own ivory shows through the stock. There is no
+   visible edge where the image starts. */
+.plate{ margin:88px 0 0; }
+.plate__img{
+  display:block; width:100vw; max-width:100vw; height:auto;
+  margin-left:calc(50% - 50vw);
+  mix-blend-mode:multiply;
+}
+.plate__cap{
+  max-width:var(--maxw); margin:26px auto 0; padding:0 var(--pad);
+  color:var(--muted); font:500 13px/1.5 var(--sans);
+}
+@media (max-width:680px){ .plate{ margin-top:56px; } .plate__cap{ font-size:12.5px; } }
+
+/* With the node graph gone, the band is two blocks instead of three: what it
+   plugs into, and what it knows. */
+.integ__grid{ grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important; gap:72px!important; align-items:start!important; }
+.moat-copy{ grid-column:auto!important; }
+@media (max-width:900px){ .integ__grid{ grid-template-columns:1fr!important; gap:48px!important; } }
+
+/* ---------- the two revenue surfaces ----------
+   The App Store card was the only place on the site using acid lime, with no
+   rule behind it. The pair also disagreed on headline voice and on bullet
+   colour, and their headings ran three lines against two, so the body copy
+   underneath sat on different baselines. */
+.surface-card--store .surface-card__number{ background:#EDF1F8!important; color:#17151F!important; box-shadow:none!important; }
+.surface-card--store .surface-proof::before{ background:#8FA8CE!important; box-shadow:none!important; }
+.surface-card__body h3{
+  font-family:var(--serif)!important; font-weight:400!important;
+  font-size:clamp(26px,2.4vw,34px)!important; line-height:1.08!important;
+  letter-spacing:-.022em!important; max-width:18ch; min-height:2.16em;
+}
+.surface-card__body p{ max-width:44ch; }
+.surface-proof::before{ background:#8FA8CE!important; box-shadow:none!important; }
+.surface-card__visual{ background:var(--cand-soft)!important; }
+.surface-card--store .surface-card__visual{ background:#fff!important; }
+@media (max-width:900px){ .surface-card__body h3{ min-height:0; } }
+
+/* ---------- customers ----------
+   Same treatment as the hero row: the logo is the logo, not a tile.
+   Grayscale by default so no single customer's brand colour dominates the
+   row; full colour on hover for anyone who looks twice. */
+.proof-app__logo img{ filter:grayscale(1); opacity:.72; transition:filter .2s ease,opacity .2s ease; }
+.proof-app:hover .proof-app__logo img{ filter:grayscale(0); opacity:1; }
+.logoband__txt{
+  font-family:var(--serif)!important; font-weight:400!important;
+  font-size:clamp(28px,3.2vw,42px)!important; line-height:1.08!important; letter-spacing:-.022em!important;
+}
+.proof-app__logo{
+  border:0!important; background:none!important; box-shadow:none!important;
+  border-radius:0!important; width:auto!important; height:30px!important;
+}
+.proof-app__logo img{ width:auto!important; height:100%!important; object-fit:contain; object-position:left center; }
+.proof-app__audience strong{ font-variant-numeric:tabular-nums; }
+/* "monthly active users" is the customer's number, not the system's output,
+   so it does not get the accent. */
+.proof-app__audience{ color:var(--muted)!important; }
+
+/* ---------- footer ----------
+   Two thirds of the footer was empty space. */
+.foot__brand{ flex:1 1 340px!important; }
+.foot__cols{ flex:1 1 460px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; }
+.foot__col h4{ margin:0 0 12px; color:var(--ink); font:700 11px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; }
+.foot__col a{ display:block; padding:5px 0; color:var(--muted); font-size:14px; text-decoration:none; }
+.foot__col a:hover{ color:var(--ink); }
+@media (max-width:720px){ .foot__cols{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+/* ---------- final CTA ----------
+   The retro Macintosh render was the only illustration on the page and it
+   referred to nothing in the product. It is replaced by what the reader
+   actually wants at the point of deciding: what they get on the call.
+   Two columns instead of three, so the close reads as one argument. */
+.cta__grid{ grid-template-columns:1.05fr .95fr!important; gap:56px!important; align-items:start!important; padding:88px var(--pad)!important; }
+.cta__btns{ flex-direction:row!important; flex-wrap:wrap; margin-top:28px; min-width:0!important; }
+.cta__grid > div:first-child{ display:flex; flex-direction:column; }
+.cta__art{ display:block!important; place-items:initial!important; }
+.cta__deliver-head{ margin-bottom:6px; color:var(--ink); font:700 13px/1.4 var(--sans); letter-spacing:.02em; }
+.cta__deliver{ margin:0; padding:0; border-top:1px solid rgba(33,30,26,.16); }
+.cta__deliver li{
+  display:grid; grid-template-columns:24px 1fr; gap:14px; align-items:baseline;
+  padding:15px 0; border-bottom:1px solid rgba(33,30,26,.12); list-style:none;
+}
+.cta__deliver b{ color:var(--accent); font:700 12px/1.5 var(--sans); font-variant-numeric:tabular-nums; }
+.cta__deliver span{ color:var(--ink-2); font:500 15px/1.5 var(--sans); }
+.cta__deliver strong{ color:var(--ink); font-weight:700; }
+.cta__deliver-note{ margin-top:16px!important; color:var(--muted)!important; font-size:13px!important; }
+@media (max-width:900px){
+  .cta__grid{ grid-template-columns:1fr!important; gap:36px!important; padding:64px var(--pad)!important; }
+}
+
+/* ---------- typography ----------
+   Two voices, and they are not interchangeable.
+   Newsreader states the argument. Manrope is what the machine reports —
+   every figure, label, and control, on tabular figures so columns line up
+   and nothing shifts width as values change.
+
+   The h1 was the one heading on the page set in the sans, which made the
+   most important typographic moment the one that opted out of the system.
+   A geometric-sans line closing on a Didone italic is also the most-copied
+   AI landing-page move of the last two years. The whole page now speaks in
+   one voice, and the italic reads as emphasis inside a sentence rather
+   than as a different typeface arriving. */
+.hero h1{
+  font-family:var(--serif)!important;
+  font-size:clamp(58px,6.6vw,102px)!important;
+  font-weight:400!important;
+  line-height:.98!important;
+  letter-spacing:-.032em!important;
+  max-width:15ch;
+}
+.hero__title-accent{ letter-spacing:-.034em!important; }
+.stat__num{
+  font-family:var(--sans)!important; font-size:42px!important; font-weight:700!important;
+  letter-spacing:-.035em!important; color:var(--ink)!important;
+  background:none!important; -webkit-text-fill-color:currentColor!important;
+}
+.stat__lbl{ color:var(--muted); font-size:12.5px; letter-spacing:.01em; }
+.problem__thesis,.pipe-head__title,.integ__h,.moat__title,.sys__title,
+.grow-title,.cs2-title,.logoband__txt,.cta h2{ text-wrap:balance; }
+.integ__h{ max-width:14ch; }
+
+/* The status quo has one colour, and it is not an error state. Oxblood
+   rather than alert red: this is a cost, not a system failure. */
+.problem h3 span[style*="E04745"],.broken-cell__v{ color:#9E4741!important; }
+
+/* ---------- the cost of manual testing ----------
+   Four equal white cards said "four equally weighted features". These are
+   four facts about one problem, so they read as one instrument block:
+   hairline columns, tabular figures, no container. */
+.broken-grid{ display:grid!important; grid-template-columns:repeat(4,minmax(0,1fr))!important; gap:0!important; border-top:1px solid var(--line); }
+.broken-cell{ padding:26px 28px 24px; border-right:1px solid var(--line); }
+.broken-cell:last-child{ border-right:0; }
+.broken-cell__v{ font:400 30px/1 var(--sans); letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
+.broken-cell__k{ margin-top:10px; color:var(--ink); font:700 14px/1.35 var(--sans); }
+.broken-cell__n{ margin-top:4px; color:var(--muted); font:500 13px/1.4 var(--sans); }
+@media (max-width:820px){
+  .broken-grid{ grid-template-columns:repeat(2,minmax(0,1fr))!important; }
+  .broken-cell:nth-child(2n){ border-right:0; }
+  .broken-cell:nth-child(-n+2){ border-bottom:1px solid var(--line); }
+}
+@media (max-width:460px){
+  .broken-grid{ grid-template-columns:1fr!important; }
+  .broken-cell{ border-right:0; border-bottom:1px solid var(--line); }
+}
+
+/* ---------- always-on / velocity / lift ----------
+   Same treatment: three facts, one rule between them, no cards. */
+.numbers-strip{ gap:0!important; border-top:1px solid var(--line); }
+.numbers-cell{
+  min-height:0!important; padding:26px 28px 24px!important;
+  border:0!important; border-right:1px solid var(--line)!important;
+  border-radius:0!important; background:none!important; box-shadow:none!important;
+}
+.numbers-cell:last-child{ border-right:0!important; }
+.numbers-cell:hover{ transform:none!important; box-shadow:none!important; }
+.numbers-cell::after{ display:none; }
+.numbers-kicker{ margin-bottom:18px!important; }
+.numbers-kicker span:last-child{ width:auto!important; height:auto!important; background:none!important; color:var(--muted)!important; }
+@media (max-width:820px){
+  .numbers-strip{ grid-template-columns:1fr!important; }
+  .numbers-cell{ border-right:0!important; border-bottom:1px solid var(--line)!important; }
+  .numbers-cell:last-child{ border-bottom:0!important; }
+}
+
+/* ---------- nav ----------
+   A floating pill let sections slide past on both sides of it at once,
+   which read as a rendering fault rather than a fixed header. The pill
+   keeps its shape; the page now passes behind a paper band. The band has
+   to start above .nav's own 16px offset or the strip above it stays bare.
+
+   Translucent-plus-blur was not enough: headings passing underneath stayed
+   legible through it as a smeared strip, which reads worse than no band at
+   all. The band is opaque for the pill's full height and fades only over
+   the last third, so content disappears cleanly instead of dissolving. */
+.nav::before{
+  content:''; position:absolute; top:-16px; left:0; right:0; height:136px;
+  background:linear-gradient(180deg,var(--paper) 0,var(--paper) 72%,rgba(251,248,242,.7) 86%,rgba(251,248,242,0) 100%);
+  pointer-events:none;
+}
+.nav__inner{ position:relative; }
+/* The pill's own padding was 22px on the left and 10px on the right. */
+.nav__inner{ padding-right:10px; padding-left:22px; }
+
+/* ---------- section statements ----------
+   Left edge, serif, one measure. Four sections used to centre these while
+   the rest of the page hung off the 1180px left edge. */
+.problem .wrap,.pipe-head,.sys__grid{ text-align:left; }
+.problem__thesis{
+  max-width:40ch!important; margin:24px 0 0!important; text-align:left!important;
+  color:var(--muted)!important; font:500 16px/1.62 var(--sans)!important;
+}
+.problem__claim{
+  max-width:19ch; margin:0; color:var(--ink);
+  font:400 clamp(30px,3.4vw,46px)/1.08 var(--serif); letter-spacing:-.022em;
+}
+.problem__claim--sub{ margin:0 0 34px; max-width:28ch; }
+.problem__cost{ margin-top:88px; }
+
+/* The claim and its evidence, side by side: the sentence on the left, the
+   hundred visitors it describes on the right. The dot grid is the argument,
+   not an illustration of it — four of a hundred is legible at a glance in a
+   way "96%" set in type never is. */
+.problem__lede{
+  display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:64px; align-items:start; margin-top:30px;
+}
+.hundred{ margin:0; justify-self:end; width:min(100%,352px); }
+.hundred__grid{
+  display:grid; grid-template-columns:repeat(10,1fr); gap:7px;
+}
+.hundred__grid i{
+  display:block; aspect-ratio:1; border-radius:50%; background:#C2B9A6;
+}
+.hundred__grid i.is-buyer{ background:var(--accent); box-shadow:0 0 0 3px rgba(36,68,127,.14); }
+.hundred__cap{ display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:20px; }
+.hundred__key{ display:inline-flex; align-items:center; gap:8px; color:var(--muted); font:500 13px/1.3 var(--sans); }
+.hundred__key i{ width:9px; height:9px; border-radius:50%; background:#C2B9A6; }
+.visually-hidden{ position:absolute!important; width:1px; height:1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+/* dead rule: #expgrid canvas was removed in the deletion pass */
+.hundred__key i.is-buyer{ background:var(--accent); }
+@media (max-width:900px){
+  .problem__lede{ grid-template-columns:1fr; gap:44px; }
+  .hundred{ justify-self:start; }
+  .problem__cost{ margin-top:64px; }
+}
+.pipe-head{ max-width:1180px; margin:0 auto 44px; padding:0 var(--pad); }
+.pipe-head__title{ max-width:26ch; margin:14px 0 0; font-size:clamp(30px,3.5vw,46px)!important; font-weight:400!important; line-height:1.08!important; letter-spacing:-.022em; }
+
+/* ---------- pipeline ----------
+   Four stages of one loop. The active card used to grow, which knocked its
+   heading off the line the other three sat on; hover now changes tone, not
+   size, so the four headings stay on one baseline. */
+.pipeline > .pcard{ transform:none!important; }
+.pcard{ background:#fff!important; border:1px solid var(--line)!important; box-shadow:none!important; transition:border-color .25s ease,background .25s ease!important; }
+.pcard.is-active{ border-color:var(--accent-line)!important; background:#fff!important; }
+.pcard__head{ align-items:flex-start; }
+.pnum{ background:var(--accent)!important; color:#fff!important; }
+.pcard.is-active .pnum{ background:var(--accent)!important; }
+
+/* Putting the pipeline back on the 1180 grid took ~75px off each card, and
+   the contents had been sized for the old 1400 container: labels wrapped to
+   two lines, the rollout ladder broke, and "+57% uplift" ran out of the Ship
+   card. The content fits the grid rather than the grid stretching for it. */
+.pcard{ padding:20px 18px!important; }
+.pcard__title h3{ font-size:19px!important; }
+.pcard__title p{ font-size:13px!important; line-height:1.45!important; }
+.plist li,.plist .plt{ font-size:13px!important; line-height:1.35!important; }
+.plist .plt small{ font-size:11.5px!important; }
+.plist li{ gap:9px!important; }
+/* The scatter sat on top of the two middle labels. It is a texture behind the
+   list, so it belongs behind it and out of the text column. */
+.mindmap--card{ right:-6px!important; width:118px!important; opacity:.55; z-index:0; }
+.plist{ position:relative; z-index:1; }
+.ship-win{ flex-wrap:wrap!important; row-gap:6px; }
+.ship-up{ flex-basis:100%; font-size:12px!important; }
+.ship-row{ font-size:12px!important; }
+.ship-k{ font-size:12.5px!important; }
+.ship-v{ font-size:11.5px!important; text-align:right; }
+
+/* The return path used to shout in letterspaced caps inside a bordered pill.
+   It is a caption on a diagram, so it reads as one. */
+#pipe-return-label{
+  border:0!important; background:transparent!important; padding:10px 0 0!important;
+  color:var(--muted)!important; font:500 13px/1.5 var(--sans)!important;
+  font-weight:500!important; letter-spacing:.01em!important; text-transform:none!important;
+  font-size:13px!important;
+}
+/* Below ~1080px the four stages wrap to 2x2 and the return arc — which is
+   drawn from card 4 to card 1 — runs straight through the caption. The arc
+   only describes a single row, so it goes away when the row does. */
+@media (max-width:1080px){
+  #pipe-return-svg{ display:none!important; }
+  #pipe-return-label{
+    position:static!important; transform:none!important; white-space:normal!important;
+    margin:26px auto 0!important; max-width:44ch; text-align:center;
+  }
+}
+.grow-title{ max-width:20ch; margin:0 0 34px!important; font-size:clamp(28px,3.2vw,42px)!important; font-weight:400!important; line-height:1.1!important; letter-spacing:-.022em; text-align:left!important; }
+.sys__title{ max-width:18ch; margin:14px 0 34px!important; font-size:clamp(30px,3.5vw,46px)!important; font-weight:400!important; line-height:1.08!important; letter-spacing:-.022em; text-align:left!important; }
+.integ__h{ font-size:clamp(26px,2.6vw,34px)!important; font-weight:400!important; line-height:1.12!important; }
+.moat__title{ font-weight:400!important; }
+.accent-ink{ color:var(--accent); font-style:normal; }
+.cost-ink{ color:#9E4741; font-style:normal; }
+.problem .eyebrow{ text-align:left!important; }
+
+/* ---------- hero: the customer row ----------
+   Five 42px white circles with a drop shadow turned two wordmarks and three
+   marks into a sticker sheet: at that size only the solid Zeo mark read at
+   all. Chips removed. Logos now sit directly on the paper at their own aspect
+   ratio, optically sized (marks run taller than wordmarks), desaturated so the
+   row reads as one grey line and no single brand shouts over the others. */
+.trust::before{ font-size:10.5px!important; letter-spacing:.1em!important; }
+.logos-row{ gap:34px!important; align-items:center; }
+.lg-chip{
+  width:auto!important; height:auto!important; border:0!important; border-radius:0!important;
+  background:none!important; box-shadow:none!important; overflow:visible!important;
+  opacity:.55; filter:grayscale(1); transition:opacity .2s ease,filter .2s ease;
+}
+.lg-chip:hover{ transform:none!important; box-shadow:none!important; opacity:1; filter:grayscale(0); }
+.lg-chip img{ width:auto!important; height:26px!important; object-fit:contain; }
+.lg-chip[title="HiAstro"] img,.lg-chip[title="Zeo"] img{ height:29px!important; }
+.lg-chip[title="TATA 1mg"] img{ height:15px!important; }
+.lg-chip[title="Influish"] img{ height:16px!important; }
+@media (max-width:680px){
+  .logos-row{ gap:20px!important; }
+  .lg-chip img{ height:21px!important; }
+  .lg-chip[title="HiAstro"] img,.lg-chip[title="Zeo"] img{ height:23px!important; }
+  .lg-chip[title="TATA 1mg"] img{ height:12px!important; }
+  .lg-chip[title="Influish"] img{ height:13px!important; }
+}
+
+/* The control and the winner were being clipped by the viewport edge, which
+   read as a rendering fault rather than as cards drifting out of frame. */
+.hero.hero-engine-phase-0 .hero-engine-card--control{ transform:translate(-50%,-50%) translate3d(-38vw,-1vh,90px) rotate(-5deg) scale(.84); }
+.hero.hero-engine-phase-2 .hero-engine-card--control{ transform:translate(-50%,-50%) translate3d(-35vw,2vh,0) rotate(-5deg) scale(.65); }
+.hero.hero-engine-phase-2 .hero-engine-card--winner{ transform:translate(-50%,-50%) translate3d(35vw,1vh,100px) rotate(4deg) scale(.86); }
+
+/* ---------- small screens ----------
+   These have to come last. The responsive h1 rules live earlier in the file,
+   so the desktop clamp set above was winning at every width and the headline
+   was running under the nav on a phone. */
+@media (max-width:1180px){
+  .hero h1{ font-size:clamp(52px,6.4vw,84px)!important; max-width:14ch; }
+}
+@media (max-width:900px){
+  .hero h1{ font-size:clamp(46px,7.4vw,64px)!important; max-width:13ch; }
+  .cta__deliver span{ font-size:14.5px; }
+}
+@media (max-width:680px){
+  .hero-scroll-cue{ display:none; }
+  .section--pad{ padding-top:72px; padding-bottom:72px; }
+  /* Five figures in a two-column grid left the last one alone across a full
+     row, twice the size of its neighbours and reading as the headline number
+     when it is the least important of the five. One column, one rule each. */
+  .stats{ grid-template-columns:1fr!important; }
+  .stats .stat{ display:flex!important; align-items:baseline; justify-content:space-between; gap:16px; padding:15px 20px!important; text-align:left!important; border-bottom:1px solid var(--line); }
+  .stats .stat:last-child{ grid-column:auto!important; border-bottom:0; }
+  .stats .stat__num{ font-size:26px!important; min-width:5.2em; }
+  .stats .stat__lbl{ margin-top:0!important; text-align:left; }
+  .lg-chip{ opacity:.72; }
+  /* Two full-width buttons of identical height read as one control repeated. */
+  .hero__ctas{ display:flex; flex-direction:column; align-items:stretch; gap:10px; }
+  .hero__ctas .btn--ghost{ align-self:center; width:auto; border:0!important; background:none!important; text-decoration:underline; text-underline-offset:4px; }
+  .hero__grid{ padding-top:128px!important; padding-bottom:48px!important; }
+  /* At 9ch the headline broke to five lines and split "revenue surfaces",
+     which is the phrase the roman-to-italic turn depends on. */
+  .hero h1{ width:100%!important; max-width:12ch!important; font-size:clamp(36px,9.6vw,46px)!important; line-height:1.02!important; letter-spacing:-.03em!important; background:none!important; }
+  .problem__claim,.problem__claim--sub,.pipe-head__title,.grow-title,
+  .sys__title,.cs2-title,.astro-case__outcome,.logoband__txt,.cta h2{
+    font-size:clamp(28px,7.6vw,34px)!important; line-height:1.1!important; max-width:none!important;
+  }
+  .problem__cost{ margin-top:56px; }
+  .grow-wrap{ margin-top:64px!important; }
+  .hundred{ width:100%; }
+  .broken-cell,.numbers-cell{ padding:20px 0!important; }
+  .broken-cell{ padding-left:0!important; padding-right:0!important; }
+  .cs2-stat{ padding:18px 20px!important; }
+  .cs2-card__head,.cs2-changed{ padding:18px 20px!important; }
+  .logo-card{ padding:18px 0!important; }
+}
+
 </style>
 </head>
 <body>
@@ -2061,7 +2787,7 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
 <!-- ============================ NAV ============================ -->
 <header class="nav">
   <div class="wrap nav__inner">
-    <a href="#top" class="brand" style="width: 200px; font-family: Manrope; color: #000000; font-weight: 600">Tranzmit AI</a>
+    <a href="#top" class="brand" style="width: 200px; color: #000000; font-weight: 600">Tranzmit AI</a>
     <nav class="nav__links" aria-label="Primary navigation">
       <a class="nav__link" href="#how">How it works</a>
       <a class="nav__link" href="#system">Platform</a>
@@ -2069,7 +2795,7 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
       <a class="nav__link" href="#case-study">Results</a>
     </nav>
     <div class="nav__cta">
-      <a href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener" class="btn btn--accent" style="font-family: Manrope; font-size: 16px">Book Demo <span class="arr">→</span></a>
+      <a href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener" class="btn btn--accent" style="font-size: 16px">Book Demo <span class="arr">→</span></a>
     </div>
     <span class="nav__progress" aria-hidden="true"><i></i></span>
   </div>
@@ -2086,12 +2812,11 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
 
 <!-- ============================ HERO ============================ -->
 <section class="hero hero-engine-phase-0" id="top" data-engine-phase="0">
-  <canvas id="expgrid" style="position:absolute; top:0; left:0; right:0; bottom:0; width:100%; height:100%; display:block; z-index:0; pointer-events:none;"></canvas>
   <canvas id="hero-webgl-field" aria-hidden="true"></canvas>
   <div class="hero__cloud"></div>
   <div class="hero-engine-vignette" aria-hidden="true"></div>
   <div class="hero-engine-grain" aria-hidden="true"></div>
-  <div class="hero-engine-system-status" aria-hidden="true"><span><i></i>SYSTEM LIVE</span><span>VARIANT MODEL / V3.2</span></div>
+  <div class="hero-engine-system-status" aria-hidden="true" hidden></div>
   <div class="hero-engine-cloud" aria-hidden="true">
     <div class="hero-engine-card hero-engine-card--control" data-variant="Control" style="--engine-x:-47vw;--engine-y:0vh;--engine-z:-30px;--engine-r:-5deg;--engine-s:.72;--engine-delay:0ms">
       <div class="hero-engine-phone">
@@ -2249,10 +2974,10 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
     <h1 aria-label="Make your revenue surfaces improve themselves"><span class="hero__title-line">Make your revenue surfaces</span><em class="hero__title-line hero__title-accent">improve themselves.</em></h1>
     <div class="hero__copy">
       <p class="hero__lead">Tranzmit AI builds self-improving interfaces that <span class="it">increase conversion for consumer platforms.</span></p>
-      <p class="hero__sub">We're starting with monetization—paywalls and App Store pages—helping consumer companies automatically improve conversion and revenue.</p>
+      <p class="hero__sub">We start where the money is decided: paywalls and App Store pages. No app release, no engineering sprint.</p>
       <div class="hero__ctas">
-        <a href="#case-study" class="btn btn--accent btn--lg" style="font-family: Manrope; font-size: 16px">See Live Results <span class="arr">→</span></a>
-        <a href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener" class="btn btn--ghost btn--lg btn--glow btn--cta-glow" style="font-family: Manrope; font-size: 16px">Book a Demo</a>
+        <a href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener" class="btn btn--accent btn--lg" style="font-size: 16px">Book a paywall review <span class="arr">→</span></a>
+        <a href="#case-study" class="btn btn--ghost btn--lg" style="font-size: 16px">See live results</a>
       </div>
       <div class="trust">
         <div class="logos-row">
@@ -2314,7 +3039,7 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
       </div>
     </div>
   </div>
-  <a href="#how" class="hero-scroll-cue"><span>scroll to see the system learn</span><svg viewBox="0 0 20 30" fill="none" aria-hidden="true"><path d="M10 1v25m0 0-5-6m5 6 5-6" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+  <a href="#how" class="hero-scroll-cue"><span class="visually-hidden">scroll to see the system learn</span><svg viewBox="0 0 20 30" fill="none" aria-hidden="true"><path d="M10 1v25m0 0-5-6m5 6 5-6" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
   </div>
   <div class="hero__proof wrap">
     <div class="hero-engine-story-controls" aria-label="Animation stages">
@@ -2325,11 +3050,11 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
     </div>
     <div class="hero-engine-loop" aria-hidden="true"><div><span>ONE CONTROL</span><b>→</b><span>GENERATE</span><b>→</b><span>TEST</span><b>→</b><span>LEARN</span><b>→</b><span>UPDATE</span><b>→</b><span>ONE CONTROL</span><b>→</b><span>GENERATE</span><b>→</b><span>TEST</span><b>→</b><span>LEARN</span><b>→</b><span>UPDATE</span><b>→</b></div></div>
     <div class="stats hero__stats" aria-label="Tranzmit AI platform results">
-      <div class="stat"><div class="stat__num" data-count="20000" data-suffix="+" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">20,000+</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Paywalls indexed</div></div>
-      <div class="stat"><div class="stat__num" data-count="5" data-suffix="M+" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">5M+</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Monthly paywall views</div></div>
-      <div class="stat"><div class="stat__num" data-count="50" data-suffix="x" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">50x</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Faster than manual A/B</div></div>
-      <div class="stat"><div class="stat__num" data-count="57" data-prefix="+" data-suffix="%" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">+57%</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Avg. uplift in paid conversion</div></div>
-      <div class="stat"><div class="stat__num" data-count="80" data-prefix="+" data-suffix="%" style="font-family: Manrope; text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">+80%</div><div class="stat__lbl" style="font-family: Manrope; text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Avg. uplift in CTA clicks</div></div>
+      <div class="stat"><div class="stat__num" data-count="20000" data-suffix="+" style="text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">20,000+</div><div class="stat__lbl" style="text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Paywalls indexed</div></div>
+      <div class="stat"><div class="stat__num" data-count="5" data-suffix="M+" style="text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">5M+</div><div class="stat__lbl" style="text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Monthly paywall views</div></div>
+      <div class="stat"><div class="stat__num" data-count="50" data-suffix="x" style="text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">50x</div><div class="stat__lbl" style="text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Faster than manual A/B</div></div>
+      <div class="stat"><div class="stat__num" data-count="57" data-prefix="+" data-suffix="%" style="text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">+57%</div><div class="stat__lbl" style="text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Avg. uplift in paid conversion</div></div>
+      <div class="stat"><div class="stat__num" data-count="80" data-prefix="+" data-suffix="%" style="text-decoration-line: none; font-weight: 700; color: #000000; font-size: 44px">+80%</div><div class="stat__lbl" style="text-decoration-line: none; color: #56524B; font-weight: 500; font-size: 14px">Avg. uplift in CTA clicks</div></div>
     </div>
   </div>
 </section>
@@ -2465,7 +3190,7 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
         float lineValue=ribbon(q+vec2(.12*sin(fi),0.),fi,spread);
         float gate=smoothstep(-1.1,-.25,q.x)*smoothstep(1.22,.12,q.x);
         vec3 color=mix(accent,accentDeep,fract(fi*.31));
-        color=mix(color,fi>5.?green:jade,.28);
+ color=mix(color,fi>5.?green:jade,.28);
         ribbonColor+=color*lineValue*gate;
       }
       field+=ribbonColor*(.025+.11*spread);
@@ -2489,7 +3214,7 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
       vec3 scene=clamp(base-field*.52,0.,1.);
       vec3 color=mix(base,scene,safeField);
       color+=(hash(gl_FragCoord.xy+u_time)-.5)*.006;
-      fragColor=vec4(color,1.);
+ fragColor=vec4(color,1.);
     }
   `;
 
@@ -2566,7 +3291,7 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
   }
 
   function render(now){
-    frame=0;
+ frame=0;
     currentPhase+=(phaseTarget-currentPhase)*.035;
     pointerX+=(targetX-pointerX)*.025;
     pointerY+=(targetY-pointerY)*.025;
@@ -2583,8 +3308,8 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
 
   hero.addEventListener('pointermove',function(event){
     const bounds=hero.getBoundingClientRect();
-    targetX=((event.clientX-bounds.left)/bounds.width-.5)*2;
-    targetY=((event.clientY-bounds.top)/bounds.height-.5)*-2;
+ targetX=((event.clientX-bounds.left)/bounds.width-.5)*2;
+ targetY=((event.clientY-bounds.top)/bounds.height-.5)*-2;
   },{passive:true});
   hero.addEventListener('pointerleave',function(){ targetX=0; targetY=0; },{passive:true});
   window.addEventListener('resize',resize,{passive:true});
@@ -2594,7 +3319,7 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
   }
   if (!reduced && window.IntersectionObserver) {
     const viewObserver=new IntersectionObserver(function(entries){
-      visible=entries[0].isIntersecting;
+ visible=entries[0].isIntersecting;
       if (visible) start();
       else if (frame) { cancelAnimationFrame(frame); frame=0; }
     },{rootMargin:'120px'});
@@ -2638,35 +3363,44 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
 <!-- ============================ PROBLEM ============================ -->
 <section class="section section--pad problem">
   <div class="wrap">
-    <span class="eyebrow" style="font-family: Manrope; font-size: 15px; font-weight: 900; display: block; text-align: center">The Problem</span>
-    <p class="problem__thesis">People spend nearly 8 hours a day on screens, and trillions of dollars of spending decisions happen through those interfaces. But today, <strong>every user still sees roughly the same interface.</strong></p>
-    <div class="problem__head" style="margin-top:28px; grid-template-columns: 1fr;">
-      <h2 style="font-family: Manrope; text-align: center; max-width: none; font-size: 33px">96% of users are not saying no to your product.<br>
-They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywall.</span></h2>
+    <span class="eyebrow">The problem</span>
+    <div class="problem__lede">
+      <div>
+        <h2 class="serif problem__claim">96% of users are not saying no to your product.<br>
+They're saying no to <span class="accent-ink">your paywall.</span></h2>
+        <p class="problem__thesis">People spend close to eight hours a day on screens, and trillions of dollars of spending decisions pass through those interfaces. Almost every one of them shows the same screen to everybody.</p>
+      </div>
+      <figure class="hundred" aria-label="Four in every hundred visitors buy at a typical paywall">
+        <div class="hundred__grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="is-buyer"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="is-buyer"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="is-buyer"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="is-buyer"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <figcaption class="hundred__cap">
+          <span class="hundred__key"><i class="is-buyer"></i>4 buy</span>
+          <span class="hundred__key"><i></i>96 leave without a second offer</span>
+        </figcaption>
+      </figure>
     </div>
 
-    <div style="margin-top: 44px;">
-      <h3 style="font-family: Manrope; font-size: 33px; font-weight: 500; color: #000000; margin: 0 0 20px; text-align: center">The only solution, manual A/B tests, <span style="color: #E04745">is broken.</span></h3>
-      <div class="broken-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
-        <div class="broken-card" style="background: #FFFFFF; border: 1px solid var(--line); border-radius: 14px; padding: 18px 16px; text-align: center;">
-          <div style="font-family: Manrope; font-size: 28px; font-weight: 400; color: #E04745">~$2,500</div>
-          <div style="font-family: Manrope; font-size: 15px; font-weight: 600; color: #211E1A; margin-top: 6px;">per experiment</div>
-          <div style="font-family: Manrope; font-size: 13px; color: #756F65; margin-top: 4px;">engineering, design, analytics</div>
+    <div class="problem__cost">
+      <h3 class="serif problem__claim problem__claim--sub">The only defence most teams have, manual A/B testing, <span class="cost-ink">does not scale.</span></h3>
+      <div class="broken-grid">
+        <div class="broken-cell">
+          <div class="broken-cell__v">~$2,500</div>
+          <div class="broken-cell__k">per experiment</div>
+          <div class="broken-cell__n">engineering, design, analytics</div>
         </div>
-        <div class="broken-card" style="background: #FFFFFF; border: 1px solid var(--line); border-radius: 14px; padding: 18px 16px; text-align: center;">
-          <div style="font-family: Manrope; font-size: 28px; font-weight: 400; color: #E04745">2–6 weeks</div>
-          <div style="font-family: Manrope; font-size: 15px; font-weight: 600; color: #211E1A; margin-top: 6px;">to trust one result</div>
-          <div style="font-family: Manrope; font-size: 13px; color: #756F65; margin-top: 4px;">one variable at a time</div>
+        <div class="broken-cell">
+          <div class="broken-cell__v">2–6 weeks</div>
+          <div class="broken-cell__k">to trust one result</div>
+          <div class="broken-cell__n">one variable at a time</div>
         </div>
-        <div class="broken-card" style="background: #FFFFFF; border: 1px solid var(--line); border-radius: 14px; padding: 18px 16px; text-align: center;">
-          <div style="font-family: Manrope; font-size: 28px; font-weight: 400; color: #E04745">No learning</div>
-          <div style="font-family: Manrope; font-size: 15px; font-weight: 600; color: #211E1A; margin-top: 6px;">between tests</div>
-          <div style="font-family: Manrope; font-size: 13px; color: #756F65; margin-top: 4px;">every test starts from zero</div>
+        <div class="broken-cell">
+          <div class="broken-cell__v">Nothing</div>
+          <div class="broken-cell__k">carries between tests</div>
+          <div class="broken-cell__n">every test restarts from zero</div>
         </div>
-        <div class="broken-card" style="background: #FFFFFF; border: 1px solid var(--line); border-radius: 14px; padding: 18px 16px; text-align: center;">
-          <div style="font-family: Manrope; font-size: 28px; font-weight: 400; color: #E04745">Rising costs</div>
-          <div style="font-family: Manrope; font-size: 15px; font-weight: 600; color: #211E1A; margin-top: 6px;">more users = more tests</div>
-          <div style="font-family: Manrope; font-size: 13px; color: #756F65; margin-top: 4px;">it never gets cheaper</div>
+        <div class="broken-cell">
+          <div class="broken-cell__v">Rising</div>
+          <div class="broken-cell__k">cost per test</div>
+          <div class="broken-cell__n">more users means more tests</div>
         </div>
       </div>
     </div>
@@ -2679,8 +3413,8 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
 <!-- pipeline cards -->
 <div class="pipe-wrap">
   <div class="pipe-head">
-    <span class="eyebrow eyebrow--muted" style="font-size: 15px; font-family: Manrope; color: #2A4B8D; font-weight: 900; text-align: center">How It Works</span>
-    <h2 class="serif pipe-head__title" style="font-family: Manrope; text-align: center">Get more install rates, conversions, and revenue with a self-improving loop that runs 24/7.</h2>
+    <span class="eyebrow eyebrow--muted">How it works</span>
+    <h2 class="serif pipe-head__title">One loop, running while nobody watches it: read, generate, score, ship, repeat.</h2>
   </div>
   <div class="pipeline">
 
@@ -2688,14 +3422,14 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
     <div class="pcard">
       <div class="pcard__head">
         <div class="pnum">1</div>
-        <div class="pcard__title"><h3 style="font-family: Manrope; font-weight: 400">Analyze</h3><p style="font-family: Manrope">Ingest real user signals and product events in real time.</p></div>
+        <div class="pcard__title"><h3 style="font-weight: 400">Analyze</h3><p>Ingest real user signals and product events in real time.</p></div>
       </div>
       <div class="pcard__body pbody--split">
         <ul class="plist">
-          <li style="font-family: Manrope"><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13h4l2.5-7 4 14 2.4-9H22"></path></svg></span> Behavioral signals</li>
-          <li style="font-family: Manrope"><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.4"></circle><circle cx="12" cy="12" r="3.3"></circle></svg></span> Intent &amp; value</li>
-          <li style="font-family: Manrope"><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2"></rect><path d="M9 21h6M12 17v4" stroke-linecap="round"></path></svg></span> Source &amp; device</li>
-          <li style="font-family: Manrope"><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 12V3.5M12 12l7.4 4.3" stroke-linecap="round"></path></svg></span> User segments</li>
+          <li><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13h4l2.5-7 4 14 2.4-9H22"></path></svg></span> Behavioral signals</li>
+          <li><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.4"></circle><circle cx="12" cy="12" r="3.3"></circle></svg></span> Intent &amp; value</li>
+          <li><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2"></rect><path d="M9 21h6M12 17v4" stroke-linecap="round"></path></svg></span> Source &amp; device</li>
+          <li><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 12V3.5M12 12l7.4 4.3" stroke-linecap="round"></path></svg></span> User segments</li>
         </ul>
         <div class="mindmap mindmap--card" id="analyzeMindmap"><canvas id="mindmapCanvas"></canvas></div>
       </div>
@@ -2707,7 +3441,7 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
     <div class="pcard">
       <div class="pcard__head">
         <div class="pnum">2</div>
-        <div class="pcard__title"><h3 style="font-family: Manrope; font-weight: 400">Generate</h3><p style="font-family: Manrope">Create multiple paywall variants across offers, layouts, and copy.</p></div>
+        <div class="pcard__title"><h3 style="font-weight: 400">Generate</h3><p>Create multiple paywall variants across offers, layouts, and copy.</p></div>
       </div>
       <div class="pcard__body pbody--gen">
         <div class="pwgrid">
@@ -2728,13 +3462,13 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
     <div class="pcard">
       <div class="pcard__head">
         <div class="pnum">3</div>
-        <div class="pcard__title"><h3 style="font-family: Manrope; font-weight: 400">Score</h3><p style="font-family: Manrope">Evaluate with simulation, VLM judges, and historical conversion data.</p></div>
+        <div class="pcard__title"><h3 style="font-weight: 400">Score</h3><p>Evaluate with simulation, VLM judges, and historical conversion data.</p></div>
       </div>
       <div class="pcard__body pbody--split">
         <ul class="plist plist--2">
-          <li><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M5 7c2-2 5-2 7 0s5 2 7 0M5 12c2-2 5-2 7 0s5 2 7 0M5 17c2-2 5-2 7 0s5 2 7 0"></path></svg></span><span class="plt" style="font-family: Manrope">Simulation<small>Projected uplift</small></span></li>
-          <li><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"></path></svg></span><span class="plt" style="font-family: Manrope">VLM Judges<small>Quality &amp; clarity</small></span></li>
-          <li><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11l3 3 7-7M4 12a8 8 0 0 0 13 6"></path></svg></span><span class="plt" style="font-family: Manrope">Conversion history<small style="font-family: Manrope">Empirical signal</small></span></li>
+          <li><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M5 7c2-2 5-2 7 0s5 2 7 0M5 12c2-2 5-2 7 0s5 2 7 0M5 17c2-2 5-2 7 0s5 2 7 0"></path></svg></span><span class="plt">Simulation<small>Projected uplift</small></span></li>
+          <li><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"></circle><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"></path></svg></span><span class="plt">VLM Judges<small>Quality &amp; clarity</small></span></li>
+          <li><span class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11l3 3 7-7M4 12a8 8 0 0 0 13 6"></path></svg></span><span class="plt">Conversion history<small>Empirical signal</small></span></li>
         </ul>
         <div class="radar-wrap" id="radarWrap"><canvas id="radarCanvas"></canvas></div>
       </div>
@@ -2746,31 +3480,31 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
     <div class="pcard">
       <div class="pcard__head">
         <div class="pnum">4</div>
-        <div class="pcard__title"><h3 style="font-family: Manrope; font-weight: 400">Ship</h3><p style="font-family: Manrope">Safely rollout the winner with guardrails and auto-rollback.</p></div>
+        <div class="pcard__title"><h3 style="font-weight: 400">Ship</h3><p>Safely rollout the winner with guardrails and auto-rollback.</p></div>
       </div>
       <div class="pcard__body pbody--ship">
         <div class="ship-panel">
           <div class="ship-win">
             <span class="toggle"></span>
-            <b style="font-family: Manrope">Winner</b>
-            <b class="ship-variant" style="font-family: Manrope">Variant&nbsp;B</b>
-            <span class="ship-up" style="font-family: Manrope">+57% uplift</span>
+            <b>Winner</b>
+            <b class="ship-variant">Variant&nbsp;B</b>
+            <span class="ship-up">+57% uplift</span>
           </div>
           <div class="ship-rows">
             <div class="ship-row">
               <span class="ship-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="2.6"></circle></svg></span>
-              <span class="ship-k" style="font-family: Manrope">Rollout</span>
-              <span class="ship-v" style="font-family: Manrope">25% → 50% → 100%</span>
+              <span class="ship-k">Rollout</span>
+              <span class="ship-v">25% → 50% → 100%</span>
             </div>
             <div class="ship-row">
               <span class="ship-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"></path></svg></span>
-              <span class="ship-k" style="font-family: Manrope">Guardrails</span>
-              <span class="ship-v" style="font-family: Manrope">Revenue, churn, errors</span>
+              <span class="ship-k">Guardrails</span>
+              <span class="ship-v">Revenue, churn, errors</span>
             </div>
             <div class="ship-row">
               <span class="ship-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v5h5M4.5 10a8 8 0 1 1 .5 5"></path></svg></span>
-              <span class="ship-k" style="font-family: Manrope">Auto-rollback</span>
-              <span class="ship-v" style="font-family: Manrope">If guardrails breach</span>
+              <span class="ship-k">Auto-rollback</span>
+              <span class="ship-v">If guardrails breach</span>
             </div>
           </div>
         </div>
@@ -2778,42 +3512,42 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
     </div>
 
     <svg id="pipe-return-svg" aria-hidden="true"></svg>
-    <div id="pipe-return-label" style="position: absolute; left: 50%; top: 100%; transform: translate(-50%, 26px); z-index: 1; background: var(--cream); border: 1.5px solid #2A4B8D; border-radius: 999px; padding: 14px 36px; text-align: center; font-family: Manrope; color: #000000; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 15px; line-height: 1.6; white-space: nowrap;">Live data flows back<br>Winners get sharper, cohorts get nuanced</div>
+    <div id="pipe-return-label" style="position: absolute; left: 50%; top: 100%; transform: translate(-50%, 26px); z-index: 1; background: var(--cream); border: 1.5px solid #2A4B8D; border-radius: 999px; padding: 14px 36px; text-align: center; color: #000000; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 15px; line-height: 1.6; white-space: nowrap">Live results feed the next round. Winners get sharper; cohorts get more specific.</div>
   </div>
 
   <div class="grow-wrap" style="max-width: 1150px; margin: 155px auto 0; padding: 0 var(--pad);">
-    <h3 class="grow-title" style="font-family: Manrope; font-size: 33px; font-weight: 500; color: #000000; text-align: center; margin: 0 0 32px;">Improves every hour. <span style="color: #2A4B8D">Compounds every week.</span></h3>
+    <h3 class="serif grow-title">Improves every hour. <span class="accent-ink">Compounds every week.</span></h3>
 
     <div class="grow-grid" style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px; align-items: stretch;">
       <!-- Experiments conducted bar chart -->
       <div style="background: #FFFFFF; border: 1px solid var(--line); border-radius: 16px; padding: 26px 28px;">
-        <div style="font-family: Manrope; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #211E1A;">Experiments conducted</div>
+        <div style="font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #211E1A">Experiments conducted</div>
         <div style="display: flex; align-items: flex-end; justify-content: space-around; gap: 24px; height: 260px; margin-top: 26px;">
           <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; flex: 1;">
-            <div id="grow-num-1" style="font-family: Manrope; font-size: 22px; font-weight: 700; color: #756F65; margin-bottom: 8px;">3&ndash;4</div>
+            <div id="grow-num-1" style="font-size: 22px; font-weight: 700; color: #756F65; margin-bottom: 8px">3&ndash;4</div>
             <div id="grow-bar-1" style="width: 72px; height: 0%; background: #D8D2C6; border-radius: 6px 6px 0 0;"></div>
           </div>
           <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; flex: 1;">
-            <div id="grow-num-2" style="font-family: Manrope; font-size: 30px; font-weight: 800; color: #2A4B8D; margin-bottom: 8px;">200+</div>
+            <div id="grow-num-2" style="font-size: 30px; font-weight: 800; color: #2A4B8D; margin-bottom: 8px">200+</div>
             <div id="grow-bar-2" style="width: 72px; height: 0%; background: #2A4B8D; border-radius: 6px 6px 0 0;"></div>
           </div>
         </div>
         <div style="display: flex; justify-content: space-around; gap: 24px; border-top: 1px solid var(--line); padding-top: 12px; margin-top: 0;">
           <div style="flex: 1; text-align: center;">
-            <div style="font-family: Manrope; font-size: 15px; font-weight: 700; color: #211E1A;">Human team</div>
-            <div style="font-family: Manrope; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #756F65; margin-top: 2px;">Per month</div>
+            <div style="font-size: 15px; font-weight: 700; color: #211E1A">Human team</div>
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #756F65; margin-top: 2px">Per month</div>
           </div>
           <div style="flex: 1; text-align: center;">
-            <div style="font-family: Manrope; font-size: 15px; font-weight: 700; color: #211E1A;">Tranzmit AI</div>
-            <div style="font-family: Manrope; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #2A4B8D; margin-top: 2px;">Per week</div>
+            <div style="font-size: 15px; font-weight: 700; color: #211E1A">Tranzmit AI</div>
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #2A4B8D; margin-top: 2px">Per week</div>
           </div>
         </div>
       </div>
 
       <!-- CVR lift line chart -->
       <div style="background: #FFFFFF; border: 1px solid var(--line); border-radius: 16px; padding: 26px 28px; display: flex; flex-direction: column;">
-        <div style="font-family: Manrope; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #211E1A;">CVR lift over baseline</div>
-        <svg viewBox="0 0 640 330" style="width: 100%; height: auto; margin-top: 14px; font-family: Manrope;" aria-label="CVR lift over baseline: Tranzmit AI +82% vs Human +9% over three weeks">
+        <div style="font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #211E1A">CVR lift over baseline</div>
+        <svg viewBox="0 0 700 330" style="width: 100%; height: auto; margin-top: 14px" aria-label="CVR lift over baseline: Tranzmit AI +82% vs Human +9% over three weeks">
           <!-- gridlines -->
           <line x1="70" y1="60" x2="530" y2="60" stroke="#E8E2D6" stroke-width="1.5" stroke-dasharray="4 5"></line>
           <line x1="70" y1="160" x2="530" y2="160" stroke="#E8E2D6" stroke-width="1.5" stroke-dasharray="4 5"></line>
@@ -2850,19 +3584,19 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
     <!-- numbers strip -->
     <div class="numbers-strip">
       <div class="numbers-cell">
-        <div class="numbers-kicker" style="font-family: Manrope"><span>Always on</span><span>01</span></div>
-        <div class="numbers-value" style="font-family: Manrope">Working 24/7</div>
-        <div class="numbers-label" style="font-family: Manrope">while your team sleeps</div>
+        <div class="numbers-kicker"><span>Always on</span><span>01</span></div>
+        <div class="numbers-value">Working 24/7</div>
+        <div class="numbers-label">while your team sleeps</div>
       </div>
       <div class="numbers-cell">
-        <div class="numbers-kicker" style="font-family: Manrope"><span>Testing velocity</span><span>02</span></div>
-        <div class="numbers-value" style="font-family: Manrope">50x</div>
-        <div class="numbers-label" style="font-family: Manrope">faster and safer testing</div>
+        <div class="numbers-kicker"><span>Testing velocity</span><span>02</span></div>
+        <div class="numbers-value">50x</div>
+        <div class="numbers-label">faster and safer testing</div>
       </div>
       <div class="numbers-cell">
-        <div class="numbers-kicker" style="font-family: Manrope"><span>Measured lift</span><span>03</span></div>
-        <div class="numbers-value" style="font-family: Manrope">+82%</div>
-        <div class="numbers-label" style="font-family: Manrope">CVR lift over baseline on the top paywall</div>
+        <div class="numbers-kicker"><span>Measured lift</span><span>03</span></div>
+        <div class="numbers-value">+82%</div>
+        <div class="numbers-label">CVR lift over baseline on the top paywall</div>
       </div>
     </div>
   </div>
@@ -2936,21 +3670,21 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
   window.addEventListener('resize', function(){ buildArrow(); syncToScroll(); }, { passive:true });
 })();
 
-// scroll-driven growth for the "Improves every hour" graphs: scroll locks when they hit
-// center, scrolling grows the graphs in place, then normal scrolling resumes at full size
+// Growth graphs for "Improves every hour".
+//
+// These used to pin the page: pin() set documentElement.overflow='hidden' and a
+// non-passive wheel handler swallowed ~900px of scroll before releasing. On a
+// trackpad that reads as a frozen page, and no reveal animation is worth taking
+// the scrollbar away from the reader. The graphs now grow from the section's own
+// position in the viewport — same reveal, no hijack, and one code path for
+// pointer and touch instead of two.
 (function(){
   var bar1 = document.getElementById('grow-bar-1');
   var bar2 = document.getElementById('grow-bar-2');
   var rect = document.getElementById('cvr-reveal-rect');
   if (!bar1 || !bar2 || !rect) return;
   var container = bar1.closest('div[style*="grid-template-columns"]');
-  var maxP = 0, pinned = false, done = false;
-  var TRAVEL = 900; // wheel px needed to fully grow the graphs (bigger = slower)
-
-  // touch / coarse-pointer devices can't fire wheel events, so the pin-and-lock
-  // approach would trap them forever. On those devices we never lock the page —
-  // the graphs simply grow as the section scrolls through the viewport.
-  var isTouch = window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  var maxP = 0;
 
   function apply(){
     var e = 1 - Math.pow(1 - maxP, 2);  // ease-out
@@ -2959,74 +3693,19 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
     rect.setAttribute('width', 640 * e);
   }
 
-  // Mobile: drive progress from the section's position, never touch page overflow.
-  if (isTouch) {
-    function onScrollMobile(){
-      var r = container.getBoundingClientRect();
-      var vh = window.innerHeight;
-      // 0 when the container's center is at the bottom of the viewport,
-      // 1 by the time its center reaches ~30% up the viewport.
-      var center = r.top + r.height / 2;
-      var p = (vh - center) / (vh * 0.7);
-      p = Math.max(0, Math.min(1, p));
-      if (p > maxP) { maxP = p; apply(); }  // only grows, matching desktop feel
-    }
-    window.addEventListener('scroll', onScrollMobile, { passive: true });
-    window.addEventListener('resize', onScrollMobile, { passive: true });
-    onScrollMobile();
-    apply();
-    return;
-  }
-
-  function onWheel(ev){
-    if (!pinned) return;
-    ev.preventDefault();
-    if (ev.deltaY > 0) {
-      maxP = Math.min(1, maxP + ev.deltaY / TRAVEL);  // lock: only grows
-      apply();
-      if (maxP >= 1) unpin();
-    }
-    // scrolling up while pinned: page stays put, graphs stay locked at current size
-  }
-
-  function pin(){
-    if (pinned || done) return;
-    pinned = true;
-    // snap the graphs to dead center, then freeze the page
-    var r = container.getBoundingClientRect();
-    window.scrollBy(0, (r.top + r.height/2) - window.innerHeight/2);
-    document.documentElement.style.overflow = 'hidden';
-  }
-
-  function unpin(){
-    pinned = false; done = true;
-    document.documentElement.style.overflow = '';
-    window.removeEventListener('wheel', onWheel);
-    window.removeEventListener('scroll', watch);
-    document.removeEventListener('click', onAnchorJump, true);
-  }
-
-  // In-page links are explicit navigation. Complete the graph reveal before the
-  // browser scrolls so the pin observer cannot pull an anchor jump back here.
-  function onAnchorJump(ev){
-    var link = ev.target.closest && ev.target.closest('a[href^="#"]');
-    if (!link || !link.getAttribute('href') || link.getAttribute('href') === '#') return;
-    maxP = 1;
-    apply();
-    unpin();
-  }
-
-  function watch(){
-    if (pinned || done) return;
+  function onScroll(){
     var r = container.getBoundingClientRect();
     var vh = window.innerHeight;
-    if (r.top + r.height/2 <= vh/2 + 40) pin();
+    // 0 while the container's centre sits at the bottom of the viewport,
+    // 1 once it has travelled about 70% of the way up.
+    var centre = r.top + r.height / 2;
+    var p = Math.max(0, Math.min(1, (vh - centre) / (vh * 0.7)));
+    if (p > maxP) { maxP = p; apply(); }  // grows once, never rewinds
   }
 
-  window.addEventListener('wheel', onWheel, { passive: false });
-  window.addEventListener('scroll', watch, { passive: true });
-  document.addEventListener('click', onAnchorJump, true);
-  watch();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
   apply();
 })();
 </script>
@@ -3037,49 +3716,43 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
   <div class="integ-wrap integ__grid">
     <!-- zone 1 · tools -->
     <div class="integ-left">
-      <h3 class="integ__h" style="font-family: Manrope; font-size: 33px">Works with the tools you already use</h3>
+      <h3 class="integ__h" style="font-size: 33px">Works with the tools you already use</h3>
       <div class="logos3">
         <div class="logo-card">
           <div class="logo-card__logo"><img width="298" height="56" src="./assets/90a06f36-c3ad-4e21-a6d7-92ed5c9288bd.png" alt="PostHog"></div>
-          <p style="font-family: Manrope">Capture events and feature usage</p>
+          <p>Capture events and feature usage</p>
         </div>
         <div class="logo-card">
           <div class="logo-card__logo"><img width="2012" height="676" src="./assets/1ae70098-747e-44e3-87dc-e420563cd968.png" alt="Mixpanel"></div>
-          <p style="font-family: Manrope">Understand user journeys and funnels</p>
+          <p>Understand user journeys and funnels</p>
         </div>
         <div class="logo-card">
           <div class="logo-card__logo"><picture style="display:contents"><source type="image/webp" srcset="./assets/0968c460-71c3-48a2-8cf6-407bb33d059b.webp"><img width="4820" height="1000" src="./assets/0968c460-71c3-48a2-8cf6-407bb33d059b.png" alt="Amplitude"></picture></div>
-          <p style="font-family: Manrope">Deep behavioral analytics and cohorts</p>
+          <p>Deep behavioral analytics and cohorts</p>
         </div>
       </div>
-      <a href="#" class="viewall" style="font-family: Manrope">And many more</a>
+      <p class="viewall">Plus Segment, Firebase, RevenueCat, and anything that can send us an event.</p>
     </div>
 
     <!-- zone 2 · data moat copy -->
     <div class="moat-copy">
-      <h3 class="moat__title" style="font-family: Manrope">20,000+ paywalls indexed into a conversion map.</h3>
-      <p class="moat__p">Our corpus of real paywalls across categories and geographies is structured into a conversion map that powers generation and scoring.</p>
+      <h3 class="moat__title">20,000+ paywalls indexed into a conversion map.</h3>
+      <p class="moat__p">Real paywalls across categories and geographies, structured so the system can tell which layouts, prices and proofs move which cohorts.</p>
     </div>
 
-    <!-- zone 3 · interactive map + legend -->
-    <div class="moat-viz">
-      <div class="moatmap" id="moatMap"><canvas id="moatCanvas"></canvas></div>
-      <ul class="legend">
-        <li><span class="sw" style="background:#6E54E8"></span> Pricing layouts</li>
-        <li><span class="sw" style="background:#F46B8B"></span> Proof systems</li>
-        <li><span class="sw" style="background:#E8A23C"></span> CTA language</li>
-        <li><span class="sw" style="background:#B0A6F0"></span> Component taxonomy</li>
-        <li><span class="sw" style="background:#46B58E"></span> Industry clusters</li>
-      </ul>
-    </div>
   </div>
+  <figure class="plate">
+    <img class="plate__img" src="./assets/specimen-sheet.webp" width="1536" height="1024" loading="lazy" decoding="async"
+         alt="A printer's proof sheet of candidate paywall layouts in graphite, with one printed in ultramarine">
+    <figcaption class="plate__cap">Every screen the system has scored, and the one it would ship.</figcaption>
+  </figure>
 </section>
 
 <!-- ============================ SYSTEM / EXPERIMENTS ============================ -->
 <section class="section section--pad" id="system">
   <div class="wrap">
     <div class="sys__grid">
-      <h2 class="sys__title" style="font-family: Manrope; text-align: center; font-size: 33px; color: #000000; margin: 0 0 28px;">Every revenue surface<br><span style="color: #2A4B8D">gets smarter together.</span></h2>
+      <h2 class="serif sys__title">Every revenue surface<br><span class="accent-ink">gets smarter together.</span></h2>
       <div class="sys__cols" style="display: none;">
       </div>
     </div>
@@ -3088,12 +3761,12 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
       <article class="surface-card surface-card--paywall">
         <div class="surface-card__top">
           <div class="surface-card__id">
-            <span class="surface-card__number" style="font-family: Manrope">01</span>
-            <h3 class="surface-card__name" style="font-family: Manrope">Paywalls</h3>
+            <span class="surface-card__number">01</span>
+            <h3 class="surface-card__name">Paywalls</h3>
           </div>
           <div class="surface-platforms" aria-label="Available on iOS and Android">
-            <span class="surface-platform" style="font-family: Manrope">iOS</span>
-            <span class="surface-platform" style="font-family: Manrope">Android</span>
+            <span class="surface-platform">iOS</span>
+            <span class="surface-platform">Android</span>
           </div>
         </div>
         <div class="surface-card__visual" aria-hidden="true">
@@ -3107,24 +3780,24 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
           </div>
         </div>
         <div class="surface-card__body">
-          <h3 style="font-family: Manrope">Make the paid moment fit the user.</h3>
-          <p style="font-family: Manrope">Generate and rank paywalls by audience, behavior, offer, price, proof, and layout—then send the strongest candidates to live traffic.</p>
-          <div class="surface-proof" style="font-family: Manrope">Personalized paywalls, tested safely</div>
+          <h3>Make the paid moment fit the user.</h3>
+          <p>Generate and rank paywalls by audience, behavior, offer, price, proof, and layout—then send the strongest candidates to live traffic.</p>
+          <div class="surface-proof">Personalized paywalls, tested safely</div>
         </div>
       </article>
 
       <article class="surface-card surface-card--store">
         <div class="surface-card__top">
           <div class="surface-card__id">
-            <span class="surface-card__number" style="font-family: Manrope">02</span>
-            <h3 class="surface-card__name" style="font-family: Manrope">Store pages</h3>
+            <span class="surface-card__number">02</span>
+            <h3 class="surface-card__name">Store pages</h3>
           </div>
           <div class="surface-platforms" aria-label="Apple App Store and Google Play">
-            <span class="surface-platform" style="font-family: Manrope">
+            <span class="surface-platform">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.79 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.1v-.01ZM12.03 7.25C11.88 5.02 13.69 3.18 15.77 3c.29 2.58-2.34 4.5-3.74 4.25Z"></path></svg>
               App Store
             </span>
-            <span class="surface-platform" style="font-family: Manrope">
+            <span class="surface-platform">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.18 2.42a1.7 1.7 0 0 0-.18.8v17.56c0 .3.07.58.2.82l9.68-9.6L3.18 2.42Zm10.9 10.77-2.34 2.32-6.9 6.84c.38.12.82.08 1.24-.16l11.6-6.58-3.6-2.42ZM19.64 9.9l-3.72-2.11-2.58 2.56 2.66 2.65 3.66-2.08c.76-.43.76-.6-.02-1.02ZM6.08 1.8a1.75 1.75 0 0 0-1.22-.16l6.88 6.83 2.38 2.36 3.67-2.46L6.08 1.8Z"></path></svg>
               Google Play
             </span>
@@ -3134,19 +3807,15 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
           <img class="surface-store-page-img" width="1500" height="946" src="./assets/app-store-product-pages.webp" alt="">
         </div>
         <div class="surface-card__body">
-          <h3 style="font-family: Manrope">Match intent before the install.</h3>
-          <p style="font-family: Manrope">Turn each campaign into a tailored App Store or Google Play page, so every user sees the right value proposition before they download.</p>
-          <div class="surface-proof" style="font-family: Manrope">Intent-matched acquisition pages</div>
+          <h3>Match intent before the install.</h3>
+          <p>Turn each campaign into a tailored App Store or Google Play page, so every user sees the right value proposition before they download.</p>
+          <div class="surface-proof">Intent-matched acquisition pages</div>
         </div>
       </article>
     </div>
 
     <!-- experiments window -->
     <div class="exp-window">
-      <div class="exp-bar">
-        <i style="background:#F26D5B"></i><i style="background:#F2BD4B"></i><i style="background:#5BC46A"></i>
-        <span style="font-size:12px;color:var(--muted);margin-left:10px;">tranzmit.app/experiments</span>
-      </div>
       <div class="exp-body">
         <nav class="exp-side">
           <div class="exp-side__h">Experiments</div>
@@ -3228,32 +3897,32 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
                   </div>
                 </div>
               </div>
-              <div class="pw-card is-sel" data-accent="#6E54E8">
+              <div class="pw-card is-sel" data-accent="#24447F">
                 <div class="pw-head"><span class="pw-letter">B</span><span class="pw-badge" style="color:var(--green);background:#E7F3EC">Winner</span></div>
                 <div class="pw-screen" style="animation-delay:.7s">
                   <div style="display:flex;justify-content:flex-end"><span class="pw-x"></span></div>
-                  <div class="pw-hero" style="height:50px;width:50px;border-radius:50%;margin:2px auto 0;background:linear-gradient(135deg,#6E54E8,#9A86F2)"></div>
+                  <div class="pw-hero" style="height:50px;width:50px;border-radius:50%;margin:2px auto 0;background:linear-gradient(135deg,#24447F,#5B7BB0)"></div>
                   <div class="pw-bar m" style="margin:3px auto 0"></div>
                   <div class="pw-bar s" style="margin:0 auto"></div>
                   <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
                     <div class="pw-pill" style="height:26px"><span class="pw-dot" style="width:10px;height:10px;background:#E7E3FB"></span><span class="pw-bar m"></span></div>
-                    <div class="pw-pill" style="height:26px;border-color:#6E54E8;background:#F3F0FE"><span class="pw-dot" style="width:10px;height:10px;background:#6E54E8"></span><span class="pw-bar m"></span></div>
-                    <div class="pw-cta" style="background:#6E54E8"></div>
+                    <div class="pw-pill" style="height:26px;border-color:#24447F;background:#EDF1F8"><span class="pw-dot" style="width:10px;height:10px;background:#24447F"></span><span class="pw-bar m"></span></div>
+                    <div class="pw-cta" style="background:#24447F"></div>
                   </div>
                 </div>
               </div>
-              <div class="pw-card" data-accent="#E8943C">
-                <div class="pw-head"><span class="pw-letter">C</span><span class="pw-badge" style="color:#E0822B;background:#FBEFE0">+18%</span></div>
+              <div class="pw-card" data-accent="#A39D92">
+                <div class="pw-head"><span class="pw-letter">C</span><span class="pw-badge" style="color:#6F6960;background:#F3F1EC">+18%</span></div>
                 <div class="pw-screen" style="animation-delay:1.4s">
                   <div style="display:flex;justify-content:space-between;align-items:center"><span class="pw-bar s" style="width:42%"></span><span class="pw-x"></span></div>
                   <div class="pw-pill" style="height:33px"><span class="pw-bar m"></span></div>
-                  <div class="pw-pill" style="height:33px;border-color:#E8943C;background:#FDF4E9"><span class="pw-bar m"></span></div>
+                  <div class="pw-pill" style="height:33px;border-color:#BDB7AB;background:#F3F1EC"><span class="pw-bar m"></span></div>
                   <div class="pw-pill" style="height:33px"><span class="pw-bar m"></span></div>
-                  <div style="margin-top:auto"><div class="pw-cta" style="background:#E8943C"></div></div>
+                  <div style="margin-top:auto"><div class="pw-cta" style="background:#A39D92"></div></div>
                 </div>
               </div>
-              <div class="pw-card" data-accent="#E2615F">
-                <div class="pw-head"><span class="pw-letter">D</span><span class="pw-badge" style="color:#D8506C;background:#FBE7EA">−12%</span></div>
+              <div class="pw-card" data-accent="#A39D92">
+                <div class="pw-head"><span class="pw-letter">D</span><span class="pw-badge" style="color:#8A5A57;background:#F6EEEC">−12%</span></div>
                 <div class="pw-screen" style="padding:0;animation-delay:2.1s">
                   <div style="height:118px;background:linear-gradient(135deg,#F2A6A0,#E2615F);position:relative;flex:none">
                     <span class="pw-x" style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,.55)"></span>
@@ -3268,7 +3937,7 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
           </div>
           <!-- SCORES -->
           <div class="exp-panel" data-panel="scores">
-            <div class="exp-head2"><h4>Live scores</h4><div class="exp-legend"><span><i style="background:#6E54E8"></i> Variant B</span><span><i style="background:#9A9389"></i> Control</span><span><i style="background:#E8943C"></i> Variant C</span></div></div>
+            <div class="exp-head2"><h4>Live scores</h4><div class="exp-legend"><span><i style="background:#24447F"></i> Variant B</span><span><i style="background:#9A9389"></i> Control</span><span><i style="background:#BDB7AB"></i> Variant C</span></div></div>
             <div class="exp-canvas-wrap" id="scoresWrap"><canvas id="scoresCanvas"></canvas></div>
           </div>
           <!-- ROLLOUT -->
@@ -3298,8 +3967,8 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
   <div class="wrap">
     <div class="logoband">
       <div class="logoband__intro">
-        <span class="eyebrow eyebrow--muted" style="font-family: Manrope; color: #2A4B8D; font-size: 15px">Trusted by innovative teams</span>
-        <p class="logoband__txt" style="font-family: Manrope; margin-top:20px;">Built for consumer apps with real scale.</p>
+        <span class="eyebrow eyebrow--muted" style="color: #2A4B8D; font-size: 15px">Trusted by innovative teams</span>
+        <p class="logoband__txt" style="margin-top:20px">Built for consumer apps with real scale.</p>
         <p class="logoband__note">From study and healthcare to astrology and creator tools, Tranzmit improves the moment users decide whether to pay.</p>
       </div>
       <div class="logoband__set">
@@ -3335,27 +4004,27 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
 
       <!-- LEFT: narrative + specialized paywall -->
       <div class="cs2-left">
-        <span class="cs2-eyebrow" style="font-size: 15px; color: #2A4B8D; font-family: Manrope; font-weight: 700">Influish Case Study</span>
-        <h2 class="cs2-title" style="font-family: Manrope; font-weight: 600">+82% paywall<br>click-through rate.</h2>
+        <span class="cs2-eyebrow" style="font-size: 15px; color: #2A4B8D; font-weight: 700">Influish Case Study</span>
+        <h2 class="cs2-title" style="font-weight: 600">+82% paywall<br>click-through rate.</h2>
 
         <div class="cs2-branch cs2-branch--phones">
           <figure class="cs2-pw-fig">
             <div class="phone-case">
               <span class="phone-case__screen"><img class="cs2-pw-img" src="./assets/influish-control.png" alt="Influish's original static-list paywall"></span>
             </div>
-            <figcaption style="font-family: Manrope; white-space: nowrap;">Original — one feature list for everyone.</figcaption>
+            <figcaption style="white-space: nowrap">Original — one feature list for everyone.</figcaption>
           </figure>
           <figure class="cs2-pw-fig">
             <div class="phone-case">
               <span class="phone-case__screen"><img class="cs2-pw-img" src="./assets/influish-variant1.png" alt="Variant slotted for DM-automation creators"></span>
             </div>
-            <figcaption style="font-family: Manrope; white-space: nowrap;">Variant 1 — DM automation, 2x CTA clicks.</figcaption>
+            <figcaption style="white-space: nowrap">Variant 1 — DM automation, 2x CTA clicks.</figcaption>
           </figure>
           <figure class="cs2-pw-fig">
             <div class="phone-case">
               <span class="phone-case__screen"><img class="cs2-pw-img" src="./assets/influish-variant2.png" alt="Variant 2 — growth-focused paywall"></span>
             </div>
-            <figcaption style="font-family: Manrope; white-space: nowrap;">Variant 2 — growth, 1.5x topline revenue.</figcaption>
+            <figcaption style="white-space: nowrap">Variant 2 — growth, 1.5x topline revenue.</figcaption>
           </figure>
         </div>
       </div>
@@ -3366,42 +4035,42 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
           <div class="cs2-card__head">
             <span class="cs2-card__logo"><img src="./assets/influish-logo.png" alt="Influish"></span>
             <div class="cs2-card__id">
-              <h4 style="font-family: Manrope">Influish</h4>
-              <span class="cs2-card__meta" style="font-family: Manrope">CREATOR GROWTH · 3M+ MAU</span>
+              <h4>Influish</h4>
+              <span class="cs2-card__meta">CREATOR GROWTH · 3M+ MAU</span>
             </div>
-            <span class="cs2-uplift" style="font-family: Manrope">Positive uplift</span>
+            <span class="cs2-uplift">Positive uplift</span>
           </div>
 
           <div class="cs2-stats">
             <div class="cs2-stat">
               <span class="cs2-stat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"></path><path d="M14 7h6v6"></path></svg></span>
-              <div class="cs2-stat__val" style="font-family: Manrope">+82%</div>
-              <div class="cs2-stat__lab" style="font-family: Manrope">paywall click-through rate</div>
+              <div class="cs2-stat__val">+82%</div>
+              <div class="cs2-stat__lab">paywall click-through rate</div>
             </div>
             <div class="cs2-stat">
               <span class="cs2-stat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6l7-3Z"></path><path d="M9 12l2 2 4-4" stroke-linecap="round"></path></svg></span>
-              <div class="cs2-stat__val" style="font-family: Manrope">+49%</div>
-              <div class="cs2-stat__lab" style="font-family: Manrope">subscription conversion</div>
+              <div class="cs2-stat__val">+49%</div>
+              <div class="cs2-stat__lab">subscription conversion</div>
             </div>
             <div class="cs2-stat">
               <span class="cs2-stat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-5 4 5 4M15 8l5 4-5 4"></path></svg></span>
-              <div class="cs2-stat__val" style="font-family: Manrope">1.5x</div>
-              <div class="cs2-stat__lab" style="font-family: Manrope">topline revenue</div>
+              <div class="cs2-stat__val">1.5x</div>
+              <div class="cs2-stat__lab">topline revenue</div>
             </div>
             <div class="cs2-stat">
               <span class="cs2-stat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 13V9M12 5h0M9 2h6"></path></svg></span>
-              <div class="cs2-stat__val" style="font-family: Manrope">0</div>
-              <div class="cs2-stat__lab" style="font-family: Manrope">app updates or engineering cycles</div>
+              <div class="cs2-stat__val">0</div>
+              <div class="cs2-stat__lab">app updates or engineering cycles</div>
             </div>
           </div>
 
           <div class="cs2-changed">
             <div class="cs2-changed__h">What changed</div>
             <ul>
-              <li style="font-family: Manrope">Static feature list replaced with benefit-led paywalls.</li>
-              <li style="font-family: Manrope">DM-automation variant slotted for engagement-focused creators.</li>
-              <li style="font-family: Manrope">Growth variant leads with follower proof and creator testimonials.</li>
-              <li style="font-family: Manrope">Traffic shifted to the winning variants, weaker ones fazed out</li>
+              <li>Static feature list replaced with benefit-led paywalls.</li>
+              <li>DM-automation variant slotted for engagement-focused creators.</li>
+              <li>Growth variant leads with follower proof and creator testimonials.</li>
+              <li>Traffic shifted to the winning variants and the weaker ones were phased out</li>
             </ul>
           </div>
         </div>
@@ -3417,8 +4086,8 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
 
       <!-- LEFT: narrative + specialized paywall -->
       <div class="cs2-left">
-        <span class="cs2-eyebrow" style="font-size: 15px; color: #2A4B8D; font-family: Manrope; font-weight: 700">Jungle AI Case Study</span>
-        <h2 class="cs2-title" style="font-family: Manrope; font-weight: 600">+62% paywall<br>conversion uplift.</h2>
+        <span class="cs2-eyebrow" style="font-size: 15px; color: #2A4B8D; font-weight: 700">Jungle AI Case Study</span>
+        <h2 class="cs2-title" style="font-weight: 600">+62% paywall<br>conversion uplift.</h2>
 
         <div class="cs2-branch cs2-branch--phones">
           <figure class="cs2-pw-fig">
@@ -3445,7 +4114,7 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
                 </div>
               </div>
             </div>
-            <figcaption style="font-family: Manrope">Original — one generic paywall for everyone.</figcaption>
+            <figcaption>Original — one generic paywall for everyone.</figcaption>
           </figure>
           <figure class="cs2-pw-fig">
             <div class="phone-case">
@@ -3475,7 +4144,7 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
                 </div>
               </div>
             </div>
-            <figcaption style="font-family: Manrope">Variant 1 — clinical-student cohort.</figcaption>
+            <figcaption>Variant 1 — clinical-student cohort.</figcaption>
           </figure>
           <figure class="cs2-pw-fig">
             <div class="phone-case">
@@ -3502,7 +4171,7 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
                 </div>
               </div>
             </div>
-            <figcaption style="font-family: Manrope">Variant 2 — +$24,000 revenue growth.</figcaption>
+            <figcaption>Variant 2 — +$24,000 revenue growth.</figcaption>
           </figure>
         </div>
       </div>
@@ -3513,42 +4182,42 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
           <div class="cs2-card__head">
             <span class="cs2-card__logo"><img width="190" height="109" src="./assets/a37dddec-8aa7-4b28-bc4c-04401c2eedd1.png" alt="Jungle AI"></span>
             <div class="cs2-card__id">
-              <h4 style="font-family: Manrope">Jungle AI</h4>
-              <span class="cs2-card__meta" style="font-family: Manrope">EDTECH · 500K+ MAU</span>
+              <h4>Jungle AI</h4>
+              <span class="cs2-card__meta">EDTECH · 500K+ MAU</span>
             </div>
-            <span class="cs2-uplift" style="font-family: Manrope">Positive uplift</span>
+            <span class="cs2-uplift">Positive uplift</span>
           </div>
 
           <div class="cs2-stats">
             <div class="cs2-stat">
               <span class="cs2-stat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"></path><path d="M14 7h6v6"></path></svg></span>
-              <div class="cs2-stat__val" style="font-family: Manrope">+62%</div>
-              <div class="cs2-stat__lab" style="font-family: Manrope">paywall conversion uplift</div>
+              <div class="cs2-stat__val">+62%</div>
+              <div class="cs2-stat__lab">paywall conversion uplift</div>
             </div>
             <div class="cs2-stat">
               <span class="cs2-stat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6l7-3Z"></path><path d="M9 12l2 2 4-4" stroke-linecap="round"></path></svg></span>
-              <div class="cs2-stat__val" style="font-family: Manrope">&gt;80%</div>
-              <div class="cs2-stat__lab" style="font-family: Manrope">revenue increase from the same product</div>
+              <div class="cs2-stat__val">&gt;80%</div>
+              <div class="cs2-stat__lab">revenue increase from the same product</div>
             </div>
             <div class="cs2-stat">
               <span class="cs2-stat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-5 4 5 4M15 8l5 4-5 4"></path></svg></span>
-              <div class="cs2-stat__val" style="font-family: Manrope">&gt;$20k</div>
-              <div class="cs2-stat__lab" style="font-family: Manrope">value proven during rollout</div>
+              <div class="cs2-stat__val">&gt;$20k</div>
+              <div class="cs2-stat__lab">value proven during rollout</div>
             </div>
             <div class="cs2-stat">
               <span class="cs2-stat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 13V9M12 5h0M9 2h6"></path></svg></span>
-              <div class="cs2-stat__val" style="font-family: Manrope">0</div>
-              <div class="cs2-stat__lab" style="font-family: Manrope">app updates or engineering cycles</div>
+              <div class="cs2-stat__val">0</div>
+              <div class="cs2-stat__lab">app updates or engineering cycles</div>
             </div>
           </div>
 
           <div class="cs2-changed">
             <div class="cs2-changed__h">What changed</div>
             <ul>
-              <li style="font-family: Manrope">Annual plan re-anchored as the default recommendation.</li>
-              <li style="font-family: Manrope">Proof strip moved beside the CTA to reduce buyer uncertainty.</li>
-              <li style="font-family: Manrope">Separate paywalls slotted for trial-day-3 and new-user cohorts.</li>
-              <li style="font-family: Manrope">Traffic shifted to the winning variants, weaker ones fazed out</li>
+              <li>Annual plan re-anchored as the default recommendation.</li>
+              <li>Proof strip moved beside the CTA to reduce buyer uncertainty.</li>
+              <li>Separate paywalls slotted for trial-day-3 and new-user cohorts.</li>
+              <li>Weekly cohorts kept re-scoring, so the winner kept moving</li>
             </ul>
           </div>
         </div>
@@ -3590,10 +4259,10 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
           <div class="cs2-card__head">
             <span class="cs2-card__logo"><picture style="display:contents"><source type="image/webp" srcset="./assets/1770459b-3984-434d-a90e-99b6f91e441f.webp"><img width="512" height="512" src="./assets/1770459b-3984-434d-a90e-99b6f91e441f.png" alt="HiAstro" loading="lazy" decoding="async"></picture></span>
             <div class="cs2-card__id">
-              <h4 style="font-family: Manrope"><a class="astro-case__brand-link" href="https://www.hiastro.in/" target="_blank" rel="noopener">HiAstro</a></h4>
-              <span class="cs2-card__meta" style="font-family: Manrope">ASTROLOGY · 400K+ USERS</span>
+              <h4><a class="astro-case__brand-link" href="https://www.hiastro.in/" target="_blank" rel="noopener">HiAstro</a></h4>
+              <span class="cs2-card__meta">ASTROLOGY · 400K+ USERS</span>
             </div>
-            <span class="cs2-uplift" style="font-family: Manrope">25% uplift</span>
+            <span class="cs2-uplift">25% uplift</span>
           </div>
 
           <div class="astro-case__metrics" aria-label="HiAstro rollout results">
@@ -3613,6 +4282,16 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
               <span class="cs2-stat__lab">to prove uplift after going live</span>
             </div>
           </div>
+
+          <div class="cs2-changed">
+            <div class="cs2-changed__h">What changed</div>
+            <ul>
+              <li>The one-rupee trial now shows the exact charge timeline instead of hiding it.</li>
+              <li>A renewal reminder was moved above the CTA, where the hesitation happens.</li>
+              <li>Readings are slotted by the question the user came with, not by a generic offer.</li>
+              <li>Traffic shifted to the winning variants over two weeks of live rollout.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -3623,93 +4302,22 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
 <section class="cta" id="demo">
   <div class="hero__cloud"></div>
   <div class="wrap cta__grid">
-    <div>
-      <h2 class="serif" style="font-family: Manrope; font-weight: 600">Stop guessing.<br>Start <span style="color: #2A4B8D; font-style: normal">compounding.</span></h2>
-      <p style="font-family: Manrope">Join product and growth teams who use Tranzmit AI to turn paywall experimentation into a 24/7 growth engine.</p>
-    </div>
-    <div class="cta__btns">
-      <a href="#case-study" class="btn btn--accent btn--lg">See Live Results <span class="arr">→</span></a>
-      <a href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener" class="btn btn--ghost btn--lg btn--glow btn--cta-glow" style="font-size: 16px">Book a Demo</a>
+    <div class="cta__lede">
+      <h2 class="serif" style="font-weight: 600">Stop guessing.<br>Start <span style="color: #24447F; font-style: normal">compounding.</span></h2>
+      <p>Bring the paywall you are least sure about. We will show you a better one before the call ends.</p>
+      <div class="cta__btns">
+        <a href="https://calendly.com/tranzmitai/new-meeting" target="_blank" rel="noopener" class="btn btn--accent btn--lg">Book a paywall review <span class="arr">→</span></a>
+        <a href="#case-study" class="btn btn--ghost btn--lg">See live results</a>
+      </div>
     </div>
     <div class="cta__art">
-      <div class="retro-mac" role="img" aria-label="Retro Macintosh computer with a glowing Tranzmit AI spark on its screen">
-        <div class="retro-mac__clouds">
-          <span class="rc-cloud rc-cloud--1"></span>
-          <span class="rc-cloud rc-cloud--2"></span>
-          <span class="rc-cloud rc-cloud--3"></span>
-          <span class="rc-cloud rc-cloud--4"></span>
-        </div>
-        <svg class="retro-mac__svg" viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="rcFace" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F0E9DA"></stop><stop offset="1" stop-color="#DBCEB5"></stop>
-            </linearGradient>
-            <linearGradient id="rcTop" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F5EFE2"></stop><stop offset="1" stop-color="#E7DDC8"></stop>
-            </linearGradient>
-            <linearGradient id="rcSide" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#D4C8AD"></stop><stop offset="1" stop-color="#BFB18E"></stop>
-            </linearGradient>
-            <linearGradient id="rcKey" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F2ECDD"></stop><stop offset="1" stop-color="#E2D8C2"></stop>
-            </linearGradient>
-            <radialGradient id="rcScreen" cx="0.5" cy="0.42" r="0.75">
-              <stop offset="0" stop-color="#39332C"></stop><stop offset="1" stop-color="#15120E"></stop>
-            </radialGradient>
-            <radialGradient id="rcGlow" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0" stop-color="#3E68B5" stop-opacity="0.9"></stop>
-              <stop offset="0.55" stop-color="#2A4B8D" stop-opacity="0.22"></stop>
-              <stop offset="1" stop-color="#2A4B8D" stop-opacity="0"></stop>
-            </radialGradient>
-            <filter id="rcSoft" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="5"></feGaussianBlur>
-            </filter>
-          </defs>
-
-          <!-- contact shadows -->
-          <ellipse cx="150" cy="214" rx="120" ry="12" fill="#4A3D24" opacity="0.16" filter="url(#rcSoft)"></ellipse>
-          <ellipse cx="138" cy="206" rx="62" ry="10" fill="#4A3D24" opacity="0.18" filter="url(#rcSoft)"></ellipse>
-
-          <!-- body: top + side + front -->
-          <polygon points="70,44 96,28 232,28 206,44" fill="url(#rcTop)"></polygon>
-          <polygon points="206,44 232,28 232,190 206,206" fill="url(#rcSide)"></polygon>
-          <rect x="64" y="44" width="142" height="162" rx="15" fill="url(#rcFace)"></rect>
-          <rect x="64.5" y="44.5" width="141" height="161" rx="14.5" fill="none" stroke="#B6A684" stroke-opacity="0.55"></rect>
-
-          <!-- screen bezel -->
-          <rect x="80" y="58" width="110" height="92" rx="12" fill="#D6CAB1"></rect>
-          <rect x="80.5" y="58.5" width="109" height="91" rx="11.5" fill="none" stroke="#B6A684" stroke-opacity="0.5"></rect>
-          <rect x="87" y="64" width="96" height="80" rx="8" fill="#191510"></rect>
-          <rect x="91" y="68" width="88" height="72" rx="6" fill="url(#rcScreen)"></rect>
-
-          <!-- glow + spark -->
-          <circle class="rc-glow" cx="135" cy="104" r="30" fill="url(#rcGlow)"></circle>
-          <path class="rc-spark" d="M135 82 C 136 96, 141 101, 157 104 C 141 107, 136 112, 135 126 C 134 112, 129 107, 113 104 C 129 101, 134 96, 135 82 Z" fill="#3E68B5"></path>
-          <path class="rc-spark2" d="M135 93 C 135.5 100, 138 102.5, 146 104 C 138 105.5, 135.5 108, 135 115 C 134.5 108, 132 105.5, 124 104 C 132 102.5, 134.5 100, 135 93 Z" fill="#CFDCF2"></path>
-
-          <!-- disk slot + label -->
-          <rect x="116" y="168" width="72" height="8" rx="4" fill="#CABD9D"></rect>
-          <rect x="120" y="170.5" width="50" height="3" rx="1.5" fill="#A89B7C"></rect>
-
-          <!-- keyboard (reclined) -->
-          <g class="rc-kb" transform="translate(40,196) skewX(-30) scale(1,0.46)">
-            <rect x="0" y="0" width="156" height="66" rx="11" fill="url(#rcKey)" stroke="#B6A684" stroke-opacity="0.5"></rect>
-            <g fill="#EBE1CD" stroke="#BCAD8A" stroke-opacity="0.45" stroke-width="0.8">
-              <rect x="9" y="8" width="12" height="11" rx="2.5"></rect><rect x="24" y="8" width="12" height="11" rx="2.5"></rect><rect x="39" y="8" width="12" height="11" rx="2.5"></rect><rect x="54" y="8" width="12" height="11" rx="2.5"></rect><rect x="69" y="8" width="12" height="11" rx="2.5"></rect><rect x="84" y="8" width="12" height="11" rx="2.5"></rect><rect x="99" y="8" width="12" height="11" rx="2.5"></rect><rect x="114" y="8" width="12" height="11" rx="2.5"></rect><rect x="129" y="8" width="18" height="11" rx="2.5"></rect>
-              <rect x="9" y="23" width="14" height="11" rx="2.5"></rect><rect x="26" y="23" width="12" height="11" rx="2.5"></rect><rect x="41" y="23" width="12" height="11" rx="2.5"></rect><rect x="56" y="23" width="12" height="11" rx="2.5"></rect><rect x="71" y="23" width="12" height="11" rx="2.5"></rect><rect x="86" y="23" width="12" height="11" rx="2.5"></rect><rect x="101" y="23" width="12" height="11" rx="2.5"></rect><rect x="116" y="23" width="12" height="11" rx="2.5"></rect><rect x="131" y="23" width="16" height="11" rx="2.5"></rect>
-              <rect x="9" y="38" width="16" height="11" rx="2.5"></rect><rect x="28" y="38" width="12" height="11" rx="2.5"></rect><rect x="43" y="38" width="12" height="11" rx="2.5"></rect><rect x="58" y="38" width="12" height="11" rx="2.5"></rect><rect x="73" y="38" width="12" height="11" rx="2.5"></rect><rect x="88" y="38" width="12" height="11" rx="2.5"></rect><rect x="103" y="38" width="12" height="11" rx="2.5"></rect><rect x="118" y="38" width="29" height="11" rx="2.5"></rect>
-              <rect x="34" y="53" width="88" height="9" rx="2.5"></rect>
-            </g>
-          </g>
-
-          <!-- mouse + cable -->
-          <path d="M210 206 C 198 202, 196 198, 202 196" fill="none" stroke="#C2B48F" stroke-width="2.2" stroke-linecap="round"></path>
-          <g class="rc-mouse" transform="translate(212,202)">
-            <rect x="0" y="0" width="30" height="24" rx="8" fill="url(#rcKey)" stroke="#B6A684" stroke-opacity="0.55"></rect>
-            <line x1="15" y1="4" x2="15" y2="11" stroke="#BCAD8A" stroke-opacity="0.6" stroke-width="1.4"></line>
-          </g>
-        </svg>
-      </div>
+      <div class="cta__deliver-head">You bring one paywall. You leave with:</div>
+      <ul class="cta__deliver">
+        <li><b>01</b><span><strong>20 scored variants</strong> against your current screen</span></li>
+        <li><b>02</b><span>The <strong>projected lift</strong>, and the confidence band around it</span></li>
+        <li><b>03</b><span>The <strong>reason it wins</strong> — price, proof, plan, or CTA</span></li>
+      </ul>
+      <p class="cta__deliver-note">30 minutes. No integration required to see the first result.</p>
     </div>
   </div>
 </section>
@@ -3719,17 +4327,37 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
   <div class="wrap">
     <div class="foot__top">
       <div class="foot__brand">
-        <a href="#top" class="brand" style="font-family: Manrope; font-weight: 600">Tranzmit AI</a>
-        <p class="foot__about" style="font-family: Manrope; font-size: 15px">The AI platform for paywalls and store pages that improve together.</p>
+        <a href="#top" class="brand" style="font-weight: 600">Tranzmit AI</a>
+        <p class="foot__about" style="font-size: 15px">The AI platform for paywalls and store pages that improve together.</p>
         <div class="foot__social">
           <a href="https://www.linkedin.com/in/agaaz-singhal/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
           <a href="https://x.com/agaazsinghal007" target="_blank" rel="noopener" aria-label="X">✕</a>
           <a href="mailto:agaaz@tranzmitai.com" aria-label="Email">✉</a>
         </div>
       </div>
+      <nav class="foot__cols" aria-label="Footer">
+        <div class="foot__col">
+          <h4>Product</h4>
+          <a href="#how">How it works</a>
+          <a href="#system">Platform</a>
+          <a href="#demo">Book a demo</a>
+        </div>
+        <div class="foot__col">
+          <h4>Evidence</h4>
+          <a href="#case-study">Influish</a>
+          <a href="#case-study-jungle">Jungle AI</a>
+          <a href="#case-study-high-astro">HiAstro</a>
+        </div>
+        <div class="foot__col">
+          <h4>Company</h4>
+          <a href="#customers">Customers</a>
+          <a href="mailto:agaaz@tranzmitai.com">Contact</a>
+          <a href="https://www.linkedin.com/in/agaaz-singhal/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </nav>
     </div>
     <div class="foot__bottom">
-      <small style="font-family: Manrope">© 2026 Tranzmit Technologies - Delaware C Corp
+      <small>© 2026 Tranzmit Technologies - Delaware C Corp
 </small>
       <div class="links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Security</a></div>
     </div>
@@ -3755,7 +4383,7 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
       if(!canvas) return { start:function(){}, stop:function(){} };
       var ctx = canvas.getContext('2d'), W=0, H=296, raf=null, frame=0, ro=null;
       var N=66, M=N+2, phase=0, speed=0.016;
-      var series=[{c:'#6E54E8',base:88,amp:5,data:[]},{c:'#9A9389',base:55,amp:6,data:[]},{c:'#E8943C',base:66,amp:7,data:[]}];
+      var series=[{c:'#24447F',base:88,amp:5,data:[]},{c:'#9A9389',base:55,amp:6,data:[]},{c:'#BDB7AB',base:66,amp:7,data:[]}];
       series.forEach(function(s){ for(var i=0;i<M;i++){ s.data.push(s.base + Math.sin(i*0.30)*s.amp + (Math.random()-0.5)*2.4); } });
       var mouse={x:-9999,active:false};
       var padL=36,padR=48,padT=18,padB=16;
@@ -3874,7 +4502,7 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
       Object.keys(panels).forEach(function(k){ panels[k].classList.toggle('is-shown', k===name); });
       document.querySelectorAll('.exp-side button').forEach(function(bb){ bb.classList.toggle('is-active', bb.getAttribute('data-tab')===name); });
       if(current && modules[current] && modules[current].stop) modules[current].stop();
-      current=name;
+ current=name;
       if(modules[name] && modules[name].start) requestAnimationFrame(function(){ modules[name].start(); });
     }
     document.querySelectorAll('.exp-side button').forEach(function(bb){ bb.addEventListener('click', function(){ activate(bb.getAttribute('data-tab')); }); });
@@ -3890,63 +4518,11 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
   var statNums = document.querySelectorAll('.stat__num[data-count]');
   var statsDone = 0;
 
-  // once every number has landed, run one gradient continuously across all of them
-  function startStatsGradient(){
-    var row = document.querySelector('.stats');
-    if (!row) return;
-    var els = [].slice.call(statNums);
-    els.forEach(function(el){
-      el.style.backgroundImage = 'linear-gradient(90deg, #000000 0%, #000000 25%, #1F3A6E 40%, #2A4B8D 50%, #1F3A6E 60%, #000000 75%, #000000 100%)';
-      el.style.backgroundRepeat = 'repeat-x';
-      el.style.webkitBackgroundClip = 'text';
-      el.style.backgroundClip = 'text';
-      el.style.webkitTextFillColor = 'transparent';
-      el.style.color = 'transparent';
-    });
-    var ts0 = null;
-    function frame(ts){
-      if (ts0 === null) ts0 = ts;
-      var rowRect = row.getBoundingClientRect();
-      var rowW = Math.max(rowRect.width, 1);
-      var tileW = rowW * 2;
-      // accent band starts just left of the "2" in 20,000 and sweeps left -> right
-      var shift = ((ts - ts0) * tileW / 5000) % tileW;
-      els.forEach(function(el){
-        var off = el.getBoundingClientRect().left - rowRect.left;
-        el.style.backgroundSize = tileW + 'px 100%';
-        el.style.backgroundPositionX = (-1.5 * rowW + shift - off) + 'px';
-      });
-      requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
-
-  statNums.forEach(function(el){
-    var played = false;
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting && !played) {
-          played = true;
-          var target   = parseFloat(el.getAttribute('data-count'));
-          var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
-          var prefix   = el.getAttribute('data-prefix') || '';
-          var suffix   = el.getAttribute('data-suffix') || '';
-          var start = null;
-          function step(ts){
-            if (!start) start = ts;
-            var p = Math.min((ts - start) / 1300, 1);
-            var eased = 1 - Math.pow(1 - p, 3);
-            el.textContent = prefix + formatNum(eased * target, decimals) + suffix;
-            if (p < 1) { requestAnimationFrame(step); }
-            else if (++statsDone === statNums.length) { setTimeout(startStatsGradient, 500); }
-          }
-          el.textContent = prefix + formatNum(0, decimals) + suffix;
-          requestAnimationFrame(step);
-        }
-      });
-    }, { threshold: .6 });
-    io.observe(el);
-  });
+  // The five hero figures used to count up from zero on entry and then run a blue
+  // gradient sweep through themselves forever on a rAF loop. Both read as a slot
+  // machine: a number that is still moving is a number the reader cannot trust,
+  // and these are the page's central evidence. They now render as written.
+  statNums.forEach(function(el){ el.removeAttribute('data-count'); });
 
   // live experiment counter in the hero eyebrow — starts at 1,892, ticks up 1–3 every 3s
   var liveExp = document.getElementById('live-exp');
@@ -4120,12 +4696,12 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
 
       // connector line from list card to the cloud
       if (!centered) {
-        ctx.strokeStyle = 'rgba(110,84,232,0.32)';
+        ctx.strokeStyle = 'rgba(36,68,127,0.32)';
         ctx.lineWidth = 1;
         ctx.setLineDash([3, 5]);
         ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(cx, cy); ctx.stroke();
         ctx.setLineDash([]);
-        ctx.fillStyle = 'rgba(110,84,232,0.55)';
+        ctx.fillStyle = 'rgba(36,68,127,0.55)';
         ctx.beginPath(); ctx.arc(3, cy, 2.6, 0, 7); ctx.fill();
       }
 
@@ -4136,7 +4712,7 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
           var dx = n.x - mouse.x, dy = n.y - mouse.y;
           var d = Math.sqrt(dx * dx + dy * dy);
           if (d < 96){
-            ctx.strokeStyle = 'rgba(110,84,232,' + (0.22 * (1 - d / 96)) + ')';
+            ctx.strokeStyle = 'rgba(36,68,127,' + (0.22 * (1 - d / 96)) + ')';
             ctx.lineWidth = 0.7;
             ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(n.x, n.y); ctx.stroke();
           }
@@ -4146,7 +4722,7 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
       for (var k = 0; k < nodes.length; k++){
         var p = nodes[k];
         var alpha = Math.min(1, p.a + p.hl * 0.55);
-        ctx.fillStyle = 'rgba(110,84,232,' + alpha + ')';
+        ctx.fillStyle = 'rgba(36,68,127,' + alpha + ')';
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r + p.hl * 1.8, 0, 7); ctx.fill();
       }
     }
@@ -4366,7 +4942,7 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
     var ctx = canvas.getContext('2d');
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var W = 0, H = 0;
-    var COLORS = ['#6E54E8','#F46B8B','#E8A23C','#B0A6F0','#46B58E'];
+    var COLORS = ['#24447F','#5B7BB0','#8C8578','#B99C63','#5E8B72'];
     var RGB = COLORS.map(function(h){ return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]; });
     var nodes = [], edges = [], adj = {};
     var mouse = { x:-9999, y:-9999, active:false };
@@ -4478,91 +5054,12 @@ They're saying no to <span style="color: #2A4B8D; font-style: normal">your paywa
   })();
 </script>
 
-<!-- ============================ TWEAKS PANEL ============================ -->
-<div id="tweaks-root"></div>
-<script src="./assets/999ff3bf-1f29-47a9-8e42-3966eaa70ff3.js"></script>
-<script src="./assets/7332278c-390f-4e17-88e4-e55bd0dbd91f.js"></script>
-<script src="./assets/75bef888-52fa-4e61-aaa3-991d16c02ad1.js"></script>
-<script>
-"use strict";
-
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-var TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "accent": "#2A4B8D",
-  "background": "#FFFFFF",
-  "headline": 60,
-  "radius": 16,
-  "showMockups": true
-} /*EDITMODE-END*/;
-function TransmitTweaks() {
-  var _useTweaks = useTweaks(TWEAK_DEFAULTS),
-    _useTweaks2 = _slicedToArray(_useTweaks, 2),
-    t = _useTweaks2[0],
-    setTweak = _useTweaks2[1];
-  React.useEffect(function () {
-    var root = document.documentElement.style;
-    root.setProperty('--accent', t.accent);
-    root.setProperty('--cream', t.background);
-    root.setProperty('--hero-h1', t.headline + 'px');
-    root.setProperty('--radius', t.radius + 'px');
-  }, [t.accent, t.background, t.headline, t.radius]);
-  React.useEffect(function () {
-    var stage = document.querySelector('.hero .stage');
-    if (stage) stage.style.display = t.showMockups ? '' : 'none';
-  }, [t.showMockups]);
-  return /*#__PURE__*/React.createElement(TweaksPanel, null, /*#__PURE__*/React.createElement(TweakSection, {
-    label: "Brand"
-  }), /*#__PURE__*/React.createElement(TweakColor, {
-    label: "Accent",
-    value: t.accent,
-    options: ['#2A4B8D', '#2A6FDB', '#1F8A5B', '#7A5AE0'],
-    onChange: function onChange(v) {
-      return setTweak('accent', v);
-    }
-  }), /*#__PURE__*/React.createElement(TweakColor, {
-    label: "Background",
-    value: t.background,
-    options: ['#FFFFFF', '#F6F1E9', '#F2F0EC', '#0F0D0B'],
-    onChange: function onChange(v) {
-      return setTweak('background', v);
-    }
-  }), /*#__PURE__*/React.createElement(TweakSection, {
-    label: "Layout"
-  }), /*#__PURE__*/React.createElement(TweakSlider, {
-    label: "Headline size",
-    value: t.headline,
-    min: 44,
-    max: 76,
-    step: 1,
-    unit: "px",
-    onChange: function onChange(v) {
-      return setTweak('headline', v);
-    }
-  }), /*#__PURE__*/React.createElement(TweakSlider, {
-    label: "Corner radius",
-    value: t.radius,
-    min: 4,
-    max: 24,
-    step: 1,
-    unit: "px",
-    onChange: function onChange(v) {
-      return setTweak('radius', v);
-    }
-  }), /*#__PURE__*/React.createElement(TweakToggle, {
-    label: "Floating mockups",
-    value: t.showMockups,
-    onChange: function onChange(v) {
-      return setTweak('showMockups', v);
-    }
-  }));
-}
-ReactDOM.createRoot(document.getElementById('tweaks-root')).render(/*#__PURE__*/React.createElement(TransmitTweaks, null));
-</script>
+<!-- The tweaks panel lived here: a leftover visual editor that shipped React,
+     ReactDOM and its own bundle (169KB) to every visitor, rendered no UI, and
+     on mount wrote --accent, --cream, --hero-h1 and --radius as inline styles
+     on <html>. Inline styles beat every stylesheet rule, so the brand colour,
+     the page background and the radius scale were pinned at runtime and the
+     stylesheet was not the source of truth. Removed. -->
 
 <script>
 (function(){
@@ -4572,7 +5069,7 @@ ReactDOM.createRoot(document.getElementById('tweaks-root')).render(/*#__PURE__*/
   const ctx = cv.getContext('2d');
   let W, H, cells, raf;
   const CELL = 32, GAP = 10, STEP = CELL + GAP;
-  const ACCENT = '42,75,141', GREEN = '31,154,82';
+  const ACCENT = '36,68,127', GREEN = '36,68,127';
 
   function build() {
     const dpr = window.devicePixelRatio || 1;
@@ -4734,7 +5231,7 @@ ReactDOM.createRoot(document.getElementById('tweaks-root')).render(/*#__PURE__*/
   }
   function requestScrollUpdate(){
     if (scrollTicking) return;
-    scrollTicking=true;
+ scrollTicking=true;
     requestAnimationFrame(updateScrollState);
   }
   window.addEventListener('scroll',requestScrollUpdate,{passive:true});
@@ -4746,19 +5243,19 @@ ReactDOM.createRoot(document.getElementById('tweaks-root')).render(/*#__PURE__*/
     var targetX=-80,targetY=-80,currentX=-80,currentY=-80,cursorFrame=0;
 
     function cursorRender(){
-      cursorFrame=0;
+ cursorFrame=0;
       currentX+=(targetX-currentX)*.22;
       currentY+=(targetY-currentY)*.22;
       if (halo) halo.style.transform='translate3d('+(currentX-310).toFixed(2)+'px,'+(currentY-310).toFixed(2)+'px,0)';
       if (Math.abs(targetX-currentX)>.12 || Math.abs(targetY-currentY)>.12) {
-        cursorFrame=requestAnimationFrame(cursorRender);
+ cursorFrame=requestAnimationFrame(cursorRender);
       }
     }
     function startCursor(){
       if (!cursorFrame) cursorFrame=requestAnimationFrame(cursorRender);
     }
     function cursorMove(event){
-      targetX=event.clientX; targetY=event.clientY;
+ targetX=event.clientX; targetY=event.clientY;
       if (halo) halo.style.opacity='.7';
       startCursor();
     }
