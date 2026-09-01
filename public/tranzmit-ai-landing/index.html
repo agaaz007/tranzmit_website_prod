@@ -2396,28 +2396,6 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
   .logo-card:last-child{ border-bottom:0!important; }
 }
 
-/* ---------- the specimen plate ----------
-   The page's one owned image. Full bleed, because the whole point is that it
-   is a sheet of paper larger than the column grid — and because after eleven
-   screens of contained blocks, one thing running edge to edge is worth more
-   than any amount of styling inside them.
-
-   It is generated, so it is composited rather than dropped in: the plate is
-   colour-matched to the page's paper, and multiply blending drops its white
-   entirely so the page's own ivory shows through the stock. There is no
-   visible edge where the image starts. */
-.plate{ margin:88px 0 0; }
-.plate__img{
-  display:block; width:100vw; max-width:100vw; height:auto;
-  margin-left:calc(50% - 50vw);
-  mix-blend-mode:multiply;
-}
-.plate__cap{
-  max-width:var(--maxw); margin:26px auto 0; padding:0 var(--pad);
-  color:var(--muted); font:500 13px/1.5 var(--sans);
-}
-@media (max-width:680px){ .plate{ margin-top:56px; } .plate__cap{ font-size:12.5px; } }
-
 /* With the node graph gone, the band is two blocks instead of three: what it
    plugs into, and what it knows. */
 .integ__grid{ grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important; gap:72px!important; align-items:start!important; }
@@ -3741,11 +3719,6 @@ They're saying no to <span class="accent-ink">your paywall.</span></h2>
     </div>
 
   </div>
-  <figure class="plate">
-    <img class="plate__img" src="./assets/specimen-sheet.webp" width="1536" height="1024" loading="lazy" decoding="async"
-         alt="A printer's proof sheet of candidate paywall layouts in graphite, with one printed in ultramarine">
-    <figcaption class="plate__cap">Every screen the system has scored, and the one it would ship.</figcaption>
-  </figure>
 </section>
 
 <!-- ============================ SYSTEM / EXPERIMENTS ============================ -->
