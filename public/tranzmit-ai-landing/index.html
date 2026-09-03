@@ -1315,6 +1315,9 @@ h1, h2, h3 { font-weight: 500; line-height: 1.04; letter-spacing: -.01em; }
   text-decoration:none;
   border-bottom:1px solid var(--line);
   transition:background-color .22s ease, transform .22s ease;
+  /* Nothing in the card is meant to paint outside it, so contain it. Guards
+     the logo against escaping its cell if a repaint goes stale. */
+  contain:paint;
 }
 .proof-app:nth-child(even) { border-left:1px solid var(--line); }
 .proof-app:hover { background:rgba(251,243,246,.72); transform:translateY(-2px); }
@@ -1986,7 +1989,11 @@ html.motion-enabled [data-reveal] {
   transition-delay:var(--reveal-delay,0ms);
   will-change:opacity,filter,transform;
 }
-html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform:none; }
+/* Release the compositor layer once the reveal has settled. Leaving
+   will-change on permanently promoted every revealed section for the life of
+   the page, which combined with the sticky column in #customers produced
+   stale-layer repaints (logos painting at their pre-scroll position). */
+html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform:none; will-change:auto; }
 .section { position:relative; background:rgba(255,255,255,.74); }
 #how { background:radial-gradient(circle at 50% 20%,rgba(42,75,141,.055),transparent 32%),rgba(255,255,255,.76); }
 #system { background:radial-gradient(circle at 15% 35%,rgba(36,68,127,.055),transparent 28%),rgba(255,255,255,.76); }
