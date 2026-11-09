@@ -31,7 +31,7 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-# Google (Gemini / AI Overviews grounding)
+# Google-Extended (Gemini Apps and Vertex AI training and grounding; does not affect inclusion in Google Search): https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers
 User-agent: Google-Extended
 Allow: /
 

@@ -15,16 +15,16 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="Tranzmit AI — Revenue surfaces that improve themselves">
 <meta property="og:description" content="Tranzmit AI builds self-improving interfaces that increase conversion for consumer platforms, starting with monetization: paywalls, App Store pages, and Google Play pages.">
-<meta property="og:image" content="https://tranzmitai.com/tranzmit-ai-landing/assets/og-card-v2.jpg">
+<meta property="og:image" content="https://tranzmitai.com/tranzmit-ai-landing/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:alt" content="Tranzmit AI — revenue surfaces that improve themselves">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@agaazsinghal007">
 <meta name="twitter:title" content="Tranzmit AI — Revenue surfaces that improve themselves">
 <meta name="twitter:description" content="Tranzmit AI builds self-improving interfaces that increase conversion for consumer platforms, starting with monetization: paywalls, App Store pages, and Google Play pages.">
-<meta name="twitter:image" content="https://tranzmitai.com/tranzmit-ai-landing/assets/og-card-v2.jpg">
+<meta name="twitter:image" content="https://tranzmitai.com/tranzmit-ai-landing/assets/og-card.png">
 <meta name="twitter:image:alt" content="Tranzmit AI — revenue surfaces that improve themselves">
 <script type="application/ld+json">
 {
@@ -58,12 +58,6 @@
       "operatingSystem": "Web",
       "url": "https://tranzmitai.com/",
       "description": "Tranzmit AI builds self-improving interfaces that increase conversion for consumer platforms, starting with monetization: paywalls, App Store pages, and Google Play pages.",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "description": "Book a demo"
-      },
       "provider": {
         "@id": "https://tranzmitai.com/#org"
       }
@@ -2109,7 +2103,7 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
 }
 
 /* Anchored sections used to land underneath the fixed nav. */
-:where(#top,#how,#system,#customers,#case-study,#case-study-jungle,#case-study-high-astro,#demo){ scroll-margin-top:104px; }
+:where(#top,#how,#system,#customers,#case-study,#case-study-jungle,#case-study-high-astro,#faq,#demo){ scroll-margin-top:104px; }
 
 /* The hero and the two masking gradients were hard-coded to #FFFFFF, so with
    an ivory page they showed as a white plate with a visible seam. */
@@ -2139,19 +2133,6 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
 .cta .btn--ghost{ background:transparent!important; border-color:rgba(255,255,255,.42)!important; color:#fff!important; }
 .cta .btn--ghost:hover{ background:rgba(255,255,255,.09)!important; border-color:#fff!important; }
 .cta .hero__cloud{ display:none; }
-/* A field of flat hex this large reads as a filled div. The generated ink
-   plate gives it stock: paper tooth and a little roller variation, blended
-   soft-light so it darkens the grain without shifting the hue.
-
-   The !important matters: the rule above sets the `background` shorthand
-   with !important, which resets background-image to none at the same
-   priority, so a plain declaration here loses. */
-.cta{
-  background-image:url("./assets/ink-plate.webp")!important;
-  background-size:cover!important;
-  background-position:center!important;
-  background-blend-mode:soft-light;
-}
 
 /* The near-black App Store card was the only dark surface on the page and it
    answered to nothing — a different hue from every other dark value here. It
@@ -2450,7 +2431,7 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
 /* ---------- footer ----------
    Two thirds of the footer was empty space. */
 .foot__brand{ flex:1 1 340px!important; }
-.foot__cols{ flex:1 1 460px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; }
+.foot__cols{ flex:1 1 620px; display:grid; grid-template-columns:repeat(3,minmax(0,.72fr)) minmax(0,1.3fr); gap:28px; }
 .foot__col h4{ margin:0 0 12px; color:var(--ink); font:700 11px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; }
 .foot__col a{ display:block; padding:5px 0; color:var(--muted); font-size:14px; text-decoration:none; }
 .foot__col a:hover{ color:var(--ink); }
@@ -2749,6 +2730,20 @@ html.motion-enabled [data-reveal].is-visible { opacity:1; filter:none; transform
   .cs2-card__head,.cs2-changed{ padding:18px 20px!important; }
   .logo-card{ padding:18px 0!important; }
 }
+
+/* ---------- FAQ and customer links ----------
+   The FAQ stays open and its text matches the FAQPage JSON-LD word for word:
+   structured data has to describe what readers can see. */
+.logoband__cases{ grid-column:1 / -1; display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 18px; padding-top:18px; font-size:13.5px; }
+.logoband__cases span{ color:var(--ink-2); font-weight:600; }
+.logoband__cases a{ color:var(--accent); font-weight:600; text-decoration:none; }
+.logoband__cases a:hover{ color:var(--accent-deep); text-decoration:underline; text-underline-offset:3px; }
+.logoband__cases a:last-child{ margin-left:auto; }
+@media (max-width:560px){ .logoband__cases span{ flex-basis:100%; } .logoband__cases a:last-child{ margin-left:0; } }
+.faq-list{ border-top:1px solid var(--line); }
+.faq-item{ padding:24px 0; border-bottom:1px solid var(--line); }
+.faq-item h3{ color:var(--ink); font-size:18px; font-weight:600; line-height:1.3; letter-spacing:-.015em; }
+.faq-item p{ max-width:62ch; margin-top:9px; color:var(--muted); font-size:15px; line-height:1.6; text-wrap:pretty; }
 
 </style>
 </head>
@@ -3950,6 +3945,7 @@ They're saying no to <span class="accent-ink">your paywall.</span></h2>
         <span class="eyebrow eyebrow--muted" style="color: #2A4B8D; font-size: 15px">Trusted by innovative teams</span>
         <p class="logoband__txt" style="margin-top:20px">Built for consumer apps with real scale.</p>
         <p class="logoband__note">From study and healthcare to astrology and creator tools, Tranzmit improves the moment users decide whether to pay.</p>
+        <p class="logoband__note">Tranzmit works with Indian apps, including HiAstro and TATA 1mg: paywalls can show rupee pricing and localized offers, and run in Indian languages such as Hindi. We don't process payments or run UPI mandates; Tranzmit sits on top of your billing tools.</p>
       </div>
       <div class="logoband__set">
         <a class="proof-app" href="https://app.jungleai.com/" target="_blank" rel="noopener">
@@ -3972,6 +3968,13 @@ They're saying no to <span class="accent-ink">your paywall.</span></h2>
           <div class="proof-app__body"><h3>Influish</h3><p>Creator tools for Instagram Auto-DM and brand collaborations.</p></div>
           <span class="proof-app__audience"><strong>3M+</strong> monthly active users</span>
         </a>
+        <nav class="logoband__cases" aria-label="Customer case studies">
+          <span>Case studies</span>
+          <a href="/customers/influish">Influish</a>
+          <a href="/customers/jungle-ai">Jungle AI</a>
+          <a href="/customers/hiastro">HiAstro</a>
+          <a href="/customers">All customers →</a>
+        </nav>
       </div>
     </div>
   </div>
@@ -4278,6 +4281,40 @@ They're saying no to <span class="accent-ink">your paywall.</span></h2>
   </div>
 </section>
 
+<!-- ============================ FAQ ============================ -->
+<section class="section section--pad" id="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="logoband">
+      <div class="logoband__intro">
+        <span class="eyebrow eyebrow--muted" style="color: #2A4B8D; font-size: 15px">FAQ</span>
+        <h2 class="logoband__txt" id="faq-title" style="margin-top:20px">Common questions about paywall optimization.</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>What is paywall optimization?</h3>
+          <p>Paywall optimization is the practice of systematically testing and improving the screen where users decide to subscribe or pay, so that more visitors convert into buyers. Tranzmit AI automates this with AI variant generation, simulation-based scoring, and safe live rollout.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How does Tranzmit AI optimize paywalls?</h3>
+          <p>Tranzmit AI runs a continuous loop: it analyzes real user signals and product events, generates multiple paywall variants across offers, layouts, and copy, scores them with simulation, VLM judges, and historical conversion data, and safely ships the winning variant with guardrails and automatic rollback.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How is Tranzmit AI different from manual A/B testing?</h3>
+          <p>Traditional A/B testing is slow and run by hand. Tranzmit AI continuously generates variants, scores them with simulation, VLM judges, and historical conversion data, and ships winners automatically with guardrails and auto-rollback, reducing both time-to-winner and risk.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Who is Tranzmit AI for?</h3>
+          <p>Product and growth teams at consumer subscription apps that want to increase paywall conversion and revenue without heavy engineering work.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What results does Tranzmit AI deliver?</h3>
+          <p>Across customers, Tranzmit AI has indexed more than 20,000 paywalls into a conversion map and delivered a +57% average uplift from control, with a best customer uplift of +130%. In one case study, Jungle AI saw a +62% paywall conversion uplift with more than $20,000 of value proven and zero engineering. Influish saw a +82% paywall click-through rate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================ CTA BAND ============================ -->
 <section class="cta" id="demo">
   <div class="hero__cloud"></div>
@@ -4333,6 +4370,17 @@ They're saying no to <span class="accent-ink">your paywall.</span></h2>
           <a href="#customers">Customers</a>
           <a href="mailto:agaaz@tranzmitai.com">Contact</a>
           <a href="https://www.linkedin.com/in/agaaz-singhal/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <div class="foot__col">
+          <h4>Answers</h4>
+          <a href="/paywall-ab-testing">Paywall A/B testing</a>
+          <a href="/change-paywall-without-app-release">Paywalls without an app release</a>
+          <a href="/ai-generated-paywalls">AI-generated paywalls</a>
+          <a href="/personalized-paywalls">Personalized paywalls</a>
+          <a href="/app-store-google-play-page-tests">App Store and Google Play tests</a>
+          <a href="/paywalls-for-indian-apps">Paywalls for Indian apps</a>
+          <a href="/works-with-your-stack">Works with your stack</a>
+          <a href="/pricing">Pricing</a>
         </div>
       </nav>
     </div>

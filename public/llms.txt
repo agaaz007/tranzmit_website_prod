@@ -21,6 +21,7 @@ Tranzmit runs a continuous closed loop:
 - 9.4 minutes median time to a winning direction
 - Case study — Jungle AI: +62% paywall conversion uplift, more than $20,000 of value proven, with zero engineering
 - Case study — Influish: +82% paywall click-through rate, +49% subscription conversion, 1.5x topline revenue
+- HiAstro case study: 25% uplift in paywall click-through rates, measured across more than 400,000 users within two weeks of going live
 
 ## Integrations
 
@@ -30,16 +31,44 @@ Works with the analytics tools teams already use:
 - **Mixpanel** — understand user journeys and funnels
 - **Amplitude** — deep behavioral analytics and cohorts
 
+Plus Segment, Firebase, RevenueCat, and anything that can send an event.
+
+## India
+
+Tranzmit works with Indian apps, including HiAstro and TATA 1mg. Paywalls can show rupee pricing and localized offers and can run in Indian languages such as Hindi. Tranzmit does not process payments or run UPI mandates; it sits on top of billing tools. HiAstro's one-rupee trial now shows the exact charge timeline instead of hiding it.
+
+- [Paywalls for Indian apps](https://tranzmitai.com/paywalls-for-indian-apps)
+
 ## Common questions about paywall optimization
 
 - **What is paywall optimization?** Systematically testing and improving the screen where users decide to subscribe or pay, so a larger share of visitors convert to buyers. Tranzmit automates this with AI variant generation, simulation-based scoring, and safe live rollout.
 - **How is this different from manual A/B testing?** Traditional A/B testing is slow and hand-run. Tranzmit continuously generates variants, scores them (simulation + VLM judges + historical conversion data), and ships winners automatically with guardrails and auto-rollback — reducing both time-to-winner and risk.
 - **Who is it for?** Product and growth teams at consumer subscription apps that want to increase paywall conversion and revenue without heavy engineering work.
 
+## Paywall and store page questions
+
+- [Paywall A/B testing](https://tranzmitai.com/paywall-ab-testing)
+- [Change a paywall without an app release](https://tranzmitai.com/change-paywall-without-app-release)
+- [AI-generated paywalls](https://tranzmitai.com/ai-generated-paywalls)
+- [Personalized paywalls](https://tranzmitai.com/personalized-paywalls)
+- [App Store and Google Play page tests](https://tranzmitai.com/app-store-google-play-page-tests)
+
+## Fit and pricing
+
+- [Works with your stack](https://tranzmitai.com/works-with-your-stack): the analytics tools it works with and the billing tools it sits on top of
+- [Pricing](https://tranzmitai.com/pricing): set after a free 30-minute paywall review
+
+## Customers
+
+- [Customers](https://tranzmitai.com/customers): Jungle AI, TATA 1mg, HiAstro, Influish
+- [Influish case study](https://tranzmitai.com/customers/influish)
+- [Jungle AI case study](https://tranzmitai.com/customers/jungle-ai)
+- [HiAstro case study](https://tranzmitai.com/customers/hiastro)
+
 ## Links
 
-- Home / book a demo / see live results: https://tranzmitai.com/
-- Sitemap: https://tranzmitai.com/sitemap.xml
-- Email: agaaz@tranzmitai.com
-- LinkedIn: https://www.linkedin.com/in/agaaz-singhal/
-- X / Twitter: https://x.com/agaazsinghal007
+- [Home / book a demo / see live results](https://tranzmitai.com/)
+- [Sitemap](https://tranzmitai.com/sitemap.xml)
+- [Email](mailto:agaaz@tranzmitai.com): agaaz@tranzmitai.com
+- [LinkedIn](https://www.linkedin.com/in/agaaz-singhal/)
+- [X / Twitter](https://x.com/agaazsinghal007)
